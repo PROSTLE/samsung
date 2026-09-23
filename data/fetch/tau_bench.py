@@ -23,6 +23,7 @@ import sys
 from typing import Any, Optional
 
 from data.fetch import _common as c
+from data.labels.ast_effects import tau1_invoke_effects
 
 TAU1 = "sierra-research/tau-bench"
 TAU2 = "sierra-research/tau2-bench"
@@ -53,7 +54,9 @@ def fetch_tau1(sha: str) -> tuple[list[dict], list[str]]:
         domain = path.split("/")[2]
         url = c.raw_url(TAU1, sha, path)
         try:
-            info = extract_get_info(c.http_get(url).decode("utf-8"))
+            source = c.http_get(url).decode("utf-8")
+            info = extract_get_info(source)
+            fx = tau1_invoke_effects(source)
         except (ValueError, SyntaxError) as exc:
             failures.append(f"{path}: {exc}")
             continue
@@ -71,6 +74,8 @@ def fetch_tau1(sha: str) -> tuple[list[dict], list[str]]:
             "parameters": fn.get("parameters", {}),
             "schema_dialect": "json-schema",
             "labels": None,
+            # Derived from the reference implementation (data/labels/ast_effects.py).
+            "impl_effects": None if fx is None else {"mutates": fx.mutates, "evidence": fx.evidence},
         })
     return rows, failures
 
