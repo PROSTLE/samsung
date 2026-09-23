@@ -1,0 +1,18 @@
+# Keel runtime configuration.
+#
+# Every tunable behaviour lives here with a comment saying where the value
+# came from. A value marked "provisional" has no measurement behind it yet and
+# must be replaced when the phase that measures it lands.
+
+[protocol]
+# Version string written into every trace header, so a trace can be matched to
+# the provisional contract it was produced under. Bump when
+# keel/protocol/provisional.py changes shape.
+schema_version = "keel-provisional/0.1"
+
+[trace]
+# Record wall-clock nanoseconds (relative to session start) next to the
+# virtual timestamp. Wall time is how we measure real kernel reaction time;
+# virtual time is how the harness scores. Set false to produce byte-identical
+# traces for golden-file comparisons.
+record_wall_time = true
