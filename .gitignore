@@ -1,0 +1,10 @@
+# The official guide is watermarked with a registrant's identity; keep it local.
+docs/Theme_5_Guide.pdf
+
+.venv/
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.hypothesis/
+/traces/
+/reports/

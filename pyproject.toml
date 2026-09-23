@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "keel"
+version = "0.1.0"
+description = "Interruption-safe execution layer for real-time voice agents"
+readme = "README.md"
+# Theme 5 guide, section 6: "Runtime: Python 3.10-3.12".
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "pydantic>=2.6,<3",
+    "tomli>=2.0; python_version < '3.11'",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "hypothesis>=6.100",
+]
+
+[tool.setuptools.packages.find]
+include = ["keel*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# data/fetch is a script package at the repo root, not part of the installed wheel.
+pythonpath = ["."]
+addopts = "-q"
