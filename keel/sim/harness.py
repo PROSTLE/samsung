@@ -7,7 +7,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Mapping, Optional, Union
 
-from keel.compiler.manifest import ManifestCompiler, hints_only_compiler
+from keel.compiler.manifest import ManifestCompiler
 from keel.config import KeelConfig
 from keel.kernel.clock import VirtualClock
 from keel.kernel.internal import Interpretation
@@ -45,7 +45,7 @@ class Simulation:
     script: Mapping[str, list[tuple[int, Interpretation]]] = field(default_factory=dict)
     session_id: str = "sim"
     probe: Optional[StatusProbe] = None
-    compiler: ManifestCompiler = hints_only_compiler
+    compiler: Optional[ManifestCompiler] = None
     synthetic: bool = True
     scenario: Optional[str] = None
     trace_path: Optional[Union[str, Path]] = None

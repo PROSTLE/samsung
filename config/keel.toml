@@ -77,3 +77,10 @@ clarify_low_confidence = "Just to check, is the {slot} {value}?"
 clarify_missing = "What {slot} should I use?"
 final_default = "All done."
 failed = "Sorry, that didn't work: {error}."
+
+[compiler]
+# A tool is classified read_only (and so may run speculatively) only if the
+# classifier is at least this sure; otherwise it is `unknown`, treated as
+# state_changing. Fixed at 0.8 BEFORE running the evaluation, so it was not
+# tuned on the test data; `python -m eval.compiler_eval` reports all thresholds.
+min_confidence = 0.8

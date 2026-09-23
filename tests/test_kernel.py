@@ -63,7 +63,7 @@ def test_reads_start_speculatively_and_writes_wait_for_the_fence(cfg):
                "book": ToolBehaviour(latency_ms=200, result={"ticket": "T1"}, effect=True)})
     assert timeline(res) == [
         (1200, "tool_call", "lookup"),           # speculative read at once
-        (1300, "speak", "One moment."),          # ack_after_ms after end of turn
+        (1200, "speak", "Let me check that."),   # compiler-built ack for the read (no hold phrase needed)
         (1800, "tool_call", "book"),             # fence: 1200 (last change) + 600
         (2000, "final", "Booked for your washer."),
     ]
@@ -147,11 +147,29 @@ def test_did_it_go_through(cfg, executed):
 
 
 def test_without_a_probe_keel_says_it_cannot_confirm(cfg):
-    g = goal("book", step("s1", "book", day="day"))
+    # "reserve" shares no object words with any read-only tool, so nothing can check it.
+    g = goal("book", step("s1", "reserve", day="day"))
     res = run(cfg, [text("e1", 1000)], {"e1": [(200, interp(prop("day", "friday"), goal=g))]},
-              {"book": ToolBehaviour(latency_ms=500, outcome="timeout", effect=True)})
-    assert [c.tool for c in res.env.calls] == ["book"]
+              {"reserve": ToolBehaviour(latency_ms=500, outcome="timeout", effect=True)})
+    assert [c.tool for c in res.env.calls] == ["reserve"]
     assert res.of("final")[0].text == "I can't confirm whether that went through."
+
+
+def test_probe_is_derived_from_the_manifest(cfg):
+    tools = manifest(0, tool("book", False),
+                     {"name": "check_booking", "annotations": {"readOnlyHint": True},
+                      "parameters": {"type": "object", "properties": {"day": {"type": "string"}},
+                                     "required": ["day"]}})
+    g = goal("book", step("s1", "book", day="day"))
+    sim = Simulation(config=cfg, script={"e1": [(200, interp(prop("day", "friday"), goal=g))]},
+                     behaviours={"book": ToolBehaviour(latency_ms=500, outcome="timeout", effect=True),
+                                 "check_booking": ToolBehaviour(latency_ms=100, respond=check_booking)})
+    res = sim.run([tools, text("e1", 1000)])
+    assert check_trace(res.records, res.env.world) == []
+    probe_call = [c for c in res.env.calls if c.tool == "check_booking"]
+    assert [c.arguments for c in probe_call] == [{"day": "friday"}]
+    said = [a.text for a in res.actions if a.type in ("speak", "final")]
+    assert said[-2:] == ["I've checked: it did go through.", "All done."]
 
 
 def test_chained_step_follows_the_result_it_depends_on(cfg):

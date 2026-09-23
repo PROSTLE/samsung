@@ -57,6 +57,10 @@ class FloorConfig(_Section):
     max_progress_per_turn: int = Field(ge=0)
 
 
+class CompilerConfig(_Section):
+    min_confidence: float = Field(ge=0.5, le=1.0)
+
+
 class Phrases(_Section):
     hold: str
     correction: str
@@ -80,6 +84,7 @@ class KeelConfig(_Section):
     reconcile: ReconcileConfig
     perception: PerceptionConfig
     floor: FloorConfig
+    compiler: CompilerConfig
     phrases: Phrases
     # sha256 of the raw file, written into trace headers.
     digest: str = ""

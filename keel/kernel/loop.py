@@ -27,7 +27,7 @@ from typing import Any, Callable, Mapping, Optional, Protocol, Union
 
 from pydantic import JsonValue
 
-from keel.compiler.manifest import ManifestCompiler, ToolPolicy, hints_only_compiler
+from keel.compiler.manifest import ManifestCompiler, ToolPolicy, default_compiler
 from keel.config import KeelConfig
 from keel.kernel.clock import Clock, TimerHandle
 from keel.kernel.fence import CommitFence
@@ -95,7 +95,7 @@ class Kernel:
         trace: TraceWriter,
         sink: Callable[[ActionT], None],
         interpreter: Optional[Interpreter] = None,
-        compiler: ManifestCompiler = hints_only_compiler,
+        compiler: Optional[ManifestCompiler] = None,
         probe: Optional[StatusProbe] = None,
         post: Optional[Callable[[AnyEvent], None]] = None,
     ) -> None:
@@ -105,7 +105,11 @@ class Kernel:
         self.trace = trace
         self._sink = sink
         self.interpreter = interpreter
-        self.compiler = compiler
+        self.compiler = compiler or default_compiler(config.compiler.min_confidence)
+        if probe is None:
+            from keel.compiler.probe import ManifestProbe
+
+            probe = ManifestProbe()
         self.probe = probe
         # Default post: schedule on the clock at "now", i.e. after the current
         # handle() returns. Live runs replace this with a queue put.
@@ -141,6 +145,7 @@ class Kernel:
         # Only ask for a missing slot after the slow path has had its say.
         self._may_ask_missing = False
         self._deferred_ack: Optional[str] = None
+        self._invalid_args: set[str] = set()
 
         self._now = clock.now_ms()
         self._cause: Optional[str] = None
@@ -463,7 +468,7 @@ class Kernel:
                 self._cancel(e)
         # 2. create what is missing, then 3. dispatch whatever may go now.
         for r in to_create:
-            if self.ledger.blocking(r.key) is None:
+            if self.ledger.blocking(r.key) is None and self._arguments_valid(r):
                 self._new_entry(r.step.step_id, r.step.tool, r.arguments, r.reads, self._safety(r.step.tool))
         for e in self.ledger.active():
             if e.status == "pending" and e.probe_for is None:
@@ -541,6 +546,30 @@ class Kernel:
             return "failed", tries[-1]
         return "create", None
 
+    def _arguments_valid(self, r: _Resolved) -> bool:
+        """Check arguments against the tool's schema before anything is sent.
+        On failure, ask about the slot behind the first bad argument (once)."""
+        pol = self.policies.get(r.step.tool)
+        errors = pol.validate(r.arguments) if pol else []
+        if not errors:
+            return True
+        if r.key not in self._invalid_args:
+            self._invalid_args.add(r.key)
+            self.trace.note("arguments_invalid", step_id=r.step.step_id, tool=r.step.tool,
+                            arguments=r.arguments, errors=errors)
+            bad = errors[0].split(":", 1)[0].split("/")[0]
+            b = r.step.bindings.get(bad)
+            if isinstance(b, SlotRef) and self._may_ask_missing:
+                key = (b.slot, "<invalid>")
+                if key not in self._clarified:
+                    self._clarified.add(key)
+                    text = render(self.cfg.phrases.clarify_missing, {"slot": humanize(b.slot)})
+                    if text:
+                        self._emit(Clarify(action_id=self.ids.new("act"), session_id=self.session_id,
+                                           ts_ms=self._now, caused_by=self._cause, text=text, slot=b.slot))
+                        self._spoke()
+        return False
+
     def _maybe_ask_missing(self, step: Step, slots: list[str]) -> None:
         if not slots or self.fence.turn_open or not self._may_ask_missing:
             return
@@ -611,7 +640,9 @@ class Kernel:
         # fault model is unknown, so the value is provisional (config/keel.toml).
         self._set_timer("call_timeout", e.call_id, self._now + self.cfg.calls.timeout_ms)
         pol = self.policies.get(e.tool)
-        if pol and pol.ack_template and not self._spoke_this_turn and e.probe_for is None:
+        # One filler per turn: a pending correction acknowledgment wins.
+        if (pol and pol.ack_template and not self._spoke_this_turn and e.probe_for is None
+                and not self._deferred_ack):
             text = render(pol.ack_template, e.arguments)
             if text:
                 self._say("acknowledge", text)
