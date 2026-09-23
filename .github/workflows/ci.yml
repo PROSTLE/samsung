@@ -14,3 +14,4 @@ jobs:
           python-version: ${{ matrix.python }}
       - run: python -m pip install -e ".[dev]"
       - run: python -m pytest
+      - run: python -m eval.grid_self_repair

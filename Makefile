@@ -1,6 +1,6 @@
 PY ?= python
 
-.PHONY: install data test test-all
+.PHONY: install data test test-all grid
 
 install:
 	$(PY) -m pip install -e ".[dev]"
@@ -12,6 +12,10 @@ data:
 
 test:
 	$(PY) -m pytest
+
+# Synthetic timing/fault grid around one self-repair; exits non-zero on any violation.
+grid:
+	$(PY) -m eval.grid_self_repair
 
 # Same suite on every Python version the guide allows (needs uv).
 test-all:
