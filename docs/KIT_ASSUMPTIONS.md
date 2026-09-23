@@ -28,6 +28,9 @@ change `keel/protocol/provisional.py` and a new `Codec` in
 | K14 | adapter.py `ProvisionalCodec` | Wire messages are JSON matching provisional.py exactly | The wire format |
 | K15 | adapter.py `KitAdapter.warmup` | Warm-up is an async method called once before the first scenario | How the 300 s setup hook is invoked |
 | K16 | adapter.py `END_OF_STREAM` | `None` on the input queue ends a scenario | How end of scenario is signalled |
+| K17 | compiler/manifest.py `explicit_hints` | Side-effect hints, if any, arrive as MCP `annotations`, `read_only`/`side_effects`/`mutates_state` booleans, a τ²-style `tool_type`, or an HTTP `method` | Which hint fields real manifests carry, if any |
+| K18 | kernel/loop.py `_dispatch` | Keel times a call out after `calls.timeout_ms` (10 s) of silence | The mock environment's latency and fault distribution; whether the harness itself reports timeouts |
+| K19 | kernel/loop.py `_step_state` | A cancel may be honoured silently; a cancelled in-flight write is treated as "maybe executed" until a result, our timeout, or a probe settles it | What the mock environment does on cancel: drop silently, send a final result, or report "cancelled" |
 
 ## Open questions from reading the guide
 

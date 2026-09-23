@@ -50,6 +50,60 @@ can't be undone.
 The guide's budgets are "few ms" and "few hundred ms"; integers make replay
 exact. Real reaction time is also logged in wall-clock nanoseconds.
 
+## Kernel (phase 2)
+
+**Q: How do you decide which calls to cancel?**
+Every argument of every call is *bound* to a slot (or a constant, or an
+earlier result), and the ledger records the slot version each call read. When
+a slot gets a new version, the calls whose inputs no longer resolve to the
+same arguments are cancelled; the reason names the versions, e.g.
+`appliance v1->v2`. Calls that read other slots keep running. Test:
+`test_slot_change_cancels_exactly_the_calls_that_read_it`.
+
+**Q: How fast is cancellation?**
+In the same virtual millisecond as the event that changed the slot
+(invariant I2, checked on every trace). The path is pure bookkeeping with no
+model call. Wall-clock time is recorded in the trace too; phase 5 reports it
+as a measured number.
+
+**Q: What stops a double booking when the user says "Friday… no, Saturday"?**
+Three layers. (1) The commit fence: writes wait for end-of-turn plus a quiet
+period, so most self-repairs land before anything is sent. (2) The
+idempotency key: a write with the same (session, tool, args) can't be sent
+twice. (3) Per-tool write serialisation: while an older write is in flight or
+in doubt, a corrected write waits, and if the older one turns out to have
+executed, Keel says so instead of booking again. Evidence:
+`python -m eval.grid_self_repair` runs 3072 synthetic timing/fault
+combinations and reports 0 double bookings, 0 invariant violations, 0 false
+success claims.
+
+**Q: Why not just retry a write that timed out?**
+It may have succeeded; a retry could double-book, and the guide scores "zero
+duplicate state-changing calls". Keel marks it `unknown`, tells the user it
+isn't sure, and checks with a read-only tool. If nothing can check, it says
+it cannot confirm. It never claims success without a success result.
+
+**Q: Why wait 600 ms before a write? Isn't that slow?**
+The *user* doesn't wait: the fast path speaks within 300 ms. 600 ms is where
+Roberts & Francis (JASA 2013) found listeners start judging a silence
+negatively, so it is the longest pause we can hide behind an
+acknowledgment. It is provisional; phase 4 replaces it with a measurement on
+self-repair audio.
+
+**Q: Why run read-only calls speculatively but not writes?**
+The same reason HTTP separates safe methods: RFC 9110 §9.2.1 says safe
+methods exist "to allow … pre-fetching to work without fear of causing harm".
+A wasted read costs a little time; a wrong write costs a booking.
+
+**Q: Is the single-writer rule real or just a convention?**
+Enforced. `WriteGuard` raises if a store is touched outside `handle()`, from
+another thread, or re-entrantly; there are tests for all three.
+
+**Q: Did your own tests ever catch a real bug?**
+Yes. The invariant checker (I3) caught a case where, in one tick, a
+corrected write was sent before the old one was cancelled. That's why writes
+to one tool are now serialised. See `docs/reports/PHASE_2.md`, decision 4.
+
 ## Honesty
 
 **Q: Are your numbers real?**

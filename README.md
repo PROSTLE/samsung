@@ -3,8 +3,8 @@
 An interruption-safe execution layer for real-time voice agents, built for the
 Samsung PRISM Generative AI Hackathon, Theme 05 (Interruptible Real-Time Agents).
 
-Status: phase 1 of 7 (protocol models, kit adapter, virtual clock, trace
-logger, tool-schema collection). No performance numbers are reported yet.
+Status: phase 2 of 7 done (protocol, adapter, virtual clock, trace, tool data;
+coordination kernel). No performance numbers are reported yet. See docs/reports/.
 
 - Interface contract is provisional until the evaluation kit ships; see
   `docs/KIT_ASSUMPTIONS.md`.
