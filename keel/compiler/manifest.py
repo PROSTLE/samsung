@@ -1,9 +1,14 @@
 """Manifest compiler: tool definitions in, per-tool interruption policy out.
 
-Order of evidence (build prompt §2):
-  1. explicit hints in the manifest,
-  2. a classifier (phase 3) with a confidence score,
-  3. otherwise `unknown`, which the kernel treats as state-changing.
+For each tool it produces
+  * an argument validator (from the manifest's parameter schema),
+  * a safety class, from, in order: explicit hints in the manifest; the
+    lexical classifier (keel/compiler/classify.py) if it is at least
+    `compiler.min_confidence` sure; otherwise `unknown`, which the kernel
+    treats as state-changing,
+  * a slot dependency map (argument -> session slot it reads by default),
+  * an acknowledgment template that only ever describes what is being
+    started, never claims it is done.
 
 Every decision carries the evidence that produced it, so the console can show
 *why* a tool was classified the way it was.
@@ -14,6 +19,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any, Callable, Optional, Protocol
 
+from keel.compiler.schema import validate_arguments
 from keel.kernel.ledger import SafetyClass
 from keel.protocol.provisional import ToolSpec
 
@@ -35,8 +41,14 @@ class ToolPolicy:
     parameters: dict[str, Any] = field(default_factory=dict)
     description: str = ""
     # Spoken when this tool is dispatched, rendered from its arguments only
-    # (keel.paths.fast.render). Built by the compiler in phase 3.
+    # (keel.paths.fast.render).
     ack_template: Optional[str] = None
+    required: tuple[str, ...] = ()
+    # argument name -> session slot it reads unless a goal binds it otherwise.
+    slot_map: dict[str, str] = field(default_factory=dict)
+
+    def validate(self, arguments: dict[str, Any]) -> list[str]:
+        return validate_arguments(self.parameters, arguments)
 
 
 class Classifier(Protocol):
@@ -97,11 +109,44 @@ def explicit_hints(spec: ToolSpec) -> Optional[tuple[SafetyClass, bool, tuple[st
     return safety, idempotent or safety == "read_only", tuple(evidence)
 
 
+_SCALAR_TYPES = frozenset({"string", "str", "integer", "int", "number", "float", "boolean", "bool"})
+
+
+def ack_template(name: str, safety: SafetyClass, parameters: dict[str, Any]) -> str:
+    """A progress phrase built from the tool's own name. Reads: "Let me check
+    the reservation details for {reservation_id}." Writes (spoken only once the
+    call is actually sent): "I'm sending the book reservation request now."
+    Neither says the action is complete."""
+    from keel.compiler.classify import split_identifier
+
+    toks = split_identifier(name)
+    head, rest = (toks[0], " ".join(toks[1:])) if len(toks) > 1 else (toks[0] if toks else "", "")
+    if safety == "read_only":
+        props = parameters.get("properties") or {}
+        required = [a for a in (parameters.get("required") or []) if a in props]
+        scalar = [a for a in required if str((props[a] or {}).get("type", "")).lower() in _SCALAR_TYPES]
+        what = f"the {rest}" if rest else "that"
+        suffix = f" for {{{scalar[0]}}}" if len(scalar) == 1 else ""
+        return f"Let me check {what}{suffix}."
+    return f"I'm sending the {head} {rest} request now." if rest else f"I'm sending that {head} request now."
+
+
 def compile_tool(
     spec: ToolSpec,
     classifier: Optional[Classifier] = None,
     min_confidence: float = 1.0,
 ) -> ToolPolicy:
+    policy = _classify(spec, classifier, min_confidence)
+    props = (spec.parameters or {}).get("properties") or {}
+    return ToolPolicy(
+        **{**policy.__dict__,
+           "ack_template": ack_template(spec.name, policy.safety, spec.parameters or {}),
+           "required": tuple(a for a in (spec.parameters or {}).get("required") or [] if a in props),
+           "slot_map": {a: a for a in props}},
+    )
+
+
+def _classify(spec: ToolSpec, classifier: Optional[Classifier], min_confidence: float) -> ToolPolicy:
     common = dict(name=spec.name, parameters=dict(spec.parameters), description=spec.description)
     hinted = explicit_hints(spec)
     if hinted is not None:
@@ -127,3 +172,16 @@ ManifestCompiler = Callable[[list[ToolSpec]], dict[str, ToolPolicy]]
 
 def hints_only_compiler(tools: list[ToolSpec]) -> dict[str, ToolPolicy]:
     return {t.name: compile_tool(t) for t in tools}
+
+
+def default_compiler(min_confidence: float, classifier: Optional[Classifier] = None) -> ManifestCompiler:
+    """Hints -> lexical classifier (or the one given) -> unknown."""
+    if classifier is None:
+        from keel.compiler.classify import LexicalClassifier
+
+        classifier = LexicalClassifier()
+
+    def compile_manifest(tools: list[ToolSpec]) -> dict[str, ToolPolicy]:
+        return {t.name: compile_tool(t, classifier, min_confidence) for t in tools}
+
+    return compile_manifest
