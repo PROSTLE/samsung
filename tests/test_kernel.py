@@ -172,6 +172,45 @@ def test_probe_is_derived_from_the_manifest(cfg):
     assert said[-2:] == ["I've checked: it did go through.", "All done."]
 
 
+
+def test_write_that_landed_with_old_details_ends_the_goal_truthfully(cfg):
+    # friday is cancelled after dispatch but the world runs it anyway; saturday
+    # must not also be booked, and the session must still get a final response.
+    fast = with_overrides(cfg, fence={"quiet_ms": 0})
+    g = goal("book", step("s1", "book", day="day"))
+    res = run(fast, [text("e1", 1000), text("e2", 1400)],
+              {"e1": [(100, interp(prop("day", "friday"), goal=g))],
+               "e2": [(100, interp(prop("day", "saturday", correction=True)))]},
+              {"book": ToolBehaviour(latency_ms=1000, effect=True, honors_cancel=False)})
+    assert res.env.world.effects == [(2100, "book", {"day": "friday"})]
+    finals = res.of("final")
+    assert [(f.ts_ms, f.text) for f in finals] == [(2100, cfg.phrases.already_committed)]
+    assert finals[0].snapshot.slots == {"day": "saturday"}
+    assert "commit_conflict" in [r.kind for r in res.records]
+
+
+def test_required_argument_the_goal_left_unbound_reads_the_same_named_slot(cfg):
+    tools = manifest(0, {"name": "create_ticket", "annotations": {"readOnlyHint": False},
+                         "parameters": {"type": "object", "required": ["user_id", "issue"],
+                                        "properties": {"user_id": {"type": "string"}, "issue": {"type": "string"}}}})
+    g = goal("support", step("s1", "create_ticket", issue="issue"))  # no binding for user_id
+    sim = Simulation(config=cfg, behaviours={"create_ticket": ToolBehaviour(effect=True)},
+                     script={"e1": [(100, interp(prop("issue", "E21"), prop("user_id", "u7"), goal=g))]})
+    res = sim.run([tools, text("e1", 1000)])
+    assert check_trace(res.records, res.env.world) == []
+    assert [c.arguments for c in res.env.calls] == [{"issue": "E21", "user_id": "u7"}]
+    assert res.of("final")[0].text == "All done."
+
+
+def test_required_argument_with_no_slot_is_asked_for(cfg):
+    tools = manifest(0, {"name": "create_ticket", "annotations": {"readOnlyHint": False},
+                         "parameters": {"type": "object", "required": ["user_id"],
+                                        "properties": {"user_id": {"type": "string"}}}})
+    g = goal("support", step("s1", "create_ticket"))
+    res = Simulation(config=cfg, script={"e1": [(100, interp(goal=g))]}).run([tools, text("e1", 1000)])
+    assert [c.text for c in res.of("clarify")] == ["What user id should I use?"]
+    assert res.env.calls == []
+
 def test_chained_step_follows_the_result_it_depends_on(cfg):
     g = Goal(intent="fly", steps=(
         Step(step_id="find", tool="lookup", bindings={"day": SlotRef(slot="day")}),

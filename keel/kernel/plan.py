@@ -45,6 +45,11 @@ class Step(_Frozen):
     bindings: dict[str, Binding] = Field(default_factory=dict)
     # Steps that must succeed first even though no argument reads them.
     after: tuple[str, ...] = ()
+    # Slots this step was *planned from* without reading them as arguments,
+    # e.g. the user utterance an LLM derived a tool call from. Their versions
+    # are recorded on the call like any other read, so the trace shows which
+    # version of the request a call was based on.
+    basis: tuple[str, ...] = ()
 
 
 class Goal(_Frozen):

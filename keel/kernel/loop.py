@@ -134,7 +134,6 @@ class Kernel:
         self.last_intent: Optional[str] = None
         # (intent, step_id) -> call_id of a write that went through.
         self._commits: dict[tuple[str, str], str] = {}
-        self._conflicts_spoken: set[tuple[str, str]] = set()
         self._clarified: set[tuple[str, str]] = set()
         self._call_cause: dict[str, Optional[str]] = {}
         self._call_intent: dict[str, str] = {}
@@ -146,6 +145,9 @@ class Kernel:
         self._may_ask_missing = False
         self._deferred_ack: Optional[str] = None
         self._invalid_args: set[str] = set()
+        self._held_for_speech: set[str] = set()
+        # Writes whose outcome nothing could settle (see _give_up_on).
+        self.unresolvable: set[str] = set()
 
         self._now = clock.now_ms()
         self._cause: Optional[str] = None
@@ -219,7 +221,7 @@ class Kernel:
         elif isinstance(ev, Interrupt):
             # The user is talking over us: their turn is open. An interrupt by
             # itself cancels nothing; only a change to what a call read does.
-            self.fence.user_activity(self._now, end_of_turn=False)
+            self.fence.user_activity(self._now, end_of_turn=False, speaking=True)
             self._new_turn()
         if isinstance(ev, (TextChunk, AudioClip, VideoFrame, Interrupt)) and self.interpreter is not None:
             self.interpreter.submit(ev, self.view(), self.post)
@@ -425,6 +427,7 @@ class Kernel:
         """Nothing can settle this write. Say so and end the goal truthfully:
         blocking forever would stall the task, and re-sending could duplicate it."""
         self.trace.note("doubt_unresolvable", call_id=e.call_id)
+        self.unresolvable.add(e.call_id)
         if self.goal is not None and not self.goal_done:
             self._final(self.cfg.phrases.status_cannot_confirm)
         else:
@@ -440,6 +443,7 @@ class Kernel:
         results: dict[str, CallEntry] = {}
         all_done = goal is not None
         failure: Optional[CallEntry] = None
+        conflict: Optional[tuple[str, CallEntry]] = None
         to_create: list[_Resolved] = []
 
         for step in (goal.steps if goal else ()):
@@ -460,6 +464,9 @@ class Kernel:
                 to_create.append(r)
             elif state == "failed" and failure is None:
                 failure = entry
+            elif state == "conflict" and conflict is None:
+                assert entry is not None
+                conflict = (step.step_id, entry)
 
         self._result_seq = {sid: e.seq for sid, e in results.items()}
         # 1. cancel what is no longer needed (never probes; they settle doubt).
@@ -476,6 +483,8 @@ class Kernel:
 
         if goal is not None and failure is not None:
             self._finish_failed(failure)
+        elif goal is not None and conflict is not None:
+            self._finish_conflict(*conflict)
         elif goal is not None and all_done:
             self._final(self._reply_text(goal, results))
 
@@ -483,7 +492,7 @@ class Kernel:
         args: dict[str, JsonValue] = {}
         reads: dict[str, int] = {}
         missing: list[str] = []
-        for arg, b in step.bindings.items():
+        for arg, b in self._bindings(step).items():
             if isinstance(b, SlotRef):
                 sv = self.slots.get(b.slot)
                 if sv is None or sv.value is None:
@@ -501,6 +510,8 @@ class Kernel:
                 else:
                     args[arg] = v
                     reads[result_key(b.result)] = src.seq  # type: ignore[union-attr]
+        for slot in step.basis:
+            reads[slot] = self.slots.version(slot)
         for dep in step.after:
             if dep not in results:
                 missing.append(result_key(dep))
@@ -511,6 +522,18 @@ class Kernel:
             return None
         return _Resolved(step, args, reads, self.ledger.key_for(step.tool, args))
 
+    def _bindings(self, step: Step) -> dict[str, Any]:
+        """The step's own bindings, plus the manifest's default slot for every
+        required argument the step left unbound (ToolPolicy.slot_map)."""
+        pol = self.policies.get(step.tool)
+        if pol is None:
+            return dict(step.bindings)
+        out: dict[str, Any] = dict(step.bindings)
+        for arg in pol.required:
+            if arg not in out and arg in pol.slot_map:
+                out[arg] = SlotRef(slot=pol.slot_map[arg])
+        return out
+
     def _step_state(self, r: _Resolved) -> tuple[str, Optional[CallEntry]]:
         writes = self._safety(r.step.tool) != "read_only"
         if writes:
@@ -520,8 +543,7 @@ class Kernel:
                 assert committed is not None
                 if committed.idem_key == r.key:
                     return "satisfied", committed
-                self._speak_conflict(r.step.step_id, committed)
-                return "blocked", None
+                return "conflict", committed
         blocker = self.ledger.blocking(r.key)
         if blocker is not None:
             if blocker.status == "succeeded":
@@ -534,7 +556,7 @@ class Kernel:
             # with different arguments is in flight (it may be about to be
             # cancelled in this very converge) or in doubt, so an old and a
             # new write can never both land.
-            # TODO(kit): [K19] What a cancel does to an in-flight call in the
+            # ASSUMPTION [K19] What a cancel does to an in-flight call in the
             # mock environment (dropped silently? a final result?). We wait for
             # a result or our timeout before probing, since probing while the
             # write may still be executing could read a misleading "not found".
@@ -558,7 +580,7 @@ class Kernel:
             self.trace.note("arguments_invalid", step_id=r.step.step_id, tool=r.step.tool,
                             arguments=r.arguments, errors=errors)
             bad = errors[0].split(":", 1)[0].split("/")[0]
-            b = r.step.bindings.get(bad)
+            b = self._bindings(r.step).get(bad)
             if isinstance(b, SlotRef) and self._may_ask_missing:
                 key = (b.slot, "<invalid>")
                 if key not in self._clarified:
@@ -584,13 +606,14 @@ class Kernel:
                                caused_by=self._cause, text=text, slot=slot))
             self._spoke()
 
-    def _speak_conflict(self, step_id: str, committed: CallEntry) -> None:
-        key = (self._intent(), step_id)
-        if key in self._conflicts_spoken:
-            return
-        self._conflicts_spoken.add(key)
-        self.trace.note("commit_conflict", step_id=step_id, committed_call=committed.call_id)
-        self._say("status", self.cfg.phrases.already_committed)
+    def _finish_conflict(self, step_id: str, committed: CallEntry) -> None:
+        """A write for this step already went through with the old details.
+        Re-sending would duplicate it, so end the goal truthfully instead of
+        waiting forever; a later goal (e.g. one using a modify tool) can still
+        change it."""
+        self.trace.note("commit_conflict", step_id=step_id, committed_call=committed.call_id,
+                        committed_arguments=committed.arguments)
+        self._final(self.cfg.phrases.already_committed)
 
     # ======================================================================
     # call lifecycle
@@ -619,13 +642,20 @@ class Kernel:
         return e
 
     def _maybe_dispatch(self, e: CallEntry) -> None:
-        if not e.writes:
+        if not e.writes and not self.cfg.fence.hold_reads:
             self._dispatch(e)
             return
         opens = self.fence.opens_at({k: v for k, v in e.reads.items() if not k.startswith("@")})
-        if opens <= self._now:
+        if opens is None:
+            # The user is speaking; the input that ends it re-runs converge.
+            if e.call_id not in self._held_for_speech:
+                self._held_for_speech.add(e.call_id)
+                self.trace.note("fence_hold", call_id=e.call_id, until=None, why="user is speaking")
+            self._clear_timer("fence", e.call_id)
+        elif opens <= self._now:
             self._dispatch(e)
         else:
+            self._held_for_speech.discard(e.call_id)
             if ("fence", e.call_id) not in self._timers:
                 self.trace.note("fence_hold", call_id=e.call_id, until=opens)
             self._set_timer("fence", e.call_id, opens)
@@ -636,7 +666,7 @@ class Kernel:
         cause = self._call_cause.get(e.call_id)
         self._emit(ToolCall(action_id=self.ids.new("act"), session_id=self.session_id, ts_ms=self._now,
                             caused_by=cause, call_id=e.call_id, tool=e.tool, arguments=e.arguments))
-        # TODO(kit): [K18] Keel-side call timeout; the kit's latency and
+        # ASSUMPTION [K18] Keel-side call timeout; the kit's latency and
         # fault model is unknown, so the value is provisional (config/keel.toml).
         self._set_timer("call_timeout", e.call_id, self._now + self.cfg.calls.timeout_ms)
         pol = self.policies.get(e.tool)
@@ -680,6 +710,12 @@ class Kernel:
     # ======================================================================
 
     def _emit(self, action: ActionT) -> None:
+        if not self.cfg.floor.speak and isinstance(action, (Speak, Clarify, FinalResponse)):
+            # Another component owns the conversation (e.g. a LiveKit LLM). The
+            # kernel's own lines are recorded as notes, never as actions, so the
+            # trace does not show speech that was never produced.
+            self.trace.note(f"unspoken_{action.type}", **action.model_dump(mode="json"))
+            return
         self.trace.action_out(action)
         self._sink(action)
 
@@ -786,7 +822,14 @@ class AsyncKernelRunner:
         reader_task = asyncio.create_task(reader())
         try:
             while (ev := await inbox.get()) is not end:
-                kernel.handle(ev)
+                try:
+                    kernel.handle(ev)
+                except Exception as exc:  # noqa: BLE001
+                    # One bad event must not end the session: every later
+                    # event (and its score) would be lost. Record it and go on;
+                    # the simulator calls handle() directly, so tests still fail loudly.
+                    kernel.trace.note("kernel_error", event_type=getattr(ev, "type", type(ev).__name__),
+                                      error=f"{type(exc).__name__}: {exc}")
                 while outbox:
                     await adapter.send(outbox.pop(0))
         finally:
