@@ -59,7 +59,7 @@ def main() -> int:
     grid = itertools.product([1100, 1500, 2500], [0, 5, 50, 200], [0, 600], [0, 50, 300, 1500],
                              ["ok", "timeout", "error", "drop"], [True, False], [False, True], [True, False])
     tally: collections.Counter = collections.Counter()
-    runs = violations = double = false_success = 0
+    runs = violations = double = false_success = no_final = 0
     for corr, delay, quiet, lat, outcome, honors, dup, with_probe in grid:
         sim = Simulation(
             config=with_overrides(base, fence={"quiet_ms": quiet}),
@@ -77,16 +77,17 @@ def main() -> int:
         booked = tuple(a["day"] for _, t, a in res.env.world.effects if t == "book")
         double += len(booked) > 1
         finals = res.of("final")
+        no_final += not finals
         if finals and finals[0].text == "All done." and not res.env.world.happened(
                 "book", day=finals[0].snapshot.slots["day"]):
             false_success += 1
-        tally[(finals[0].text if finals else "<no final: commit conflict awaits replan>", booked)] += 1
+        tally[(finals[0].text if finals else "<no final response>", booked)] += 1
 
     print(f"synthetic grid: runs={runs} invariant_violations={violations} "
-          f"double_bookings={double} false_success_claims={false_success}")
+          f"double_bookings={double} false_success_claims={false_success} runs_without_final={no_final}")
     for (final, booked), n in tally.most_common():
         print(f"{n:5d}  booked={list(booked)!s:<14} final={final!r}")
-    return 1 if (violations or double or false_success) else 0
+    return 1 if (violations or double or false_success or no_final) else 0
 
 
 if __name__ == "__main__":
