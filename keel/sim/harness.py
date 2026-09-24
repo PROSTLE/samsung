@@ -18,7 +18,7 @@ from keel.sim.mock_env import MockEnv, ToolBehaviour
 from keel.sim.scripted import ScriptedInterpreter
 from keel.trace import TraceRecord, TraceWriter
 
-# Guide §6: "120s wall-clock cap per scenario". We apply the same bound to
+# Original guide (v1.0.0) §6: "120s wall-clock cap per scenario". We apply the same bound to
 # virtual time so a runaway timer loop cannot spin forever.
 SCENARIO_CAP_MS = 120_000
 

@@ -52,7 +52,9 @@ class TraceWriter:
     ) -> None:
         if isinstance(sink, (str, Path)):
             Path(sink).parent.mkdir(parents=True, exist_ok=True)
-            self._fh: IO[str] = open(sink, "w", encoding="utf-8", newline="\n")
+            # Line-buffered: every record is on disk as soon as it is written, so a
+            # killed or crashed agent process never loses its trace.
+            self._fh: IO[str] = open(sink, "w", encoding="utf-8", newline="\n", buffering=1)
             self._owns = True
         else:
             self._fh = sink

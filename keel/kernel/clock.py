@@ -1,7 +1,7 @@
 """Clocks for the kernel.
 
 The guide's harness is a "virtual clock streaming harness" with
-"deterministic event replay" (guide section 4). Keel needs the same property
+"deterministic event replay" (original guide v1.0.0, section 4). Keel needs the same property
 for its own tests and fuzzer: given the same inputs, the same timers fire in
 the same order at the same virtual times.
 

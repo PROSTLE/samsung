@@ -65,3 +65,23 @@ def test_closed_trace_rejects_writes():
     tr.close()  # idempotent
     with pytest.raises(RuntimeError):
         tr.note("late")
+
+
+def test_overridden_config_gets_its_own_digest():
+    from keel.config import load_config, with_overrides
+    base = load_config()
+    a = with_overrides(base, fence={"quiet_ms": 0})
+    assert a.digest != base.digest
+    assert a.digest == with_overrides(base, fence={"quiet_ms": 0}).digest
+    assert a.digest != with_overrides(base, fence={"quiet_ms": 1}).digest
+
+
+def test_a_file_trace_is_on_disk_before_it_is_closed(tmp_path):
+    from keel.config import load_config
+    from keel.kernel.clock import VirtualClock
+    from keel.trace import TraceWriter
+    path = tmp_path / "t.jsonl"
+    tw = TraceWriter(path, clock=VirtualClock(), session_id="s", config=load_config(), synthetic=True)
+    tw.note("hello", x=1)
+    assert len(path.read_text(encoding="utf-8").splitlines()) == 2   # header + note, not buffered
+    tw.close()

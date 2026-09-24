@@ -10,7 +10,8 @@ so a lower-confidence perception (OCR, vision, a mis-heard ASR word) cannot
 silently overwrite what the user just said. Locks last until the goal they
 were made under completes (release_locks()).
 
-Guide §6: session-scoped memory only. A SlotStore belongs to one session and
+Session-scoped memory only: original guide (v1.0.0) §6, and the updated
+guide §6 ("Don't cache anything across scenarios"). A SlotStore belongs to one session and
 is never persisted.
 """
 
