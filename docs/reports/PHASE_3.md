@@ -21,7 +21,7 @@ python -m eval.grid_self_repair
 |---|---|---|
 | Argument validator | Manifest parameter schema, normalised (BFCL's `dict`/`float`/`tuple`/`any` → JSON Schema), Draft 2020-12 via `jsonschema`. The kernel checks arguments **before** a call leaves; if they're invalid it asks about the slot behind the bad argument. | `keel/compiler/schema.py` |
 | Safety class | 1. explicit hints (MCP `readOnlyHint`, `read_only`/`side_effects`/`mutates_state`, τ²-style `tool_type`, HTTP method per RFC 9110) → 2. lexical classifier if ≥ `compiler.min_confidence` sure → 3. `unknown` (treated as write). Evidence logged per tool. | `keel/compiler/manifest.py`, `classify.py` |
-| Slot dependency map | argument → session slot of the same name (a goal binding can override it) | `manifest.py` |
+| Slot dependency map | argument → session slot of the same name (a goal binding can override it). *Until 2026-09-24 the kernel never read it; it now binds required arguments the goal left unbound (AUDIT_2026-09-24.md).* | `manifest.py` |
 | Acknowledgment template | From the tool's own name; reads: "Let me check the reservation details for {reservation_id}."; writes, spoken only once the call has actually gone out: "I'm sending the book reservation request now." A test checks that no template for any of the 263 real tools says done/booked/completed/confirmed/success. | `manifest.py` |
 | Status probe | For an in-doubt write: a read-only tool sharing its object words whose required arguments the write already has; the verdict is read structurally from the result (bool flag / matching record / empty collection). | `keel/compiler/probe.py` |
 

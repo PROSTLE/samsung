@@ -93,6 +93,9 @@ python -m eval.grid_self_repair                          # the synthetic stress 
   first booking landed before the correction, so there is no final response:
   Keel correctly refuses to book again and waits for a new plan. The slow
   path (phase 4) must receive this conflict and plan a modification.
+  *Fixed 2026-09-24 (docs/reports/AUDIT_2026-09-24.md): Keel now ends the goal
+  with that truthful sentence as its final response; a later goal can still
+  modify the booking. The grid now fails if any run has no final response.*
 - Argument validation against the tool's JSON Schema comes with the compiler
   (phase 3).
 - The fence default is literature-based until phase 4 measures self-repairs.
