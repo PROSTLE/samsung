@@ -1,9 +1,14 @@
 """Provisional wire contract between Keel and the evaluation harness.
 
-Source: docs/Theme_5_Guide.pdf, section 3.1. The guide names the *kinds* of
-messages on each queue but not their fields, so every field name below is our
-placeholder. Each choice the real kit must confirm carries a TODO(kit) tag
-whose ID is listed in docs/KIT_ASSUMPTIONS.md.
+Source: the original guide, docs/Theme_5_Guide.pdf (v1.0.0), section 3.1.
+Since the theme update (Theme05 participant guide, 2026-09-24) the scored
+harness is FDB-v3 over LiveKit, so these models are Keel's *internal* event
+vocabulary: keel.livekit.gate translates LiveKit session events into them.
+
+The original guide named the *kinds* of messages on each queue but not their
+fields, so every field name below is our placeholder. Each such choice carries
+a tagged assumption ID; docs/KIT_ASSUMPTIONS.md lists them and how the theme
+update resolved each one.
 
 Inputs (guide 3.1): transcribed text chunks with end-of-turn markers, raw audio
 clips (WAV), video frames (PNG), interruption signals, asynchronous tool
@@ -28,11 +33,11 @@ from pydantic import (
     model_validator,
 )
 
-# TODO(kit): [K01] Identifier alphabet and length. The guide only says
+# ASSUMPTION [K01] Identifier alphabet and length. The guide only says
 # "valid identifiers"; we accept a conservative ASCII set.
 Id = Annotated[str, StringConstraints(pattern=r"^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$")]
 
-# TODO(kit): [K02] Timestamps are integer milliseconds on the harness's
+# ASSUMPTION [K02] Timestamps are integer milliseconds on the harness's
 # virtual clock, measured from scenario start. The kit may use float seconds.
 TimeMs = Annotated[int, Field(ge=0)]
 
@@ -51,7 +56,7 @@ class _Msg(BaseModel):
 # --------------------------------------------------------------------------
 
 class _Event(_Msg):
-    # TODO(kit): [K03] Envelope fields shared by every input event.
+    # ASSUMPTION [K03] Envelope fields shared by every input event.
     event_id: Id
     session_id: Id
     ts_ms: TimeMs
@@ -60,7 +65,7 @@ class _Event(_Msg):
 class MediaRef(_Msg):
     """Exactly one of `uri` or `data_b64` must be present."""
 
-    # TODO(kit): [K04] Whether media arrives inline (base64) or by path/URI.
+    # ASSUMPTION [K04] Whether media arrives inline (base64) or by path/URI.
     uri: Optional[str] = None
     data_b64: Optional[str] = None
 
@@ -74,7 +79,7 @@ class MediaRef(_Msg):
 class TextChunk(_Event):
     type: Literal["text"] = "text"
     text: str
-    # TODO(kit): [K05] End-of-turn marker is a boolean on the chunk rather
+    # ASSUMPTION [K05] End-of-turn marker is a boolean on the chunk rather
     # than a separate event.
     end_of_turn: bool = False
 
@@ -82,7 +87,7 @@ class TextChunk(_Event):
 class AudioClip(_Event):
     type: Literal["audio"] = "audio"
     media: MediaRef
-    # TODO(kit): [K06] Whether the kit supplies clip duration / sample rate.
+    # ASSUMPTION [K06] Whether the kit supplies clip duration / sample rate.
     duration_ms: Optional[TimeMs] = None
     end_of_turn: bool = False
 
@@ -93,7 +98,7 @@ class VideoFrame(_Event):
 
 
 class Interrupt(_Event):
-    # TODO(kit): [K07] Whether an interruption carries a payload (e.g. the
+    # ASSUMPTION [K07] Whether an interruption carries a payload (e.g. the
     # interrupting text) or is a bare signal followed by a text/audio event.
     type: Literal["interrupt"] = "interrupt"
 
@@ -101,7 +106,7 @@ class Interrupt(_Event):
 class ToolResult(_Event):
     type: Literal["tool_result"] = "tool_result"
     call_id: Id
-    # TODO(kit): [K08] Result status vocabulary. "timeout" is what drives the
+    # ASSUMPTION [K08] Result status vocabulary. "timeout" is what drives the
     # reconciliation path; the kit may signal timeouts differently.
     status: Literal["ok", "error", "timeout"]
     result: JsonValue = None
@@ -116,7 +121,7 @@ class ToolSpec(BaseModel):
     manifest compiler looks for.
     """
 
-    # TODO(kit): [K09] Manifest tool shape. We assume OpenAI/BFCL-style
+    # ASSUMPTION [K09] Manifest tool shape. We assume OpenAI/BFCL-style
     # {name, description, parameters: JSON Schema} plus arbitrary extras.
     model_config = ConfigDict(extra="allow", frozen=True)
 
@@ -141,13 +146,13 @@ Event = Annotated[
 # --------------------------------------------------------------------------
 
 class _Action(_Msg):
-    # TODO(kit): [K10] Envelope fields shared by every output action.
+    # ASSUMPTION [K10] Envelope fields shared by every output action.
     action_id: Id
     session_id: Id
     ts_ms: TimeMs
-    # TODO(kit): [K11] Link from an action to the input event that caused it.
+    # ASSUMPTION [K11] Link from an action to the input event that caused it.
     # The latency score ("time to first substantive spoken action following
-    # user input or interruption", guide section 5) needs this or an
+    # user input or interruption", original guide section 5) needs this or an
     # equivalent; the kit may compute it from timestamps alone.
     caused_by: Optional[Id] = None
 
@@ -157,7 +162,7 @@ class Speak(_Action):
 
     type: Literal["speak"] = "speak"
     text: str = Field(min_length=1)
-    # TODO(kit): [K12] Whether the kit distinguishes filler sub-kinds. The
+    # ASSUMPTION [K12] Whether the kit distinguishes filler sub-kinds. The
     # guide penalises "excessive fillers" (3.2.1), so we tag them ourselves.
     purpose: Literal["acknowledge", "progress", "status"]
 
@@ -182,7 +187,7 @@ class Clarify(_Action):
 
 
 class StateSnapshot(_Msg):
-    # TODO(kit): [K13] Snapshot shape: a single intent string plus a flat
+    # ASSUMPTION [K13] Snapshot shape: a single intent string plus a flat
     # slot->value map. The kit may nest slots or allow multiple intents.
     intent: Optional[str]
     slots: dict[str, JsonValue]

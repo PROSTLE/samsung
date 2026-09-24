@@ -2,7 +2,7 @@
 
 The kernel speaks in provisional models (keel.protocol.provisional). A
 KitAdapter moves those models across the harness's two asynchronous queues
-(guide 3: "two asynchronous queues (timestamped events input, actions
+(original guide v1.0.0, §3: "two asynchronous queues (timestamped events input, actions
 output)"). When the real kit ships, write a new Codec and, if its transport
 differs, a new KitAdapter. Nothing in keel.kernel should change.
 """
@@ -41,7 +41,7 @@ class Codec(ABC):
 class ProvisionalCodec(Codec):
     """Identity codec: the wire format *is* the provisional JSON.
 
-    TODO(kit): [K14] Wire messages are JSON objects (or JSON text) matching
+    ASSUMPTION [K14] Wire messages are JSON objects (or JSON text) matching
     provisional.py field-for-field. Replace this class when the kit's real
     field names are known.
     """
@@ -67,8 +67,8 @@ class KitAdapter(ABC):
     async def warmup(self) -> None:
         """Called once inside the harness's setup hook.
 
-        Guide section 6: "300s setup/warm-up hook". Model loading happens here.
-        TODO(kit): [K15] How the harness invokes the warm-up hook.
+        Original guide v1.0.0, section 6: "300s setup/warm-up hook". Model loading happens here.
+        ASSUMPTION [K15] How the harness invokes the warm-up hook.
         """
 
     @abstractmethod
@@ -82,7 +82,7 @@ class KitAdapter(ABC):
         return None
 
 
-# TODO(kit): [K16] End-of-stream is signalled by a None on the input queue.
+# ASSUMPTION [K16] End-of-stream is signalled by a None on the input queue.
 END_OF_STREAM = None
 
 

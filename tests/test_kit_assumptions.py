@@ -1,10 +1,10 @@
-"""Every TODO(kit) in code has an ID, and code IDs match docs/KIT_ASSUMPTIONS.md."""
+"""Every ASSUMPTION tag in code has an ID, and code IDs match docs/KIT_ASSUMPTIONS.md."""
 
 import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-TAG = re.compile(r"TODO\(kit\):\s*(\[K\d{2}\])?")
+TAG = re.compile(r"\bASSUMPTION\b\s*(\[K\d{2}\])?")
 
 
 def code_ids():
