@@ -44,7 +44,10 @@ class ToolPolicy:
     # (keel.paths.fast.render).
     ack_template: Optional[str] = None
     required: tuple[str, ...] = ()
-    # argument name -> session slot it reads unless a goal binds it otherwise.
+    # argument name -> session slot of the same name. The kernel binds a
+    # *required* argument that the goal left unbound to this slot, so a goal
+    # that forgets `user_id` reads the session's user_id (or asks for it)
+    # instead of stalling on a call that can never validate.
     slot_map: dict[str, str] = field(default_factory=dict)
 
     def validate(self, arguments: dict[str, Any]) -> list[str]:
@@ -62,7 +65,7 @@ def _bool(v: Any) -> Optional[bool]:
 def explicit_hints(spec: ToolSpec) -> Optional[tuple[SafetyClass, bool, tuple[str, ...]]]:
     """Read explicit side-effect hints if the manifest carries any.
 
-    TODO(kit): [K17] Which hint fields real manifests carry. We accept MCP
+    ASSUMPTION [K17] Which hint fields real manifests carry. We accept MCP
     tool annotations, τ²-bench-style tool_type / mutates_state, a plain
     read_only / side_effects boolean, and an HTTP method.
     """
@@ -77,6 +80,12 @@ def explicit_hints(spec: ToolSpec) -> Optional[tuple[SafetyClass, bool, tuple[st
         if ro is not None:
             safety = "read_only" if ro else "state_changing"
             evidence.append(f"annotations.readOnlyHint={ro} (MCP)")
+        elif "readOnlyHint" not in ann:
+            # The manifest speaks MCP but omits the hint: the spec's default
+            # applies ("If true, the tool does not modify its environment.
+            # Default: false"), so the classifier gets no say.
+            safety = "state_changing"
+            evidence.append("annotations without readOnlyHint (MCP default: false)")
         if _bool(ann.get("idempotentHint")):
             idempotent = True
             evidence.append("annotations.idempotentHint=true (MCP)")

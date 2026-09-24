@@ -107,8 +107,14 @@ def _records(x: Any):
 
 
 def _is_empty_collection(x: Any) -> bool:
+    """An empty list, or an object whose collections are all empty. Scalar
+    fields beside them (an envelope's "status": "success") are metadata, so
+    {"status": "success", "bookings": []} is an empty result."""
     if isinstance(x, list):
         return len(x) == 0
     if isinstance(x, dict):
-        return all(isinstance(v, (list, dict)) and len(v) == 0 for v in x.values()) if x else True
+        if not x:
+            return True
+        collections = [v for v in x.values() if isinstance(v, (list, dict))]
+        return bool(collections) and all(len(v) == 0 for v in collections)
     return False

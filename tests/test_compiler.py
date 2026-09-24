@@ -72,6 +72,13 @@ def test_idempotent_hint_is_kept():
     assert compile_tool(spec("put", annotations={"readOnlyHint": False, "idempotentHint": True})).idempotent
 
 
+
+def test_mcp_annotations_without_read_only_hint_use_the_spec_default():
+    # MCP ToolAnnotations: readOnlyHint "Default: false". A read-looking name must not override it.
+    pol = compile_tool(spec("get_order_status", annotations={"title": "Order status"}), LexicalClassifier(), 0.8)
+    assert pol.safety == "state_changing" and pol.method == "hint"
+    assert "MCP default: false" in pol.evidence[0]
+
 # ---- classifier -----------------------------------------------------------------
 
 def test_split_identifier_handles_snake_and_camel():
@@ -169,3 +176,10 @@ def test_probe_needs_shared_object_words():
     assert object_words("book_reservation") == {"reservation"}
     policies = default_compiler(0.8)([spec("get_weather", annotations={"readOnlyHint": True})])
     assert ManifestProbe().plan(entry("book_reservation", {}), policies) is None
+
+
+def test_probe_reads_an_empty_result_inside_a_status_envelope():
+    e = entry("book_reservation", {"day": "fri"})
+    probe = ManifestProbe()
+    assert probe.verdict(e, {"status": "success", "reservations": []}) == "not_executed"
+    assert probe.verdict(e, {"status": "success"}) == "unknown"   # no collection at all: says nothing
