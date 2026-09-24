@@ -33,3 +33,14 @@ def test_without_end_of_turn_requirement_only_activity_counts():
 
 def test_no_activity_means_open_now():
     assert fence().opens_at({}) == 0
+
+
+def test_while_the_user_speaks_the_fence_has_no_opening_time():
+    f = fence()
+    f.user_activity(1000, end_of_turn=True)
+    f.user_activity(1200, end_of_turn=False, speaking=True)   # an interruption: speaking again
+    assert f.opens_at({}) is None
+    f.user_activity(4000, end_of_turn=False)                  # that stretch of speech ended
+    assert f.opens_at({}) == 4000 + 1000 + 600                # turn still open: stale rule
+    f.user_activity(4100, end_of_turn=True)
+    assert f.opens_at({}) == 4100 + 600

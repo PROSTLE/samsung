@@ -7,7 +7,11 @@ State-changing calls wait until the user has stopped revising what they read:
      quiet for `stale_turn_ms`, so a lost end-of-turn marker cannot block
      writes forever), and
   2. `quiet_ms` has passed since the later of: the end of that turn, and the
-     last change to any slot the call reads.
+     last change to any slot the call reads, and
+  3. the user is not speaking right now. An interruption marks the user as
+     speaking until the next text/audio input ends that stretch of speech, so
+     a long utterance can never outlast the stale-turn rule and let a write
+     out mid-sentence.
 
 Self-repairs mostly land inside the same turn ("Friday, no, Saturday"), which
 rule 1 covers; rule 2 covers the correction that arrives as a fresh turn just
@@ -25,13 +29,15 @@ class CommitFence:
         self.stale_turn_ms = stale_turn_ms
         self.require_end_of_turn = require_end_of_turn
         self.turn_open = False
+        self.speaking = False
         self.last_user_activity = -1
         self.last_turn_end = -1
         self._last_change: dict[str, int] = {}
 
-    def user_activity(self, now: int, *, end_of_turn: bool) -> None:
+    def user_activity(self, now: int, *, end_of_turn: bool, speaking: bool = False) -> None:
         self.last_user_activity = now
         self.turn_open = not end_of_turn
+        self.speaking = speaking
         if end_of_turn:
             self.last_turn_end = now
 
@@ -46,8 +52,11 @@ class CommitFence:
             return self.last_user_activity + self.stale_turn_ms
         return self.last_turn_end
 
-    def opens_at(self, reads: dict[str, int]) -> int:
-        """Earliest virtual time at which a write reading these slots may go."""
+    def opens_at(self, reads: dict[str, int]) -> Optional[int]:
+        """Earliest virtual time at which a write reading these slots may go;
+        None while the user is speaking (no time is known yet)."""
+        if self.speaking:
+            return None
         closed = self._turn_closed_at()
         anchors = [closed if closed is not None else -1]
         anchors += [self._last_change[s] for s in reads if s in self._last_change]
