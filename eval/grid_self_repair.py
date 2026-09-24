@@ -33,6 +33,16 @@ class Probe:
         return "executed" if result.get("exists") else "not_executed"
 
 
+class NoProbe:
+    """Nothing can check a write (the manifest-derived probe is disabled)."""
+
+    def plan(self, entry, policies):
+        return None
+
+    def verdict(self, entry, result):
+        return "unknown"
+
+
 def text(eid, ts):
     return {"type": "text", "event_id": eid, "session_id": "sim", "ts_ms": ts, "text": "", "end_of_turn": True}
 
@@ -59,7 +69,7 @@ def main() -> int:
                         "check_booking": ToolBehaviour(
                             latency_ms=100,
                             respond=lambda a, w: ("ok", {"exists": w.happened("book", **a)}))},
-            probe=Probe() if with_probe else None,
+            probe=Probe() if with_probe else NoProbe(),
         )
         res = sim.run([TOOLS, text("e1", 1000), text("e2", corr)])
         runs += 1
