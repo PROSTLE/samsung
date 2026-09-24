@@ -7,7 +7,7 @@ name = "keel"
 version = "0.1.0"
 description = "Interruption-safe execution layer for real-time voice agents"
 readme = "README.md"
-# Theme 5 guide, section 6: "Runtime: Python 3.10-3.12".
+# FDB-v3's README sets up Python 3.10; the kernel is tested on 3.10-3.12.
 requires-python = ">=3.10,<3.13"
 dependencies = [
     "pydantic>=2.6,<3",
@@ -20,9 +20,21 @@ dev = [
     "pytest>=8",
     "hypothesis>=6.100",
 ]
+# The LiveKit agent (keel.livekit) and the Show & Fix extension. Exact pins for
+# the benchmark run are in requirements/agent.lock.txt.
+livekit = [
+    "livekit-agents[openai,silero,turn-detector]==1.8.3",
+    "python-dotenv==1.2.3",
+]
 
 [tool.setuptools.packages.find]
-include = ["keel*"]
+include = ["keel*", "extension*"]
+
+# Non-Python files the package reads at runtime. Without this a wheel install
+# has no classifier model (and no console template) and fails on first use.
+[tool.setuptools.package-data]
+"keel.compiler" = ["model.json"]
+"keel.console" = ["template.html"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
