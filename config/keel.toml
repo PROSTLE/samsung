@@ -29,6 +29,11 @@ require_end_of_turn = true
 # end-of-turn marker cannot block writes forever. ~1 s is Jefferson's (1988)
 # "standard maximum" silence in conversation, after which speakers act on it.
 stale_turn_ms = 1000
+# Read-only calls normally start speculatively (a wasted read costs only
+# time). Set true when every *executed* call is scored, as in FDB-v3, whose
+# strict pass rate fails a scenario on any unexpected call
+# (evaluate_pass_rate.py, check 1); config/fdb_v3.toml sets it.
+hold_reads = false
 
 [calls]
 # Keel-side timeout for a dispatched call; on expiry a read is retried and a
@@ -52,8 +57,12 @@ retry_if_idempotent = false
 clarify_below = 0.6
 
 [floor]
+# false when something else owns the conversation (the LiveKit LLM in
+# config/fdb_v3.toml): the kernel then records its lines as trace notes and
+# emits no speak/clarify/final actions.
+speak = true
 # If nothing substantive has been said this long after the user's turn ends,
-# the fast path speaks a hold phrase. Guide §1: fast path responds "within a
+# the fast path speaks a hold phrase. Original guide (v1.0.0) §1: fast path responds "within a
 # few hundred milliseconds"; 300 ms keeps well under the 600 ms drop-off above.
 ack_after_ms = 300
 # Speak a progress line after this much silence while calls are in flight
