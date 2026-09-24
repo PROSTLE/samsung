@@ -104,6 +104,53 @@ Yes. The invariant checker (I3) caught a case where, in one tick, a
 corrected write was sent before the old one was cancelled. That's why writes
 to one tool are now serialised. See `docs/reports/PHASE_2.md`, decision 4.
 
+## Manifest compiler (phase 3)
+
+**Q: How accurate is your read/write classifier?**
+Measured leave-one-domain-out on 263 real tools from τ²-bench and BFCL, so
+every tool is scored as if never seen. At the shipped (pre-registered)
+confidence, 1 of 123 writes would be treated as read-only, and 41% of reads
+are recognised as safe to speculate. Accuracy of the treated label is 0.684.
+The single unsafe case is `get_flight_cost`, which looks like a price quote
+but caches a value the booking later uses. Full table:
+`python -m eval.compiler_eval`.
+
+**Q: A verb list gets higher recall than your model. Why ship the model?**
+At the threshold we fixed before evaluating, yes: 0.636 vs 0.414 read
+recall. At t = 0.55 the model beats the verb list on all three metrics
+(0.852 accuracy / 1 unsafe / 0.729 recall). We didn't move the threshold
+after seeing test results; that would be tuning on the test set. The model
+also explains each decision and learns from data rather than a hand list.
+
+**Q: Where do the labels come from? Did you label your own test set?**
+No. τ²-bench's authors label their tools READ/WRITE in code. For τ-bench v1
+and BFCL we derive labels from each tool's *reference implementation* by
+static analysis (does the code mutate its environment?). That analyser agrees
+with τ²-bench's authors on 28/28 tools the two benchmarks share. Two policy
+overrides (hand-off / contacting a person counts as state-changing) are
+listed in `data/labels/POLICY.md`.
+
+**Q: What happens when the classifier is wrong?**
+If it wrongly says "write", the call just waits behind the commit fence
+(latency, not correctness). If it's unsure, the tool is `unknown`, which is
+also treated as a write. A wrong "read" is the dangerous direction, and it
+only happens above the confidence threshold. Explicit manifest hints (MCP
+`readOnlyHint`, HTTP method, etc.) always override the classifier.
+
+**Q: Why not use an LLM to classify tools?**
+It's supported (`PromptClassifier`: fixed prompt, few-shot real examples,
+strict JSON schema, falls back on any failure) but not the default. It's
+unknown whether hosted models are reachable during evaluation, and we won't
+claim an accuracy we haven't measured. The lexical model runs offline in
+~0.1 ms per tool (measured) with no warm-up.
+
+**Q: How does Keel answer "did it go through?" for a tool it has never seen?**
+It looks in the same manifest for a read-only tool about the same thing
+(shared object words, e.g. `book_reservation` ↔ `get_user_reservations`)
+that it can call with arguments the write already had. It then reads the
+result structurally: a matching record means executed, and an empty result
+or no match means not executed. Anything else, and Keel says it can't confirm.
+
 ## Honesty
 
 **Q: Are your numbers real?**

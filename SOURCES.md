@@ -115,6 +115,7 @@ by the matching `data/fetch/` script; everything else is maintained by hand.
 |---|---|---|---|
 | pydantic | protocol models, validation | MIT | https://github.com/pydantic/pydantic (GitHub API, 2026-09-23) |
 | tomli | TOML on Python 3.10 only | MIT | https://github.com/hukkin/tomli (GitHub API, 2026-09-23) |
+| jsonschema | argument validation (Draft 2020-12) | MIT | https://github.com/python-jsonschema/jsonschema (GitHub API, 2026-09-23); 4.26.0 installed |
 | pytest | tests (dev only) | MIT | https://github.com/pytest-dev/pytest (GitHub API, 2026-09-23) |
 | hypothesis | property tests (dev only) | MPL-2.0 | GitHub API reports NOASSERTION; https://github.com/HypothesisWorks/hypothesis/blob/master/LICENSE.txt says MPL 2.0, and package metadata `License-Expression: MPL-2.0` (6.168.0), 2026-09-23 |
 
@@ -144,4 +145,7 @@ own code.
 - Retrieved: 2026-09-23 by `python -m data.fetch.bfcl`
 - Output: `data/tools/bfcl.jsonl` (162 functions: gorilla_file_system=18, math_api=17, memory_kv=15, memory_rec_sum=5, memory_vector=12, message_api=10, posting_api=14, ticket_api=9, trading_bot=20, travel_booking=18, vehicle_control=22, web_search=2)
 - No read/write labels upstream. Schema dialect is BFCL's (`"type": "dict"`, `"float"`), stored verbatim.
+- `impl_effects`: whether the reference implementation in `berkeley-function-call-leaderboard/bfcl_eval/eval_checker/multi_turn_eval/func_source_code/` mutates
+  its state, by static analysis (`data/labels/ast_effects.py`). Functions with
+  no matching implementation method: 0.
 <!-- /source:bfcl -->
