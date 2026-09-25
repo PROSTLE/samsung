@@ -2,8 +2,9 @@
 
 Keel sits between a voice agent's perception/reasoning and its tools. Its job
 is to keep the agent *correct* while the user interrupts, corrects, and
-changes their mind. It is scored on the guide's four categories, and it
-runs deterministically with no model at all.
+changes their mind. The kernel runs deterministically with no model at all.
+Since the theme update it runs under a LiveKit voice agent and is scored by
+Full-Duplex-Bench v3 (see "LiveKit layer" below).
 
 ## Event flow
 
@@ -52,6 +53,12 @@ runs deterministically with no model at all.
 4. **Create** missing calls. Read-only → dispatched at once (speculative).
    State-changing → held until the fence opens.
 5. Every step succeeded → one **final response** with the full snapshot.
+   A step that failed, or whose write already went through with details the
+   user has since changed, also ends the goal with one truthful final
+   response, so no session ends without one.
+
+A required tool argument that the goal left unbound reads the session slot
+of the same name (the compiler's slot map), or Keel asks for it.
 
 Cancellation happens in the same virtual millisecond as the change that
 caused it, and no model call sits on that path.
@@ -75,3 +82,59 @@ caused it, and no model call sits on that path.
 I1 no stale dispatch · I2 cancellation in the same ms as invalidation ·
 I3 no duplicate state-changing calls · I4 no effect twice in the world ·
 I5 final snapshot equals the slot store.
+
+## Trace console (`keel/console/`)
+
+`python -m keel.console trace.jsonl` renders one self-contained HTML page per
+set of traces. The view model is computed in Python from trace records only
+(tested in `tests/test_console.py`); the page draws it. `python -m
+eval.showcase` produces five labelled synthetic sessions and their page.
+
+## LiveKit layer (`keel/livekit/`), added with the theme update
+
+The scored harness is now FDB-v3 driving a LiveKit voice agent. The LLM decides
+*what* to call; Keel decides *whether and when* it runs.
+
+```
+LiveKit AgentSession                         KeelGate (gate.py)                     Kernel
+───────────────────                          ──────────────────                     ──────
+user_state_changed: speaking  ────────────►  Interrupt            ───────────────►  fence closed (user speaking)
+user_state_changed: stopped   ────────────►  TextChunk(eot=False) ───────────────►  fence: speaking ended
+user_input_transcribed final  ────────────►  slot `utterance` v+1 ───────────────►  held calls planned earlier: dropped
+conversation_item_added user  ────────────►  TextChunk(eot=True)  ───────────────►  turn closed; fence opens after quiet_ms
+LLM tool call (raw-schema tool) ──────────►  Step(Const args, basis=utterance) ──►  ledger entry: held → dispatched → result
+                              ◄────────────  result JSON | "superseded" | "unknown"
+```
+
+A tool call's life:
+
+1. **Completed and validated** (`fdb.py` `arguments`, compiler schema): signature
+   defaults are filled in and scalars take the schema's type, *before* the
+   idempotency key is computed. So `add_to_cart(p)` and `add_to_cart(p, quantity=1)`
+   are one call. Invalid arguments go back to the LLM and never run.
+2. **Held** behind the commit fence. With `fence.hold_reads` (the FDB-v3
+   profile) this applies to reads too, because the benchmark scores every
+   executed call. The fence counts from the end of the user's turn, so it only
+   delays a call the LLM proposes sooner than `quiet_ms` after the user stopped.
+3. **Dropped** if new transcribed speech arrives first, or if LiveKit
+   interrupts the reply the call belongs to. The kernel cancels it with a
+   reason (`utterance v1->v2`), and the LLM is told it was superseded. It never
+   executed, so it never reaches the benchmark's tool log.
+4. **Dispatched** to the backend, which runs FDB-v3's mock API in a worker thread
+   and appends one whole line to the tool log under a lock.
+5. **Reused**: an identical call later in the same session gets the first result.
+
+Why "never dispatch what might need cancelling": LiveKit does not cancel a
+running tool (voice/generation.py waits for it), and a logged call cannot be
+un-logged. So all of Keel's cancellation happens *before* dispatch.
+
+Speech: in LiveKit mode the LLM speaks (`floor.speak = false`). The kernel's
+own lines are recorded as `unspoken_*` notes, so the trace never shows speech
+that did not happen. Keel says only three kinds of truthful line, through
+LiveKit's `RunContext.with_filler`: the hold phrase while a call waits, the tool's
+acknowledgment once it has gone out, and a progress line for a slow call (at
+most three per call). Each is recorded as `filler_said`.
+
+The Show & Fix extension (`extension/show_and_fix/`) uses the same gate and
+session code with its own manifest, where reads may run speculatively
+(`hold_reads = false`) because nothing scores a wasted read there.

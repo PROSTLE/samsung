@@ -1,7 +1,97 @@
 # Judges' cross-questions: prepared answers
 
+**Read the "Theme update" section first.** Scoring now uses Full-Duplex-Bench
+v3 over LiveKit. Answers further down that cite "the original guide" describe
+the first version of the brief; the mechanisms they explain are unchanged.
+
 Short answers first, evidence second. Every external claim is sourced in
 `SOURCES.md`. Updated at the end of each phase.
+
+## Theme update: FDB-v3 and LiveKit (2026-09-25)
+
+**Q: The theme changed to FDB-v3 on LiveKit. Did you throw away the kernel?**
+No. The kernel was built behind an adapter precisely because the kit was
+unknown. The LiveKit layer (`keel/livekit/`) is that adapter: LiveKit session
+events and LLM tool calls become kernel events, and the kernel's ledger, commit
+fence and idempotency decide what runs. `docs/KIT_ASSUMPTIONS.md` records what
+each of the 19 wire-format guesses became.
+
+**Q: What exactly does Keel change in a FDB-v3 run?**
+Relative to FDB-v3's cascaded template, six things. The models are the same
+(Whisper, GPT-4o, OpenAI TTS), so any score difference comes from these:
+1. Every tool call is held until the user has finished (turn ended, not
+   speaking, 600 ms quiet), and dropped if they keep talking before it is sent.
+2. An identical call later in the session is answered from the first one.
+3. End of turn uses LiveKit's end-of-utterance model instead of VAD silence alone.
+4. Four general instructions about self-corrections and superseded calls,
+   appended to the template's own instructions.
+5. The LLM runs at temperature 0 with a fixed seed (the template sets neither),
+   so a re-run is as repeatable as the API allows.
+6. While a call is held or running, Keel may say a short truthful line itself
+   ("One moment.", the tool's acknowledgment, "Still working on it.") through
+   LiveKit's filler mechanism, at most three per call.
+
+**Q: Why hold read-only calls too? That costs latency.**
+In FDB-v3 it costs correctness not to. The strict pass rate fails a scenario on
+any *unexpected* call (`evaluate_pass_rate.py`, check 1), and a read that ran on
+"Paris" before the user said "no, Berlin" is exactly that. The fence counts
+from the end of the user's turn, not from the LLM's proposal, so a call the LLM
+proposes more than 600 ms after the user stopped is not delayed at all. In the
+extension, where nothing scores a wasted read, reads run speculatively
+(`config/show_and_fix.toml`). It's one flag, set per deployment with a stated
+reason.
+
+**Q: Why not just cancel the stale call when the correction arrives?**
+Because it's too late by then. LiveKit does not cancel a running tool
+(voice/generation.py waits for it to finish), and once FDB-v3's tool log has the
+line, the scorer counts it. So Keel never dispatches a call it might have to
+take back.
+
+**Q: How do you know the tool log you write is what FDB-v3 scores?**
+The format and path are read from FDB-v3's runner at the pinned commit (step 6
+of `run_tool_benchmark.py`). A test runs FDB-v3's real mock registry and checks
+the line shape. Another fires 20 concurrent calls and checks every line is
+whole: an early version interleaved lines from parallel calls, which would have
+silently corrupted scoring.
+
+**Q: Did you tune anything on the benchmark?**
+No, and the guide forbids it. The timing values come from conversation research
+(Roberts & Francis 2013; Jefferson 1988), the classifier threshold was fixed in
+phase 3, and the extra instructions mention no benchmark item. The only use of
+the benchmark data is a compatibility test: every argument shape the benchmark
+expects must pass Keel's validation. That test found two, a number and a
+boolean for `value: str`, which Keel now converts to strings rather than bouncing
+back to the LLM.
+
+**Q: Why is there no score in the README?**
+A run needs a LiveKit Cloud project and an OpenAI key, which we had not
+configured when this was written. We ran everything we could without them. A
+real `AgentSession` executes Keel's tools in text mode. A local LiveKit server
+received FDB-v3's own client streaming a real benchmark recording into Keel's
+agent, which joined, detected speech and reached STT, where the fake key stopped
+it. On a clean Linux machine (WSL Ubuntu, GPU) the whole reproduction script ran
+end to end against a local LiveKit server: install, FDB-v3's own runner, NeMo ASR
+on the GPU, all three evaluations, and collection. The only thing missing was a
+real OpenAI key, so the agent heard the user but could not transcribe. That dry
+run found five bugs, including one that would have kept the agent out of every
+room on Linux. The score
+will come from `scripts/reproduce_fdb_v3.sh`.
+
+**Q: What is the extension, and why that one?**
+Show & Fix: point the camera at a Samsung washer's display, and the agent reads
+the code, explains it from Samsung's own published table, and books a
+technician, exactly once, even if you change the day mid-sentence. It is the
+guide's own example ("device troubleshooting with a camera frame"), it is
+Samsung's product domain, and it uses every part of Keel: perception with a
+confidence threshold, a state-changing call behind the fence, self-correction,
+and a status probe for "did it go through?".
+
+**Q: Could the vision model invent an error code?**
+It can misread one. That is why its reading only counts above
+`perception.clarify_below` confidence; below it the agent asks the user. Its
+prompt forbids inferring a code from what codes usually exist. And a code
+missing from Samsung's table is answered "I don't have that one", never with a
+guess.
 
 ## Positioning
 
@@ -17,11 +107,11 @@ that doesn't change anything a call depends on doesn't cancel it.
 
 **Q: Why not just cancel everything when the user interrupts?**
 Over-cancelling throws away valid work (latency) and makes the agent look
-unstable. The guide scores "prompt cancellation of *invalidated* calls" (§5),
+unstable. The original guide scored "prompt cancellation of *invalidated* calls" (§5),
 not of all calls.
 
 **Q: How does this map to the Samsung use cases?**
-The guide lists four (§2): in-car reroutes (a destination change invalidates
+The original guide listed four (§2): in-car reroutes (a destination change invalidates
 the route call), support bookings (a parameter change mid-booking must not
 double-book), field troubleshooting from camera frames (Show & Fix demo), and
 accessibility (self-repairs, hesitations).
@@ -47,7 +137,7 @@ pinned to commit SHAs. The read/write labels are the τ²-bench authors' own
 can't be undone.
 
 **Q: Why integer milliseconds?**
-The guide's budgets are "few ms" and "few hundred ms"; integers make replay
+The original guide's budgets were "few ms" and "few hundred ms"; integers make replay
 exact. Real reaction time is also logged in wall-clock nanoseconds.
 
 ## Kernel (phase 2)
@@ -78,7 +168,7 @@ combinations and reports 0 double bookings, 0 invariant violations, 0 false
 success claims.
 
 **Q: Why not just retry a write that timed out?**
-It may have succeeded; a retry could double-book, and the guide scores "zero
+It may have succeeded; a retry could double-book, and the original guide scored "zero
 duplicate state-changing calls". Keel marks it `unknown`, tells the user it
 isn't sure, and checks with a read-only tool. If nothing can check, it says
 it cannot confirm. It never claims success without a success result.
@@ -150,6 +240,39 @@ It looks in the same manifest for a read-only tool about the same thing
 that it can call with arguments the write already had. It then reads the
 result structurally: a matching record means executed, and an empty result
 or no match means not executed. Anything else, and Keel says it can't confirm.
+
+## Audit and console (2026-09-24)
+
+**Q: The first booking went through before the user's correction arrived. Now what?**
+Keel never books a second time. It ends the goal with a truthful final
+response ("That was already submitted with the earlier details, so it needs
+a change rather than a second submission.") carrying the user's latest
+slots. A later goal that uses a modify tool can still change it. Before
+this fix Keel waited silently for a replan that nothing could send, and 356
+of the 3,072 grid runs ended with no final response. The grid now fails if
+any run lacks one (`python -m eval.grid_self_repair`).
+
+**Q: What if the LLM's plan forgets a required argument?**
+The compiler maps every tool argument to the session slot of the same name.
+A required argument left unbound reads that slot. If the slot is empty, Keel
+asks ("What user id should I use?"). Before the audit this map was computed
+but never used, so such a call could never pass validation and the session
+stalled after "One moment."
+
+**Q: Can I see what Keel did, not just a number?**
+`python -m eval.showcase` then open `traces/console.html`. Every session shows
+I1-I5 checked from its own trace, time to first response per turn, a
+timeline (fence holds hatched, cancellations with their reason, in-doubt
+writes dashed), the conversation, each slot's version history, and the raw
+event log. Showcase sessions are labelled synthetic because the slow path is
+scripted.
+
+**Q: What can't Keel do yet?**
+Understand anything by itself. There's no slow path yet (phase 4), so today
+text, audio and frames reach a scripted interpreter only. Against the real
+kit, Keel would acknowledge and then wait. Everything downstream of an
+interpretation is built and measured; turning speech into interpretations
+is next.
 
 ## Honesty
 
