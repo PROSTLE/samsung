@@ -1,0 +1,54 @@
+# Keel profile for the Show & Fix extension (extension/show_and_fix), layered
+# on config/keel.toml. It uses the same LiveKit pipeline as config/fdb_v3.toml;
+# only the tools, the instructions and one fence rule differ.
+
+[fence]
+# Unlike the benchmark, nothing here scores a wasted read: reading the display
+# or the manual cannot change anything, so reads start at once (speculatively)
+# and only the booking waits behind the fence.
+hold_reads = false
+
+[floor]
+# The LLM speaks; Keel speaks only through LiveKit fillers (keel/livekit/gate.py).
+speak = false
+
+[calls]
+read_retries = 1
+
+[livekit]
+pipeline = "cascaded"
+trace_dir = "traces/show_and_fix"
+speak_purposes = ["acknowledge", "progress"]
+
+[livekit.show_and_fix]
+manifest = "extension/show_and_fix/manifest.json"
+instructions = "extension/show_and_fix/instructions.txt"
+# Verbatim from Samsung SG's information-code table (source URL inside the file).
+manual = "extension/show_and_fix/washer_codes.json"
+# Reads the display in a camera frame. Same model family as the pipeline's LLM.
+vision_model = "gpt-4o"
+# A frame older than this is not trusted as "what the camera shows now".
+frame_max_age_s = 3.0
+
+[livekit.cascaded]
+# Same pipeline as the benchmark profile (config/fdb_v3.toml), stated in full
+# here so this profile does not depend on that file.
+vad_min_speech_s = 0.05
+vad_min_silence_s = 0.55
+stt_model = "whisper-1"
+stt_language = "en"
+llm_model = "gpt-4o"
+llm_temperature = 0.0
+llm_seed = 5
+tts_model = "tts-1"
+tts_voice = "nova"
+turn_detector = "english"
+min_endpointing_s = 0.5
+max_endpointing_s = 5.0
+preemptive_generation = true
+drop_on_new_speech = true
+
+[livekit.realtime]
+model = "gpt-realtime-1.5"
+voice = "coral"
+drop_on_new_speech = false
