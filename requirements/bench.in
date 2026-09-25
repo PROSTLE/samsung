@@ -1,0 +1,19 @@
+# FDB-v3's inference and evaluation scripts, as listed in its v3/README.md
+# ("Install Dependencies"), minus the agent-side packages, which live in the
+# agent environment. Lock: requirements/bench.lock.txt
+livekit[crypto]~=1.0
+# livekit_inference.py does `from livekit import api`. FDB-v3's README gets it
+# indirectly through livekit-agents; this environment has no agent, so name it.
+livekit-api
+numpy
+python-dotenv
+nemo_toolkit[asr]
+pydub
+ffmpeg-python
+openai
+gdown
+# The organisers' machine is "CUDA 12.x/13.x" (guide §5). PyPI's torch 2.14.0 is
+# built for CUDA 13.0 and does not run on a 12.x driver, and FDB-v3's runner
+# calls model.cuda() unconditionally, so a CUDA 12.x driver would crash the
+# ASR step. The CUDA 12.6 build runs on 12.x and 13.x drivers alike.
+torch==2.14.0+cu126

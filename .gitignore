@@ -8,3 +8,14 @@ __pycache__/
 .hypothesis/
 /traces/
 /reports/
+
+# FDB-v3 checkout and audio (fetched by scripts/reproduce_fdb_v3.sh)
+/third_party/
+# Environments created by scripts/reproduce_fdb_v3.sh
+.venv-agent/
+.venv-bench/
+# API keys: never committed (guide §4). See .env.example.
+.env
+.env.local
+# Organisers' updated guide; kept local like the original PDF.
+Theme05_Participant_Guide_UPDATED_FBD.docx
