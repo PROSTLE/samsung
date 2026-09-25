@@ -1,0 +1,41 @@
+{
+  "note": "Show & Fix tools. Keel compiles these like any manifest; the annotations follow MCP ToolAnnotations (readOnlyHint).",
+  "tools": [
+    {
+      "name": "read_error_display",
+      "description": "Read the error or information code shown on the appliance's display, from the user's live camera. Returns the code only if it can be read with enough confidence; otherwise says it is unclear.",
+      "parameters": {"type": "object", "properties": {}, "required": []},
+      "annotations": {"readOnlyHint": true}
+    },
+    {
+      "name": "lookup_error_code",
+      "description": "Look up what a washing machine information code means and the steps Samsung's support page recommends.",
+      "parameters": {
+        "type": "object",
+        "properties": {"code": {"type": "string", "description": "The code as shown, e.g. '4C' or 'dE'"}},
+        "required": ["code"]
+      },
+      "annotations": {"readOnlyHint": true}
+    },
+    {
+      "name": "book_technician",
+      "description": "Book a Samsung service technician visit for the appliance.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "code": {"type": "string", "description": "The information code the appliance shows"},
+          "day": {"type": "string", "description": "Day of the visit, e.g. 'Saturday' or '2026-10-03'"},
+          "time_window": {"type": "string", "enum": ["morning", "afternoon", "evening"], "description": "Part of the day"}
+        },
+        "required": ["code", "day", "time_window"]
+      },
+      "annotations": {"readOnlyHint": false, "idempotentHint": false}
+    },
+    {
+      "name": "list_technician_bookings",
+      "description": "List the technician visits booked in this conversation.",
+      "parameters": {"type": "object", "properties": {}, "required": []},
+      "annotations": {"readOnlyHint": true}
+    }
+  ]
+}

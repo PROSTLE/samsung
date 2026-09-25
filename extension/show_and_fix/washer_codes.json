@@ -1,0 +1,105 @@
+{
+ "appliance": "washing machine",
+ "source": "https://www.samsung.com/sg/support/home-appliances/check-out-the-information-codes-on-my-washing-machine/",
+ "source_title": "About the Information Codes On a Samsung washing machine | Samsung SG",
+ "retrieved": "2026-09-25",
+ "note": "Text copied verbatim from the page's information-code table (static HTML). Codes on the page that are not in that table are not included.",
+ "entries": [
+  {
+   "codes": [
+    "4C",
+    "4E",
+    "E1"
+   ],
+   "meaning": "Water is not supplied.",
+   "steps": [
+    "Make sure the water taps are open.",
+    "Make sure the water hoses are not clogged.",
+    "Make sure the water taps are not frozen.",
+    "Make sure the washing machine is operating with sufficient water pressure.",
+    "Make sure that the cold water tap and the hot water tap are properly connected.",
+    "Clean the mesh filter as it may be clogged.",
+    "All buttons will be disabled for 3 minutes after the information codes appears."
+   ],
+   "contact_service_if_persists": false
+  },
+  {
+   "codes": [
+    "5C",
+    "5E"
+   ],
+   "meaning": "Water is not draining.",
+   "steps": [
+    "Make sure the drain hose is not frozen or clogged.",
+    "Make sure the drain hose is positioned correctly, depending on the connection type.",
+    "Clean the debris filter as it may be clogged.",
+    "Make sure the drain hose is straightened all the way to the drain system.",
+    "If the information code remains, contact a customer service center."
+   ],
+   "contact_service_if_persists": true
+  },
+  {
+   "codes": [
+    "dC",
+    "dE"
+   ],
+   "meaning": "Operating the washing machine with the door open.",
+   "steps": [
+    "Make sure the door is properly closed.",
+    "Make sure laundry is not caught in the door."
+   ],
+   "contact_service_if_persists": false
+  },
+  {
+   "codes": [
+    "OC",
+    "OE",
+    "OF"
+   ],
+   "meaning": "Water has overflowed.",
+   "steps": [
+    "Restart after spinning.",
+    "If the information code remains on the display, contact a local Samsung service center."
+   ],
+   "contact_service_if_persists": true
+  },
+  {
+   "codes": [
+    "Ub",
+    "UE"
+   ],
+   "meaning": "Spinning does not work.",
+   "steps": [
+    "Make sure laundry is spread out evenly.",
+    "Make sure the washing machine is on a flat, stable surface.",
+    "Redistribute the load.",
+    "If only one item or clothing needs washing, check message will be shown in the display."
+   ],
+   "contact_service_if_persists": false
+  },
+  {
+   "codes": [
+    "AC",
+    "AE"
+   ],
+   "meaning": "Check communications between main and sub PBAs.",
+   "steps": [
+    "Turn the machine off, and restart the cycle.",
+    "If the information code remains, contact a customer service center."
+   ],
+   "contact_service_if_persists": true
+  },
+  {
+   "codes": [
+    "DDC",
+    "ddC"
+   ],
+   "meaning": "The Add Door opened without pressing Start/Pause (Hold to Start). This message appears when you open the Add Door without pressing Start/Pause (Hold to Start). If this happens, do one of the following:",
+   "steps": [
+    "Press the Add Door to close properly. Then, press and hold Start/Pause (Hold to Start) and try again.",
+    "To add laundry, open the Add Door and input laundry. Close the Add Door properly. Then, press and hold Start/Pause (Hold to Start) to resume operation."
+   ],
+   "contact_service_if_persists": false
+  }
+ ]
+}
