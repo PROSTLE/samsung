@@ -7,6 +7,69 @@ the first version of the brief; the mechanisms they explain are unchanged.
 Short answers first, evidence second. Every external claim is sourced in
 `SOURCES.md`. Updated at the end of each phase.
 
+## Free models and the web app (2026-09-27)
+
+**Q: Your default pipeline is OpenAI's, which costs money. Can anyone run this for free?**
+Yes, two ways, both with Keel under every tool call. `--pipeline gemini_realtime`
+uses Gemini Live, which Google's pricing page lists as free of charge on the free tier;
+it is FDB-v3's own `gemini3_1` model. `--pipeline open` uses only open-weight models on
+the machine itself (faster-whisper, Qwen3-4B-Instruct through Ollama, Kokoro): no key,
+no account, no request limit. The default stays OpenAI's cascade because it is FDB-v3's
+cascaded template and the published baseline, so a score difference is Keel's, not a
+model swap.
+
+**Q: Isn't a local model server "your own server", which the guide forbids?**
+The rule is "Don't call your own servers at evaluation time; all agent logic lives in
+the submission." The open pipeline calls nothing outside the evaluation machine: the
+reproduction script downloads public checkpoints (pinned by version, revision and
+sha256), starts Ollama and `keel/speech/` on 127.0.0.1, and stops them afterwards. The
+code of both is in the submission or a pinned public release. The guide also says "Do
+use public checkpoints". Only LiveKit's audio leaves the machine, as for every pipeline.
+
+**Q: Why write a speech server instead of using an existing one?**
+We looked at Speaches, the usual OpenAI-compatible faster-whisper + Kokoro server. It
+requires exactly Python 3.12 and pulls PyTorch and Gradio. LiveKit's plugin calls only
+two endpoints, so `keel/speech/server.py` serves those in about 200 lines, refuses a
+model it has not loaded instead of answering with another, and is tested with the
+OpenAI SDK itself (`tests/test_speech.py`).
+
+**Q: Why these models?**
+Each is the smallest that works on a 4 GB laptop GPU and is permissively licensed:
+Qwen3-4B-Instruct-2507 (Apache-2.0, tool calling, no thinking phase to add latency),
+Kokoro-82M (Apache-2.0; the full-precision file, because the int8 files either fail to
+load in ONNX Runtime or run 3.5x slower than real time on our CPU), faster-whisper
+small.en (MIT), Qwen3-VL-2B for Show & Fix (Apache-2.0; Qwen2.5-VL-3B's licence is
+non-commercial). Measurements are in `SOURCES.md`. We also tried Gemma 4 on the free
+Gemini API: it called the tool but with the wrong year, and took 8 s.
+
+**Q: What does the web app's replay actually play?**
+FDB-v3's own files: the scenario's input audio and the agent's reply as FDB-v3
+recorded it from the room. They are lined up with Keel's trace by the first executed
+call, which both record (FDB-v3 to 10 ms), and we checked the result against FDB-v3's
+word timestamps. New traces also store their wall-clock start. A session without a
+recording plays without sound and says so. No number on any page is typed in: they come
+from traces, FDB-v3's reports, the config and the environment.
+
+**Q: What did running on slow, local speech-to-text teach you?**
+A fifth fence rule. In our first open-pipeline run of travel_10, local Whisper took
+5.5 s, 2.5 s and 5.7 s for the three stretches of speech. LiveKit committed the turn
+from the first two ("…October 5th. Oh, wait.") at 22.6 s, although the user had
+finished the third ("…make it October 7th instead.") at 22.2 s. The model planned the
+Oct 5 search, Keel held it 600 ms, saw a closed turn and a quiet user, and sent it;
+the correction's words arrived at 28.5 s. The rule: a call also waits until every
+stretch of speech that has ended has had its words arrive (capped, because LiveKit
+sends nothing for a stretch that yields no words). It is general: any cascade whose
+speech-to-text lags its voice detection, OpenAI's included, has the same race; the
+local run only made it wide enough to see. A test reproduces the race through the
+real gate, with a control run showing the stale call going out without the rule.
+
+**Q: What does the replay show that the scores do not?**
+Why a call was or wasn't made. In our Gemini run of finance_21 the user said "…the gold
+card because I'm comparing a few options." and went straight on with "And then…". Gemini
+reported the end of that first turn 2.3 s late, while the user was already speaking,
+and the model planned `get_card_benefits` from it. Keel dropped that call, and both
+calls then ran once, after the whole request. You can hear it and see it on the timeline.
+
 ## Theme update: FDB-v3 and LiveKit (2026-09-25)
 
 **Q: The theme changed to FDB-v3 on LiveKit. Did you throw away the kernel?**

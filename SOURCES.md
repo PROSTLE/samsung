@@ -107,6 +107,180 @@ by the matching `data/fetch/` script; everything else is maintained by hand.
   (https://github.com/livekit/livekit/releases, Apache-2.0) was used to run
   FDB-v3's own `livekit_inference.py` against Keel's agent on this machine.
 
+## Model availability (OpenAI deprecations page)
+- https://developers.openai.com/api/docs/deprecations (the old platform.openai.com URL
+  redirects there), read 2026-09-25. Rows for the models Keel uses:
+  - `gpt-4o` (agent LLM, Show & Fix vision, FDB-v3's judge): the alias is in no
+    shutdown list. Only the snapshot `gpt-4o-2024-05-13` shuts down (October 23, 2026).
+  - `tts-1`: not mentioned.
+  - `whisper-1`: announced 2026-08-26, shutdown **Feb 26, 2027** (replacement
+    `gpt-live-transcribe` or `gpt-transcribe`).
+  - `gpt-realtime` family (the optional `--pipeline gpt_realtime`): announced
+    2026-07-20, shutdown **Jan 20, 2027** (replacement `gpt-realtime-2.1`).
+- A re-run after those dates needs `livekit.cascaded.stt_model` (or the realtime
+  model) in `config/fdb_v3.toml` moved to the replacement. Keel changes no code
+  for that.
+
+## Web app (`keel/web/`)
+- LiveKit text streams, https://docs.livekit.io/home/client/data/text-streams/ and
+  https://docs.livekit.io/agents/build/text/ (read 2026-09-25): agents publish transcripts on
+  the `lk.transcription` topic with `lk.segment_id` / `lk.transcription_final` attributes;
+  `room.local_participant.send_text(text, topic=...)` in Python and
+  `room.registerTextStreamHandler(topic, ...)` in JavaScript. The installed
+  `LocalParticipant.send_text` takes `destination_identities` (checked with `inspect`,
+  livekit 1.1.18), which the app uses to reach only its own participants.
+- livekit-client 2.22.3: the jsDelivr package API's "latest" tag on 2026-09-25
+  (https://data.jsdelivr.com/v1/packages/npm/livekit-client); pinned in `keel/web/static/live.js`.
+- Interface research (2026-09-25): LiveKit's agent-starter-react
+  (https://github.com/livekit-examples/agent-starter-react: welcome view, session view with
+  transcript, control bar, one audio visualiser, bars by default) and Pipecat's Voice UI Kit
+  (https://github.com/pipecat-ai/voice-ui-kit: live transcripts, mic and camera controls,
+  audio visualisers). Call-log products (Vapi, Retell) break a call down turn by turn with
+  its tool calls and timing. Keel's own addition is the action card: what the kernel did
+  with each planned call, and why.
+- Replay audio (2026-09-27): FDB-v3's `run_tool_benchmark.py` at the pinned commit writes,
+  per scenario folder, `output_{provider}.wav` (the agent's audio recorded from the room,
+  line 289) and `input_mono.wav` (line 344), records `stream_start_time` from its client's
+  `STREAM_START_TIME=` line (lines 243-252, Unix seconds), and turns each executed call's
+  `timestamp_start` into seconds after that start (lines 432-450). Keel's tool log gives
+  that timestamp at dispatch (`keel/livekit/fdb.py`), and the trace records the same
+  dispatch, so one executed call lines the recording up with the trace to within FDB-v3's
+  10 ms rounding. Checked on finance_21 (Gemini run, room `eval-6420f1e7`): offset 2,072 ms;
+  FDB-v3's own ASR puts "…a few options." at 8.24-9.20 s and "And…" at 9.52 s of the
+  recording, i.e. 11.3 s and 11.6 s of the trace, where the replay's waveform shows them.
+  New traces also record `unix_ms` in `session_start`, which lines them up directly.
+- Design reference: the user's mock-up (sidebar, live conversation with waveform,
+  transcript, tool-call status, Keel decision log, turn timeline, benchmark and system
+  cards). Every number on the pages comes from `/api/*`; nothing in the mock-up's sample
+  data is used.
+
+## Gemini Live pipeline (`--pipeline gemini_realtime`)
+- FDB-v3 `v3/lk_agent_tool.py` at the pinned commit, provider `gemini3_1`:
+  `google.realtime.RealtimeModel(model="gemini-3.1-flash-live-preview", voice=os.getenv("GOOGLE_VOICE", "Puck"))`,
+  key `GOOGLE_API_KEY`. `config/fdb_v3.toml [livekit.gemini]` uses the same model and
+  voice; `tests/test_livekit_session.py` checks the model against that file.
+- https://ai.google.dev/gemini-api/docs/pricing, read 2026-09-25: `gemini-3.1-flash-live-preview`
+  is "Free of charge" for input and output on the free tier. Free-tier rate limits are
+  not published there; https://ai.google.dev/gemini-api/docs/rate-limits says they are
+  shown per account in Google AI Studio.
+- https://ai.google.dev/gemini-api/docs/models, read 2026-09-25: `gemini-3.1-flash-live-preview`
+  is listed as a Live API model ("legacy version"; `gemini-3.8-live` is the default).
+- https://docs.livekit.io/agents/models/realtime/plugins/gemini/, read 2026-09-25:
+  `livekit-agents[google]`, `google.realtime.RealtimeModel`, key `GOOGLE_API_KEY`, tool
+  calling supported. The installed plugin (`livekit-plugins-google==1.8.3`) reports
+  `supports_say=False`, so Keel's fillers are off in this pipeline, as for `gpt_realtime`.
+- FDB-v3 `evaluate_tool_calls.py` / `evaluate_pass_rate.py`: without `--use-llm`, argument
+  accuracy is rule-based and `response_qual` is `None` ("LLM judge disabled"). The script's
+  `--judge none` is exactly that.
+- Checked and not used: LiveKit Cloud's free plan includes $2.50 of LiveKit Inference
+  credit, "~50 minutes" (https://livekit.com/pricing, 2026-09-25), too little for a full
+  run; Groq's free tier caps `openai/gpt-oss-120b` at 8K tokens/min and 200K tokens/day
+  (https://console.groq.com/docs/rate-limits, 2026-09-25).
+
+## Free and open-weight models (pipeline `open`, Show & Fix on Gemini)
+
+Researched 2026-09-26/27 for a run that costs nothing. Measurements are on the
+development laptop (AMD Ryzen 5 5600H, 12 threads, NVIDIA RTX 3050 Laptop 4 GB, WSL2).
+
+- **Gemini API pricing**, https://ai.google.dev/gemini-api/docs/pricing (read 2026-09-26):
+  `gemini-3.1-flash-live-preview` "Free of charge" on the free tier (input and output);
+  Gemini 2.5 Flash, 2.5 Flash-Lite and Gemma 4 are also free of charge on the free tier.
+  The models this key can call were listed with `GET /v1beta/openai/models` (2026-09-27):
+  `gemini-2.5-flash`, `gemma-4-26b-a4b-it`, `gemma-4-31b-it` among 61.
+- **Gemini's OpenAI compatibility layer**, https://ai.google.dev/gemini-api/docs/openai:
+  base URL `https://generativelanguage.googleapis.com/v1beta/openai/`, images as base64
+  `image_url`, JSON output. Measured 2026-09-27: every model answered **HTTP 400
+  "Unknown name \"seed\""** to a request with `seed`, although the page says unknown
+  parameters are ignored; hence `[providers.gemini] seed = false`. Without it,
+  `gemini-2.5-flash` called `search_flights` with the corrected date in 1.45 s and read
+  an image in JSON mode in 3.1 s; `gemma-4-26b-a4b-it` made the call in 8.0 s with the
+  wrong year and its reasoning in the reply text, so it is not offered as a default.
+- **Groq**, https://console.groq.com/docs/openai: base URL `https://api.groq.com/openai/v1`;
+  `temperature` 0 becomes 1e-8. Free-tier limits: Groq's rate-limit page renders its table
+  in the browser, so they are taken from https://klymentiev.com/blog/groq-pricing (updated
+  2026-09-12): gpt-oss-120b / gpt-oss-20b / Qwen 27B at 30 requests/min, 1,000/day,
+  8,000 tokens/min, 200,000 tokens/day; Llama 3.1 8B and 3.3 70B left the free tier on
+  16 August 2026; Whisper 2,000 requests/day; Orpheus TTS 100 requests/day. Enough for
+  a demo, not for a 100-scenario run (FDB-v3's instructions and 12 tool schemas are
+  thousands of tokens per request).
+- **Not used**: Cerebras' free trial needs a verified payment method for its $5 credit
+  (https://inference-docs.cerebras.ai/support/rate-limits, 2026-09-26); LiveKit
+  Inference gives $2.50 a month on the free Build plan, about 50 minutes
+  (https://livekit.com/pricing, 2026-09-26).
+- **LiveKit OpenAI plugin 1.8.3** (installed source, `livekit/plugins/openai/`): `LLM`,
+  `STT` and `TTS` take `base_url`; `LLM.with_ollama` defaults to
+  `http://localhost:11434/v1`; `STT(use_realtime=...)` defaults to the plain
+  transcription endpoint for non-realtime models; `TTS` decodes a compatible server's
+  raw audio by its `Content-Type` ("OpenAI-compatible servers ignore it and answer with
+  the audio bytes of `response_format`", the plugin's own comment).
+- **Ollama** v0.34.4, https://github.com/ollama/ollama/releases/tag/v0.34.4 (latest on
+  2026-09-26, MIT): Linux x86-64 ships only as `ollama-linux-amd64.tar.zst` (1,361 MB);
+  the official install script needs `zstd` and `sudo`, so `scripts/open_models.sh`
+  unpacks it with Python's `zstandard` into `third_party/ollama`.
+- **LLM**: `qwen3:4b-instruct-2507-q4_K_M`, https://ollama.com/library/qwen3:4b-instruct-2507-q4_K_M
+  (2.5 GB, tools); Qwen3-4B-Instruct-2507 is Apache-2.0 (Hugging Face model card
+  `license: apache-2.0`, 2026-09-27). The "instruct" release has no thinking phase.
+- **Display reader** (Show & Fix, pipeline open): `qwen3-vl:2b-instruct-q4_K_M`,
+  https://ollama.com/library/qwen3-vl/tags (1.9 GB, text and image input);
+  Qwen3-VL-2B-Instruct is Apache-2.0. Qwen2.5-VL-3B was passed over: its card says
+  `license_name: qwen-research` (non-commercial), unlike the 7B (Apache-2.0).
+- **TTS**: Kokoro-82M (Apache-2.0, https://huggingface.co/hexgrad/Kokoro-82M) through
+  kokoro-onnx 0.6.1 (MIT, https://pypi.org/project/kokoro-onnx/, released 2026-08-19).
+  Files from https://github.com/thewh1teagle/kokoro-onnx/releases/tag/model-files-v1.1:
+  `kokoro-v1.0.onnx` (310 MB, sha256 `beb0d184…df3a`), `voices-v1.0.bin` (sha256
+  `bca610b8…bf7d`, 54 voices). Measured on the CPU: the v1.1 int8 file fails to load in
+  ONNX Runtime 1.23.2 ("Could not find an implementation for ConvInteger(10)"); the v1.0
+  int8 file speaks 4.2 s of audio in 13.6 s; the full-precision file 5.0 s in 2.9 s.
+- **STT**: faster-whisper 1.2.1 (MIT), model `Systran/faster-whisper-small.en` (MIT) at
+  revision `d1d751a5f8271d482d14ca55d9e2deeebbae577f` (Hugging Face API). A Kokoro
+  sentence round-trips exactly ("Find me flights to Miami on October 5th. Oh, wait. Make
+  it the 7th."). On the CPU a 5 s clip takes 3.0 s (6 threads; 12 threads is slower,
+  6.5 s; `base.en` 2.1 s): Whisper always encodes a 30 s window, so a short clip costs
+  nearly as much as a long one. On a GPU this is a fraction of a second.
+- **The LLM on the laptop** (2026-09-27): with FDB-v3's instructions and 12 tool schemas
+  (about 1,850 prompt tokens), Qwen3-4B-Instruct made the right calls for the travel_10
+  correction (`search_flights(Miami, 2026-10-07)`), "two of item P52… no, wait, just one"
+  (`add_to_cart(P52, 1)`) and the gold-card-plus-yen request (both calls). Speed: the
+  laptop was on battery (Win32_Battery status 1); the GPU copied memory at 17 GB/s and did
+  4.0 fp16 TFLOPS; Ollama processed prompts at 120-440 tokens/s and generated 6-7 tokens/s,
+  and with an 8,192-token context kept 11 of 37 layers on the CPU (2.8 GiB of the 4 GB
+  card available). Generation is memory-bound: 2.4 GB of weights per token at 17 GB/s is
+  about 7 tokens/s, as measured. The first chat request after loading took 65 s until
+  `scripts/open_models.sh` warmed the model with a real chat request (then 5.7 s).
+- **LiveKit's request deadlines** (installed `livekit/agents/types.py`): `APIConnectOptions`
+  defaults to `timeout=10.0`, `max_retry=3`; the OpenAI plugin's HTTP client allows 5 s
+  between bytes. A local request timed out at 10.0 s and started again in our first local
+  run, hence `[livekit.open].request_timeout_s`.
+- **Speaches** (https://github.com/speaches-ai/speaches, an OpenAI-compatible
+  faster-whisper + Kokoro server) was considered and not used: it requires exactly
+  Python 3.12 and pulls PyTorch (pyannote-audio) and Gradio. `keel/speech/server.py`
+  serves the two endpoints the plugin calls, in about 200 lines.
+- **FDB-v3's "no own servers" rule** (updated guide §6: "Don't call your own servers at
+  evaluation time; all agent logic lives in the submission") and "Do use public
+  checkpoints": the open pipeline's servers are started by the reproduction script on
+  the evaluation machine itself, from public checkpoints pinned by version and hash;
+  nothing leaves that machine except LiveKit's audio.
+
+## Show & Fix end to end (2026-09-27)
+
+- Run: the Show & Fix agent on `gemini_realtime` in WSL (`KEEL_SHOW_AND_FIX_IMAGE` = a
+  synthetic seven-segment "5E" display, labelled so in the image), and headless Chrome on
+  the web app's Live page with a Kokoro-spoken script as its microphone ("…can you read it
+  and tell me what it means?", "…book a technician for Friday morning. Oh, wait. No, make it
+  Saturday morning.", "Did the booking go through?").
+- First run: `gemini-2.5-flash` read the display as "SE" (confidence 1), and the agent
+  explained the code without calling `lookup_error_code` while saying it came from
+  Samsung's page. Booking (Saturday, held until the user finished) and the status check
+  (`list_technician_bookings`) were right.
+- Wikipedia, https://en.wikipedia.org/wiki/Seven-segment_display (read 2026-09-27):
+  "Uppercase letters "B", "I", "S", "Z", and "D" & "O" conflict with the common
+  seven-segment representation of digits "8", "1", "5", "2", and "0"". Hence the lookup
+  treats S/5, O/0, I/1, Z/2 as one; B and D are not, because Samsung shows them as
+  lowercase b and d, and D/0 would merge the table's dC (door) and OC (overflow).
+- Second run, after the fixes (the reading carries Samsung's entry; seven-segment
+  matching): the agent explained "the water isn't draining" and the drain-hose steps from
+  the table, and booked `book_technician(code 5E, Saturday, morning)` once.
+
 ## Show & Fix extension data
 - Samsung Singapore, "About the Information Codes On a Samsung washing machine",
   https://www.samsung.com/sg/support/home-appliances/check-out-the-information-codes-on-my-washing-machine/
@@ -209,6 +383,25 @@ Re-verified 2026-09-24: the Pipecat defaults (`cancel_on_interruption` True,
   handles by waiting for end-of-turn. The exact interval distribution is not
   in the abstract (UNVERIFIED beyond it); phase 4 measures our own.
 
+### Levelt (1983): the three phases of a self-repair
+- W. J. M. Levelt, "Monitoring and self-repair in speech", *Cognition* 14:41–104, 1983.
+  doi:10.1016/0010-0277(83)90026-4. Abstract read at
+  https://www.mpi.nl/publications/item64752/monitoring-and-self-repair-speech (2026-09-25;
+  the full-text PDF returned HTTP 403).
+- Abstract: "The first phase involves the monitoring of one's own speech and the
+  interruption of the flow of speech when trouble is detected." "The second phase is
+  characterized by hesitation, pausing, but especially the use of so-called editing
+  terms." "The third phase consists of making the repair proper." 959 spontaneous repairs.
+- Used for: fence rule 4 (`keel/kernel/repair.py`): a turn made only of editing terms
+  ends in phase two, so calls planned from it wait for the next turn. The abstract gives
+  no pause length; the bound (`fence.repair_wait_ms = 5000` in the LiveKit profiles) is
+  the FDB-v3 template's own `max_endpointing_delay=5.0` (cascaded_agent.py), the longest
+  it waits for a user who is not finished. The term list is Keel's (general English
+  hesitation and editing terms, `config/fdb_v3.toml`), not taken from benchmark items.
+- Observed (our run `20260925T140743Z_keel_gemini_realtime_travel_10`, trace
+  `eval-318ad861`): after "Oh, wait." Gemini Live re-planned the pre-correction call,
+  which went out at 11.4 s; the user resumed about 1.6 s after "Oh, wait." ended.
+
 ### RFC 9110 §9.2.1: safe methods
 - https://www.rfc-editor.org/rfc/rfc9110.txt (fetched 2026-09-23).
 - "Of the request methods defined by this specification, the GET, HEAD,
@@ -250,11 +443,17 @@ default behaviour noted above.
 | pytest | tests (dev only) | MIT | https://github.com/pytest-dev/pytest (GitHub API, 2026-09-23) |
 | hypothesis | property tests (dev only) | MPL-2.0 | GitHub API reports NOASSERTION; https://github.com/HypothesisWorks/hypothesis/blob/master/LICENSE.txt says MPL 2.0, and package metadata `License-Expression: MPL-2.0` (6.168.0), 2026-09-23 |
 
-| livekit-agents (+ openai, silero, turn-detector plugins) | the voice agent | Apache-2.0 | https://github.com/livekit/agents (GitHub API, 2026-09-25); 1.8.3 pinned |
+| livekit-agents (+ openai, google, silero, turn-detector plugins) | the voice agent | Apache-2.0 | https://github.com/livekit/agents (GitHub API, 2026-09-25); 1.8.3 pinned |
 | livekit (rtc) | LiveKit client used by the agent and FDB-v3's client | Apache-2.0 | https://github.com/livekit/python-sdks (GitHub API, 2026-09-25) |
 | openai | OpenAI API client (agent vision reader; FDB-v3 judge) | Apache-2.0 | https://github.com/openai/openai-python (GitHub API, 2026-09-25) |
 | nemo_toolkit[asr] | FDB-v3's ASR (benchmark environment only) | Apache-2.0 | https://github.com/NVIDIA/NeMo LICENSE (2026-09-25) |
 | gdown | downloads FDB-v3's audio | MIT | https://github.com/wkentaro/gdown (GitHub API, 2026-09-25) |
+| aiohttp | the web app and the local speech server | Apache-2.0 | https://github.com/aio-libs/aiohttp (GitHub API, 2026-09-27); 3.14.3 |
+| livekit-api | signs the web app's room tokens, LiveKit check on the Setup page | Apache-2.0 | https://github.com/livekit/python-sdks (GitHub API, 2026-09-27) |
+| faster-whisper (+ CTranslate2) | speech-to-text in the open pipeline | MIT, MIT | https://github.com/SYSTRAN/faster-whisper, https://github.com/OpenNMT/CTranslate2 (GitHub API, 2026-09-27) |
+| kokoro-onnx (+ ONNX Runtime) | text-to-speech in the open pipeline | MIT, MIT | https://github.com/thewh1teagle/kokoro-onnx, https://github.com/microsoft/onnxruntime (GitHub API, 2026-09-27) |
+| zstandard | unpacks Ollama's release archive | BSD-3-Clause | https://github.com/indygreg/python-zstandard (GitHub API, 2026-09-27) |
+| Ollama (binary, not a Python package) | serves the open pipeline's LLM and vision model | MIT | https://github.com/ollama/ollama (GitHub API, 2026-09-27); 0.34.4 pinned in `scripts/open_models.sh` |
 
 MPL-2.0 is file-level copyleft. Hypothesis is a dev-only test dependency that
 Keel neither modifies nor redistributes, so it places no obligations on Keel's
