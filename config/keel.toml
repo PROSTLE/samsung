@@ -93,3 +93,33 @@ failed = "Sorry, that didn't work: {error}."
 # state_changing. Fixed at 0.8 BEFORE running the evaluation, so it was not
 # tuned on the test data; `python -m eval.compiler_eval` reports all thresholds.
 min_confidence = 0.8
+
+# Model endpoints that speak OpenAI's API, by name. [livekit.open] (the "open"
+# pipeline) and [livekit.show_and_fix].vision pick from these. key_env names the
+# environment variable with the key ("" = none needed); the key itself is never
+# in a config file. Base URLs from each provider's own documentation (SOURCES.md).
+[providers.openai]
+base_url = "https://api.openai.com/v1"
+key_env = "OPENAI_API_KEY"
+
+[providers.gemini]
+# Gemini API's OpenAI compatibility layer (ai.google.dev/gemini-api/docs/openai).
+base_url = "https://generativelanguage.googleapis.com/v1beta/openai/"
+key_env = "GOOGLE_API_KEY"
+# Rejects `seed` with HTTP 400 (measured 2026-09-27), whatever its docs say.
+seed = false
+
+[providers.groq]
+# Groq's OpenAI-compatible API (console.groq.com/docs/openai); free tier, open-weight models.
+base_url = "https://api.groq.com/openai/v1"
+key_env = "GROQ_API_KEY"
+
+[providers.ollama]
+# A local Ollama server (open-weight LLMs), started by scripts/open_models.sh.
+base_url = "http://127.0.0.1:11434/v1"
+key_env = ""
+
+[providers.speaches]
+# A local Speaches server (faster-whisper STT, Kokoro TTS), started by scripts/open_models.sh.
+base_url = "http://127.0.0.1:8000/v1"
+key_env = ""

@@ -41,9 +41,20 @@ from keel.livekit.template import Template
 _LOG_LOCK = threading.Lock()
 
 
-def load_mock_registry(fdb_dir: Path, latency_profile: str) -> Any:
-    """Import FDB-v3's mock_apis.py from its checkout and build a registry."""
-    fdb_dir = Path(fdb_dir)
+_MOCK_MODULES: dict[Path, Any] = {}
+
+
+def import_mock_apis(fdb_dir: Path) -> Any:
+    """Import FDB-v3's mock_apis.py from its checkout, once per process.
+
+    Importing it (and its latency_injector) takes over a second; done inside a
+    job it blocks the agent's event loop while the room is already live, so the
+    agent's process warm-up calls this first. Only the module is shared: every
+    session still builds its own registry (load_mock_registry), and LiveKit
+    runs each job in a process of its own."""
+    fdb_dir = Path(fdb_dir).resolve()
+    if fdb_dir in _MOCK_MODULES:
+        return _MOCK_MODULES[fdb_dir]
     path = fdb_dir / "mock_apis.py"
     if not path.exists():
         raise FileNotFoundError(f"FDB-v3 mock_apis.py not found at {path} (set KEEL_FDB_DIR)")
@@ -54,7 +65,13 @@ def load_mock_registry(fdb_dir: Path, latency_profile: str) -> Any:
     assert spec and spec.loader
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
-    return module.MockAPIRegistry(latency_profile=latency_profile)
+    _MOCK_MODULES[fdb_dir] = module
+    return module
+
+
+def load_mock_registry(fdb_dir: Path, latency_profile: str) -> Any:
+    """A new registry from FDB-v3's mock_apis.py, for one session."""
+    return import_mock_apis(fdb_dir).MockAPIRegistry(latency_profile=latency_profile)
 
 
 class FdbBackend:

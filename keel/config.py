@@ -39,6 +39,15 @@ class FenceConfig(_Section):
     hold_reads: bool
     require_end_of_turn: bool
     stale_turn_ms: int = Field(ge=0)
+    # A turn made only of editing terms ("oh, wait") holds calls until the next
+    # turn ends, for at most this long (keel/kernel/fence.py rule 4). 0 = off.
+    repair_wait_ms: int = Field(default=0, ge=0)
+    editing_terms: list[str] = Field(default_factory=list)
+    # A stretch of speech that has ended but whose words have not arrived yet
+    # holds calls until they do, for at most this long (keel/kernel/fence.py
+    # rule 5). 0 = off. Only meaningful where a transcript follows each stretch
+    # of speech (a cascade); keel/livekit/gate.py turns it off otherwise.
+    transcript_wait_ms: int = Field(default=0, ge=0)
 
 
 class CallsConfig(_Section):
@@ -97,6 +106,42 @@ class CascadedConfig(_Section):
     drop_on_new_speech: bool
 
 
+class ProviderConfig(_Section):
+    """An OpenAI-compatible endpoint (OpenAI, Gemini's compatibility layer, Groq,
+    a local Ollama or Speaches server...)."""
+    # "" = the OpenAI SDK's default (https://api.openai.com/v1).
+    base_url: str = ""
+    # Environment variable holding the key. "" = the endpoint needs no key (a
+    # local server); the SDK is then given a placeholder.
+    key_env: str = ""
+    # Whether it accepts OpenAI's `seed` parameter. Gemini's compatibility layer
+    # rejects it (HTTP 400 "Unknown name seed"), so the seed is left out there.
+    seed: bool = True
+
+
+class OpenCascadeConfig(_Section):
+    """Pipeline "open": the cascaded pipeline (VAD, end of turn and endpointing
+    from [livekit.cascaded]) with each of STT, LLM and TTS served by any
+    OpenAI-compatible provider from [providers]."""
+    stt_provider: str
+    stt_model: str
+    stt_language: str = "en"
+    llm_provider: str
+    llm_model: str
+    tts_provider: str
+    tts_model: str
+    tts_voice: str
+    # Audio format asked of the TTS endpoint (mp3 | wav | pcm | flac | opus).
+    tts_format: str = "mp3"
+    drop_on_new_speech: bool = True
+    # Per-request deadline for each stage. LiveKit's default is 10 s with three
+    # retries; a local model on a small GPU can take longer to start answering,
+    # and a retry only starts the same work again (measured: a 10.0 s timeout
+    # and retry cost 10 s in our local travel_10 run). One retry is kept for a
+    # dropped connection.
+    request_timeout_s: float = Field(default=60.0, gt=0)
+
+
 class RealtimeConfig(_Section):
     model: str
     voice: str
@@ -119,14 +164,28 @@ class ShowAndFixConfig(_Section):
     manual: str
     vision_model: str
     frame_max_age_s: float = Field(gt=0)
+    # Pipeline -> "provider:model" for reading the display, when it should not
+    # be vision_model on OpenAI (e.g. gemini_realtime reads with a Gemini model,
+    # so that pipeline needs no other key). Split at the first colon.
+    vision: dict[str, str] = Field(default_factory=dict)
+
+    def vision_for(self, pipeline: str) -> tuple[str, str]:
+        """(provider, model) that reads the display under this pipeline."""
+        choice = self.vision.get(pipeline)
+        if not choice:
+            return "openai", self.vision_model
+        provider, _, model = choice.partition(":")
+        return provider, model
 
 
 class LivekitConfig(_Section):
-    pipeline: str  # "cascaded" | "gpt_realtime"
+    pipeline: str  # "cascaded" | "gpt_realtime" | "gemini_realtime" | "open"
     trace_dir: str
     speak_purposes: list[str]
     cascaded: CascadedConfig
     realtime: RealtimeConfig
+    gemini: Optional[RealtimeConfig] = None
+    open: Optional[OpenCascadeConfig] = None
     fdb: Optional[FdbConfig] = None
     show_and_fix: Optional[ShowAndFixConfig] = None
 
@@ -141,6 +200,9 @@ class KeelConfig(_Section):
     floor: FloorConfig
     compiler: CompilerConfig
     phrases: Phrases
+    # Model endpoints by name, referred to by [livekit.open] and
+    # [livekit.show_and_fix].vision. "openai" works without an entry.
+    providers: dict[str, ProviderConfig] = Field(default_factory=dict)
     # Only present when a LiveKit profile (e.g. config/fdb_v3.toml) is layered on.
     livekit: Optional[LivekitConfig] = None
     # sha256 of the raw file, written into trace headers.

@@ -21,10 +21,25 @@ dev = [
     "hypothesis>=6.100",
 ]
 # The LiveKit agent (keel.livekit) and the Show & Fix extension. Exact pins for
-# the benchmark run are in requirements/agent.lock.txt.
+# the benchmark run are in requirements/agent.lock.txt. keel/livekit/session.py
+# imports the Google plugin at start-up (gemini_realtime), so it is required.
 livekit = [
-    "livekit-agents[openai,silero,turn-detector]==1.8.3",
+    "livekit-agents[openai,google,silero,turn-detector]==1.8.3",
     "python-dotenv==1.2.3",
+]
+# The web app alone (python -m keel.web): sessions, replays, results, setup.
+# The live page also needs LiveKit keys; the agent runs from the livekit extra.
+web = [
+    "aiohttp>=3.9",
+    "livekit-api>=1.0",
+    "python-dotenv>=1.0",
+]
+# The local speech server of the open pipeline (python -m keel.speech).
+# Exact pins: requirements/speech.lock.txt.
+speech = [
+    "faster-whisper==1.2.1",
+    "kokoro-onnx==0.6.1",
+    "aiohttp>=3.9",
 ]
 
 [tool.setuptools.packages.find]
@@ -35,6 +50,7 @@ include = ["keel*", "extension*"]
 [tool.setuptools.package-data]
 "keel.compiler" = ["model.json"]
 "keel.console" = ["template.html"]
+"keel.web" = ["static/*", "examples.json"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -11,6 +11,7 @@ Skipped when livekit-agents is not installed (pip install -e ".[livekit]").
 import asyncio
 import io
 import json
+import os
 from pathlib import Path
 
 import pytest
@@ -66,13 +67,13 @@ class _Stream(llm.LLMStream):
             for n, (tool, args) in enumerate(calls)])))
 
 
-async def _run_session(tmp_path, plan, turns, fillers=False):
+async def _run_session(tmp_path, plan, turns, fillers=False, tool_delay_s=0.0, history=None):
     config = with_overrides(load_config(None, ROOT / "config" / "fdb_v3.toml"), trace={"record_wall_time": False},
                             fence={"quiet_ms": 50})
     loop = asyncio.get_running_loop()
     clock = MonotonicClock(loop)
     template = read_template(FIXTURE)
-    registry = FakeRegistry()
+    registry = FakeRegistry(delay_s=tool_delay_s)
     backend = FdbBackend(template=template, registry=registry, room="room-lk", tool_log=tmp_path / "tools.log", seed=5)
     buf = io.StringIO()
     trace = TraceWriter(buf, clock=clock, session_id="room-lk", config=config, synthetic=True)
@@ -91,6 +92,8 @@ async def _run_session(tmp_path, plan, turns, fillers=False):
     results = []
     for text in turns:
         results.append(await session.run(user_input=text))
+    if history is not None:
+        history.extend(getattr(item, "text_content", None) or "" for item in session.history.items)
     await session.aclose()
     await gate.aclose()
     logged = [json.loads(line) for line in (tmp_path / "tools.log").read_text(encoding="utf-8").splitlines()] \
@@ -134,10 +137,153 @@ def test_invalid_arguments_never_reach_the_benchmark_log(tmp_path):
     assert json.loads(outputs[0])["status"] == "error"
 
 
-def test_fillers_path_runs_without_breaking_the_call(tmp_path):
+def test_a_filler_is_spoken_but_kept_out_of_the_llms_chat_history(tmp_path):
+    # The tool is slow enough (1.2 s) for the filler to fire. What Keel says
+    # while waiting must not reach the LLM's context, where it would read as
+    # something the assistant itself said.
     plan = {"trains": [("search_trains", {"city": "X", "date": "d"})]}
-    _, logged, _, _ = asyncio.run(_run_session(tmp_path, plan, list(plan), fillers=True))
+    history: list = []
+    _, logged, records, _ = asyncio.run(_run_session(tmp_path, plan, list(plan), fillers=True,
+                                                     tool_delay_s=1.2, history=history))
     assert len(logged) == 1
+    said = [r.data["text"] for r in records if r.kind == "filler_said"]
+    assert said, "the filler never fired, so this test would prove nothing"
+    assert not [h for h in history if any(text in h for text in said)]
+
+
+def _gemini_config():
+    return with_overrides(load_config(None, ROOT / "config" / "fdb_v3.toml"), livekit={"pipeline": "gemini_realtime"})
+
+
+def test_the_gemini_pipeline_is_a_gemini_live_session_with_the_configured_model(monkeypatch):
+    pytest.importorskip("livekit.plugins.google")
+    from livekit.plugins import google
+
+    from keel.livekit.session import build_session
+
+    monkeypatch.setenv("GOOGLE_API_KEY", "test-key")      # read by the plugin; no request is made
+    cfg = _gemini_config()
+
+    async def build():
+        return build_session(cfg)
+
+    session, has_tts, drop = asyncio.run(build())
+    assert isinstance(session.llm, google.realtime.RealtimeModel)
+    assert (session.llm.model, session.llm._opts.voice) == (cfg.livekit.gemini.model, cfg.livekit.gemini.voice)
+    # No separate TTS: Keel's fillers (session.say) are off, as for gpt_realtime.
+    assert has_tts is False and drop == cfg.livekit.gemini.drop_on_new_speech
+
+
+def _open_config(**stages):
+    base = load_config(None, ROOT / "config" / "fdb_v3.toml")
+    # VAD turn detection: the end-of-utterance model needs a LiveKit job context.
+    cascaded = {**base.livekit.cascaded.model_dump(), "turn_detector": "vad"}
+    return with_overrides(base, livekit={"pipeline": "open", "cascaded": cascaded,
+                                         "open": {**base.livekit.open.model_dump(), **stages}})
+
+
+def test_the_open_pipeline_points_each_stage_at_its_provider():
+    from livekit.plugins import openai as lk_openai
+
+    from keel.livekit.session import build_session
+
+    cfg = _open_config()
+    o = cfg.livekit.open
+
+    async def build():
+        return build_session(cfg)
+
+    session, has_tts, drop = asyncio.run(build())
+    assert isinstance(session.stt, lk_openai.STT) and isinstance(session.tts, lk_openai.TTS)
+    assert (str(session.stt._client.base_url), session.stt.model) == ("http://127.0.0.1:8000/v1/", o.stt_model)
+    assert (str(session.llm._client.base_url), session.llm.model) == ("http://127.0.0.1:11434/v1/", o.llm_model)
+    assert (str(session.tts._client.base_url), session.tts.model) == ("http://127.0.0.1:8000/v1/", o.tts_model)
+    assert session.stt.capabilities.streaming is False          # the plain transcription endpoint, not OpenAI's realtime one
+    assert session.llm._opts.temperature == 0.0 and session.llm._opts.extra_body == {"seed": cfg.livekit.cascaded.llm_seed}
+    assert session.tts._opts.response_format == o.tts_format and has_tts is True and drop is o.drop_on_new_speech
+    # Local models get longer per-request deadlines than LiveKit's 10 s, and one retry.
+    for opts in (session.conn_options.stt_conn_options, session.conn_options.llm_conn_options,
+                 session.conn_options.tts_conn_options):
+        assert (opts.timeout, opts.max_retry) == (o.request_timeout_s, 1)
+
+
+def test_an_open_stage_on_gemini_is_sent_no_seed(monkeypatch):
+    from keel.livekit.session import build_session
+
+    monkeypatch.setenv("GOOGLE_API_KEY", "test-key")
+    cfg = _open_config(llm_provider="gemini", llm_model="gemini-2.5-flash")
+
+    async def build():
+        return build_session(cfg)
+
+    session, _, _ = asyncio.run(build())
+    assert str(session.llm._client.base_url) == "https://generativelanguage.googleapis.com/v1beta/openai/"
+    assert not session.llm._opts.extra_body                   # Gemini rejects `seed` with HTTP 400
+
+
+def test_a_missing_key_for_an_open_stage_stops_with_its_name(monkeypatch):
+    from keel.livekit.session import build_session
+
+    monkeypatch.delenv("GROQ_API_KEY", raising=False)
+    cfg = _open_config(llm_provider="groq", llm_model="openai/gpt-oss-20b")
+
+    async def build():
+        return build_session(cfg)
+
+    with pytest.raises(SystemExit, match="GROQ_API_KEY"):
+        asyncio.run(build())
+
+
+@pytest.mark.skipif(not os.getenv("KEEL_FDB_DIR"), reason="set KEEL_FDB_DIR to an FDB-v3 checkout's v3/ directory")
+def test_the_gemini_model_is_fdb_v3s_own_gemini3_1_provider():
+    source = (Path(os.environ["KEEL_FDB_DIR"]) / "lk_agent_tool.py").read_text(encoding="utf-8")
+    branch = source.split('provider == "gemini3_1"', 1)[1].split("elif", 1)[0]
+    assert f'model="{_gemini_config().livekit.gemini.model}"' in branch
+
+
+def _live_declarations(template_path):
+    # The conversion the Live session itself makes when it connects
+    # (livekit/plugins/google/realtime/realtime_api.py, _build_connect_config).
+    from livekit.plugins.google.utils import create_tools_config
+
+    template = read_template(template_path)
+    tools = [make_tool(t.spec, None, _gemini_config(), False) for t in template.tools]
+    gemini_tools, _ = create_tools_config(llm.ToolContext(tools), use_parameters_json_schema=False)
+    return template, {d.name: d for d in gemini_tools[0].function_declarations}
+
+
+def test_keel_tools_convert_to_the_live_sessions_function_declarations():
+    pytest.importorskip("livekit.plugins.google")
+    template, declared = _live_declarations(FIXTURE)
+    assert set(declared) == {t.spec.name for t in template.tools}
+    convert = declared["convert"].parameters
+    assert convert.properties["note"].nullable is True            # `note: str = None`
+    assert convert.properties["note"].type.value == "STRING"
+    assert set(convert.required) == {"amount", "to_currency"}
+
+
+@pytest.mark.skipif(not os.getenv("KEEL_FDB_DIR"), reason="set KEEL_FDB_DIR to an FDB-v3 checkout's v3/ directory")
+def test_every_fdb_v3_tool_converts_for_the_live_session():
+    pytest.importorskip("livekit.plugins.google")
+    template, declared = _live_declarations(Path(os.environ["KEEL_FDB_DIR"]) / "cascaded_agent.py")
+    assert set(declared) == {t.spec.name for t in template.tools}
+    for t in template.tools:
+        props = declared[t.spec.name].parameters.properties if t.spec.parameters["properties"] else {}
+        assert set(props or {}) == set(t.spec.parameters["properties"]), t.spec.name
+
+
+def test_nullable_as_any_of_is_the_same_schema_in_another_form():
+    from jsonschema import Draft202012Validator
+
+    from keel.livekit.session import nullable_as_any_of
+
+    before = {"type": "object", "properties": {"note": {"type": ["string", "null"], "description": "d"},
+                                               "n": {"type": "integer"}}, "required": ["n"]}
+    after = nullable_as_any_of(before)
+    assert after["properties"]["note"] == {"description": "d", "anyOf": [{"type": "string"}, {"type": "null"}]}
+    assert after["properties"]["n"] == {"type": "integer"} and before["properties"]["note"]["type"] == ["string", "null"]
+    for value in ({"n": 1}, {"n": 1, "note": None}, {"n": 1, "note": "x"}, {"n": 1, "note": 3}, {}):
+        assert Draft202012Validator(before).is_valid(value) == Draft202012Validator(after).is_valid(value)
 
 
 @pytest.mark.parametrize("module", ["keel.livekit.agent", "extension.show_and_fix.agent"])

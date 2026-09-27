@@ -36,7 +36,7 @@ from typing import Any, Awaitable, Callable, Optional, Sequence
 from pydantic import JsonValue
 
 from keel.compiler.manifest import ManifestCompiler
-from keel.config import KeelConfig
+from keel.config import KeelConfig, with_overrides
 from keel.kernel.clock import Clock
 from keel.kernel.internal import Interpretation, SlotProposal
 from keel.kernel.ledger import CallEntry
@@ -91,6 +91,11 @@ class KeelGate:
         # taken, so `add_to_cart(p)` and `add_to_cart(p, quantity=1)` are one call.
         self._complete = complete_arguments or (lambda tool, args: dict(args))
         self._ids = IdFactory(f"{session_id}-lk")
+        if not drop_on_new_speech and config.fence.transcript_wait_ms:
+            # A realtime model's input transcript may come after its tool call:
+            # there, a transcript is not a stretch of speech's words (fence rule 5).
+            config = with_overrides(config, fence={"transcript_wait_ms": 0})
+            self.cfg = config
         self.kernel = Kernel(session_id=session_id, clock=clock, config=config, trace=trace,
                              sink=self._on_action, post=self._post, compiler=compiler)
         self._pending: dict[str, _Pending] = {}
@@ -146,6 +151,9 @@ class KeelGate:
                         "retracted details. Do not repeat it; act on the user's complete request.")))
             if dropped:
                 self.trace.note("superseded_by_speech", steps=dropped, transcript=text)
+            # The words of the stretch of speech that just ended (fence rule 5).
+            self._handle(TextChunk(event_id=self._ids.new("evt"), session_id=self.session_id, ts_ms=self._now(),
+                                   text=text, end_of_turn=False))
         self._handle(Interpretation(
             proposals=(SlotProposal(name=UTTERANCE, value=self._turn_text, source="system", confidence=1.0),),
             **self._goal_fields()))

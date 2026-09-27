@@ -128,6 +128,43 @@ def test_a_call_planned_before_a_self_correction_never_runs(tmp_path):
     assert check_trace(h.records()) == []
 
 
+def test_a_call_planned_from_oh_wait_waits_for_the_repair_and_never_runs(tmp_path):
+    # The shape of a FDB-v3 self-correction, with the scale shrunk: the pause
+    # after "oh, wait" is longer than quiet_ms, and the LLM plans again from it.
+    async def main():
+        async with Harness(tmp_path, config=cfg(repair_wait_ms=300)) as h:
+            h.say("trains to Pune on Friday")
+            h.say("oh, wait.")
+            pending = asyncio.ensure_future(h.gate.call("search_trains", {"city": "Pune", "date": "Friday"}))
+            await asyncio.sleep(0.15)                    # past quiet_ms (60), inside repair_wait_ms
+            sent_during_pause = list(h.registry.calls)
+            h.say("make it Saturday instead")            # the repair proper
+            dropped = await pending
+            fixed = await h.gate.call("search_trains", {"city": "Pune", "date": "Saturday"})
+            return h, sent_during_pause, dropped, fixed
+
+    h, sent_during_pause, dropped, fixed = run(main())
+    assert sent_during_pause == []
+    assert dropped["status"] == "superseded" and fixed["status"] == "ok"
+    assert [r["call"]["args"]["date"] for r in h.logged()] == ["Saturday"]
+    assert [r.data["text"] for r in h.records() if r.kind == "repair_announced"] == ["oh, wait."]
+    assert check_trace(h.records()) == []
+
+
+def test_an_announced_repair_that_never_comes_releases_the_call(tmp_path):
+    async def main():
+        async with Harness(tmp_path, config=cfg(repair_wait_ms=300)) as h:
+            h.say("trains to Pune on Friday")
+            h.say("hmm, hold on")
+            t0 = asyncio.get_running_loop().time()
+            out = await h.gate.call("search_trains", {"city": "Pune", "date": "Friday"})
+            return h, out, asyncio.get_running_loop().time() - t0
+
+    h, out, waited = run(main())
+    assert out["status"] == "ok" and len(h.logged()) == 1
+    assert waited >= 0.25                                # repair_wait_ms, not quiet_ms
+
+
 def test_speech_that_is_not_transcribed_drops_nothing(tmp_path):
     async def main():
         async with Harness(tmp_path) as h:
@@ -363,3 +400,51 @@ def test_without_hold_reads_a_read_starts_at_once():
         return started
 
     assert run(main()) == [("get_price", {"item": "apples"})]
+
+
+# ---------------------------------------------------------------- fence rule 5 through the gate
+def _late_correction(tmp_path, transcript_wait_ms):
+    """travel_10 as our open-pipeline run recorded it: the turn is committed from
+    the first stretch while the correction, already spoken, is still being transcribed."""
+    async def main():
+        async with Harness(tmp_path, config=cfg(transcript_wait_ms=transcript_wait_ms)) as h:
+            g = h.gate
+            g.user_speaking(); g.user_stopped()
+            g.user_transcript("flights to Miami on October 5th", final=True)
+            g.user_speaking(); g.user_stopped()          # "make it the 7th" spoken; STT still working
+            g.user_turn_committed("flights to Miami on October 5th")
+            first = asyncio.ensure_future(g.call("search_trains", {"city": "Miami", "date": "October 5"}))
+            await asyncio.sleep(0.25)                    # well past quiet_ms (60 ms)
+            g.user_transcript("no, make it the 7th", final=True)
+            g.user_turn_committed("no, make it the 7th")
+            superseded = await first
+            second = await g.call("search_trains", {"city": "Miami", "date": "October 7"})
+            return h, superseded, second
+    return asyncio.run(main())
+
+
+def test_a_call_waits_for_the_words_of_speech_still_being_transcribed(tmp_path):
+    h, superseded, second = _late_correction(tmp_path, transcript_wait_ms=2000)
+    assert superseded["status"] == "superseded" and second["status"] == "ok"
+    assert h.registry.calls == [("search_trains", {"city": "Miami", "date": "October 7"})]
+    holds = [r.data for r in h.records() if r.kind == "fence_hold"]
+    assert any(d.get("why") == "speech not yet transcribed" for d in holds)
+    assert check_trace(h.records()) == []
+
+
+def test_without_rule_five_the_stale_call_goes_out(tmp_path):
+    # The control: what the run recorded before the rule.
+    h, first, second = _late_correction(tmp_path, transcript_wait_ms=0)
+    assert [c[1]["date"] for c in h.registry.calls] == ["October 5", "October 7"]
+
+
+def test_a_realtime_gate_does_not_wait_for_transcripts(tmp_path):
+    async def main():
+        loop = asyncio.get_running_loop()
+        clock = MonotonicClock(loop)
+        trace = TraceWriter(io.StringIO(), clock=clock, session_id="r", config=cfg(), synthetic=True)
+        gate = KeelGate(session_id="r", config=cfg(transcript_wait_ms=5000), tools=read_template(FIXTURE).specs(),
+                        execute=None, trace=trace, clock=clock, loop=loop, drop_on_new_speech=False)
+        await gate.aclose()
+        return gate
+    assert asyncio.run(main()).kernel.fence.transcript_wait_ms == 0

@@ -20,10 +20,12 @@ template file itself (keel.livekit.template). What differs from the template:
      through LiveKit's filler mechanism (livekit.speak_purposes).
 
 Environment (e.g. .env.local; see .env.example):
-    LIVEKIT_URL, LIVEKIT_API_KEY, LIVEKIT_API_SECRET, OPENAI_API_KEY
+    LIVEKIT_URL, LIVEKIT_API_KEY, LIVEKIT_API_SECRET, and
+    OPENAI_API_KEY (cascaded, gpt_realtime), GOOGLE_API_KEY (gemini_realtime), or the keys
+    of the providers [livekit.open] names (pipeline open; none for local servers)
     KEEL_CONFIG    overlay on config/keel.toml (default config/fdb_v3.toml)
     KEEL_FDB_DIR   FDB-v3 checkout's v3/ directory (default from the config)
-    KEEL_PIPELINE  "cascaded" | "gpt_realtime" (default from the config)
+    KEEL_PIPELINE  "cascaded" | "gpt_realtime" | "gemini_realtime" | "open" (default from the config)
 """
 
 from __future__ import annotations
@@ -44,11 +46,13 @@ from livekit.agents import Agent, AgentServer
 
 from keel.config import KeelConfig, load_config, with_overrides
 from keel.kernel.clock import MonotonicClock
-from keel.livekit.fdb import FdbBackend, load_mock_registry
+from keel.livekit.fdb import FdbBackend, import_mock_apis, load_mock_registry
 from keel.livekit.gate import KeelGate
 from keel.livekit.session import build_session, make_tool, prewarm_vad, wire
+from keel.providers import apply_env_pipeline
 from keel.livekit.template import Template, read_template
 from keel.trace import TraceWriter
+from keel.web import live as live_story
 
 REPO = Path(__file__).resolve().parents[2]
 log = logging.getLogger("keel.livekit")
@@ -99,8 +103,7 @@ def load_settings() -> Settings:
     cfg = load_config(None, os.getenv("KEEL_CONFIG", str(REPO / "config" / "fdb_v3.toml")))
     if cfg.livekit is None or cfg.livekit.fdb is None:
         raise SystemExit("the config has no [livekit.fdb] section; set KEEL_CONFIG to config/fdb_v3.toml")
-    if os.getenv("KEEL_PIPELINE"):
-        cfg = with_overrides(cfg, livekit={"pipeline": os.environ["KEEL_PIPELINE"]})
+    cfg = apply_env_pipeline(cfg)
     if os.getenv("KEEL_LATENCY_PROFILE"):
         fdb = {**cfg.livekit.fdb.model_dump(), "latency_profile": os.environ["KEEL_LATENCY_PROFILE"]}
         cfg = with_overrides(cfg, livekit={"fdb": fdb})
@@ -177,6 +180,7 @@ async def entrypoint(ctx: agents.JobContext) -> None:
     sid = session_id(room)
     trace = TraceWriter(resolve(lk.trace_dir) / f"{sid}.jsonl", clock=clock, session_id=sid, config=cfg,
                         synthetic=False, scenario=room)
+    live_story.attach(trace, ctx.room, loop)   # the web app's Live page, if one joined
     tracker = LatencyTracker(Path(lk.fdb.heartbeat_log), room)
     backend = FdbBackend(template=s.template, registry=load_mock_registry(s.fdb_dir, lk.fdb.latency_profile),
                          room=room, tool_log=lk.fdb.tool_log, seed=lk.fdb.seed, on_executed=tracker.executed)
@@ -198,7 +202,9 @@ async def entrypoint(ctx: agents.JobContext) -> None:
 
 def setup(proc: agents.JobProcess) -> None:
     """Job-process warm-up. Module-level so it can be pickled (see prewarm_vad)."""
-    prewarm_vad(proc, settings().config)
+    s = settings()
+    prewarm_vad(proc, s.config)
+    import_mock_apis(s.fdb_dir)
 
 
 server.setup_fnc = setup

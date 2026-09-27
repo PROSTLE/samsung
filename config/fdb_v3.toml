@@ -17,6 +17,29 @@
 # The fence counts from the end of the user's turn, so it only delays a call
 # the LLM proposes sooner than quiet_ms after the user stopped.
 hold_reads = true
+# A turn made only of editing terms ("Oh, wait.") announces a self-repair that
+# has not been said yet (Levelt 1983: interruption, then hesitation and editing
+# terms, then "the repair proper"; keel/kernel/repair.py). Calls planned from it
+# wait for the next turn, as long as the template waits for a user who is not
+# finished: max_endpointing_delay=5.0 (cascaded_agent.py). A general list of
+# English hesitation and editing terms; "no" and "okay" are left out because
+# alone they are answers, not announcements.
+repair_wait_ms = 5000
+editing_terms = [
+  "uh", "um", "er", "erm", "hmm", "mm", "oh", "ah",
+  "wait", "hold on", "hang on", "one second", "one sec", "one moment", "just a moment", "just a second",
+  "sorry", "actually", "i mean", "let me think", "let me see", "scratch that",
+]
+# In a cascade, the words of a stretch of speech arrive from speech-to-text after
+# it ends, and the turn can be committed from the earlier stretches while the
+# last one is still being transcribed (fence rule 5; seen in our open-pipeline
+# travel_10 run: "My schedule just changed ... make it October 7th" ended at
+# 22.2 s, the turn was committed without it at 22.6 s, its words came at 28.5 s,
+# and the Oct 5 search had gone out at 23.2 s). Calls wait for those words, at most
+# this long after the stretch ended. The longest transcription measured on the
+# laptop CPU was 5.7 s (an 11.7 s stretch); a hosted STT is faster. The cap only
+# delays a call when a stretch produced no words at all. Off for realtime models.
+transcript_wait_ms = 8000
 
 [floor]
 # The LiveKit LLM speaks. Keel's own lines are played through LiveKit's
@@ -31,6 +54,8 @@ read_retries = 0
 [livekit]
 # "cascaded": VAD + STT + LLM + TTS, as in the cascaded template.
 # "gpt_realtime": OpenAI Realtime, as in lk_agent_tool.py with LK_PROVIDER=gpt_realtime.
+# "gemini_realtime": Gemini Live, as in lk_agent_tool.py with LK_PROVIDER=gemini3_1.
+#   Needs only GOOGLE_API_KEY (Gemini API free tier).
 pipeline = "cascaded"
 # One Keel trace per room. Render them with `python -m keel.console`.
 trace_dir = "traces/livekit"
@@ -108,3 +133,38 @@ voice = "coral"
 # after it has already called a tool, so a transcript is not evidence of new
 # speech here. Held calls are still dropped if LiveKit interrupts their reply.
 drop_on_new_speech = false
+
+[livekit.gemini]
+# From lk_agent_tool.py, provider "gemini3_1" (google.realtime.RealtimeModel).
+model = "gemini-3.1-flash-live-preview"
+voice = "Puck"
+# A realtime model too: its input transcript can arrive after its tool call.
+drop_on_new_speech = false
+
+[livekit.open]
+# Pipeline "open" (--pipeline open): the cascaded pipeline above (same VAD,
+# end-of-utterance model, endpointing, temperature and seed) with open-weight
+# models served on this machine by scripts/open_models.sh: no model key, no
+# account, no per-request limit. The substitute for the paid OpenAI models and
+# for Gemini's free tier. Each stage may name any provider in config/keel.toml's
+# [providers]; e.g. llm_provider = "groq", llm_model = "openai/gpt-oss-20b" moves
+# the LLM to Groq's free tier (GROQ_API_KEY) and leaves the rest local.
+#   STT  faster-whisper small.en (Whisper, MIT), CTranslate2 int8 on the CPU
+#   LLM  Qwen3-4B-Instruct-2507 (Apache-2.0), 4-bit, on the GPU through Ollama;
+#        instruct (no thinking phase), tool calling in its chat template
+#   TTS  Kokoro-82M v1.0 (Apache-2.0) through ONNX Runtime
+stt_provider = "speaches"
+stt_model = "Systran/faster-whisper-small.en"
+stt_language = "en"
+llm_provider = "ollama"
+llm_model = "qwen3:4b-instruct-2507-q4_K_M"
+tts_provider = "speaches"
+tts_model = "kokoro-v1.0"
+tts_voice = "af_heart"
+tts_format = "wav"
+# A cascade: the transcript of a turn arrives before the LLM plans from it.
+drop_on_new_speech = true
+# Per-request deadline for each stage, with one retry (LiveKit's default: 10 s and
+# three retries). In our first local travel_10 run a request to the 4B model timed
+# out at 10.0 s and was started again from scratch, 10 s lost.
+request_timeout_s = 60.0

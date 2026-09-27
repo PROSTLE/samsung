@@ -17,7 +17,7 @@ from __future__ import annotations
 import json
 import time
 from pathlib import Path
-from typing import IO, Any, Iterator, Literal, Optional, Union
+from typing import IO, Any, Callable, Iterator, Literal, Optional, Union
 
 from pydantic import BaseModel, ConfigDict, JsonValue
 
@@ -64,18 +64,23 @@ class TraceWriter:
         self._t0 = time.perf_counter_ns()
         self._seq = 0
         self._closed = False
-        self._write(
-            "meta",
-            "session_start",
-            {
-                "session_id": session_id,
-                "schema_version": config.protocol.schema_version,
-                "config_digest": config.digest,
-                # The console must show a visible "synthetic" label when set.
-                "synthetic": synthetic,
-                "scenario": scenario,
-            },
-        )
+        # Called with every record after it is on disk (e.g. the web app's live
+        # view). A listener that raises is removed; the trace itself never fails.
+        self.listeners: list[Callable[[TraceRecord], None]] = []
+        header: dict[str, Any] = {
+            "session_id": session_id,
+            "schema_version": config.protocol.schema_version,
+            "config_digest": config.digest,
+            # The console must show a visible "synthetic" label when set.
+            "synthetic": synthetic,
+            "scenario": scenario,
+        }
+        if self._record_wall:
+            # Wall-clock time of this record, so a replay can line the trace up
+            # with audio recorded elsewhere (FDB-v3 stamps its stream start in
+            # Unix time). Only with record_wall_time: it makes traces differ run to run.
+            header["unix_ms"] = time.time_ns() // 1_000_000
+        self._write("meta", "session_start", header)
 
     def _write(self, direction: Direction, kind: str, data: dict[str, Any]) -> TraceRecord:
         if self._closed:
@@ -91,6 +96,11 @@ class TraceWriter:
         self._seq += 1
         self._fh.write(json.dumps(rec.model_dump(mode="json"), separators=(",", ":"), sort_keys=True))
         self._fh.write("\n")
+        for listener in list(self.listeners):
+            try:
+                listener(rec)
+            except Exception:  # noqa: BLE001 - a broken listener must not break the trace
+                self.listeners.remove(listener)
         return rec
 
     def event_in(self, event: EventT) -> TraceRecord:

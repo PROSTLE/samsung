@@ -14,12 +14,18 @@ from typing import Any, Callable, Optional
 
 from livekit import agents
 from livekit.agents import AgentSession, RunContext, function_tool
-# Imported at module level so `download-files` fetches their model weights.
-from livekit.plugins import openai, silero, turn_detector  # noqa: F401
+# Imported at module level: LiveKit registers plugins on the main thread,
+# `download-files` fetches their model weights, and importing google.genai
+# inside a job blocked the agent's event loop for ~2 s (measured).
+from livekit.plugins import google, openai, silero, turn_detector  # noqa: F401
 
 from keel.config import KeelConfig
 from keel.livekit.gate import KeelGate
 from keel.protocol.provisional import ToolSpec
+from keel.providers import PIPELINES, ProviderError, accepts_seed, apply_env_pipeline, endpoint  # noqa: F401
+
+# Pipelines built from VAD + STT + LLM + TTS (the others are one realtime model).
+CASCADES = ("cascaded", "open")
 
 
 def to_llm(payload: dict[str, Any]) -> str:
@@ -30,10 +36,33 @@ def to_llm(payload: dict[str, Any]) -> str:
     return json.dumps(payload)
 
 
+def nullable_as_any_of(schema: Any) -> Any:
+    """`"type": [T, "null"]` rewritten as `"anyOf": [{"type": T}, {"type": "null"}]`.
+
+    The same JSON Schema. The Google plugin's Live API converter
+    (_GeminiJsonSchema, called with use_parameters_json_schema=False) reads a
+    nullable parameter only in the anyOf form; a type list makes it raise
+    ("unhashable type: 'list'") and the session never connects."""
+    if isinstance(schema, list):
+        return [nullable_as_any_of(s) for s in schema]
+    if not isinstance(schema, dict):
+        return schema
+    out = {k: nullable_as_any_of(v) for k, v in schema.items()}
+    t = out.get("type")
+    if isinstance(t, list) and "null" in t and len(t) == 2:
+        (other,) = [x for x in t if x != "null"]
+        del out["type"]
+        out["anyOf"] = [{"type": other}, {"type": "null"}]
+    return out
+
+
 def make_tool(spec: ToolSpec, gate: KeelGate, cfg: KeelConfig, fillers: bool):
     """A LiveKit raw-schema tool whose every call goes through the gate."""
     name = spec.name
-    schema = {"name": name, "description": spec.description, "parameters": spec.parameters}
+    parameters = spec.parameters
+    if cfg.livekit is not None and cfg.livekit.pipeline == "gemini_realtime":
+        parameters = nullable_as_any_of(parameters)
+    schema = {"name": name, "description": spec.description, "parameters": parameters}
     floor = cfg.floor
 
     async def wait(step_id: str, fut: asyncio.Future, context: RunContext) -> dict[str, Any]:
@@ -50,8 +79,16 @@ def make_tool(spec: ToolSpec, gate: KeelGate, cfg: KeelConfig, fillers: bool):
             return to_llm(fut.result())
         if not fillers:
             return to_llm(await wait(step_id, fut, context))
-        async with context.with_filler(lambda n: gate.filler(step_id, n),
-                                       delay=floor.ack_after_ms / 1000, interval=floor.progress_after_ms / 1000,
+
+        def filler(n: int):
+            # Spoken, but kept out of the LLM's chat history (say() adds text to
+            # it by default): the LLM must not read "I'm sending the ... request
+            # now" back as something it said, or plan from it.
+            text = gate.filler(step_id, n)
+            return context.session.say(text, add_to_chat_ctx=False) if text else None
+
+        async with context.with_filler(filler, delay=floor.ack_after_ms / 1000,
+                                       interval=floor.progress_after_ms / 1000,
                                        max_steps=1 + floor.max_progress_per_turn):
             return to_llm(await wait(step_id, fut, context))
 
@@ -71,8 +108,41 @@ def prewarm_vad(proc: agents.JobProcess, cfg: KeelConfig) -> None:
     processes with multiprocessing's forkserver, which pickles the setup
     function; a closure cannot be pickled and every job process then fails
     to start ("Can't pickle local object"), so no agent ever joins a room."""
-    if cfg.livekit is not None and cfg.livekit.pipeline == "cascaded":
+    if cfg.livekit is not None and cfg.livekit.pipeline in CASCADES:
         proc.userdata["vad"] = load_vad(cfg)
+
+
+def _client_args(cfg: KeelConfig, provider: str) -> dict[str, Any]:
+    try:
+        base_url, key = endpoint(cfg, provider)
+    except ProviderError as e:
+        raise SystemExit(str(e)) from None
+    return {"api_key": key, **({"base_url": base_url} if base_url else {})}
+
+
+def _cascade(cfg: KeelConfig, vad: Any, stt: Any, llm: Any, tts: Any, **session_kwargs: Any) -> AgentSession:
+    """VAD, end-of-turn model and endpointing from [livekit.cascaded], around any STT/LLM/TTS."""
+    c = cfg.livekit.cascaded  # type: ignore[union-attr]
+    vad = vad or load_vad(cfg)
+    if c.turn_detector == "english":
+        from livekit.plugins.turn_detector.english import EnglishModel
+        detection: Any = EnglishModel()
+    elif c.turn_detector == "multilingual":
+        from livekit.plugins.turn_detector.multilingual import MultilingualModel
+        detection = MultilingualModel()
+    elif c.turn_detector == "vad":
+        detection = "vad"
+    else:
+        raise SystemExit(f"unknown turn_detector {c.turn_detector!r}")
+    return AgentSession(
+        vad=vad, stt=stt, llm=llm, tts=tts,
+        turn_handling={
+            "turn_detection": detection,
+            "endpointing": {"min_delay": c.min_endpointing_s, "max_delay": c.max_endpointing_s},
+            "preemptive_generation": {"enabled": c.preemptive_generation},
+        },
+        **session_kwargs,
+    )
 
 
 def build_session(cfg: KeelConfig, *, vad: Any = None, **session_kwargs: Any) -> tuple[AgentSession, bool, bool]:
@@ -81,34 +151,49 @@ def build_session(cfg: KeelConfig, *, vad: Any = None, **session_kwargs: Any) ->
     assert lk is not None
     if lk.pipeline == "cascaded":
         c = lk.cascaded
-        vad = vad or load_vad(cfg)
-        if c.turn_detector == "english":
-            from livekit.plugins.turn_detector.english import EnglishModel
-            detection: Any = EnglishModel()
-        elif c.turn_detector == "multilingual":
-            from livekit.plugins.turn_detector.multilingual import MultilingualModel
-            detection = MultilingualModel()
-        elif c.turn_detector == "vad":
-            detection = "vad"
-        else:
-            raise SystemExit(f"unknown turn_detector {c.turn_detector!r}")
-        session = AgentSession(
-            vad=vad,
+        session = _cascade(
+            cfg, vad,
             stt=openai.STT(model=c.stt_model, language=c.stt_language),
             llm=openai.LLM(model=c.llm_model, temperature=c.llm_temperature, extra_body={"seed": c.llm_seed}),
             tts=openai.TTS(model=c.tts_model, voice=c.tts_voice),
-            turn_handling={
-                "turn_detection": detection,
-                "endpointing": {"min_delay": c.min_endpointing_s, "max_delay": c.max_endpointing_s},
-                "preemptive_generation": {"enabled": c.preemptive_generation},
-            },
             **session_kwargs,
         )
         return session, True, c.drop_on_new_speech
+    if lk.pipeline == "open":
+        o, c = lk.open, lk.cascaded
+        if o is None:
+            raise SystemExit("pipeline open needs a [livekit.open] section in the config")
+        import httpx
+        from livekit.agents import APIConnectOptions
+        from livekit.agents.voice.agent_session import SessionConnectOptions
+
+        per_request = APIConnectOptions(max_retry=1, retry_interval=0.5, timeout=o.request_timeout_s)
+        session_kwargs.setdefault("conn_options", SessionConnectOptions(
+            stt_conn_options=per_request, llm_conn_options=per_request, tts_conn_options=per_request))
+        session = _cascade(
+            cfg, vad,
+            stt=openai.STT(model=o.stt_model, language=o.stt_language, use_realtime=False,
+                           **_client_args(cfg, o.stt_provider)),
+            llm=openai.LLM(model=o.llm_model, temperature=c.llm_temperature,
+                           # The plugin's default allows 5 s between bytes; the first token may take longer.
+                           timeout=httpx.Timeout(connect=15.0, read=o.request_timeout_s, write=15.0, pool=15.0),
+                           **({"extra_body": {"seed": c.llm_seed}} if accepts_seed(cfg, o.llm_provider) else {}),
+                           **_client_args(cfg, o.llm_provider)),
+            tts=openai.TTS(model=o.tts_model, voice=o.tts_voice, response_format=o.tts_format,  # type: ignore[arg-type]
+                           **_client_args(cfg, o.tts_provider)),
+            **session_kwargs,
+        )
+        return session, True, o.drop_on_new_speech
     if lk.pipeline == "gpt_realtime":
         r = lk.realtime
         model = openai.realtime.RealtimeModel(model=r.model, voice=r.voice)
         return AgentSession(llm=model, **session_kwargs), False, r.drop_on_new_speech
+    if lk.pipeline == "gemini_realtime":
+        g = lk.gemini
+        if g is None:
+            raise SystemExit("pipeline gemini_realtime needs a [livekit.gemini] section in the config")
+        model = google.realtime.RealtimeModel(model=g.model, voice=g.voice)
+        return AgentSession(llm=model, **session_kwargs), False, g.drop_on_new_speech
     raise SystemExit(f"unknown pipeline {lk.pipeline!r}")
 
 

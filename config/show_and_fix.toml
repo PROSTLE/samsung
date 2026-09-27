@@ -7,6 +7,17 @@
 # or the manual cannot change anything, so reads start at once (speculatively)
 # and only the booking waits behind the fence.
 hold_reads = false
+# Same announced-repair rule and terms as config/fdb_v3.toml: a booking planned
+# from "oh, wait" waits for the repair that follows.
+repair_wait_ms = 5000
+editing_terms = [
+  "uh", "um", "er", "erm", "hmm", "mm", "oh", "ah",
+  "wait", "hold on", "hang on", "one second", "one sec", "one moment", "just a moment", "just a second",
+  "sorry", "actually", "i mean", "let me think", "let me see", "scratch that",
+]
+# Same as config/fdb_v3.toml: a booking waits for the words of speech that has
+# ended but is still being transcribed (fence rule 5; reasons there).
+transcript_wait_ms = 8000
 
 [floor]
 # The LLM speaks; Keel speaks only through LiveKit fillers (keel/livekit/gate.py).
@@ -30,6 +41,16 @@ vision_model = "gpt-4o"
 # A frame older than this is not trusted as "what the camera shows now".
 frame_max_age_s = 3.0
 
+[livekit.show_and_fix.vision]
+# The display reader follows the pipeline's provider, so each pipeline needs
+# only its own key ("provider:model"; unlisted pipelines use vision_model on OpenAI).
+# gemini-2.5-flash takes images and is free of charge on the Gemini API's free
+# tier (ai.google.dev/gemini-api/docs/pricing); the open pipeline reads with an
+# open-weight vision model on the local Ollama: Qwen3-VL-2B-Instruct (Apache-2.0,
+# 1.9 GB at 4 bits; Qwen2.5-VL-3B was passed over for its non-commercial licence).
+gemini_realtime = "gemini:gemini-2.5-flash"
+open = "ollama:qwen3-vl:2b-instruct-q4_K_M"
+
 [livekit.cascaded]
 # Same pipeline as the benchmark profile (config/fdb_v3.toml), stated in full
 # here so this profile does not depend on that file.
@@ -52,3 +73,25 @@ drop_on_new_speech = true
 model = "gpt-realtime-1.5"
 voice = "coral"
 drop_on_new_speech = false
+
+[livekit.gemini]
+# Same as config/fdb_v3.toml: Gemini Live, free of charge on the Gemini API's
+# free tier. With the Gemini display reader above, KEEL_PIPELINE=gemini_realtime
+# runs Show & Fix on a GOOGLE_API_KEY alone.
+model = "gemini-3.1-flash-live-preview"
+voice = "Puck"
+drop_on_new_speech = false
+
+[livekit.open]
+# Same open-weight models as config/fdb_v3.toml (see the comments there).
+stt_provider = "speaches"
+stt_model = "Systran/faster-whisper-small.en"
+stt_language = "en"
+llm_provider = "ollama"
+llm_model = "qwen3:4b-instruct-2507-q4_K_M"
+tts_provider = "speaches"
+tts_model = "kokoro-v1.0"
+tts_voice = "af_heart"
+tts_format = "wav"
+drop_on_new_speech = true
+request_timeout_s = 60.0
