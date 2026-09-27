@@ -12,7 +12,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
-      - run: python -m pip install -e ".[dev]"
+      # web: the web app's API tests; numpy and openai: the speech server's tests
+      # (with fake engines, and the OpenAI SDK as its client). No model is downloaded.
+      - run: python -m pip install -e ".[dev,web]" numpy openai
       - run: python -m pytest
       - run: python -m data.labels.build
       - run: python -m eval.grid_self_repair
@@ -35,7 +37,10 @@ jobs:
           commit=$(sed -n 's/^FDB_COMMIT="\([0-9a-f]\{40\}\)".*/\1/p' scripts/reproduce_fdb_v3.sh)
           git clone -q https://github.com/DanielLin94144/Full-Duplex-Bench.git third_party/Full-Duplex-Bench
           git -C third_party/Full-Duplex-Bench checkout -q "$commit"
-      - run: python -m pytest tests/test_livekit_template.py tests/test_livekit_gate.py tests/test_livekit_session.py tests/test_show_and_fix.py
+      - run: >-
+          python -m pytest tests/test_livekit_template.py tests/test_livekit_gate.py
+          tests/test_livekit_session.py tests/test_show_and_fix.py tests/test_providers.py
+          tests/test_preflight.py tests/test_web.py tests/test_speech.py
         env:
           KEEL_FDB_DIR: third_party/Full-Duplex-Bench/v3
-      - run: bash -n scripts/reproduce_fdb_v3.sh
+      - run: bash -n scripts/reproduce_fdb_v3.sh scripts/open_models.sh scripts/keel_live_wsl.sh scripts/reproduce_fdb_v3_wsl.sh

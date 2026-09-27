@@ -11,9 +11,10 @@ __pycache__/
 
 # FDB-v3 checkout and audio (fetched by scripts/reproduce_fdb_v3.sh)
 /third_party/
-# Environments created by scripts/reproduce_fdb_v3.sh
+# Environments created by scripts/reproduce_fdb_v3.sh and scripts/open_models.sh
 .venv-agent/
 .venv-bench/
+.venv-speech/
 # API keys: never committed (guide §4). See .env.example.
 .env
 .env.local

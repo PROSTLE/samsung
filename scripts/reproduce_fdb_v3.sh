@@ -10,7 +10,8 @@
 #   3. clones FDB-v3 at a pinned commit and downloads its audio (link from its v3/README.md)
 #   4. downloads the agent's model weights (VAD, end-of-utterance model)
 #   5. starts Keel's LiveKit agent, runs FDB-v3's own inference script, stops the agent
-#   6. runs FDB-v3's three evaluations with the gpt-4o judge (--use-llm)
+#   6. runs FDB-v3's three evaluations, with the gpt-4o judge (--use-llm) when
+#      OPENAI_API_KEY is set, else with FDB-v3's rule-based scoring (--judge)
 #   7. collects reports, per-scenario results, logs, traces, versions and seeds into
 #      results/fdb_v3/<timestamp>_<provider>/
 #
@@ -18,8 +19,19 @@
 #   cascaded (default): Silero VAD + LiveKit end-of-utterance model (local) +
 #                       OpenAI whisper-1 STT + gpt-4o + tts-1, with Keel under every tool call
 #   gpt_realtime:       OpenAI gpt-realtime-1.5, with Keel under every tool call
+#   gemini_realtime:    Gemini Live (gemini-3.1-flash-live-preview, FDB-v3's
+#                       "gemini3_1" provider), with Keel under every tool call
+#   open:               the cascaded pipeline on open-weight models served on this
+#                       machine (faster-whisper, Qwen3-4B-Instruct through Ollama,
+#                       Kokoro; config/fdb_v3.toml [livekit.open]), started by
+#                       scripts/open_models.sh. No model key, no account.
 # Keys (in .env at the repo root; see .env.example):
-#   LIVEKIT_URL, LIVEKIT_API_KEY, LIVEKIT_API_SECRET, OPENAI_API_KEY
+#   LIVEKIT_URL, LIVEKIT_API_KEY, LIVEKIT_API_SECRET, and
+#   OPENAI_API_KEY (cascaded, gpt_realtime, the gpt-4o judge) or GOOGLE_API_KEY (gemini_realtime);
+#   open needs none unless [livekit.open] names a hosted provider (e.g. GROQ_API_KEY)
+# Judge (--judge): gpt-4o (FDB-v3's --use-llm) or none (FDB-v3's rule-based
+#   scoring: tool selection and exact-match arguments; no response-quality score).
+#   Default: gpt-4o when OPENAI_API_KEY is set, else none.
 #
 # Needs: Linux or macOS, bash, git, ffmpeg, Python 3.10 (FDB-v3's README uses 3.10; set PYTHON=...).
 # FDB-v3's ASR model (NeMo parakeet) uses the GPU when one is available.
@@ -27,6 +39,9 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+# `python -m keel...` imports from the current directory first; run from the
+# checkout so the agent uses this checkout's code and writes its traces here.
+cd "$ROOT"
 FDB_REPO="https://github.com/DanielLin94144/Full-Duplex-Bench.git"
 FDB_COMMIT="3e799c45a045256f47d5f1c9cda90157e2d2ec9e"      # main, 2026-05-20
 FDB_DATA_ID="1SO_4MTazWQ_jvCx0dtmpQ-t40bdd07yz"            # Google Drive id in FDB v3/README.md "Data"
@@ -37,18 +52,24 @@ PY="${PYTHON:-python3.10}"
 PIPELINE="cascaded"
 LATENCY="instant"
 EXAMPLE=""
+JUDGE=""
 SKIP_INSTALL=0
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --pipeline) PIPELINE="$2"; shift 2 ;;
     --latency) LATENCY="$2"; shift 2 ;;
     --example) EXAMPLE="$2"; shift 2 ;;
+    --judge) JUDGE="$2"; shift 2 ;;
     --skip-install) SKIP_INSTALL=1; shift ;;
-    -h|--help) sed -n '2,28p' "$0"; exit 0 ;;
+    -h|--help) sed -n '2,33p' "$0"; exit 0 ;;
     *) echo "unknown option: $1" >&2; exit 2 ;;
   esac
 done
-case "$PIPELINE" in cascaded|gpt_realtime) ;; *) echo "--pipeline must be cascaded or gpt_realtime" >&2; exit 2 ;; esac
+case "$PIPELINE" in
+  cascaded|gpt_realtime|gemini_realtime|open) ;;
+  *) echo "--pipeline must be cascaded, gpt_realtime, gemini_realtime or open" >&2; exit 2 ;;
+esac
+case "$JUDGE" in ""|gpt-4o|none) ;; *) echo "--judge must be gpt-4o or none" >&2; exit 2 ;; esac
 PROVIDER="keel_${PIPELINE}"
 
 say() { printf '\n==> %s\n' "$*"; }
@@ -64,10 +85,21 @@ done
 [[ -f "$ROOT/.env" ]] || die "no .env at the repo root; copy .env.example to .env and fill it in"
 set -a; # shellcheck disable=SC1091
 source "$ROOT/.env"; set +a
-for key in LIVEKIT_URL LIVEKIT_API_KEY LIVEKIT_API_SECRET OPENAI_API_KEY; do
-  [[ -n "${!key:-}" ]] || die "$key is empty in .env"
+if [[ -z "$JUDGE" ]]; then
+  if [[ -n "${OPENAI_API_KEY:-}" ]]; then JUDGE="gpt-4o"; else JUDGE="none"; fi
+fi
+keys=(LIVEKIT_URL LIVEKIT_API_KEY LIVEKIT_API_SECRET)
+case "$PIPELINE" in
+  gemini_realtime) keys+=(GOOGLE_API_KEY) ;;
+  open) ;;   # local models; a hosted provider's key is checked by the preflight below
+  *) keys+=(OPENAI_API_KEY) ;;
+esac
+if [[ "$JUDGE" == "gpt-4o" && ! " ${keys[*]} " =~ " OPENAI_API_KEY " ]]; then keys+=(OPENAI_API_KEY); fi
+for key in "${keys[@]}"; do
+  [[ -n "${!key:-}" ]] || die "$key is empty in .env (needed for --pipeline $PIPELINE --judge $JUDGE)"
 done
-echo "keys present: LIVEKIT_URL LIVEKIT_API_KEY LIVEKIT_API_SECRET OPENAI_API_KEY (values not shown)"
+echo "keys present: ${keys[*]} (values not shown)"
+echo "judge: $JUDGE"
 
 # ---------------------------------------------------------------- 2. environments
 # Large wheels (torch, triton: hundreds of MB) must survive a flaky connection.
@@ -88,10 +120,28 @@ fi
 
 # Fail fast: every import the agent and FDB-v3's scripts make, before the long steps.
 say "Checking both environments"
-agent_imports="import livekit.agents, livekit.plugins.openai, livekit.plugins.silero, livekit.plugins.turn_detector, dotenv, keel.livekit.session"
+agent_imports="import livekit.agents, livekit.plugins.openai, livekit.plugins.google, livekit.plugins.silero, livekit.plugins.turn_detector, dotenv, keel.livekit.session"
 bench_imports="from livekit import api, rtc; import numpy, dotenv, pydub, openai, gdown, nemo.collections.asr"
 "$AGENT_PY" -c "$agent_imports" || die "agent environment is incomplete; rerun without --skip-install"
 "$BENCH_PY" -c "$bench_imports" || die "benchmark environment is incomplete; rerun without --skip-install"
+
+# A key can be valid and still have no credit or no access to the model; the run
+# would then score a silent agent everywhere. One minimal request per provider.
+OPEN_MODELS_STARTED=0
+stop_open_models() { if [[ $OPEN_MODELS_STARTED -eq 1 ]]; then bash "$ROOT/scripts/open_models.sh" stop || true; fi; }
+if [[ "$PIPELINE" == "open" ]]; then
+  say "Starting the open-weight model servers (scripts/open_models.sh)"
+  PYTHON="$PY" bash "$ROOT/scripts/open_models.sh" start || die "the open-weight model servers did not start"
+  OPEN_MODELS_STARTED=1
+  trap stop_open_models EXIT
+fi
+
+say "Checking that the model providers accept the keys"
+providers=()
+case "$PIPELINE" in gemini_realtime) providers+=(gemini) ;; open) providers+=(open) ;; *) providers+=(openai) ;; esac
+if [[ "$JUDGE" == "gpt-4o" && "$PIPELINE" != "cascaded" && "$PIPELINE" != "gpt_realtime" ]]; then providers+=(openai); fi
+KEEL_PIPELINE="$PIPELINE" "$AGENT_PY" -m keel.livekit.preflight "${providers[@]}" \
+  || die "a model provider refused the request (see above); for OpenAI, check the credit balance at https://platform.openai.com/settings/organization/billing"
 
 # ---------------------------------------------------------------- 3. benchmark code + data
 say "FDB-v3 at $FDB_COMMIT"
@@ -147,7 +197,7 @@ say "Starting Keel's agent (pipeline=$PIPELINE, latency=$LATENCY)"
 KEEL_FDB_DIR="$V3" KEEL_PIPELINE="$PIPELINE" "$AGENT_PY" -m keel.livekit.agent start --latency "$LATENCY" \
   >"$OUT/agent.log" 2>&1 &
 AGENT_PID=$!
-cleanup() { kill "$AGENT_PID" 2>/dev/null || true; wait "$AGENT_PID" 2>/dev/null || true; }
+cleanup() { kill "$AGENT_PID" 2>/dev/null || true; wait "$AGENT_PID" 2>/dev/null || true; stop_open_models; }
 trap cleanup EXIT
 for _ in $(seq 1 120); do
   grep -q "registered worker" "$OUT/agent.log" && break
@@ -170,11 +220,15 @@ trap - EXIT
 # ---------------------------------------------------------------- 6. evaluation
 # Each evaluation is non-fatal, as in FDB-v3's own run_all_evaluations_released.sh,
 # so one failing step still leaves the others and the collected logs.
-say "Evaluating (gpt-4o judge)"
+# FDB-v3's own flag: --use-llm judges arguments and responses with gpt-4o;
+# without it, arguments are matched exactly and response quality is not scored.
+judge_flag=()
+if [[ "$JUDGE" == "gpt-4o" ]]; then judge_flag=(--use-llm); fi
+say "Evaluating (judge: $JUDGE)"
 "$BENCH_PY" evaluate_tool_calls.py --benchmark benchmark_data_v2.json --results-dir fdb_v3_data_released \
-  --provider "$PROVIDER" --output "$OUT/${PROVIDER}_evaluation_report.json" --use-llm 2>&1 | tee "$OUT/eval_tool_calls.log" || echo "WARNING: this evaluation failed; see $OUT/eval_tool_calls.log"
+  --provider "$PROVIDER" --output "$OUT/${PROVIDER}_evaluation_report.json" ${judge_flag[@]+"${judge_flag[@]}"} 2>&1 | tee "$OUT/eval_tool_calls.log" || echo "WARNING: this evaluation failed; see $OUT/eval_tool_calls.log"
 "$BENCH_PY" evaluate_pass_rate.py --benchmark benchmark_data_v2.json --results-dir fdb_v3_data_released \
-  --provider "$PROVIDER" --output "$OUT/${PROVIDER}_pass_rate_report.json" --use-llm 2>&1 | tee "$OUT/eval_pass_rate.log" || echo "WARNING: this evaluation failed; see $OUT/eval_pass_rate.log"
+  --provider "$PROVIDER" --output "$OUT/${PROVIDER}_pass_rate_report.json" ${judge_flag[@]+"${judge_flag[@]}"} 2>&1 | tee "$OUT/eval_pass_rate.log" || echo "WARNING: this evaluation failed; see $OUT/eval_pass_rate.log"
 "$BENCH_PY" analyze_tool_latency.py --results-dir fdb_v3_data_released --provider "$PROVIDER" \
   --output "$OUT/${PROVIDER}_latency_report.json" 2>&1 | tee "$OUT/eval_latency.log" || echo "WARNING: this evaluation failed; see $OUT/eval_latency.log"
 
@@ -197,17 +251,25 @@ lines = [l for l in log.read_text().splitlines() if l.strip() and json.loads(l).
 PY
 # Keel's per-room traces written during this run (cp would reset their times, so filter first).
 find "$ROOT/traces/livekit" -name 'eval-*.jsonl' -newermt "@$START_EPOCH" -exec cp {} "$OUT/traces/" \; 2>/dev/null || true
-cp "$ROOT/config/keel.toml" "$ROOT/config/fdb_v3.toml" "$OUT/"
+# The profile the agent actually ran with (KEEL_CONFIG overrides the default).
+PROFILE="${KEEL_CONFIG:-$ROOT/config/fdb_v3.toml}"
+cp "$ROOT/config/keel.toml" "$OUT/"
+cp "$PROFILE" "$OUT/fdb_v3.toml"
 {
   echo "run_id: $RUN_ID"
-  echo "command: $0 --pipeline $PIPELINE --latency $LATENCY${EXAMPLE:+ --example $EXAMPLE}"
+  echo "command: $0 --pipeline $PIPELINE --latency $LATENCY --judge $JUDGE${EXAMPLE:+ --example $EXAMPLE}"
   echo "provider_label: $PROVIDER"
+  echo "judge: $JUDGE$([[ "$JUDGE" == none ]] && echo ' (FDB-v3 rule-based scoring: exact-match arguments, no response-quality score)')"
   echo "keel_commit: $(git -C "$ROOT" rev-parse HEAD 2>/dev/null || echo unknown)$(git -C "$ROOT" diff --quiet 2>/dev/null || echo ' (uncommitted changes)')"
   echo "fdb_v3_commit: $FDB_COMMIT"
-  echo "seeds: $(grep -E '^(seed|llm_seed) *=' "$ROOT/config/fdb_v3.toml" | tr -s ' ' | paste -sd ';' -)"
+  echo "profile: $PROFILE$([[ -n "${KEEL_CONFIG:-}" ]] && echo ' (KEEL_CONFIG; copied here as fdb_v3.toml)')"
+  echo "seeds: $(grep -E '^(seed|llm_seed) *=' "$PROFILE" | tr -s ' ' | paste -sd ';' -)"
   echo "python: $("$AGENT_PY" -V 2>&1)"
   echo "os: $(uname -a)"
   command -v nvidia-smi >/dev/null && echo "gpu: $(nvidia-smi --query-gpu=name,driver_version --format=csv,noheader | paste -sd ';' -)"
+  if [[ "$PIPELINE" == "open" ]]; then
+    echo "open_models: $(KEEL_PIPELINE=open "$AGENT_PY" -m keel.providers describe)"
+  fi
 } > "$OUT/run_info.txt"
 "$AGENT_PY" -m pip freeze > "$OUT/pip_freeze_agent.txt"
 "$BENCH_PY" -m pip freeze > "$OUT/pip_freeze_bench.txt"
