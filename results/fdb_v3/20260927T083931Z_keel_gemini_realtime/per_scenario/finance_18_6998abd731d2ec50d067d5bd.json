@@ -1,0 +1,703 @@
+{
+  "pid": "6998abd731d2ec50d067d5bd",
+  "example_id": "finance_18",
+  "category": "finance_billing",
+  "title": "Exchange + Autopay + Benefits Chain",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-27T09:25:49.061918",
+  "inference_time_s": 57.65,
+  "room_name": "eval-6e647658",
+  "stream_start_time": 1790501152.40327,
+  "input_transcript": "Um so alright, so first um I need to know how much thousand US dollars would be in Euros. Then I want to change my credit card or to pay so it pulls from the savings instead. And finally, can you tell me what kind of benefits the premium card has?",
+  "input_asr_chunks": [
+    {
+      "text": "Um",
+      "timestamp": [
+        0.88,
+        1.04
+      ]
+    },
+    {
+      "text": "so",
+      "timestamp": [
+        1.28,
+        1.44
+      ]
+    },
+    {
+      "text": "alright,",
+      "timestamp": [
+        1.52,
+        1.84
+      ]
+    },
+    {
+      "text": "so",
+      "timestamp": [
+        2.24,
+        2.4
+      ]
+    },
+    {
+      "text": "first",
+      "timestamp": [
+        2.64,
+        2.88
+      ]
+    },
+    {
+      "text": "um",
+      "timestamp": [
+        3.2,
+        3.52
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        3.68,
+        4.0
+      ]
+    },
+    {
+      "text": "need",
+      "timestamp": [
+        4.0,
+        4.24
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        4.24,
+        4.48
+      ]
+    },
+    {
+      "text": "know",
+      "timestamp": [
+        4.48,
+        4.8
+      ]
+    },
+    {
+      "text": "how",
+      "timestamp": [
+        4.8,
+        5.04
+      ]
+    },
+    {
+      "text": "much",
+      "timestamp": [
+        5.04,
+        5.36
+      ]
+    },
+    {
+      "text": "thousand",
+      "timestamp": [
+        5.36,
+        5.68
+      ]
+    },
+    {
+      "text": "US",
+      "timestamp": [
+        5.84,
+        6.32
+      ]
+    },
+    {
+      "text": "dollars",
+      "timestamp": [
+        6.32,
+        6.88
+      ]
+    },
+    {
+      "text": "would",
+      "timestamp": [
+        6.88,
+        7.12
+      ]
+    },
+    {
+      "text": "be",
+      "timestamp": [
+        7.12,
+        7.28
+      ]
+    },
+    {
+      "text": "in",
+      "timestamp": [
+        7.28,
+        7.44
+      ]
+    },
+    {
+      "text": "Euros.",
+      "timestamp": [
+        7.44,
+        7.84
+      ]
+    },
+    {
+      "text": "Then",
+      "timestamp": [
+        8.32,
+        8.4
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        8.48,
+        8.56
+      ]
+    },
+    {
+      "text": "want",
+      "timestamp": [
+        8.56,
+        8.72
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        8.72,
+        8.88
+      ]
+    },
+    {
+      "text": "change",
+      "timestamp": [
+        8.88,
+        9.200000000000001
+      ]
+    },
+    {
+      "text": "my",
+      "timestamp": [
+        9.200000000000001,
+        9.44
+      ]
+    },
+    {
+      "text": "credit",
+      "timestamp": [
+        9.44,
+        10.08
+      ]
+    },
+    {
+      "text": "card",
+      "timestamp": [
+        10.08,
+        10.64
+      ]
+    },
+    {
+      "text": "or",
+      "timestamp": [
+        10.96,
+        11.120000000000001
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        11.200000000000001,
+        11.36
+      ]
+    },
+    {
+      "text": "pay",
+      "timestamp": [
+        11.36,
+        11.68
+      ]
+    },
+    {
+      "text": "so",
+      "timestamp": [
+        11.76,
+        12.0
+      ]
+    },
+    {
+      "text": "it",
+      "timestamp": [
+        12.0,
+        12.16
+      ]
+    },
+    {
+      "text": "pulls",
+      "timestamp": [
+        12.16,
+        12.56
+      ]
+    },
+    {
+      "text": "from",
+      "timestamp": [
+        12.56,
+        12.72
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        12.72,
+        12.88
+      ]
+    },
+    {
+      "text": "savings",
+      "timestamp": [
+        12.88,
+        13.44
+      ]
+    },
+    {
+      "text": "instead.",
+      "timestamp": [
+        13.44,
+        13.84
+      ]
+    },
+    {
+      "text": "And",
+      "timestamp": [
+        14.0,
+        14.16
+      ]
+    },
+    {
+      "text": "finally,",
+      "timestamp": [
+        14.16,
+        14.56
+      ]
+    },
+    {
+      "text": "can",
+      "timestamp": [
+        14.72,
+        15.040000000000001
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        15.040000000000001,
+        15.36
+      ]
+    },
+    {
+      "text": "tell",
+      "timestamp": [
+        15.36,
+        15.68
+      ]
+    },
+    {
+      "text": "me",
+      "timestamp": [
+        15.68,
+        15.84
+      ]
+    },
+    {
+      "text": "what",
+      "timestamp": [
+        16.16,
+        16.48
+      ]
+    },
+    {
+      "text": "kind",
+      "timestamp": [
+        16.48,
+        16.64
+      ]
+    },
+    {
+      "text": "of",
+      "timestamp": [
+        16.64,
+        16.8
+      ]
+    },
+    {
+      "text": "benefits",
+      "timestamp": [
+        16.8,
+        17.52
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        17.52,
+        17.68
+      ]
+    },
+    {
+      "text": "premium",
+      "timestamp": [
+        17.68,
+        18.32
+      ]
+    },
+    {
+      "text": "card",
+      "timestamp": [
+        18.32,
+        18.8
+      ]
+    },
+    {
+      "text": "has?",
+      "timestamp": [
+        19.12,
+        19.44
+      ]
+    }
+  ],
+  "user_speech_end_rel": 19.44,
+  "latency": {
+    "input_duration_s": 49.797,
+    "output_duration_s": 49.797,
+    "first_speech_s": 24.35
+  },
+  "user_done_unix": 1790501171.84327,
+  "search_latency_breakdown": {
+    "room": "eval-6e647658",
+    "tool": "get_card_benefits",
+    "reasoning": 0.61,
+    "execution": 0.0,
+    "synthesis": 0.854,
+    "total": 1.464,
+    "agent_start_at": 1790501175.9154465
+  },
+  "absolute_total_latency": 4.072,
+  "transcript": "Okay, so for a thousand US dollars, you'd get 900 euros. I've also updated your autopilot to pull from your savings account instead of your credit card. And premium card holders get 2% cash back and no foreign transaction fees.",
+  "asr_chunks": [
+    {
+      "text": "Okay,",
+      "timestamp": [
+        24.32,
+        24.64
+      ]
+    },
+    {
+      "text": "so",
+      "timestamp": [
+        24.96,
+        25.12
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        25.12,
+        25.36
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        25.36,
+        25.52
+      ]
+    },
+    {
+      "text": "thousand",
+      "timestamp": [
+        25.52,
+        25.84
+      ]
+    },
+    {
+      "text": "US",
+      "timestamp": [
+        25.92,
+        26.32
+      ]
+    },
+    {
+      "text": "dollars,",
+      "timestamp": [
+        26.32,
+        26.64
+      ]
+    },
+    {
+      "text": "you'd",
+      "timestamp": [
+        26.72,
+        26.96
+      ]
+    },
+    {
+      "text": "get",
+      "timestamp": [
+        26.96,
+        27.12
+      ]
+    },
+    {
+      "text": "900",
+      "timestamp": [
+        27.12,
+        27.68
+      ]
+    },
+    {
+      "text": "euros.",
+      "timestamp": [
+        27.68,
+        28.16
+      ]
+    },
+    {
+      "text": "I've",
+      "timestamp": [
+        28.48,
+        28.72
+      ]
+    },
+    {
+      "text": "also",
+      "timestamp": [
+        28.72,
+        28.88
+      ]
+    },
+    {
+      "text": "updated",
+      "timestamp": [
+        28.88,
+        29.28
+      ]
+    },
+    {
+      "text": "your",
+      "timestamp": [
+        29.28,
+        29.44
+      ]
+    },
+    {
+      "text": "autopilot",
+      "timestamp": [
+        29.44,
+        30.080000000000002
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        30.080000000000002,
+        30.240000000000002
+      ]
+    },
+    {
+      "text": "pull",
+      "timestamp": [
+        30.240000000000002,
+        30.400000000000002
+      ]
+    },
+    {
+      "text": "from",
+      "timestamp": [
+        30.400000000000002,
+        30.560000000000002
+      ]
+    },
+    {
+      "text": "your",
+      "timestamp": [
+        30.560000000000002,
+        30.72
+      ]
+    },
+    {
+      "text": "savings",
+      "timestamp": [
+        30.72,
+        31.12
+      ]
+    },
+    {
+      "text": "account",
+      "timestamp": [
+        31.12,
+        31.44
+      ]
+    },
+    {
+      "text": "instead",
+      "timestamp": [
+        31.44,
+        31.68
+      ]
+    },
+    {
+      "text": "of",
+      "timestamp": [
+        31.68,
+        31.76
+      ]
+    },
+    {
+      "text": "your",
+      "timestamp": [
+        31.76,
+        31.92
+      ]
+    },
+    {
+      "text": "credit",
+      "timestamp": [
+        31.92,
+        32.24
+      ]
+    },
+    {
+      "text": "card.",
+      "timestamp": [
+        32.24,
+        32.480000000000004
+      ]
+    },
+    {
+      "text": "And",
+      "timestamp": [
+        32.8,
+        33.04
+      ]
+    },
+    {
+      "text": "premium",
+      "timestamp": [
+        33.04,
+        33.52
+      ]
+    },
+    {
+      "text": "card",
+      "timestamp": [
+        33.52,
+        33.76
+      ]
+    },
+    {
+      "text": "holders",
+      "timestamp": [
+        33.76,
+        34.08
+      ]
+    },
+    {
+      "text": "get",
+      "timestamp": [
+        34.08,
+        34.24
+      ]
+    },
+    {
+      "text": "2%",
+      "timestamp": [
+        34.24,
+        34.56
+      ]
+    },
+    {
+      "text": "cash",
+      "timestamp": [
+        34.800000000000004,
+        35.12
+      ]
+    },
+    {
+      "text": "back",
+      "timestamp": [
+        35.12,
+        35.28
+      ]
+    },
+    {
+      "text": "and",
+      "timestamp": [
+        35.28,
+        35.44
+      ]
+    },
+    {
+      "text": "no",
+      "timestamp": [
+        35.44,
+        35.68
+      ]
+    },
+    {
+      "text": "foreign",
+      "timestamp": [
+        35.68,
+        36.0
+      ]
+    },
+    {
+      "text": "transaction",
+      "timestamp": [
+        36.0,
+        36.72
+      ]
+    },
+    {
+      "text": "fees.",
+      "timestamp": [
+        36.72,
+        37.36
+      ]
+    }
+  ],
+  "perceived_total_latency": 4.88,
+  "audio_agent_speech_start": 24.32,
+  "actual_tool_calls": [
+    {
+      "function": "get_exchange_rate",
+      "args": {
+        "from_currency": "USD",
+        "to_currency": "EUR",
+        "amount": 1000.0
+      },
+      "timestamp_start": 22.66,
+      "timestamp_end": 22.66
+    },
+    {
+      "function": "modify_autopay",
+      "args": {
+        "source_account": "savings",
+        "bill_type": "credit_card"
+      },
+      "timestamp_start": 22.66,
+      "timestamp_end": 22.66
+    },
+    {
+      "function": "get_card_benefits",
+      "args": {
+        "card_type": "premium"
+      },
+      "timestamp_start": 22.66,
+      "timestamp_end": 22.66
+    }
+  ],
+  "status": "completed"
+}

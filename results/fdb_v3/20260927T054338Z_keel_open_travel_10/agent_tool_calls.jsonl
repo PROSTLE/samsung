@@ -1,0 +1,1 @@
+{"room": "eval-9bb2cb5c", "call": {"function": "search_flights", "args": {"destination": "Miami", "date": "2026-10-07"}, "timestamp_start": 1790487983.8326092, "timestamp_end": 1790487984.1915138}}

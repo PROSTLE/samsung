@@ -1,0 +1,95 @@
+# Keel runtime configuration.
+#
+# Every tunable behaviour lives here with a comment saying where the value
+# came from. PROVISIONAL means no measurement of our own backs it yet; the
+# comment names the phase that will replace it. Citations are in SOURCES.md.
+
+[protocol]
+# Written into every trace header so a trace can be matched to the contract it
+# was produced under. Bump when keel/protocol/provisional.py changes shape.
+schema_version = "keel-provisional/0.1"
+
+[trace]
+# Record wall-clock ns (relative to session start) beside virtual time. Wall
+# time measures real kernel reaction; virtual time is what the harness scores.
+# false => byte-identical traces for golden-file comparison.
+record_wall_time = true
+
+[fence]
+# Quiet period before a state-changing call may be dispatched, counted from
+# the later of (end of the user's turn, last change to any slot it reads).
+# PROVISIONAL, replaced in phase 4 by a measurement on self-repair audio.
+# 600 ms is where Roberts & Francis (2013, JASA 133(6) EL471) found listener
+# ratings of a silent gap start to drop; waiting this long is affordable
+# because the fast path has already spoken an acknowledgment.
+quiet_ms = 600
+# Writes wait for the user's turn to close.
+require_end_of_turn = true
+# An open turn with no new input for this long counts as closed, so a lost
+# end-of-turn marker cannot block writes forever. ~1 s is Jefferson's (1988)
+# "standard maximum" silence in conversation, after which speakers act on it.
+stale_turn_ms = 1000
+# Read-only calls normally start speculatively (a wasted read costs only
+# time). Set true when every *executed* call is scored, as in FDB-v3, whose
+# strict pass rate fails a scenario on any unexpected call
+# (evaluate_pass_rate.py, check 1); config/fdb_v3.toml sets it.
+hold_reads = false
+
+[calls]
+# Keel-side timeout for a dispatched call; on expiry a read is retried and a
+# write becomes `unknown`. PROVISIONAL: the kit's mock latency distribution is
+# unknown (TODO(kit) K18); the only hard bound in the guide is 120 s/scenario.
+timeout_ms = 10000
+# Extra attempts for a read-only call that failed or timed out. Reads are safe
+# to repeat (RFC 9110 §9.2.1 reasoning), so one retry costs nothing but time.
+read_retries = 1
+
+[reconcile]
+# Re-send an in-doubt write only if the manifest declares the tool idempotent
+# (MCP idempotentHint: "calling the tool repeatedly with the same arguments
+# will have no additional effect"). Otherwise probe with a read-only tool.
+retry_if_idempotent = false
+
+[perception]
+# Proposals below this confidence are not written to a slot; Keel asks a
+# clarification instead. PROVISIONAL, calibrated in phase 4 on our own
+# labelled frames and clips.
+clarify_below = 0.6
+
+[floor]
+# false when something else owns the conversation (the LiveKit LLM in
+# config/fdb_v3.toml): the kernel then records its lines as trace notes and
+# emits no speak/clarify/final actions.
+speak = true
+# If nothing substantive has been said this long after the user's turn ends,
+# the fast path speaks a hold phrase. Original guide (v1.0.0) §1: fast path responds "within a
+# few hundred milliseconds"; 300 ms keeps well under the 600 ms drop-off above.
+ack_after_ms = 300
+# Speak a progress line after this much silence while calls are in flight
+# (Jefferson 1988: ~1 s "standard maximum" silence).
+progress_after_ms = 1000
+# Cap on progress lines per user turn; the guide penalises "excessive fillers".
+max_progress_per_turn = 2
+
+[phrases]
+# Spoken templates. They may only reference confirmed state, and none of them
+# claims an action completed unless the ledger holds a matching success.
+hold = "One moment."
+correction = "Okay, {value} instead."
+progress = "Still working on it."
+status_unsure = "I'm not sure yet whether that went through. Let me check."
+status_confirmed = "I've checked: it did go through."
+status_not_executed = "I've checked: it did not go through."
+status_cannot_confirm = "I can't confirm whether that went through."
+already_committed = "That was already submitted with the earlier details, so it needs a change rather than a second submission."
+clarify_low_confidence = "Just to check, is the {slot} {value}?"
+clarify_missing = "What {slot} should I use?"
+final_default = "All done."
+failed = "Sorry, that didn't work: {error}."
+
+[compiler]
+# A tool is classified read_only (and so may run speculatively) only if the
+# classifier is at least this sure; otherwise it is `unknown`, treated as
+# state_changing. Fixed at 0.8 BEFORE running the evaluation, so it was not
+# tuned on the test data; `python -m eval.compiler_eval` reports all thresholds.
+min_confidence = 0.8

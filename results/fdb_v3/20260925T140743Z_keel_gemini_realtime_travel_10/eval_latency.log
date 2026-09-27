@@ -1,0 +1,20 @@
+📁 Found 1 result files for provider 'keel_gemini_realtime'
+  🔍 travel_10... FR=1.52s  TC=2.34s  TK=Nones  filler=✗
+
+============================================================
+✅ Analyzed: 1, Skipped (existing): 0, Failed: 0
+
+📊 LATENCY REPORT — KEEL_GEMINI_REALTIME
+========================================================
+  Turn-Take Success: 1/1 (100.0%)
+  (Latency metrics below exclude interruptions)
+
+  First Response (N=1):
+    Mean: 1.52s ± 0.00s
+    Min / Median / Max: 1.52s / 1.52s / 1.52s
+  Tool Call (N=1):
+    Mean: 2.34s ± 0.00s
+    Min / Median / Max: 2.34s / 2.34s / 2.34s
+  Task Completion: No data
+
+  📄 Report saved: /home/harshit/keel/results/fdb_v3/20260925T140743Z_keel_gemini_realtime_travel_10/keel_gemini_realtime_latency_report.json

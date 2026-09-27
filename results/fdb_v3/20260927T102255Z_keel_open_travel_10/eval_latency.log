@@ -1,0 +1,20 @@
+📁 Found 1 result files for provider 'keel_open'
+  🔍 travel_10... FR=28.48s  TC=22.51s  TK=Nones  filler=✗
+
+============================================================
+✅ Analyzed: 1, Skipped (existing): 0, Failed: 0
+
+📊 LATENCY REPORT — KEEL_OPEN
+========================================================
+  Turn-Take Success: 1/1 (100.0%)
+  (Latency metrics below exclude interruptions)
+
+  First Response (N=1):
+    Mean: 28.48s ± 0.00s
+    Min / Median / Max: 28.48s / 28.48s / 28.48s
+  Tool Call (N=1):
+    Mean: 22.51s ± 0.00s
+    Min / Median / Max: 22.51s / 22.51s / 22.51s
+  Task Completion: No data
+
+  📄 Report saved: /home/harshit/keel/results/fdb_v3/20260927T102255Z_keel_open_travel_10/keel_open_latency_report.json

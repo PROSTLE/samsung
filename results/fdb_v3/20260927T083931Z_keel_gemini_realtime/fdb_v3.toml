@@ -1,0 +1,170 @@
+# Keel profile for Full-Duplex-Bench v3 (FDB-v3), layered on config/keel.toml:
+#
+#     load_config(None, "config/fdb_v3.toml")
+#
+# FDB-v3 is the Theme 05 scoring benchmark (Theme05 participant guide, §2 and §5).
+# "template" below means FDB-v3's own agents at the commit pinned in
+# scripts/reproduce_fdb_v3.sh: v3/cascaded_agent.py and v3/lk_agent_tool.py.
+# Values copied from a template say so. Everything else is Keel's own choice,
+# with the reason given.
+
+[fence]
+# FDB-v3 records every tool call the agent *executes* (the runner reads the
+# agent's tool log, run_tool_benchmark.py step 6), and the strict pass rate
+# fails a scenario on any unexpected call (evaluate_pass_rate.py, check 1).
+# A read that ran on a retracted value ("Paris ... no, Berlin") is therefore
+# an error here, not just wasted time, so reads wait behind the fence too.
+# The fence counts from the end of the user's turn, so it only delays a call
+# the LLM proposes sooner than quiet_ms after the user stopped.
+hold_reads = true
+# A turn made only of editing terms ("Oh, wait.") announces a self-repair that
+# has not been said yet (Levelt 1983: interruption, then hesitation and editing
+# terms, then "the repair proper"; keel/kernel/repair.py). Calls planned from it
+# wait for the next turn, as long as the template waits for a user who is not
+# finished: max_endpointing_delay=5.0 (cascaded_agent.py). A general list of
+# English hesitation and editing terms; "no" and "okay" are left out because
+# alone they are answers, not announcements.
+repair_wait_ms = 5000
+editing_terms = [
+  "uh", "um", "er", "erm", "hmm", "mm", "oh", "ah",
+  "wait", "hold on", "hang on", "one second", "one sec", "one moment", "just a moment", "just a second",
+  "sorry", "actually", "i mean", "let me think", "let me see", "scratch that",
+]
+# In a cascade, the words of a stretch of speech arrive from speech-to-text after
+# it ends, and the turn can be committed from the earlier stretches while the
+# last one is still being transcribed (fence rule 5; seen in our open-pipeline
+# travel_10 run: "My schedule just changed ... make it October 7th" ended at
+# 22.2 s, the turn was committed without it at 22.6 s, its words came at 28.5 s,
+# and the Oct 5 search had gone out at 23.2 s). Calls wait for those words, at most
+# this long after the stretch ended. The longest transcription measured on the
+# laptop CPU was 5.7 s (an 11.7 s stretch); a hosted STT is faster. The cap only
+# delays a call when a stretch produced no words at all. Off for realtime models.
+transcript_wait_ms = 8000
+
+[floor]
+# The LiveKit LLM speaks. Keel's own lines are played through LiveKit's
+# filler mechanism by keel/livekit/gate.py, and logged only when they play.
+speak = false
+
+[calls]
+# A retried read is a second executed call, which FDB-v3 scores as an
+# unexpected call. A failed read is reported to the LLM instead.
+read_retries = 0
+
+[livekit]
+# "cascaded": VAD + STT + LLM + TTS, as in the cascaded template.
+# "gpt_realtime": OpenAI Realtime, as in lk_agent_tool.py with LK_PROVIDER=gpt_realtime.
+# "gemini_realtime": Gemini Live, as in lk_agent_tool.py with LK_PROVIDER=gemini3_1.
+#   Needs only GOOGLE_API_KEY (Gemini API free tier).
+pipeline = "cascaded"
+# One Keel trace per room. Render them with `python -m keel.console`.
+trace_dir = "traces/livekit"
+# What Keel may say itself, through LiveKit's filler mechanism, while a tool
+# call is held or running (keel/livekit/gate.py `filler`): "acknowledge" is the
+# hold phrase, or the tool's acknowledgment once the call has gone out;
+# "progress" is spoken after floor.progress_after_ms of silence. None of them
+# claims completion.
+speak_purposes = ["acknowledge", "progress"]
+
+[livekit.fdb]
+# FDB-v3 checkout's v3/ directory. KEEL_FDB_DIR overrides it. Relative paths
+# are resolved from the repository root.
+fdb_dir = "third_party/Full-Duplex-Bench/v3"
+# File the tools and instructions are read from (not copied). Tools are parsed
+# from its @function_tool methods, and the instructions from its Agent subclass.
+template = "cascaded_agent.py"
+# Where the FDB-v3 runner reads tool calls and latency records. The runner
+# hard-codes these paths (run_tool_benchmark.py: Path("/tmp/agent_tool_calls.log")
+# and Path("/tmp/agent_heartbeat.log")), so they must not change.
+tool_log = "/tmp/agent_tool_calls.log"
+heartbeat_log = "/tmp/agent_heartbeat.log"
+# Mock API latency profile. Both templates default to "instant" and take
+# --latency to change it; per-API defaults in latency_injector.py still apply.
+latency_profile = "instant"
+# The latency injector draws jitter from Python's `random`. It is seeded once
+# per session, so a re-run reproduces the same delays (guide §6: "pin seeds").
+seed = 5
+# Appended to the template's instructions. General behaviour only, nothing
+# about specific benchmark items (guide §6: don't hardcode or memorize test items).
+extra_instructions = """
+The user speaks naturally, with fillers, pauses, false starts and self-corrections.
+When the user corrects something they said, act only on the corrected value and never on the value they took back.
+If a tool result says the call was superseded, do not repeat that call; answer the user's latest complete request instead.
+When a later step needs a value returned by an earlier tool (an ID, a price), use the returned value exactly.
+"""
+
+[livekit.cascaded]
+# Silero VAD settings from the template (build_cascaded_pipeline).
+vad_min_speech_s = 0.05
+vad_min_silence_s = 0.55
+# STT, LLM and TTS models from the template, so that differences from the
+# published cascaded baseline (paper: Whisper -> GPT-4o -> TTS) come from Keel,
+# not from a model swap.
+stt_model = "whisper-1"
+stt_language = "en"
+llm_model = "gpt-4o"
+# Template: unset. Keel: deterministic decoding plus a fixed seed (guide §6).
+llm_temperature = 0.0
+llm_seed = 5
+tts_model = "tts-1"
+tts_voice = "nova"
+# Keel: LiveKit's end-of-utterance model (livekit-plugins-turn-detector) in
+# place of VAD-only endpointing. It predicts from the transcript whether the
+# user has finished, so a mid-sentence pause or filler is less likely to end
+# the turn early. The paper names self-correction and pauses as the weakest
+# categories. Options: "english" | "multilingual" | "vad".
+turn_detector = "english"
+# Endpointing delays from the template (AgentSession min/max_endpointing_delay).
+min_endpointing_s = 0.5
+max_endpointing_s = 5.0
+# LiveKit 1.8 default. It runs the LLM early, but tools only execute once the
+# turn is confirmed (voice/agent_activity.py waits for authorization).
+preemptive_generation = true
+# Drop a held call when new transcribed speech arrives (keel/livekit/gate.py).
+# In this pipeline the STT transcript of a turn always arrives before the LLM
+# plans from it, so any later transcript is genuinely new speech.
+drop_on_new_speech = true
+
+[livekit.realtime]
+# From lk_agent_tool.py, provider "gpt_realtime".
+model = "gpt-realtime-1.5"
+voice = "coral"
+# The realtime model plans from audio, and its input transcript can arrive
+# after it has already called a tool, so a transcript is not evidence of new
+# speech here. Held calls are still dropped if LiveKit interrupts their reply.
+drop_on_new_speech = false
+
+[livekit.gemini]
+# From lk_agent_tool.py, provider "gemini3_1" (google.realtime.RealtimeModel).
+model = "gemini-3.1-flash-live-preview"
+voice = "Puck"
+# A realtime model too: its input transcript can arrive after its tool call.
+drop_on_new_speech = false
+
+[livekit.open]
+# Pipeline "open" (--pipeline open): the cascaded pipeline above (same VAD,
+# end-of-utterance model, endpointing, temperature and seed) with open-weight
+# models served on this machine by scripts/open_models.sh: no model key, no
+# account, no per-request limit. The substitute for the paid OpenAI models and
+# for Gemini's free tier. Each stage may name any provider in config/keel.toml's
+# [providers]; e.g. llm_provider = "groq", llm_model = "openai/gpt-oss-20b" moves
+# the LLM to Groq's free tier (GROQ_API_KEY) and leaves the rest local.
+#   STT  faster-whisper small.en (Whisper, MIT), CTranslate2 int8 on the CPU
+#   LLM  Qwen3-4B-Instruct-2507 (Apache-2.0), 4-bit, on the GPU through Ollama;
+#        instruct (no thinking phase), tool calling in its chat template
+#   TTS  Kokoro-82M v1.0 (Apache-2.0) through ONNX Runtime
+stt_provider = "speaches"
+stt_model = "Systran/faster-whisper-small.en"
+stt_language = "en"
+llm_provider = "ollama"
+llm_model = "qwen3:4b-instruct-2507-q4_K_M"
+tts_provider = "speaches"
+tts_model = "kokoro-v1.0"
+tts_voice = "af_heart"
+tts_format = "wav"
+# A cascade: the transcript of a turn arrives before the LLM plans from it.
+drop_on_new_speech = true
+# Per-request deadline for each stage, with one retry (LiveKit's default: 10 s and
+# three retries). In our first local travel_10 run a request to the 4B model timed
+# out at 10.0 s and was started again from scratch, 10 s lost.
+request_timeout_s = 60.0

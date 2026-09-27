@@ -1,0 +1,277 @@
+{
+  "pid": "69a9cf80f4d7668d5c815038",
+  "example_id": "finance_12",
+  "category": "finance_billing",
+  "title": "Amount Self-Correction",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-27T09:20:43.678899",
+  "inference_time_s": 96.64,
+  "room_name": "eval-5fec6401",
+  "stream_start_time": 1790500890.329073,
+  "input_transcript": "Well, I want to calculate how much hundred Euros would be in US dollars. Oh, wait, uh, I was looking at the wrong invoice. It's actually 150 Euros, not 100. So, 150 Euros to US dollars.",
+  "input_asr_chunks": [
+    {
+      "text": "Well,",
+      "timestamp": [
+        1.04,
+        1.36
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        1.52,
+        1.84
+      ]
+    },
+    {
+      "text": "want",
+      "timestamp": [
+        1.84,
+        2.08
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        2.08,
+        2.16
+      ]
+    },
+    {
+      "text": "calculate",
+      "timestamp": [
+        2.16,
+        2.72
+      ]
+    },
+    {
+      "text": "how",
+      "timestamp": [
+        2.72,
+        2.88
+      ]
+    },
+    {
+      "text": "much",
+      "timestamp": [
+        2.88,
+        3.2
+      ]
+    },
+    {
+      "text": "hundred",
+      "timestamp": [
+        3.2,
+        3.68
+      ]
+    },
+    {
+      "text": "Euros",
+      "timestamp": [
+        3.68,
+        4.24
+      ]
+    },
+    {
+      "text": "would",
+      "timestamp": [
+        4.24,
+        4.48
+      ]
+    },
+    {
+      "text": "be",
+      "timestamp": [
+        4.48,
+        4.64
+      ]
+    },
+    {
+      "text": "in",
+      "timestamp": [
+        4.64,
+        4.8
+      ]
+    },
+    {
+      "text": "US",
+      "timestamp": [
+        4.8,
+        5.2
+      ]
+    },
+    {
+      "text": "dollars.",
+      "timestamp": [
+        5.2,
+        6.16
+      ]
+    },
+    {
+      "text": "Oh,",
+      "timestamp": [
+        6.8,
+        6.96
+      ]
+    },
+    {
+      "text": "wait,",
+      "timestamp": [
+        7.04,
+        7.28
+      ]
+    },
+    {
+      "text": "uh,",
+      "timestamp": [
+        7.44,
+        7.6000000000000005
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        7.68,
+        7.84
+      ]
+    },
+    {
+      "text": "was",
+      "timestamp": [
+        7.84,
+        8.0
+      ]
+    },
+    {
+      "text": "looking",
+      "timestamp": [
+        8.0,
+        8.24
+      ]
+    },
+    {
+      "text": "at",
+      "timestamp": [
+        8.24,
+        8.4
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        8.4,
+        8.48
+      ]
+    },
+    {
+      "text": "wrong",
+      "timestamp": [
+        8.48,
+        8.72
+      ]
+    },
+    {
+      "text": "invoice.",
+      "timestamp": [
+        8.72,
+        9.200000000000001
+      ]
+    },
+    {
+      "text": "It's",
+      "timestamp": [
+        9.36,
+        9.52
+      ]
+    },
+    {
+      "text": "actually",
+      "timestamp": [
+        9.52,
+        9.76
+      ]
+    },
+    {
+      "text": "150",
+      "timestamp": [
+        9.76,
+        10.4
+      ]
+    },
+    {
+      "text": "Euros,",
+      "timestamp": [
+        10.4,
+        10.88
+      ]
+    },
+    {
+      "text": "not",
+      "timestamp": [
+        11.040000000000001,
+        11.28
+      ]
+    },
+    {
+      "text": "100.",
+      "timestamp": [
+        11.28,
+        11.68
+      ]
+    },
+    {
+      "text": "So,",
+      "timestamp": [
+        12.32,
+        12.4
+      ]
+    },
+    {
+      "text": "150",
+      "timestamp": [
+        12.56,
+        13.120000000000001
+      ]
+    },
+    {
+      "text": "Euros",
+      "timestamp": [
+        13.120000000000001,
+        13.44
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        13.44,
+        13.6
+      ]
+    },
+    {
+      "text": "US",
+      "timestamp": [
+        13.6,
+        13.92
+      ]
+    },
+    {
+      "text": "dollars.",
+      "timestamp": [
+        13.92,
+        14.8
+      ]
+    }
+  ],
+  "user_speech_end_rel": 14.8,
+  "latency": {
+    "input_duration_s": 46.14,
+    "output_duration_s": 46.14,
+    "first_speech_s": 46.14
+  },
+  "user_done_unix": 1790500905.129073,
+  "transcript": "",
+  "asr_chunks": [],
+  "actual_tool_calls": [],
+  "status": "completed"
+}

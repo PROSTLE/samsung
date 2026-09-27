@@ -1,0 +1,38 @@
+/home/harshit/keel/.venv-agent/lib/python3.10/site-packages/google/api_core/_python_version_support.py:254: FutureWarning: You are using a Python version (3.10.21) which Google will stop supporting in new releases of google.api_core once it reaches its end of life (2026-10-04). Please upgrade to the latest Python version, or at least Python 3.11, to continue receiving updates for google.api_core past that date.
+  warnings.warn(message, FutureWarning)
+/home/harshit/keel/.venv-agent/lib/python3.10/site-packages/google/api_core/_python_version_support.py:254: FutureWarning: You are using a Python version (3.10.21) which Google will stop supporting in new releases of google.cloud.speech_v1 once it reaches its end of life (2026-10-04). Please upgrade to the latest Python version, or at least Python 3.11, to continue receiving updates for google.cloud.speech_v1 past that date.
+  warnings.warn(message, FutureWarning)
+/home/harshit/keel/.venv-agent/lib/python3.10/site-packages/google/api_core/_python_version_support.py:254: FutureWarning: You are using a Python version (3.10.21) which Google will stop supporting in new releases of google.cloud.speech_v2 once it reaches its end of life (2026-10-04). Please upgrade to the latest Python version, or at least Python 3.11, to continue receiving updates for google.cloud.speech_v2 past that date.
+  warnings.warn(message, FutureWarning)
+/home/harshit/keel/.venv-agent/lib/python3.10/site-packages/google/api_core/_python_version_support.py:254: FutureWarning: You are using a Python version (3.10.21) which Google will stop supporting in new releases of google.cloud.texttospeech_v1 once it reaches its end of life (2026-10-04). Please upgrade to the latest Python version, or at least Python 3.11, to continue receiving updates for google.cloud.texttospeech_v1 past that date.
+  warnings.warn(message, FutureWarning)
+             Invoking the download-files command via your agent script is       
+             deprecated as of 1.5.10. Run it directly against the livekit.agents
+             module instead, e.g. `uv run -m livekit.agents download-files`.    
+    05:33:45.984 INFO     livekit.agents     Downloading files for              
+                                             livekit.plugins.google             
+    05:33:45.988 INFO     livekit.agents     Finished downloading files for     
+                                             livekit.plugins.google             
+    05:33:45.991 INFO     livekit.agents     Downloading files for              
+                                             livekit.plugins.openai             
+    05:33:45.995 INFO     livekit.agents     Finished downloading files for     
+                                             livekit.plugins.openai             
+    05:33:45.998 INFO     livekit.agents     Downloading files for              
+                                             livekit.plugins.silero             
+    05:33:46.002 INFO     livekit.agents     Finished downloading files for     
+                                             livekit.plugins.silero             
+    05:33:46.005 INFO     livekit.agents     Downloading files for              
+                                             livekit.plugins.turn_detector      
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+    05:33:50.344 WARNING  huggingf…ils._http Warning: You are sending           
+                                             unauthenticated requests to the    
+                                             HF Hub. Please set a HF_TOKEN to   
+                                             enable higher rate limits and      
+                                             faster downloads.                  
+    05:33:52.575 INFO     livekit.agents     Finished downloading files for     
+                                             livekit.plugins.turn_detector      
+    05:33:52.579 INFO     livekit.agents     Downloading files for              
+                                             livekit.plugins.turn_detector      
+    05:33:58.962 INFO     livekit.agents     Finished downloading files for     
+                                             livekit.plugins.turn_detector      

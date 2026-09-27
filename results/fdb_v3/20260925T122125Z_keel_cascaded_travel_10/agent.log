@@ -1,0 +1,39 @@
+{"message": "starting worker", "level": "INFO", "name": "livekit.agents", "version": "1.8.3", "rtc-version": "1.1.18", "pid": 609, "timestamp": "2026-09-25T12:21:36.399898+00:00"}
+{"message": "plugin registered", "level": "INFO", "name": "livekit.agents", "plugin": "livekit.plugins.openai", "version": "1.8.3", "pid": 609, "timestamp": "2026-09-25T12:21:36.400047+00:00"}
+{"message": "plugin registered", "level": "INFO", "name": "livekit.agents", "plugin": "livekit.plugins.silero", "version": "1.8.3", "pid": 609, "timestamp": "2026-09-25T12:21:36.400098+00:00"}
+{"message": "plugin registered", "level": "INFO", "name": "livekit.agents", "plugin": "livekit.plugins.turn_detector.base", "version": "1.8.3", "pid": 609, "timestamp": "2026-09-25T12:21:36.400139+00:00"}
+{"message": "plugin registered", "level": "INFO", "name": "livekit.agents", "plugin": "livekit.plugins.turn_detector.base", "version": "1.8.3", "pid": 609, "timestamp": "2026-09-25T12:21:36.400194+00:00"}
+{"message": "preloading plugins", "level": "INFO", "name": "livekit.agents", "packages": ["livekit.plugins.openai", "livekit.plugins.silero", "livekit.plugins.turn_detector", "livekit.plugins.turn_detector", "livekit.agents.ipc._preload", "livekit.agents.ipc._preload_freeze"], "pid": 609, "timestamp": "2026-09-25T12:21:36.400236+00:00"}
+{"message": "starting inference executor", "level": "INFO", "name": "livekit.agents", "pid": 609, "timestamp": "2026-09-25T12:21:36.403150+00:00"}
+{"message": "initializing process", "level": "INFO", "name": "livekit.agents", "pid": 652, "inference": true, "timestamp": "2026-09-25T12:21:39.528610+00:00"}
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+{"message": "process initialized", "level": "INFO", "name": "livekit.agents", "pid": 652, "inference": true, "elapsed_time": 5.67, "timestamp": "2026-09-25T12:21:45.203416+00:00"}
+{"message": "HTTP server listening on :8081", "level": "INFO", "name": "livekit.agents", "pid": 609, "timestamp": "2026-09-25T12:21:45.225879+00:00"}
+{"message": "initializing process", "level": "INFO", "name": "livekit.agents", "pid": 680, "timestamp": "2026-09-25T12:21:45.269279+00:00"}
+{"message": "initializing process", "level": "INFO", "name": "livekit.agents", "pid": 682, "timestamp": "2026-09-25T12:21:45.279591+00:00"}
+{"message": "initializing process", "level": "INFO", "name": "livekit.agents", "pid": 684, "timestamp": "2026-09-25T12:21:45.288348+00:00"}
+{"message": "initializing process", "level": "INFO", "name": "livekit.agents", "pid": 686, "timestamp": "2026-09-25T12:21:45.298604+00:00"}
+{"message": "process initialized", "level": "INFO", "name": "livekit.agents", "pid": 682, "elapsed_time": 0.6, "timestamp": "2026-09-25T12:21:45.874981+00:00"}
+{"message": "process initialized", "level": "INFO", "name": "livekit.agents", "pid": 680, "elapsed_time": 0.61, "timestamp": "2026-09-25T12:21:45.875903+00:00"}
+{"message": "process initialized", "level": "INFO", "name": "livekit.agents", "pid": 684, "elapsed_time": 0.59, "timestamp": "2026-09-25T12:21:45.877150+00:00"}
+{"message": "initializing process", "level": "INFO", "name": "livekit.agents", "pid": 700, "timestamp": "2026-09-25T12:21:45.896524+00:00"}
+{"message": "initializing process", "level": "INFO", "name": "livekit.agents", "pid": 702, "timestamp": "2026-09-25T12:21:45.904527+00:00"}
+{"message": "initializing process", "level": "INFO", "name": "livekit.agents", "pid": 704, "timestamp": "2026-09-25T12:21:45.914757+00:00"}
+{"message": "process initialized", "level": "INFO", "name": "livekit.agents", "pid": 686, "elapsed_time": 0.62, "timestamp": "2026-09-25T12:21:45.915142+00:00"}
+{"message": "initializing process", "level": "INFO", "name": "livekit.agents", "pid": 708, "timestamp": "2026-09-25T12:21:45.928732+00:00"}
+{"message": "process initialized", "level": "INFO", "name": "livekit.agents", "pid": 700, "elapsed_time": 0.51, "timestamp": "2026-09-25T12:21:46.404247+00:00"}
+{"message": "process initialized", "level": "INFO", "name": "livekit.agents", "pid": 702, "elapsed_time": 0.5, "timestamp": "2026-09-25T12:21:46.407428+00:00"}
+{"message": "initializing process", "level": "INFO", "name": "livekit.agents", "pid": 720, "timestamp": "2026-09-25T12:21:46.421778+00:00"}
+{"message": "initializing process", "level": "INFO", "name": "livekit.agents", "pid": 722, "timestamp": "2026-09-25T12:21:46.431313+00:00"}
+{"message": "process initialized", "level": "INFO", "name": "livekit.agents", "pid": 704, "elapsed_time": 0.56, "timestamp": "2026-09-25T12:21:46.472972+00:00"}
+{"message": "initializing process", "level": "INFO", "name": "livekit.agents", "pid": 726, "timestamp": "2026-09-25T12:21:46.488560+00:00"}
+{"message": "process initialized", "level": "INFO", "name": "livekit.agents", "pid": 708, "elapsed_time": 0.57, "timestamp": "2026-09-25T12:21:46.499393+00:00"}
+{"message": "initializing process", "level": "INFO", "name": "livekit.agents", "pid": 730, "timestamp": "2026-09-25T12:21:46.522193+00:00"}
+{"message": "process initialized", "level": "INFO", "name": "livekit.agents", "pid": 720, "elapsed_time": 0.49, "timestamp": "2026-09-25T12:21:46.911747+00:00"}
+{"message": "process initialized", "level": "INFO", "name": "livekit.agents", "pid": 722, "elapsed_time": 0.48, "timestamp": "2026-09-25T12:21:46.913133+00:00"}
+{"message": "process initialized", "level": "INFO", "name": "livekit.agents", "pid": 726, "elapsed_time": 0.57, "timestamp": "2026-09-25T12:21:47.055135+00:00"}
+{"message": "process initialized", "level": "INFO", "name": "livekit.agents", "pid": 730, "elapsed_time": 0.58, "timestamp": "2026-09-25T12:21:47.103387+00:00"}
+{"message": "registered worker", "level": "INFO", "name": "livekit.agents", "agent_name": "", "deployment": "", "id": "AW_pUVSNxGQCD3T", "url": "wss://samsung-fg5nmsab.livekit.cloud", "region": "India South", "protocol": 17, "pid": 609, "timestamp": "2026-09-25T12:21:47.299235+00:00"}
+{"message": "draining worker", "level": "INFO", "name": "livekit.agents", "id": "AW_pUVSNxGQCD3T", "timeout": 3600, "pid": 609, "timestamp": "2026-09-25T12:22:54.248052+00:00"}
+{"message": "shutting down worker", "level": "INFO", "name": "livekit.agents", "id": "AW_pUVSNxGQCD3T", "pid": 609, "timestamp": "2026-09-25T12:22:54.259430+00:00"}
+{"message": "process exiting", "level": "INFO", "name": "livekit.agents", "reason": "", "pid": 652, "inference": true, "timestamp": "2026-09-25T12:22:54.409262+00:00"}

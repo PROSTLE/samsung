@@ -1,0 +1,76 @@
+{
+  "benchmark_name": "In-the-Wild Speech & Multi-Step Tool Calling",
+  "evaluated_at": "2026-09-27T10:25:31.462316",
+  "total_scenarios": 1,
+  "overall_pass_rate": 0.0,
+  "passed": 0,
+  "failed": 1,
+  "failure_breakdown": {
+    "wrong_tools": 0,
+    "wrong_arguments": 1
+  },
+  "by_domain": {
+    "travel_identity": 0.0
+  },
+  "by_difficulty": {
+    "medium": 0.0
+  },
+  "by_num_tools": {
+    "1": 0.0
+  },
+  "by_disfluency_feature": {
+    "FILLER": 0.0,
+    "SELF_CORRECTION": 0.0
+  },
+  "by_state_rollback": {
+    "with_rollback": 0.0,
+    "without_rollback": null
+  },
+  "scenario_results": [
+    {
+      "scenario_id": "travel_10",
+      "domain": "travel_identity",
+      "difficulty": "medium",
+      "title": "Date Correction with Fillers",
+      "num_tools": 1,
+      "disfluency": [
+        "FILLER",
+        "SELF_CORRECTION"
+      ],
+      "state_rollback": true,
+      "passed": false,
+      "checks": {
+        "tool_selection": {
+          "passed": true,
+          "expected": [
+            "search_flights"
+          ],
+          "actual": [
+            "search_flights"
+          ],
+          "missing": [],
+          "unexpected": []
+        },
+        "argument_accuracy": {
+          "passed": false,
+          "details": [
+            {
+              "function": "search_flights",
+              "passed": false,
+              "expected_args": {
+                "destination": "Miami",
+                "date": "October 7"
+              },
+              "actual_args": {
+                "destination": "Miami",
+                "date": "2026-10-07"
+              },
+              "explanation": "Mismatch 'date': expected=October 7, got=2026-10-07"
+            }
+          ]
+        }
+      },
+      "failure_reason": "Wrong arguments for: ['search_flights']"
+    }
+  ]
+}

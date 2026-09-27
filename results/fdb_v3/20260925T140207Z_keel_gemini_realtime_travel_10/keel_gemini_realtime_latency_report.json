@@ -1,0 +1,40 @@
+{
+  "aggregate": {
+    "total_analyzed": 1,
+    "turn_taking": {
+      "total": 1,
+      "turn_taken": 0,
+      "no_response": 1,
+      "turn_take_rate": 0.0
+    },
+    "first_response_latency": {
+      "count": 0
+    },
+    "tool_call_latency": {
+      "count": 0
+    },
+    "task_completion_latency": {
+      "count": 0
+    },
+    "filler_stats": {
+      "with_filler": 0,
+      "without_filler": 0
+    },
+    "note": "All latency metrics computed on non-interrupted turn-taken samples only",
+    "provider": "keel_gemini_realtime"
+  },
+  "per_scenario": [
+    {
+      "user_speech_end_rel": 7.68,
+      "turn_take_success": false,
+      "first_response_latency_s": null,
+      "note_first_response": "No ASR chunks available",
+      "tool_call_latency_s": null,
+      "note_tool_call": "No tool calls recorded",
+      "task_completion_latency_s": null,
+      "note_task_completion": "No ASR chunks",
+      "example_id": "travel_10",
+      "provider": "keel_gemini_realtime"
+    }
+  ]
+}

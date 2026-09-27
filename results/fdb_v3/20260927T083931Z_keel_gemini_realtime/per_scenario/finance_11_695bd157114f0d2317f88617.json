@@ -1,0 +1,370 @@
+{
+  "pid": "695bd157114f0d2317f88617",
+  "example_id": "finance_11",
+  "category": "finance_billing",
+  "title": "Autopay with Filler Words",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-27T09:19:00.318539",
+  "inference_time_s": 51.39,
+  "room_name": "eval-53880418",
+  "stream_start_time": 1790500746.5581336,
+  "input_transcript": "Um, so I want to set my credit card payment to pull from like my savings account instead of where it is from now. Can you switch that over for me?",
+  "input_asr_chunks": [
+    {
+      "text": "Um,",
+      "timestamp": [
+        0.48,
+        0.72
+      ]
+    },
+    {
+      "text": "so",
+      "timestamp": [
+        0.96,
+        1.28
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        1.84,
+        2.08
+      ]
+    },
+    {
+      "text": "want",
+      "timestamp": [
+        2.08,
+        2.24
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        2.24,
+        2.48
+      ]
+    },
+    {
+      "text": "set",
+      "timestamp": [
+        2.8000000000000003,
+        3.12
+      ]
+    },
+    {
+      "text": "my",
+      "timestamp": [
+        3.12,
+        3.2800000000000002
+      ]
+    },
+    {
+      "text": "credit",
+      "timestamp": [
+        3.2800000000000002,
+        3.68
+      ]
+    },
+    {
+      "text": "card",
+      "timestamp": [
+        3.68,
+        3.92
+      ]
+    },
+    {
+      "text": "payment",
+      "timestamp": [
+        3.92,
+        4.24
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        4.24,
+        4.4
+      ]
+    },
+    {
+      "text": "pull",
+      "timestamp": [
+        4.4,
+        4.72
+      ]
+    },
+    {
+      "text": "from",
+      "timestamp": [
+        4.72,
+        4.88
+      ]
+    },
+    {
+      "text": "like",
+      "timestamp": [
+        4.96,
+        5.12
+      ]
+    },
+    {
+      "text": "my",
+      "timestamp": [
+        5.12,
+        5.36
+      ]
+    },
+    {
+      "text": "savings",
+      "timestamp": [
+        5.36,
+        5.84
+      ]
+    },
+    {
+      "text": "account",
+      "timestamp": [
+        5.84,
+        6.24
+      ]
+    },
+    {
+      "text": "instead",
+      "timestamp": [
+        6.4,
+        6.8
+      ]
+    },
+    {
+      "text": "of",
+      "timestamp": [
+        6.8,
+        6.96
+      ]
+    },
+    {
+      "text": "where",
+      "timestamp": [
+        6.96,
+        7.12
+      ]
+    },
+    {
+      "text": "it",
+      "timestamp": [
+        7.12,
+        7.28
+      ]
+    },
+    {
+      "text": "is",
+      "timestamp": [
+        7.28,
+        7.44
+      ]
+    },
+    {
+      "text": "from",
+      "timestamp": [
+        7.44,
+        7.68
+      ]
+    },
+    {
+      "text": "now.",
+      "timestamp": [
+        7.68,
+        7.92
+      ]
+    },
+    {
+      "text": "Can",
+      "timestamp": [
+        8.24,
+        8.4
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        8.4,
+        8.56
+      ]
+    },
+    {
+      "text": "switch",
+      "timestamp": [
+        8.56,
+        8.96
+      ]
+    },
+    {
+      "text": "that",
+      "timestamp": [
+        8.96,
+        9.28
+      ]
+    },
+    {
+      "text": "over",
+      "timestamp": [
+        9.28,
+        9.52
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        9.52,
+        9.84
+      ]
+    },
+    {
+      "text": "me?",
+      "timestamp": [
+        9.84,
+        10.16
+      ]
+    }
+  ],
+  "user_speech_end_rel": 10.16,
+  "latency": {
+    "input_duration_s": 41.04,
+    "output_duration_s": 41.04,
+    "first_speech_s": 14.45
+  },
+  "user_done_unix": 1790500756.7181337,
+  "search_latency_breakdown": {
+    "room": "eval-53880418",
+    "tool": "modify_autopay",
+    "reasoning": 0.606,
+    "execution": 0.0,
+    "synthesis": 0.719,
+    "total": 1.325,
+    "agent_start_at": 1790500760.1876981
+  },
+  "absolute_total_latency": 3.47,
+  "transcript": "Your credit card payment payments are now set to be pulled from your savings account.",
+  "asr_chunks": [
+    {
+      "text": "Your",
+      "timestamp": [
+        14.32,
+        14.56
+      ]
+    },
+    {
+      "text": "credit",
+      "timestamp": [
+        14.56,
+        14.96
+      ]
+    },
+    {
+      "text": "card",
+      "timestamp": [
+        14.96,
+        15.200000000000001
+      ]
+    },
+    {
+      "text": "payment",
+      "timestamp": [
+        15.200000000000001,
+        15.84
+      ]
+    },
+    {
+      "text": "payments",
+      "timestamp": [
+        21.44,
+        21.84
+      ]
+    },
+    {
+      "text": "are",
+      "timestamp": [
+        22.0,
+        22.16
+      ]
+    },
+    {
+      "text": "now",
+      "timestamp": [
+        22.16,
+        22.32
+      ]
+    },
+    {
+      "text": "set",
+      "timestamp": [
+        22.32,
+        22.56
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        22.56,
+        22.64
+      ]
+    },
+    {
+      "text": "be",
+      "timestamp": [
+        22.64,
+        22.72
+      ]
+    },
+    {
+      "text": "pulled",
+      "timestamp": [
+        22.72,
+        23.04
+      ]
+    },
+    {
+      "text": "from",
+      "timestamp": [
+        23.04,
+        23.2
+      ]
+    },
+    {
+      "text": "your",
+      "timestamp": [
+        23.2,
+        23.36
+      ]
+    },
+    {
+      "text": "savings",
+      "timestamp": [
+        28.16,
+        28.72
+      ]
+    },
+    {
+      "text": "account.",
+      "timestamp": [
+        28.72,
+        29.36
+      ]
+    }
+  ],
+  "perceived_total_latency": 4.16,
+  "audio_agent_speech_start": 14.32,
+  "actual_tool_calls": [
+    {
+      "function": "modify_autopay",
+      "args": {
+        "bill_type": "credit_card",
+        "source_account": "savings"
+      },
+      "timestamp_start": 12.91,
+      "timestamp_end": 12.91
+    }
+  ],
+  "status": "completed"
+}

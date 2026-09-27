@@ -1,0 +1,235 @@
+{
+  "pid": "5ff07b5ee7a1d23e719e421e",
+  "example_id": "travel_07",
+  "category": "travel_identity",
+  "title": "Driver License Update",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-27T10:00:39.491572",
+  "inference_time_s": 52.39,
+  "room_name": "eval-abcc7109",
+  "stream_start_time": 1790503242.648951,
+  "input_transcript": "Uh, um, the new driver's license number is Dash L dash five dash five dash five. Could you swap out the old one and put this new one in there?",
+  "input_asr_chunks": [
+    {
+      "text": "Uh,",
+      "timestamp": [
+        0.56,
+        1.04
+      ]
+    },
+    {
+      "text": "um,",
+      "timestamp": [
+        1.52,
+        1.76
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        2.32,
+        2.56
+      ]
+    },
+    {
+      "text": "new",
+      "timestamp": [
+        2.56,
+        2.8000000000000003
+      ]
+    },
+    {
+      "text": "driver's",
+      "timestamp": [
+        2.8000000000000003,
+        3.44
+      ]
+    },
+    {
+      "text": "license",
+      "timestamp": [
+        3.44,
+        4.08
+      ]
+    },
+    {
+      "text": "number",
+      "timestamp": [
+        4.08,
+        4.4
+      ]
+    },
+    {
+      "text": "is",
+      "timestamp": [
+        4.4,
+        4.72
+      ]
+    },
+    {
+      "text": "Dash",
+      "timestamp": [
+        4.72,
+        6.08
+      ]
+    },
+    {
+      "text": "L",
+      "timestamp": [
+        6.08,
+        6.4
+      ]
+    },
+    {
+      "text": "dash",
+      "timestamp": [
+        6.640000000000001,
+        7.12
+      ]
+    },
+    {
+      "text": "five",
+      "timestamp": [
+        7.12,
+        7.68
+      ]
+    },
+    {
+      "text": "dash",
+      "timestamp": [
+        8.0,
+        8.56
+      ]
+    },
+    {
+      "text": "five",
+      "timestamp": [
+        8.56,
+        9.120000000000001
+      ]
+    },
+    {
+      "text": "dash",
+      "timestamp": [
+        9.28,
+        9.76
+      ]
+    },
+    {
+      "text": "five.",
+      "timestamp": [
+        9.76,
+        10.4
+      ]
+    },
+    {
+      "text": "Could",
+      "timestamp": [
+        10.72,
+        11.040000000000001
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        11.040000000000001,
+        11.200000000000001
+      ]
+    },
+    {
+      "text": "swap",
+      "timestamp": [
+        11.200000000000001,
+        11.6
+      ]
+    },
+    {
+      "text": "out",
+      "timestamp": [
+        11.6,
+        11.76
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        11.76,
+        11.92
+      ]
+    },
+    {
+      "text": "old",
+      "timestamp": [
+        11.92,
+        12.16
+      ]
+    },
+    {
+      "text": "one",
+      "timestamp": [
+        12.16,
+        12.4
+      ]
+    },
+    {
+      "text": "and",
+      "timestamp": [
+        12.4,
+        12.56
+      ]
+    },
+    {
+      "text": "put",
+      "timestamp": [
+        12.56,
+        12.88
+      ]
+    },
+    {
+      "text": "this",
+      "timestamp": [
+        12.88,
+        13.200000000000001
+      ]
+    },
+    {
+      "text": "new",
+      "timestamp": [
+        13.200000000000001,
+        13.52
+      ]
+    },
+    {
+      "text": "one",
+      "timestamp": [
+        13.52,
+        13.84
+      ]
+    },
+    {
+      "text": "in",
+      "timestamp": [
+        13.84,
+        14.16
+      ]
+    },
+    {
+      "text": "there?",
+      "timestamp": [
+        14.16,
+        14.48
+      ]
+    }
+  ],
+  "user_speech_end_rel": 14.48,
+  "latency": {
+    "input_duration_s": 45.0,
+    "output_duration_s": 45.0,
+    "first_speech_s": 45.0
+  },
+  "user_done_unix": 1790503257.128951,
+  "transcript": "",
+  "asr_chunks": [],
+  "actual_tool_calls": [],
+  "status": "completed"
+}

@@ -1,0 +1,405 @@
+{
+  "pid": "695bd157114f0d2317f88617",
+  "example_id": "ecommerce_16",
+  "category": "ecommerce_support",
+  "title": "Search with Hesitation Before Item",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-27T08:58:23.331033",
+  "inference_time_s": 57.48,
+  "room_name": "eval-80b5910d",
+  "stream_start_time": 1790499508.933745,
+  "input_transcript": "Um, like, uh, I need a new let me think, what is it called? A coffee maker. Yeah, I'm looking for a new coffee maker. That's what it's called. Something under fifty dollars would be ideal.",
+  "input_asr_chunks": [
+    {
+      "text": "Um,",
+      "timestamp": [
+        0.4,
+        0.88
+      ]
+    },
+    {
+      "text": "like,",
+      "timestamp": [
+        1.2,
+        1.44
+      ]
+    },
+    {
+      "text": "uh,",
+      "timestamp": [
+        1.6,
+        1.84
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        2.24,
+        2.56
+      ]
+    },
+    {
+      "text": "need",
+      "timestamp": [
+        2.56,
+        2.8000000000000003
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        2.8000000000000003,
+        3.04
+      ]
+    },
+    {
+      "text": "new",
+      "timestamp": [
+        3.04,
+        3.36
+      ]
+    },
+    {
+      "text": "let",
+      "timestamp": [
+        4.5600000000000005,
+        4.8
+      ]
+    },
+    {
+      "text": "me",
+      "timestamp": [
+        4.8,
+        5.04
+      ]
+    },
+    {
+      "text": "think,",
+      "timestamp": [
+        5.04,
+        5.28
+      ]
+    },
+    {
+      "text": "what",
+      "timestamp": [
+        5.36,
+        5.6000000000000005
+      ]
+    },
+    {
+      "text": "is",
+      "timestamp": [
+        5.6000000000000005,
+        5.84
+      ]
+    },
+    {
+      "text": "it",
+      "timestamp": [
+        5.84,
+        6.16
+      ]
+    },
+    {
+      "text": "called?",
+      "timestamp": [
+        6.16,
+        6.4
+      ]
+    },
+    {
+      "text": "A",
+      "timestamp": [
+        6.96,
+        7.2
+      ]
+    },
+    {
+      "text": "coffee",
+      "timestamp": [
+        7.2,
+        7.68
+      ]
+    },
+    {
+      "text": "maker.",
+      "timestamp": [
+        7.68,
+        8.4
+      ]
+    },
+    {
+      "text": "Yeah,",
+      "timestamp": [
+        8.72,
+        8.88
+      ]
+    },
+    {
+      "text": "I'm",
+      "timestamp": [
+        9.52,
+        10.0
+      ]
+    },
+    {
+      "text": "looking",
+      "timestamp": [
+        10.0,
+        10.48
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        10.48,
+        10.72
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        10.72,
+        11.040000000000001
+      ]
+    },
+    {
+      "text": "new",
+      "timestamp": [
+        11.040000000000001,
+        11.36
+      ]
+    },
+    {
+      "text": "coffee",
+      "timestamp": [
+        11.36,
+        11.92
+      ]
+    },
+    {
+      "text": "maker.",
+      "timestamp": [
+        11.92,
+        12.4
+      ]
+    },
+    {
+      "text": "That's",
+      "timestamp": [
+        12.56,
+        12.88
+      ]
+    },
+    {
+      "text": "what",
+      "timestamp": [
+        12.88,
+        13.040000000000001
+      ]
+    },
+    {
+      "text": "it's",
+      "timestamp": [
+        13.040000000000001,
+        13.36
+      ]
+    },
+    {
+      "text": "called.",
+      "timestamp": [
+        13.36,
+        13.6
+      ]
+    },
+    {
+      "text": "Something",
+      "timestamp": [
+        13.92,
+        14.24
+      ]
+    },
+    {
+      "text": "under",
+      "timestamp": [
+        14.24,
+        14.48
+      ]
+    },
+    {
+      "text": "fifty",
+      "timestamp": [
+        14.48,
+        14.96
+      ]
+    },
+    {
+      "text": "dollars",
+      "timestamp": [
+        14.96,
+        15.280000000000001
+      ]
+    },
+    {
+      "text": "would",
+      "timestamp": [
+        15.280000000000001,
+        15.52
+      ]
+    },
+    {
+      "text": "be",
+      "timestamp": [
+        15.52,
+        15.76
+      ]
+    },
+    {
+      "text": "ideal.",
+      "timestamp": [
+        15.76,
+        16.56
+      ]
+    }
+  ],
+  "user_speech_end_rel": 16.56,
+  "latency": {
+    "input_duration_s": 47.46,
+    "output_duration_s": 47.46,
+    "first_speech_s": 20.1
+  },
+  "user_done_unix": 1790499525.4937449,
+  "search_latency_breakdown": {
+    "room": "eval-80b5910d",
+    "tool": "search_products",
+    "reasoning": 0.607,
+    "execution": 0.0,
+    "synthesis": 0.702,
+    "total": 1.308,
+    "agent_start_at": 1790499528.937363
+  },
+  "absolute_total_latency": 3.444,
+  "transcript": "I found a premium coffee maker for forty dollars. Would you like to see it?",
+  "asr_chunks": [
+    {
+      "text": "I",
+      "timestamp": [
+        19.92,
+        20.16
+      ]
+    },
+    {
+      "text": "found",
+      "timestamp": [
+        20.16,
+        20.400000000000002
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        20.400000000000002,
+        20.56
+      ]
+    },
+    {
+      "text": "premium",
+      "timestamp": [
+        20.56,
+        20.96
+      ]
+    },
+    {
+      "text": "coffee",
+      "timestamp": [
+        20.96,
+        21.44
+      ]
+    },
+    {
+      "text": "maker",
+      "timestamp": [
+        21.44,
+        21.76
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        21.76,
+        21.92
+      ]
+    },
+    {
+      "text": "forty",
+      "timestamp": [
+        21.92,
+        22.240000000000002
+      ]
+    },
+    {
+      "text": "dollars.",
+      "timestamp": [
+        22.240000000000002,
+        22.64
+      ]
+    },
+    {
+      "text": "Would",
+      "timestamp": [
+        22.8,
+        22.96
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        22.96,
+        23.12
+      ]
+    },
+    {
+      "text": "like",
+      "timestamp": [
+        23.12,
+        23.28
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        23.28,
+        23.44
+      ]
+    },
+    {
+      "text": "see",
+      "timestamp": [
+        23.44,
+        23.76
+      ]
+    },
+    {
+      "text": "it?",
+      "timestamp": [
+        23.76,
+        24.0
+      ]
+    }
+  ],
+  "perceived_total_latency": 3.36,
+  "audio_agent_speech_start": 19.92,
+  "actual_tool_calls": [
+    {
+      "function": "search_products",
+      "args": {
+        "max_price": 50.0,
+        "query": "coffee maker"
+      },
+      "timestamp_start": 19.3,
+      "timestamp_end": 19.3
+    }
+  ],
+  "status": "completed"
+}

@@ -1,0 +1,92 @@
+{
+  "benchmark_name": "In-the-Wild Speech & Multi-Step Tool Calling",
+  "evaluated_at": "2026-09-27T05:47:04.594604",
+  "total_scenarios": 1,
+  "turn_taking": {
+    "total": 1,
+    "turn_taken": 0,
+    "no_response": 1,
+    "turn_take_rate": 0.0
+  },
+  "by_metric": {
+    "tool_selection_acc": null,
+    "argument_acc": null,
+    "response_qual": null,
+    "tool_selection_acc_all": 1.0,
+    "argument_acc_all": 0.0,
+    "note": "*_all includes no-response samples (scored 0); default metrics are turn-taken only"
+  },
+  "latency": {
+    "total_samples": 0,
+    "interruption_count": 0,
+    "interruption_rate": null,
+    "avg_response_latency_s": null,
+    "std_response_latency_s": null,
+    "min_latency_s": null,
+    "max_latency_s": null,
+    "note": "avg/std/min/max exclude interruption samples; computed on turn-taken samples only"
+  },
+  "by_domain": {
+    "travel_identity": {
+      "tool_selection_acc": 1.0,
+      "argument_acc": 0.0
+    }
+  },
+  "by_difficulty": {
+    "medium": {
+      "tool_selection_acc": 1.0,
+      "argument_acc": 0.0
+    }
+  },
+  "by_domain_turn_taken": {},
+  "by_difficulty_turn_taken": {},
+  "scenario_results": [
+    {
+      "scenario_id": "travel_10",
+      "domain": "travel_identity",
+      "difficulty": "medium",
+      "title": "Date Correction with Fillers",
+      "turn_take_success": false,
+      "metrics": {
+        "tool_selection_acc": {
+          "score": 1.0,
+          "recall": 1.0,
+          "precision": 1.0,
+          "matched": 1,
+          "total_expected": 1,
+          "total_actual": 1,
+          "unmatched_expected": [],
+          "unexpected_calls": []
+        },
+        "argument_acc": {
+          "score": 0.0,
+          "details": [
+            {
+              "function": "search_flights",
+              "score": 0.0,
+              "expected_args": {
+                "destination": "Miami",
+                "date": "October 7"
+              },
+              "actual_args": {
+                "destination": "Miami",
+                "date": "2026-10-07"
+              },
+              "explanation": "Mismatch 'date': expected=October 7, got=2026-10-07"
+            }
+          ]
+        },
+        "response_qual": {
+          "score": null,
+          "explanation": "LLM judge disabled; response accuracy skipped."
+        }
+      },
+      "latency": {
+        "available": false,
+        "reason": "Missing timing fields"
+      },
+      "expected_calls_count": 1,
+      "actual_calls_count": 1
+    }
+  ]
+}

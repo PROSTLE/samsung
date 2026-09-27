@@ -1,0 +1,51 @@
+{
+  "aggregate": {
+    "total_analyzed": 1,
+    "turn_taking": {
+      "total": 1,
+      "turn_taken": 1,
+      "no_response": 0,
+      "turn_take_rate": 1.0
+    },
+    "first_response_latency": {
+      "count": 1,
+      "mean": 28.48,
+      "std": 0.0,
+      "min": 28.48,
+      "max": 28.48,
+      "median": 28.48
+    },
+    "tool_call_latency": {
+      "count": 1,
+      "mean": 22.51,
+      "std": 0.0,
+      "min": 22.51,
+      "max": 22.51,
+      "median": 22.51
+    },
+    "task_completion_latency": {
+      "count": 0
+    },
+    "filler_stats": {
+      "with_filler": 0,
+      "without_filler": 0
+    },
+    "note": "All latency metrics computed on non-interrupted turn-taken samples only",
+    "provider": "keel_open"
+  },
+  "per_scenario": [
+    {
+      "user_speech_end_rel": 7.68,
+      "turn_take_success": true,
+      "first_response_latency_s": 28.48,
+      "agent_first_word_time": 36.160000000000004,
+      "tool_call_latency_s": 22.51,
+      "first_tool_call_time": 30.19,
+      "first_tool_name": "search_flights",
+      "task_completion_latency_s": null,
+      "note_task_completion": "LLM error: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+      "example_id": "travel_10",
+      "provider": "keel_open"
+    }
+  ]
+}

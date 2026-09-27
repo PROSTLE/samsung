@@ -1,0 +1,562 @@
+{
+  "pid": "69a9cf80f4d7668d5c815038",
+  "example_id": "ecommerce_25",
+  "category": "ecommerce_support",
+  "title": "False Start into Complex Chain",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-27T09:07:28.960459",
+  "inference_time_s": 61.58,
+  "room_name": "eval-36ea48ab",
+  "stream_start_time": 1790500052.1226752,
+  "input_transcript": "You know, um, well, can um I return my never mind, uh, forget the return. Let me focus on what I actually need. Track order CAT for me, then search for cat food because I'm running low and add three of whatever you find to my card.",
+  "input_asr_chunks": [
+    {
+      "text": "You",
+      "timestamp": [
+        1.04,
+        1.28
+      ]
+    },
+    {
+      "text": "know,",
+      "timestamp": [
+        1.28,
+        1.52
+      ]
+    },
+    {
+      "text": "um,",
+      "timestamp": [
+        1.68,
+        1.92
+      ]
+    },
+    {
+      "text": "well,",
+      "timestamp": [
+        2.56,
+        2.88
+      ]
+    },
+    {
+      "text": "can",
+      "timestamp": [
+        3.84,
+        4.08
+      ]
+    },
+    {
+      "text": "um",
+      "timestamp": [
+        4.64,
+        4.96
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        5.6000000000000005,
+        5.92
+      ]
+    },
+    {
+      "text": "return",
+      "timestamp": [
+        5.92,
+        6.5600000000000005
+      ]
+    },
+    {
+      "text": "my",
+      "timestamp": [
+        6.640000000000001,
+        6.88
+      ]
+    },
+    {
+      "text": "never",
+      "timestamp": [
+        7.76,
+        7.92
+      ]
+    },
+    {
+      "text": "mind,",
+      "timestamp": [
+        8.08,
+        8.32
+      ]
+    },
+    {
+      "text": "uh,",
+      "timestamp": [
+        8.48,
+        8.64
+      ]
+    },
+    {
+      "text": "forget",
+      "timestamp": [
+        8.8,
+        9.200000000000001
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        9.200000000000001,
+        9.44
+      ]
+    },
+    {
+      "text": "return.",
+      "timestamp": [
+        9.44,
+        10.0
+      ]
+    },
+    {
+      "text": "Let",
+      "timestamp": [
+        10.64,
+        10.88
+      ]
+    },
+    {
+      "text": "me",
+      "timestamp": [
+        10.88,
+        11.040000000000001
+      ]
+    },
+    {
+      "text": "focus",
+      "timestamp": [
+        11.040000000000001,
+        11.44
+      ]
+    },
+    {
+      "text": "on",
+      "timestamp": [
+        11.44,
+        11.68
+      ]
+    },
+    {
+      "text": "what",
+      "timestamp": [
+        11.68,
+        12.0
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        12.0,
+        12.32
+      ]
+    },
+    {
+      "text": "actually",
+      "timestamp": [
+        12.32,
+        12.64
+      ]
+    },
+    {
+      "text": "need.",
+      "timestamp": [
+        12.64,
+        12.96
+      ]
+    },
+    {
+      "text": "Track",
+      "timestamp": [
+        13.6,
+        14.08
+      ]
+    },
+    {
+      "text": "order",
+      "timestamp": [
+        14.16,
+        14.56
+      ]
+    },
+    {
+      "text": "CAT",
+      "timestamp": [
+        14.72,
+        15.44
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        15.6,
+        15.92
+      ]
+    },
+    {
+      "text": "me,",
+      "timestamp": [
+        15.92,
+        16.080000000000002
+      ]
+    },
+    {
+      "text": "then",
+      "timestamp": [
+        16.72,
+        16.88
+      ]
+    },
+    {
+      "text": "search",
+      "timestamp": [
+        16.96,
+        17.2
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        17.2,
+        17.36
+      ]
+    },
+    {
+      "text": "cat",
+      "timestamp": [
+        17.36,
+        17.68
+      ]
+    },
+    {
+      "text": "food",
+      "timestamp": [
+        17.76,
+        18.080000000000002
+      ]
+    },
+    {
+      "text": "because",
+      "timestamp": [
+        18.080000000000002,
+        18.32
+      ]
+    },
+    {
+      "text": "I'm",
+      "timestamp": [
+        18.32,
+        18.56
+      ]
+    },
+    {
+      "text": "running",
+      "timestamp": [
+        18.56,
+        18.96
+      ]
+    },
+    {
+      "text": "low",
+      "timestamp": [
+        18.96,
+        19.44
+      ]
+    },
+    {
+      "text": "and",
+      "timestamp": [
+        20.080000000000002,
+        20.400000000000002
+      ]
+    },
+    {
+      "text": "add",
+      "timestamp": [
+        20.400000000000002,
+        20.56
+      ]
+    },
+    {
+      "text": "three",
+      "timestamp": [
+        20.72,
+        20.88
+      ]
+    },
+    {
+      "text": "of",
+      "timestamp": [
+        21.04,
+        21.2
+      ]
+    },
+    {
+      "text": "whatever",
+      "timestamp": [
+        21.2,
+        21.68
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        21.68,
+        22.0
+      ]
+    },
+    {
+      "text": "find",
+      "timestamp": [
+        22.0,
+        22.240000000000002
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        22.240000000000002,
+        22.400000000000002
+      ]
+    },
+    {
+      "text": "my",
+      "timestamp": [
+        22.400000000000002,
+        22.64
+      ]
+    },
+    {
+      "text": "card.",
+      "timestamp": [
+        22.64,
+        23.28
+      ]
+    }
+  ],
+  "user_speech_end_rel": 23.28,
+  "latency": {
+    "input_duration_s": 53.7,
+    "output_duration_s": 53.7,
+    "first_speech_s": 15.65
+  },
+  "user_done_unix": 1790500075.4026752,
+  "search_latency_breakdown": {
+    "room": "eval-36ea48ab",
+    "tool": "add_to_cart",
+    "reasoning": 13.432,
+    "execution": 0.0,
+    "synthesis": 0.596,
+    "total": 14.028,
+    "agent_start_at": 1790500081.1803646
+  },
+  "absolute_total_latency": 5.778,
+  "transcript": "Order CAT is out for delivery. I found cat food premium for $99.99 and added three to your cart. Your total is now $299.97.",
+  "asr_chunks": [
+    {
+      "text": "Order",
+      "timestamp": [
+        29.92,
+        30.400000000000002
+      ]
+    },
+    {
+      "text": "CAT",
+      "timestamp": [
+        30.400000000000002,
+        30.96
+      ]
+    },
+    {
+      "text": "is",
+      "timestamp": [
+        30.96,
+        31.04
+      ]
+    },
+    {
+      "text": "out",
+      "timestamp": [
+        31.04,
+        31.2
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        31.2,
+        31.36
+      ]
+    },
+    {
+      "text": "delivery.",
+      "timestamp": [
+        31.36,
+        31.76
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        32.0,
+        32.08
+      ]
+    },
+    {
+      "text": "found",
+      "timestamp": [
+        32.08,
+        32.32
+      ]
+    },
+    {
+      "text": "cat",
+      "timestamp": [
+        32.32,
+        32.64
+      ]
+    },
+    {
+      "text": "food",
+      "timestamp": [
+        32.64,
+        32.88
+      ]
+    },
+    {
+      "text": "premium",
+      "timestamp": [
+        32.88,
+        33.2
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        33.2,
+        33.36
+      ]
+    },
+    {
+      "text": "$99.99",
+      "timestamp": [
+        33.36,
+        34.32
+      ]
+    },
+    {
+      "text": "and",
+      "timestamp": [
+        34.32,
+        34.480000000000004
+      ]
+    },
+    {
+      "text": "added",
+      "timestamp": [
+        34.480000000000004,
+        34.72
+      ]
+    },
+    {
+      "text": "three",
+      "timestamp": [
+        34.72,
+        34.800000000000004
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        34.88,
+        35.04
+      ]
+    },
+    {
+      "text": "your",
+      "timestamp": [
+        35.04,
+        35.12
+      ]
+    },
+    {
+      "text": "cart.",
+      "timestamp": [
+        35.12,
+        35.36
+      ]
+    },
+    {
+      "text": "Your",
+      "timestamp": [
+        35.52,
+        35.68
+      ]
+    },
+    {
+      "text": "total",
+      "timestamp": [
+        35.68,
+        35.92
+      ]
+    },
+    {
+      "text": "is",
+      "timestamp": [
+        35.92,
+        36.0
+      ]
+    },
+    {
+      "text": "now",
+      "timestamp": [
+        36.0,
+        36.24
+      ]
+    },
+    {
+      "text": "$299.97.",
+      "timestamp": [
+        36.24,
+        37.84
+      ]
+    }
+  ],
+  "perceived_total_latency": 6.64,
+  "audio_agent_speech_start": 29.92,
+  "actual_tool_calls": [
+    {
+      "function": "track_order",
+      "args": {
+        "order_id": "CAT"
+      },
+      "timestamp_start": 26.37,
+      "timestamp_end": 26.37
+    },
+    {
+      "function": "search_products",
+      "args": {
+        "max_price": null,
+        "query": "cat food"
+      },
+      "timestamp_start": 26.37,
+      "timestamp_end": 26.37
+    },
+    {
+      "function": "add_to_cart",
+      "args": {
+        "quantity": 3,
+        "product_id": "PROD1"
+      },
+      "timestamp_start": 28.46,
+      "timestamp_end": 28.46
+    }
+  ],
+  "status": "completed"
+}

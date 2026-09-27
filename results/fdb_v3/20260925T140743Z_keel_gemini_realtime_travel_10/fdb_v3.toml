@@ -1,0 +1,119 @@
+# Keel profile for Full-Duplex-Bench v3 (FDB-v3), layered on config/keel.toml:
+#
+#     load_config(None, "config/fdb_v3.toml")
+#
+# FDB-v3 is the Theme 05 scoring benchmark (Theme05 participant guide, §2 and §5).
+# "template" below means FDB-v3's own agents at the commit pinned in
+# scripts/reproduce_fdb_v3.sh: v3/cascaded_agent.py and v3/lk_agent_tool.py.
+# Values copied from a template say so. Everything else is Keel's own choice,
+# with the reason given.
+
+[fence]
+# FDB-v3 records every tool call the agent *executes* (the runner reads the
+# agent's tool log, run_tool_benchmark.py step 6), and the strict pass rate
+# fails a scenario on any unexpected call (evaluate_pass_rate.py, check 1).
+# A read that ran on a retracted value ("Paris ... no, Berlin") is therefore
+# an error here, not just wasted time, so reads wait behind the fence too.
+# The fence counts from the end of the user's turn, so it only delays a call
+# the LLM proposes sooner than quiet_ms after the user stopped.
+hold_reads = true
+
+[floor]
+# The LiveKit LLM speaks. Keel's own lines are played through LiveKit's
+# filler mechanism by keel/livekit/gate.py, and logged only when they play.
+speak = false
+
+[calls]
+# A retried read is a second executed call, which FDB-v3 scores as an
+# unexpected call. A failed read is reported to the LLM instead.
+read_retries = 0
+
+[livekit]
+# "cascaded": VAD + STT + LLM + TTS, as in the cascaded template.
+# "gpt_realtime": OpenAI Realtime, as in lk_agent_tool.py with LK_PROVIDER=gpt_realtime.
+# "gemini_realtime": Gemini Live, as in lk_agent_tool.py with LK_PROVIDER=gemini3_1.
+#   Needs only GOOGLE_API_KEY (Gemini API free tier).
+pipeline = "cascaded"
+# One Keel trace per room. Render them with `python -m keel.console`.
+trace_dir = "traces/livekit"
+# What Keel may say itself, through LiveKit's filler mechanism, while a tool
+# call is held or running (keel/livekit/gate.py `filler`): "acknowledge" is the
+# hold phrase, or the tool's acknowledgment once the call has gone out;
+# "progress" is spoken after floor.progress_after_ms of silence. None of them
+# claims completion.
+speak_purposes = ["acknowledge", "progress"]
+
+[livekit.fdb]
+# FDB-v3 checkout's v3/ directory. KEEL_FDB_DIR overrides it. Relative paths
+# are resolved from the repository root.
+fdb_dir = "third_party/Full-Duplex-Bench/v3"
+# File the tools and instructions are read from (not copied). Tools are parsed
+# from its @function_tool methods, and the instructions from its Agent subclass.
+template = "cascaded_agent.py"
+# Where the FDB-v3 runner reads tool calls and latency records. The runner
+# hard-codes these paths (run_tool_benchmark.py: Path("/tmp/agent_tool_calls.log")
+# and Path("/tmp/agent_heartbeat.log")), so they must not change.
+tool_log = "/tmp/agent_tool_calls.log"
+heartbeat_log = "/tmp/agent_heartbeat.log"
+# Mock API latency profile. Both templates default to "instant" and take
+# --latency to change it; per-API defaults in latency_injector.py still apply.
+latency_profile = "instant"
+# The latency injector draws jitter from Python's `random`. It is seeded once
+# per session, so a re-run reproduces the same delays (guide §6: "pin seeds").
+seed = 5
+# Appended to the template's instructions. General behaviour only, nothing
+# about specific benchmark items (guide §6: don't hardcode or memorize test items).
+extra_instructions = """
+The user speaks naturally, with fillers, pauses, false starts and self-corrections.
+When the user corrects something they said, act only on the corrected value and never on the value they took back.
+If a tool result says the call was superseded, do not repeat that call; answer the user's latest complete request instead.
+When a later step needs a value returned by an earlier tool (an ID, a price), use the returned value exactly.
+"""
+
+[livekit.cascaded]
+# Silero VAD settings from the template (build_cascaded_pipeline).
+vad_min_speech_s = 0.05
+vad_min_silence_s = 0.55
+# STT, LLM and TTS models from the template, so that differences from the
+# published cascaded baseline (paper: Whisper -> GPT-4o -> TTS) come from Keel,
+# not from a model swap.
+stt_model = "whisper-1"
+stt_language = "en"
+llm_model = "gpt-4o"
+# Template: unset. Keel: deterministic decoding plus a fixed seed (guide §6).
+llm_temperature = 0.0
+llm_seed = 5
+tts_model = "tts-1"
+tts_voice = "nova"
+# Keel: LiveKit's end-of-utterance model (livekit-plugins-turn-detector) in
+# place of VAD-only endpointing. It predicts from the transcript whether the
+# user has finished, so a mid-sentence pause or filler is less likely to end
+# the turn early. The paper names self-correction and pauses as the weakest
+# categories. Options: "english" | "multilingual" | "vad".
+turn_detector = "english"
+# Endpointing delays from the template (AgentSession min/max_endpointing_delay).
+min_endpointing_s = 0.5
+max_endpointing_s = 5.0
+# LiveKit 1.8 default. It runs the LLM early, but tools only execute once the
+# turn is confirmed (voice/agent_activity.py waits for authorization).
+preemptive_generation = true
+# Drop a held call when new transcribed speech arrives (keel/livekit/gate.py).
+# In this pipeline the STT transcript of a turn always arrives before the LLM
+# plans from it, so any later transcript is genuinely new speech.
+drop_on_new_speech = true
+
+[livekit.realtime]
+# From lk_agent_tool.py, provider "gpt_realtime".
+model = "gpt-realtime-1.5"
+voice = "coral"
+# The realtime model plans from audio, and its input transcript can arrive
+# after it has already called a tool, so a transcript is not evidence of new
+# speech here. Held calls are still dropped if LiveKit interrupts their reply.
+drop_on_new_speech = false
+
+[livekit.gemini]
+# From lk_agent_tool.py, provider "gemini3_1" (google.realtime.RealtimeModel).
+model = "gemini-3.1-flash-live-preview"
+voice = "Puck"
+# A realtime model too: its input transcript can arrive after its tool call.
+drop_on_new_speech = false

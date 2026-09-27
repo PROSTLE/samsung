@@ -1,0 +1,107 @@
+{
+  "benchmark_name": "In-the-Wild Speech & Multi-Step Tool Calling",
+  "evaluated_at": "2026-09-26T20:48:05.219079",
+  "total_scenarios": 1,
+  "turn_taking": {
+    "total": 1,
+    "turn_taken": 1,
+    "no_response": 0,
+    "turn_take_rate": 1.0
+  },
+  "by_metric": {
+    "tool_selection_acc": 0.667,
+    "argument_acc": 0.0,
+    "response_qual": null,
+    "tool_selection_acc_all": 0.667,
+    "argument_acc_all": 0.0,
+    "note": "*_all includes no-response samples (scored 0); default metrics are turn-taken only"
+  },
+  "latency": {
+    "total_samples": 1,
+    "interruption_count": 0,
+    "interruption_rate": 0.0,
+    "avg_response_latency_s": 15.6,
+    "std_response_latency_s": null,
+    "min_latency_s": 15.6,
+    "max_latency_s": 15.6,
+    "note": "avg/std/min/max exclude interruption samples; computed on turn-taken samples only"
+  },
+  "by_domain": {
+    "travel_identity": {
+      "tool_selection_acc": 0.667,
+      "argument_acc": 0.0
+    }
+  },
+  "by_difficulty": {
+    "medium": {
+      "tool_selection_acc": 0.667,
+      "argument_acc": 0.0
+    }
+  },
+  "by_domain_turn_taken": {
+    "travel_identity": {
+      "tool_selection_acc": 0.667,
+      "argument_acc": 0.0
+    }
+  },
+  "by_difficulty_turn_taken": {
+    "medium": {
+      "tool_selection_acc": 0.667,
+      "argument_acc": 0.0
+    }
+  },
+  "scenario_results": [
+    {
+      "scenario_id": "travel_10",
+      "domain": "travel_identity",
+      "difficulty": "medium",
+      "title": "Date Correction with Fillers",
+      "turn_take_success": true,
+      "metrics": {
+        "tool_selection_acc": {
+          "score": 0.667,
+          "recall": 1.0,
+          "precision": 0.5,
+          "matched": 1,
+          "total_expected": 1,
+          "total_actual": 2,
+          "unmatched_expected": [],
+          "unexpected_calls": [
+            "search_flights"
+          ]
+        },
+        "argument_acc": {
+          "score": 0.0,
+          "details": [
+            {
+              "function": "search_flights",
+              "score": 0.0,
+              "expected_args": {
+                "destination": "Miami",
+                "date": "October 7"
+              },
+              "actual_args": {
+                "destination": "Miami",
+                "date": "2026-10-05"
+              },
+              "explanation": "Mismatch 'date': expected=October 7, got=2026-10-05"
+            }
+          ]
+        },
+        "response_qual": {
+          "score": null,
+          "explanation": "LLM judge disabled; response accuracy skipped."
+        }
+      },
+      "latency": {
+        "available": true,
+        "user_speech_end_rel": 7.68,
+        "audio_agent_speech_start": 23.28,
+        "agent_response_latency_s": 15.6,
+        "is_interruption": false
+      },
+      "expected_calls_count": 1,
+      "actual_calls_count": 2
+    }
+  ]
+}

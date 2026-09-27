@@ -1,0 +1,312 @@
+{
+  "pid": "5e3c1fbece3a7b000a6fd95a",
+  "example_id": "finance_21",
+  "category": "finance_billing",
+  "title": "Hesitant Multi-Task",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-27T09:28:42.166464",
+  "inference_time_s": 56.33,
+  "room_name": "eval-365dc8e6",
+  "stream_start_time": 1790501325.406869,
+  "input_transcript": "All right, so first, um, I want to know what the benefits are for the gold card because I'm comparing a few options. And then I also need to convert 500 US dollars to yen because I'm buying something from Japan.",
+  "input_asr_chunks": [
+    {
+      "text": "All",
+      "timestamp": [
+        0.8,
+        1.04
+      ]
+    },
+    {
+      "text": "right,",
+      "timestamp": [
+        1.04,
+        1.28
+      ]
+    },
+    {
+      "text": "so",
+      "timestamp": [
+        1.52,
+        1.84
+      ]
+    },
+    {
+      "text": "first,",
+      "timestamp": [
+        1.84,
+        2.16
+      ]
+    },
+    {
+      "text": "um,",
+      "timestamp": [
+        2.4,
+        2.56
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        2.72,
+        2.96
+      ]
+    },
+    {
+      "text": "want",
+      "timestamp": [
+        2.96,
+        3.12
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        3.12,
+        3.36
+      ]
+    },
+    {
+      "text": "know",
+      "timestamp": [
+        3.36,
+        3.6
+      ]
+    },
+    {
+      "text": "what",
+      "timestamp": [
+        3.6,
+        3.92
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        3.92,
+        4.16
+      ]
+    },
+    {
+      "text": "benefits",
+      "timestamp": [
+        4.48,
+        5.36
+      ]
+    },
+    {
+      "text": "are",
+      "timestamp": [
+        5.36,
+        5.6000000000000005
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        5.6000000000000005,
+        5.76
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        5.76,
+        5.92
+      ]
+    },
+    {
+      "text": "gold",
+      "timestamp": [
+        5.92,
+        6.24
+      ]
+    },
+    {
+      "text": "card",
+      "timestamp": [
+        6.24,
+        6.72
+      ]
+    },
+    {
+      "text": "because",
+      "timestamp": [
+        6.72,
+        6.96
+      ]
+    },
+    {
+      "text": "I'm",
+      "timestamp": [
+        6.96,
+        7.2
+      ]
+    },
+    {
+      "text": "comparing",
+      "timestamp": [
+        7.2,
+        7.76
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        7.76,
+        7.92
+      ]
+    },
+    {
+      "text": "few",
+      "timestamp": [
+        7.92,
+        8.24
+      ]
+    },
+    {
+      "text": "options.",
+      "timestamp": [
+        8.24,
+        9.200000000000001
+      ]
+    },
+    {
+      "text": "And",
+      "timestamp": [
+        9.52,
+        9.68
+      ]
+    },
+    {
+      "text": "then",
+      "timestamp": [
+        9.68,
+        9.92
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        9.92,
+        10.16
+      ]
+    },
+    {
+      "text": "also",
+      "timestamp": [
+        10.16,
+        10.4
+      ]
+    },
+    {
+      "text": "need",
+      "timestamp": [
+        10.4,
+        10.64
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        10.64,
+        10.8
+      ]
+    },
+    {
+      "text": "convert",
+      "timestamp": [
+        10.8,
+        11.44
+      ]
+    },
+    {
+      "text": "500",
+      "timestamp": [
+        11.76,
+        12.64
+      ]
+    },
+    {
+      "text": "US",
+      "timestamp": [
+        12.64,
+        13.120000000000001
+      ]
+    },
+    {
+      "text": "dollars",
+      "timestamp": [
+        13.120000000000001,
+        13.52
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        13.52,
+        13.84
+      ]
+    },
+    {
+      "text": "yen",
+      "timestamp": [
+        13.84,
+        14.4
+      ]
+    },
+    {
+      "text": "because",
+      "timestamp": [
+        14.4,
+        14.72
+      ]
+    },
+    {
+      "text": "I'm",
+      "timestamp": [
+        14.72,
+        15.040000000000001
+      ]
+    },
+    {
+      "text": "buying",
+      "timestamp": [
+        15.040000000000001,
+        15.6
+      ]
+    },
+    {
+      "text": "something",
+      "timestamp": [
+        15.6,
+        15.84
+      ]
+    },
+    {
+      "text": "from",
+      "timestamp": [
+        15.84,
+        16.16
+      ]
+    },
+    {
+      "text": "Japan.",
+      "timestamp": [
+        16.16,
+        16.96
+      ]
+    }
+  ],
+  "user_speech_end_rel": 16.96,
+  "latency": {
+    "input_duration_s": 48.9,
+    "output_duration_s": 48.9,
+    "first_speech_s": 48.9
+  },
+  "user_done_unix": 1790501342.366869,
+  "transcript": "",
+  "asr_chunks": [],
+  "actual_tool_calls": [],
+  "status": "completed"
+}

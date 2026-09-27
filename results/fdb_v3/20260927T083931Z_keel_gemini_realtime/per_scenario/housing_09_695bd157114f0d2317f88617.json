@@ -1,0 +1,490 @@
+{
+  "pid": "695bd157114f0d2317f88617",
+  "example_id": "housing_09",
+  "category": "housing_location",
+  "title": "City Self-Correction",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-27T09:38:56.941065",
+  "inference_time_s": 54.0,
+  "room_name": "eval-6fb62e13",
+  "stream_start_time": 1790501940.2434855,
+  "input_transcript": "Well well, uh, I'm interested in two-bedroom in Boston. Wait, actually, um, I changed my mind. Let's look in Chicago instead and keep the max price around two thousand dollars a month.",
+  "input_asr_chunks": [
+    {
+      "text": "Well",
+      "timestamp": [
+        0.56,
+        0.72
+      ]
+    },
+    {
+      "text": "well,",
+      "timestamp": [
+        1.68,
+        1.92
+      ]
+    },
+    {
+      "text": "uh,",
+      "timestamp": [
+        2.08,
+        2.24
+      ]
+    },
+    {
+      "text": "I'm",
+      "timestamp": [
+        2.4,
+        2.64
+      ]
+    },
+    {
+      "text": "interested",
+      "timestamp": [
+        2.64,
+        2.96
+      ]
+    },
+    {
+      "text": "in",
+      "timestamp": [
+        2.96,
+        3.04
+      ]
+    },
+    {
+      "text": "two-bedroom",
+      "timestamp": [
+        3.2,
+        3.84
+      ]
+    },
+    {
+      "text": "in",
+      "timestamp": [
+        4.0,
+        4.16
+      ]
+    },
+    {
+      "text": "Boston.",
+      "timestamp": [
+        4.16,
+        4.88
+      ]
+    },
+    {
+      "text": "Wait,",
+      "timestamp": [
+        5.2,
+        6.0
+      ]
+    },
+    {
+      "text": "actually,",
+      "timestamp": [
+        6.32,
+        6.5600000000000005
+      ]
+    },
+    {
+      "text": "um,",
+      "timestamp": [
+        7.12,
+        7.36
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        8.0,
+        8.24
+      ]
+    },
+    {
+      "text": "changed",
+      "timestamp": [
+        8.24,
+        8.64
+      ]
+    },
+    {
+      "text": "my",
+      "timestamp": [
+        8.64,
+        8.8
+      ]
+    },
+    {
+      "text": "mind.",
+      "timestamp": [
+        8.8,
+        9.120000000000001
+      ]
+    },
+    {
+      "text": "Let's",
+      "timestamp": [
+        9.44,
+        9.76
+      ]
+    },
+    {
+      "text": "look",
+      "timestamp": [
+        9.76,
+        9.92
+      ]
+    },
+    {
+      "text": "in",
+      "timestamp": [
+        9.92,
+        10.08
+      ]
+    },
+    {
+      "text": "Chicago",
+      "timestamp": [
+        10.08,
+        10.88
+      ]
+    },
+    {
+      "text": "instead",
+      "timestamp": [
+        10.88,
+        11.44
+      ]
+    },
+    {
+      "text": "and",
+      "timestamp": [
+        11.76,
+        11.92
+      ]
+    },
+    {
+      "text": "keep",
+      "timestamp": [
+        11.92,
+        12.16
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        12.16,
+        12.32
+      ]
+    },
+    {
+      "text": "max",
+      "timestamp": [
+        12.32,
+        12.64
+      ]
+    },
+    {
+      "text": "price",
+      "timestamp": [
+        12.64,
+        13.040000000000001
+      ]
+    },
+    {
+      "text": "around",
+      "timestamp": [
+        13.040000000000001,
+        13.36
+      ]
+    },
+    {
+      "text": "two",
+      "timestamp": [
+        13.36,
+        13.44
+      ]
+    },
+    {
+      "text": "thousand",
+      "timestamp": [
+        13.6,
+        14.08
+      ]
+    },
+    {
+      "text": "dollars",
+      "timestamp": [
+        14.08,
+        14.4
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        14.4,
+        14.72
+      ]
+    },
+    {
+      "text": "month.",
+      "timestamp": [
+        14.72,
+        15.280000000000001
+      ]
+    }
+  ],
+  "user_speech_end_rel": 15.280000000000001,
+  "latency": {
+    "input_duration_s": 46.38,
+    "output_duration_s": 46.38,
+    "first_speech_s": 20.25
+  },
+  "user_done_unix": 1790501955.5234854,
+  "search_latency_breakdown": {
+    "room": "eval-6fb62e13",
+    "tool": "search_apartments",
+    "reasoning": 0.61,
+    "execution": 0.422,
+    "synthesis": 0.625,
+    "total": 1.656,
+    "agent_start_at": 1790501959.4073396
+  },
+  "absolute_total_latency": 3.884,
+  "transcript": "I found one apartment that matches your criteria: a two-bedroom in Chicago for $1,900 a month. Let me know if you'd like more details or want to look for something else.",
+  "asr_chunks": [
+    {
+      "text": "I",
+      "timestamp": [
+        20.16,
+        20.32
+      ]
+    },
+    {
+      "text": "found",
+      "timestamp": [
+        20.48,
+        20.8
+      ]
+    },
+    {
+      "text": "one",
+      "timestamp": [
+        20.8,
+        21.04
+      ]
+    },
+    {
+      "text": "apartment",
+      "timestamp": [
+        21.04,
+        21.52
+      ]
+    },
+    {
+      "text": "that",
+      "timestamp": [
+        21.52,
+        21.68
+      ]
+    },
+    {
+      "text": "matches",
+      "timestamp": [
+        21.68,
+        22.0
+      ]
+    },
+    {
+      "text": "your",
+      "timestamp": [
+        22.0,
+        22.16
+      ]
+    },
+    {
+      "text": "criteria:",
+      "timestamp": [
+        22.16,
+        22.72
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        22.96,
+        23.12
+      ]
+    },
+    {
+      "text": "two-bedroom",
+      "timestamp": [
+        23.12,
+        23.76
+      ]
+    },
+    {
+      "text": "in",
+      "timestamp": [
+        23.76,
+        23.92
+      ]
+    },
+    {
+      "text": "Chicago",
+      "timestamp": [
+        23.92,
+        24.400000000000002
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        24.400000000000002,
+        24.560000000000002
+      ]
+    },
+    {
+      "text": "$1,900",
+      "timestamp": [
+        24.560000000000002,
+        25.36
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        25.36,
+        25.44
+      ]
+    },
+    {
+      "text": "month.",
+      "timestamp": [
+        25.44,
+        25.68
+      ]
+    },
+    {
+      "text": "Let",
+      "timestamp": [
+        26.0,
+        26.16
+      ]
+    },
+    {
+      "text": "me",
+      "timestamp": [
+        26.16,
+        26.240000000000002
+      ]
+    },
+    {
+      "text": "know",
+      "timestamp": [
+        26.240000000000002,
+        26.400000000000002
+      ]
+    },
+    {
+      "text": "if",
+      "timestamp": [
+        26.400000000000002,
+        26.48
+      ]
+    },
+    {
+      "text": "you'd",
+      "timestamp": [
+        26.48,
+        26.72
+      ]
+    },
+    {
+      "text": "like",
+      "timestamp": [
+        26.72,
+        26.88
+      ]
+    },
+    {
+      "text": "more",
+      "timestamp": [
+        26.88,
+        27.04
+      ]
+    },
+    {
+      "text": "details",
+      "timestamp": [
+        27.04,
+        27.44
+      ]
+    },
+    {
+      "text": "or",
+      "timestamp": [
+        27.44,
+        27.6
+      ]
+    },
+    {
+      "text": "want",
+      "timestamp": [
+        27.6,
+        27.84
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        27.84,
+        27.92
+      ]
+    },
+    {
+      "text": "look",
+      "timestamp": [
+        27.92,
+        28.080000000000002
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        28.080000000000002,
+        28.400000000000002
+      ]
+    },
+    {
+      "text": "something",
+      "timestamp": [
+        28.400000000000002,
+        28.64
+      ]
+    },
+    {
+      "text": "else.",
+      "timestamp": [
+        28.64,
+        29.12
+      ]
+    }
+  ],
+  "perceived_total_latency": 4.88,
+  "audio_agent_speech_start": 20.16,
+  "actual_tool_calls": [
+    {
+      "function": "search_apartments",
+      "args": {
+        "bedrooms": 2,
+        "max_price": 2000.0,
+        "city": "Chicago"
+      },
+      "timestamp_start": 18.12,
+      "timestamp_end": 18.54
+    }
+  ],
+  "status": "completed"
+}

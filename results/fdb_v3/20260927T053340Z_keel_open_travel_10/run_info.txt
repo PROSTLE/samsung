@@ -1,0 +1,12 @@
+run_id: 20260927T053340Z_keel_open_travel_10
+command: scripts/reproduce_fdb_v3.sh --pipeline open --latency instant --judge none --example travel_10
+provider_label: keel_open
+judge: none (FDB-v3 rule-based scoring: exact-match arguments, no response-quality score)
+keel_commit: 8c6ef4c0bb669ed2137ed96eb3358c0da3975d38 (uncommitted changes)
+fdb_v3_commit: 3e799c45a045256f47d5f1c9cda90157e2d2ec9e
+profile: /home/harshit/keel/config/fdb_v3.toml
+seeds: seed = 5;llm_seed = 5
+python: Python 3.10.21
+os: Linux VICTUS 6.6.87.2-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Thu Jun  5 18:30:46 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+gpu: NVIDIA GeForce RTX 3050 Laptop GPU, 610.88
+open_models: stt speaches/Systran/faster-whisper-small.en; llm ollama/qwen3:4b-instruct-2507-q4_K_M; tts speaches/kokoro-v1.0 voice af_heart; ollama digest 0edcdef34593

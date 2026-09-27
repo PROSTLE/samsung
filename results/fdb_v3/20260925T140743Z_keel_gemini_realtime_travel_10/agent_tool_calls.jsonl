@@ -1,0 +1,2 @@
+{"room": "eval-318ad861", "call": {"function": "search_flights", "args": {"destination": "Miami", "date": "2026-10-05"}, "timestamp_start": 1790345335.675878, "timestamp_end": 1790345336.0453625}}
+{"room": "eval-318ad861", "call": {"function": "search_flights", "args": {"destination": "Miami", "date": "2026-10-07"}, "timestamp_start": 1790345345.706915, "timestamp_end": 1790345346.5078096}}

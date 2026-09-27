@@ -1,0 +1,36 @@
+📖 Loading benchmark data from benchmark_data_v2.json...
+📁 Scanning fdb_v3_data_released for provider 'keel_gemini_realtime'...
+🔍 Found 1 valid result files matching benchmark scenarios.
+
+📊 PASS RATE REPORT — KEEL_GEMINI_REALTIME
+========================================================
+  Total Scenarios : 1
+  ✅ Passed       : 0
+  ❌ Failed       : 1
+  📈 Pass Rate    : 0.0%
+
+  Failure Breakdown:
+    Wrong Tools     : 0
+    Wrong Arguments : 1
+
+  By Domain:
+    travel_identity: 0.0%
+
+  By Difficulty:
+    medium: 0.0%
+
+  By Num Tool Calls:
+    1 tools: 0.0%
+
+  By Disfluency Feature:
+    FILLER: 0.0%
+    SELF_CORRECTION: 0.0%
+
+  State Rollback:
+    With rollback:    0.0%
+Traceback (most recent call last):
+  File "/home/harshit/keel/third_party/Full-Duplex-Bench/v3/evaluate_pass_rate.py", line 585, in <module>
+    main()
+  File "/home/harshit/keel/third_party/Full-Duplex-Bench/v3/evaluate_pass_rate.py", line 579, in main
+    print(f"    Without rollback: {rb['without_rollback']:.1%}")
+TypeError: unsupported format string passed to NoneType.__format__

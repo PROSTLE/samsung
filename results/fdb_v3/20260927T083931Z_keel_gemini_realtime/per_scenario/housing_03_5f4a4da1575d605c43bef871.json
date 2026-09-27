@@ -1,0 +1,475 @@
+{
+  "pid": "5f4a4da1575d605c43bef871",
+  "example_id": "housing_03",
+  "category": "housing_location",
+  "title": "Filter Update with Fillers",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-27T09:33:19.021309",
+  "inference_time_s": 56.27,
+  "room_name": "eval-68bf77ab",
+  "stream_start_time": 1790501602.339678,
+  "input_transcript": "So, while, like, um, um, I want to update my search filter. So, the max price is like eighteen hundred dollars a month. Everything I've been seeing is way over budget.",
+  "input_asr_chunks": [
+    {
+      "text": "So,",
+      "timestamp": [
+        2.88,
+        3.04
+      ]
+    },
+    {
+      "text": "while,",
+      "timestamp": [
+        3.2,
+        3.84
+      ]
+    },
+    {
+      "text": "like,",
+      "timestamp": [
+        4.16,
+        4.4
+      ]
+    },
+    {
+      "text": "um,",
+      "timestamp": [
+        4.88,
+        5.2
+      ]
+    },
+    {
+      "text": "um,",
+      "timestamp": [
+        6.48,
+        6.8
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        6.96,
+        7.28
+      ]
+    },
+    {
+      "text": "want",
+      "timestamp": [
+        7.28,
+        7.6000000000000005
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        7.6000000000000005,
+        7.76
+      ]
+    },
+    {
+      "text": "update",
+      "timestamp": [
+        7.76,
+        8.24
+      ]
+    },
+    {
+      "text": "my",
+      "timestamp": [
+        8.24,
+        8.48
+      ]
+    },
+    {
+      "text": "search",
+      "timestamp": [
+        8.48,
+        8.88
+      ]
+    },
+    {
+      "text": "filter.",
+      "timestamp": [
+        8.88,
+        9.52
+      ]
+    },
+    {
+      "text": "So,",
+      "timestamp": [
+        9.84,
+        10.0
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        10.08,
+        10.24
+      ]
+    },
+    {
+      "text": "max",
+      "timestamp": [
+        10.24,
+        10.72
+      ]
+    },
+    {
+      "text": "price",
+      "timestamp": [
+        10.72,
+        11.200000000000001
+      ]
+    },
+    {
+      "text": "is",
+      "timestamp": [
+        11.200000000000001,
+        11.44
+      ]
+    },
+    {
+      "text": "like",
+      "timestamp": [
+        11.44,
+        11.68
+      ]
+    },
+    {
+      "text": "eighteen",
+      "timestamp": [
+        11.92,
+        12.48
+      ]
+    },
+    {
+      "text": "hundred",
+      "timestamp": [
+        12.64,
+        12.96
+      ]
+    },
+    {
+      "text": "dollars",
+      "timestamp": [
+        12.96,
+        13.280000000000001
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        13.280000000000001,
+        13.52
+      ]
+    },
+    {
+      "text": "month.",
+      "timestamp": [
+        13.52,
+        14.16
+      ]
+    },
+    {
+      "text": "Everything",
+      "timestamp": [
+        14.48,
+        14.96
+      ]
+    },
+    {
+      "text": "I've",
+      "timestamp": [
+        15.120000000000001,
+        15.44
+      ]
+    },
+    {
+      "text": "been",
+      "timestamp": [
+        15.44,
+        15.76
+      ]
+    },
+    {
+      "text": "seeing",
+      "timestamp": [
+        15.76,
+        16.080000000000002
+      ]
+    },
+    {
+      "text": "is",
+      "timestamp": [
+        16.080000000000002,
+        16.4
+      ]
+    },
+    {
+      "text": "way",
+      "timestamp": [
+        16.4,
+        16.64
+      ]
+    },
+    {
+      "text": "over",
+      "timestamp": [
+        16.64,
+        16.88
+      ]
+    },
+    {
+      "text": "budget.",
+      "timestamp": [
+        16.88,
+        17.68
+      ]
+    }
+  ],
+  "user_speech_end_rel": 17.68,
+  "latency": {
+    "input_duration_s": 48.416,
+    "output_duration_s": 48.416,
+    "first_speech_s": 13.85
+  },
+  "user_done_unix": 1790501620.019678,
+  "search_latency_breakdown": {
+    "room": "eval-68bf77ab",
+    "tool": "update_search_filter",
+    "reasoning": 0.606,
+    "execution": 0.105,
+    "synthesis": 0.712,
+    "total": 1.424,
+    "agent_start_at": 1790501623.5264878
+  },
+  "absolute_total_latency": 3.507,
+  "transcript": "No problem. I've updated your search filter. The maximum price is now $1,800 per month. Hopefully, that helps narrow things down. Is there anything else I can help you with?",
+  "asr_chunks": [
+    {
+      "text": "No",
+      "timestamp": [
+        13.92,
+        14.16
+      ]
+    },
+    {
+      "text": "problem.",
+      "timestamp": [
+        14.16,
+        14.48
+      ]
+    },
+    {
+      "text": "I've",
+      "timestamp": [
+        14.64,
+        14.8
+      ]
+    },
+    {
+      "text": "updated",
+      "timestamp": [
+        14.8,
+        15.200000000000001
+      ]
+    },
+    {
+      "text": "your",
+      "timestamp": [
+        15.200000000000001,
+        15.36
+      ]
+    },
+    {
+      "text": "search",
+      "timestamp": [
+        15.36,
+        15.68
+      ]
+    },
+    {
+      "text": "filter.",
+      "timestamp": [
+        15.68,
+        16.080000000000002
+      ]
+    },
+    {
+      "text": "The",
+      "timestamp": [
+        16.240000000000002,
+        16.4
+      ]
+    },
+    {
+      "text": "maximum",
+      "timestamp": [
+        16.4,
+        16.88
+      ]
+    },
+    {
+      "text": "price",
+      "timestamp": [
+        16.88,
+        17.2
+      ]
+    },
+    {
+      "text": "is",
+      "timestamp": [
+        17.2,
+        17.36
+      ]
+    },
+    {
+      "text": "now",
+      "timestamp": [
+        17.36,
+        17.52
+      ]
+    },
+    {
+      "text": "$1,800",
+      "timestamp": [
+        17.52,
+        18.32
+      ]
+    },
+    {
+      "text": "per",
+      "timestamp": [
+        18.56,
+        18.72
+      ]
+    },
+    {
+      "text": "month.",
+      "timestamp": [
+        18.72,
+        18.96
+      ]
+    },
+    {
+      "text": "Hopefully,",
+      "timestamp": [
+        19.28,
+        19.6
+      ]
+    },
+    {
+      "text": "that",
+      "timestamp": [
+        19.68,
+        19.84
+      ]
+    },
+    {
+      "text": "helps",
+      "timestamp": [
+        19.84,
+        20.080000000000002
+      ]
+    },
+    {
+      "text": "narrow",
+      "timestamp": [
+        20.080000000000002,
+        20.48
+      ]
+    },
+    {
+      "text": "things",
+      "timestamp": [
+        20.48,
+        20.64
+      ]
+    },
+    {
+      "text": "down.",
+      "timestamp": [
+        20.64,
+        20.88
+      ]
+    },
+    {
+      "text": "Is",
+      "timestamp": [
+        21.2,
+        21.36
+      ]
+    },
+    {
+      "text": "there",
+      "timestamp": [
+        21.36,
+        21.52
+      ]
+    },
+    {
+      "text": "anything",
+      "timestamp": [
+        21.52,
+        21.84
+      ]
+    },
+    {
+      "text": "else",
+      "timestamp": [
+        21.84,
+        22.080000000000002
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        22.080000000000002,
+        22.16
+      ]
+    },
+    {
+      "text": "can",
+      "timestamp": [
+        22.16,
+        22.32
+      ]
+    },
+    {
+      "text": "help",
+      "timestamp": [
+        22.32,
+        22.56
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        22.56,
+        22.8
+      ]
+    },
+    {
+      "text": "with?",
+      "timestamp": [
+        22.8,
+        23.12
+      ]
+    }
+  ],
+  "perceived_total_latency": -3.76,
+  "audio_agent_speech_start": 13.92,
+  "actual_tool_calls": [
+    {
+      "function": "update_search_filter",
+      "args": {
+        "value": "1800",
+        "filter_name": "max_price"
+      },
+      "timestamp_start": 20.37,
+      "timestamp_end": 20.47
+    }
+  ],
+  "status": "completed"
+}

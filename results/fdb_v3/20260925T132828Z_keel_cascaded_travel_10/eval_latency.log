@@ -1,0 +1,17 @@
+📁 Found 1 result files for provider 'keel_cascaded'
+  🔍 travel_10... FR=Nones  TC=Nones  TK=Nones  filler=✗
+
+============================================================
+✅ Analyzed: 1, Skipped (existing): 0, Failed: 0
+
+📊 LATENCY REPORT — KEEL_CASCADED
+========================================================
+  Turn-Take Success: 0/1 (0.0%)
+  No Response (silent): 1
+  (Latency metrics below exclude interruptions)
+
+  First Response: No data
+  Tool Call: No data
+  Task Completion: No data
+
+  📄 Report saved: /home/harshit/keel/results/fdb_v3/20260925T132828Z_keel_cascaded_travel_10/keel_cascaded_latency_report.json

@@ -1,0 +1,26 @@
+             Invoking the download-files command via your agent script is       
+             deprecated as of 1.5.10. Run it directly against the livekit.agents
+             module instead, e.g. `uv run -m livekit.agents download-files`.    
+    13:28:30.782 INFO     livekit.agents     Downloading files for              
+                                             livekit.plugins.openai             
+    13:28:30.784 INFO     livekit.agents     Finished downloading files for     
+                                             livekit.plugins.openai             
+    13:28:30.786 INFO     livekit.agents     Downloading files for              
+                                             livekit.plugins.silero             
+    13:28:30.788 INFO     livekit.agents     Finished downloading files for     
+                                             livekit.plugins.silero             
+    13:28:30.790 INFO     livekit.agents     Downloading files for              
+                                             livekit.plugins.turn_detector      
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+    13:28:32.734 WARNING  huggingf…ils._http Warning: You are sending           
+                                             unauthenticated requests to the    
+                                             HF Hub. Please set a HF_TOKEN to   
+                                             enable higher rate limits and      
+                                             faster downloads.                  
+    13:28:34.323 INFO     livekit.agents     Finished downloading files for     
+                                             livekit.plugins.turn_detector      
+    13:28:34.325 INFO     livekit.agents     Downloading files for              
+                                             livekit.plugins.turn_detector      
+    13:28:36.919 INFO     livekit.agents     Finished downloading files for     
+                                             livekit.plugins.turn_detector      

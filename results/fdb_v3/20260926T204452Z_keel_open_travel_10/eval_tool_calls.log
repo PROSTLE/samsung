@@ -1,0 +1,26 @@
+📖 Loading benchmark data from benchmark_data_v2.json...
+📁 Scanning fdb_v3_data_released for provider 'keel_open'...
+🔍 Found 1 valid result files matching benchmark scenarios.
+
+📊 EVALUATION REPORT
+========================================================
+  Scenarios evaluated : 1
+  Turn-Take Success   : 1/1 (100.0%)
+
+  By Metric (turn-taken only, N=1):
+    Tool Selection Acc : 66.7%
+    Argument Acc       : 0.0%
+    Response Qual      : (LLM judge disabled, use --use-llm)
+
+  Latency (N=1, turn-taken only):
+    Avg latency        : 15.60s  (excl. interruptions)
+    Min / Max          : 15.60s / 15.60s
+    Interruptions      : 0 / 1  (0.0%)
+
+  By Domain (all samples):
+    travel_identity: tool_selection_acc=66.7%, argument_acc=0.0%
+
+  By Difficulty (all samples):
+    medium: tool_selection_acc=66.7%, argument_acc=0.0%
+
+  📄 Full report saved: /home/harshit/keel/results/fdb_v3/20260926T204452Z_keel_open_travel_10/keel_open_evaluation_report.json
