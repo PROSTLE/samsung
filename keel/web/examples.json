@@ -1,0 +1,19 @@
+{
+  "_note": "Things to try on the Live page, per agent profile (config/<profile>.toml). Each line uses only that agent's own tools; 'expect' says what Keel should do with it.",
+  "fdb_v3": [
+    {"say": "Find me flights to Miami on October 5th. Oh, wait. Make it the 7th.",
+     "expect": "One search, for the 7th. A search the model plans from the first date is held, then dropped when you correct it."},
+    {"say": "Book it for Ana Silva. Sorry, the name is Ana Souza.",
+     "expect": "The booking waits until you have finished and goes out once, with the corrected name."},
+    {"say": "Add two of item P52 to my cart. No, wait, just one.",
+     "expect": "One add-to-cart call, with quantity 1."}
+  ],
+  "show_and_fix": [
+    {"say": "My washer shows an error. Can you look? (camera on, pointed at the display)",
+     "expect": "It reads the display and explains the code from Samsung's published table."},
+    {"say": "Book a technician for Friday morning. No, Saturday morning.",
+     "expect": "One booking, for Saturday. The Friday booking is held and never sent."},
+    {"say": "Did the booking go through?",
+     "expect": "Answered from list_technician_bookings, never from memory."}
+  ]
+}
