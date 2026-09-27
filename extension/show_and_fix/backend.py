@@ -3,7 +3,7 @@ up in Samsung's published table, book a technician.
 
 Everything here is session-scoped (a new conversation starts empty). The
 vision model is injected (`Reader`), so the tools are tested offline with a
-fake reader; the agent passes the OpenAI one below.
+fake reader; the agent passes reader_for(config) below.
 """
 
 from __future__ import annotations
@@ -76,18 +76,37 @@ class FrameStore:
         return f if self._clock() - f.at <= max_age_s else None
 
 
+# Characters a seven-segment display draws with the same segments: a reader
+# (camera or person) cannot tell them apart, so "SE" on the panel may be the
+# table's "5E" and "0E" its "OE". Mapped on both sides before comparing.
+# Wikipedia, "Seven-segment display": uppercase B, I, S, Z, D and O "conflict with"
+# the digits 8, 1, 5, 2 and 0. B and D are left out: Samsung's panels show them
+# lowercase (b, d), which differ from 8 and 0, and D -> 0 would merge dC with OC.
+SEVEN_SEGMENT_SAME = str.maketrans({"S": "5", "O": "0", "I": "1", "Z": "2"})
+
+
+def code_key(code: str) -> str:
+    return code.strip().replace(" ", "").replace("-", "").upper().translate(SEVEN_SEGMENT_SAME)
+
+
 class Manual:
     def __init__(self, path: Path | str) -> None:
         data = json.loads(Path(path).read_text(encoding="utf-8"))
         self.source = data["source"]
         self.entries = data["entries"]
 
-    def find(self, code: str) -> Optional[dict[str, Any]]:
-        key = code.strip().replace(" ", "").replace("-", "").upper()
+    def match(self, code: str) -> Optional[tuple[str, dict[str, Any]]]:
+        """(the table's own spelling of the code, its entry), or None."""
+        key = code_key(code)
         for e in self.entries:
-            if key in {c.upper() for c in e["codes"]}:
-                return e
+            for c in e["codes"]:
+                if code_key(c) == key:
+                    return c, e
         return None
+
+    def find(self, code: str) -> Optional[dict[str, Any]]:
+        m = self.match(code)
+        return m[1] if m else None
 
 
 @dataclass
@@ -124,19 +143,34 @@ class ShowAndFixBackend:
         if self.on_perception:
             self.on_perception(record)
         if code and conf >= self.clarify_below:
-            return {"status": "success", "code": code, "confidence": round(conf, 2)}
+            # The table's entry comes with the reading, so the meaning spoken is
+            # always Samsung's, even if the model would not make a second call.
+            m = self.manual.match(code)
+            if m is None:
+                return {"status": "success", "code": code, "confidence": round(conf, 2),
+                        "manual": "not_found",
+                        "message": "This code is not in Samsung's table Keel has. Do not guess what it means."}
+            official, e = m
+            out = {"status": "success", "code": official, "confidence": round(conf, 2),
+                   "meaning": e["meaning"], "steps": e["steps"],
+                   "contact_service_if_persists": e["contact_service_if_persists"], "source": self.manual.source}
+            if official != code:
+                out["displayed_as"] = code      # e.g. "SE": a seven-segment "5E"
+            return out
         # Below the threshold nothing is asserted (config perception.clarify_below).
         return {"status": "unclear", "best_guess": code, "confidence": round(conf, 2),
                 "message": "The display is not readable with confidence. Ask the user to read the code "
                            "aloud or hold the camera closer; do not state a code."}
 
     async def _lookup_error_code(self, code: str) -> dict[str, Any]:
-        e = self.manual.find(code)
-        if e is None:
+        m = self.manual.match(code)
+        if m is None:
             return {"status": "not_found", "code": code,
                     "message": "This code is not in the manual table Keel has. Do not guess what it means."}
-        return {"status": "success", "codes": e["codes"], "meaning": e["meaning"], "steps": e["steps"],
-                "contact_service_if_persists": e["contact_service_if_persists"], "source": self.manual.source}
+        official, e = m
+        return {"status": "success", "code": official, "codes": e["codes"], "meaning": e["meaning"],
+                "steps": e["steps"], "contact_service_if_persists": e["contact_service_if_persists"],
+                "source": self.manual.source}
 
     async def _book_technician(self, code: str, day: str, time_window: str) -> dict[str, Any]:
         digest = hashlib.sha256(json.dumps([self.session_id, code, day, time_window]).encode()).hexdigest()
@@ -148,8 +182,23 @@ class ShowAndFixBackend:
         return {"status": "success", "bookings": list(self.bookings)}
 
 
-def openai_reader(model: str, *, seed: int, client: Any = None) -> Reader:
-    """Read a display with an OpenAI vision model (JSON mode, temperature 0)."""
+def reader_for(cfg: Any) -> Reader:
+    """The display reader the configured pipeline uses ([livekit.show_and_fix].vision):
+    OpenAI's vision_model by default, e.g. a Gemini model under gemini_realtime."""
+    from openai import AsyncOpenAI
+
+    from keel.providers import accepts_seed, endpoint
+
+    lk = cfg.livekit
+    provider, model = lk.show_and_fix.vision_for(lk.pipeline)
+    base_url, key = endpoint(cfg, provider)
+    seed = lk.cascaded.llm_seed if accepts_seed(cfg, provider) else None
+    return openai_reader(model, seed=seed, client=AsyncOpenAI(api_key=key, base_url=base_url))
+
+
+def openai_reader(model: str, *, seed: Optional[int], client: Any = None) -> Reader:
+    """Read a display with a vision model behind an OpenAI-compatible API (JSON
+    mode, temperature 0; `seed` where the provider honours it)."""
     from openai import AsyncOpenAI
 
     api = client or AsyncOpenAI()
@@ -157,7 +206,8 @@ def openai_reader(model: str, *, seed: int, client: Any = None) -> Reader:
     async def read(image: bytes, mime: str) -> dict[str, Any]:
         url = f"data:{mime};base64," + base64.b64encode(image).decode("ascii")
         resp = await api.chat.completions.create(
-            model=model, temperature=0, seed=seed, response_format={"type": "json_object"},
+            model=model, temperature=0, response_format={"type": "json_object"},
+            **({"seed": seed} if seed is not None else {}),
             messages=[{"role": "system", "content": VISION_PROMPT},
                       {"role": "user", "content": [{"type": "text", "text": "Read the display."},
                                                    {"type": "image_url", "image_url": {"url": url}}]}])

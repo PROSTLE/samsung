@@ -3,7 +3,7 @@
   "tools": [
     {
       "name": "read_error_display",
-      "description": "Read the error or information code shown on the appliance's display, from the user's live camera. Returns the code only if it can be read with enough confidence; otherwise says it is unclear.",
+      "description": "Read the error or information code shown on the appliance's display, from the user's live camera. Returns the code only if it can be read with enough confidence, together with what Samsung's support page says about it; otherwise says it is unclear.",
       "parameters": {"type": "object", "properties": {}, "required": []},
       "annotations": {"readOnlyHint": true}
     },

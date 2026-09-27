@@ -5,9 +5,11 @@ EXTENSION USE CASE (Theme 05 guide §3, step 4): beyond FDB-v3's four domains.
     python -m extension.show_and_fix.agent download-files
     python -m extension.show_and_fix.agent dev
 
-Then open your LiveKit Cloud project's Agent Console (or the Agents
-Playground), turn on the microphone and the camera, and point the camera at
-the washer's display. For a run without a camera, KEEL_SHOW_AND_FIX_IMAGE=<path to
+Then open Keel's web app (python -m keel.web, Live demo) or your LiveKit Cloud
+project's Agent Console, turn on the microphone and the camera, and point the
+camera at the washer's display. KEEL_PIPELINE=gemini_realtime runs it on the
+Gemini API's free tier alone (Gemini Live, and a Gemini model reading the
+display); KEEL_PIPELINE=open on the open-weight models of [livekit.open]. For a run without a camera, KEEL_SHOW_AND_FIX_IMAGE=<path to
 a photo> makes the agent use that still image; the trace marks it as a file.
 
 Same pipeline and the same Keel layer as the benchmark agent (keel.livekit):
@@ -33,14 +35,16 @@ from livekit import agents, rtc
 from livekit.agents import Agent, AgentServer, room_io
 from livekit.agents.utils.images import EncodeOptions, ResizeOptions, encode
 
-from extension.show_and_fix.backend import FrameStore, Manual, ShowAndFixBackend, openai_reader
+from extension.show_and_fix.backend import FrameStore, Manual, ShowAndFixBackend, reader_for
 from keel.config import KeelConfig, load_config
 from keel.kernel.clock import MonotonicClock
 from keel.livekit.agent import load_env, resolve, session_id
 from keel.livekit.gate import KeelGate
 from keel.livekit.session import build_session, make_tool, prewarm_vad, wire
+from keel.providers import apply_env_pipeline
 from keel.protocol.provisional import ToolSpec
 from keel.trace import TraceWriter
+from keel.web import live as live_story
 
 REPO = Path(__file__).resolve().parents[2]
 log = logging.getLogger("keel.show_and_fix")
@@ -50,7 +54,7 @@ FRAME_ENCODE = EncodeOptions(format="JPEG", quality=85,
 
 
 def load() -> tuple[KeelConfig, list[ToolSpec], str]:
-    cfg = load_config(None, os.getenv("KEEL_CONFIG", str(REPO / "config" / "show_and_fix.toml")))
+    cfg = apply_env_pipeline(load_config(None, os.getenv("KEEL_CONFIG", str(REPO / "config" / "show_and_fix.toml"))))
     if cfg.livekit is None or cfg.livekit.show_and_fix is None:
         raise SystemExit("the config has no [livekit.show_and_fix] section")
     sf = cfg.livekit.show_and_fix
@@ -82,6 +86,7 @@ async def entrypoint(ctx: agents.JobContext) -> None:
     sid = session_id(ctx.room.name)
     trace = TraceWriter(resolve(lk.trace_dir) / f"{sid}.jsonl", clock=clock, session_id=sid, config=cfg,
                         synthetic=False, scenario=f"show_and_fix:{ctx.room.name}")
+    live_story.attach(trace, ctx.room, loop)   # the web app's Live page, if one joined
     frames = FrameStore()
     if os.getenv("KEEL_SHOW_AND_FIX_IMAGE"):
         path = Path(os.environ["KEEL_SHOW_AND_FIX_IMAGE"])
@@ -89,7 +94,7 @@ async def entrypoint(ctx: agents.JobContext) -> None:
 
     session, has_tts, drop = build_session(cfg, vad=ctx.proc.userdata.get("vad"))
     backend = ShowAndFixBackend(manual=Manual(resolve(sf.manual)), frames=frames,
-                                reader=openai_reader(sf.vision_model, seed=lk.cascaded.llm_seed),
+                                reader=reader_for(cfg),
                                 session_id=sid, clarify_below=cfg.perception.clarify_below,
                                 frame_max_age_s=sf.frame_max_age_s)
     gate = KeelGate(session_id=sid, config=cfg, tools=specs, execute=backend.execute, trace=trace,

@@ -69,11 +69,41 @@ def test_no_frame_means_ask_for_the_camera():
     assert asyncio.run(backend()._read_error_display())["status"] == "no_frame"
 
 
-def test_a_confident_reading_is_returned():
+def test_a_confident_reading_is_returned_with_samsungs_entry():
     frames = FrameStore()
     frames.put(JPEG, source="file:washer.jpg")
     out = asyncio.run(backend(frames=frames)._read_error_display())
-    assert out == {"status": "success", "code": "4C", "confidence": 0.9}
+    entry = MANUAL.find("4C")
+    assert out == {"status": "success", "code": "4C", "confidence": 0.9, "meaning": entry["meaning"],
+                   "steps": entry["steps"], "contact_service_if_persists": entry["contact_service_if_persists"],
+                   "source": MANUAL.source}
+
+
+def test_a_seven_segment_reading_is_matched_to_the_tables_code():
+    # A seven-segment "5" and "S" are the same glyph: our Show & Fix live test's
+    # display showed 5E and the vision model read "SE".
+    frames = FrameStore()
+    frames.put(JPEG, source="file:washer.jpg")
+    out = asyncio.run(backend(reader=reader_returning("SE", 1.0), frames=frames)._read_error_display())
+    assert out["code"] == "5E" and out["displayed_as"] == "SE" and out["meaning"] == "Water is not draining."
+    assert asyncio.run(backend()._lookup_error_code("0E"))["code"] == "OE"      # letter O, digit 0
+    assert asyncio.run(backend()._lookup_error_code("se"))["code"] == "5E"
+
+
+def test_a_reading_that_is_not_in_the_table_is_not_explained():
+    frames = FrameStore()
+    frames.put(JPEG, source="file:washer.jpg")
+    out = asyncio.run(backend(reader=reader_returning("H9", 0.95), frames=frames)._read_error_display())
+    assert out["status"] == "success" and out["code"] == "H9" and out["manual"] == "not_found"
+    assert "meaning" not in out
+
+
+def test_seven_segment_equivalence_makes_no_two_table_codes_alike():
+    from extension.show_and_fix.backend import code_key
+
+    keys = [code_key(c) for e in MANUAL.entries for c in e["codes"]]
+    per_entry = [{code_key(c) for c in e["codes"]} for e in MANUAL.entries]
+    assert len(set(keys)) == sum(len(s) for s in per_entry)       # a key never spans two entries
 
 
 def test_a_low_confidence_reading_asserts_nothing():
