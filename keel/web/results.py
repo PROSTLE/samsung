@@ -66,7 +66,7 @@ def summarize_run(run: Path) -> dict[str, Any]:
     complete = ev is not None or pr is not None
     # No reports: still running if its logs changed in the last 10 minutes, else it stopped
     # before FDB-v3's evaluation (a crash or an interrupted run; its logs say which).
-    newest = max((p.stat().st_mtime for p in run.iterdir() if p.is_file()), default=0.0)
+    newest = max((p.stat().st_mtime for p in run.glob("*.log")), default=0.0)   # the run's own logs only
     status = "complete" if complete else ("running" if time.time() - newest < RUNNING_WINDOW_S else "stopped")
     return {
         "id": run.name,

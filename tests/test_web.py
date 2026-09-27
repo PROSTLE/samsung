@@ -68,6 +68,7 @@ def _run(tmp_path, complete=True):
     run = tmp_path / "results" / "fdb_v3" / "20260925T142230Z_keel_gemini_realtime"
     (run / "per_scenario").mkdir(parents=True)
     (run / "run_info.txt").write_text("provider_label: keel_gemini_realtime\njudge: none (rule-based)\n", encoding="utf-8")
+    (run / "inference.log").write_text("[1/1] Processing ...\n", encoding="utf-8")
     (run / "per_scenario" / "travel_10.json").write_text(json.dumps({"example_id": "travel_10", "room_name": "eval-1",
                                                                      "title": "Date Correction"}), encoding="utf-8")
     if complete:
@@ -94,8 +95,19 @@ def test_a_run_is_read_from_fdb_v3s_own_reports(tmp_path):
 def test_a_run_in_progress_has_no_invented_scores(tmp_path):
     s = summarize_run(_run(tmp_path, complete=False))
     assert s["complete"] is False and s["pass_rate"] is None and s["scenarios"] == 1
-    assert s["status"] == "running"                       # its files were just written
+    assert s["status"] == "running"                       # its log was just written
     assert [r["id"] for r in list_runs(tmp_path / "results" / "fdb_v3")] == ["20260925T142230Z_keel_gemini_realtime"]
+
+
+def test_a_run_whose_logs_went_quiet_without_reports_stopped(tmp_path):
+    import os
+
+    run = _run(tmp_path, complete=False)
+    os.utime(run / "inference.log", (1, 1))
+    (run / "NOTE.md").write_text("written later\n", encoding="utf-8")   # a note is not activity
+    s = summarize_run(run)
+    assert s["status"] == "stopped" and s["pass_rate"] is None
+    assert summarize_run(_run(tmp_path / "b"))["status"] == "complete"
 
 
 # ---------------------------------------------------------------- live publisher
