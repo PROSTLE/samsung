@@ -36,6 +36,7 @@ from keel.kernel.internal import Interpretation, InternalEvent, SlotProposal, Ti
 from keel.kernel.ledger import ACTIVE, CallEntry, Ledger, SafetyClass
 from keel.kernel.plan import Const, Goal, ResultRef, SlotRef, Step, dig, result_key
 from keel.kernel.reconcile import CannotConfirm, Probe, Retry, StatusProbe, plan_reconciliation
+from keel.kernel.repair import editing_only
 from keel.kernel.slots import Rejection, SlotChange, SlotStore
 from keel.paths.fast import humanize, render
 from keel.protocol.ids import IdFactory
@@ -124,6 +125,8 @@ class Kernel:
             quiet_ms=config.fence.quiet_ms,
             stale_turn_ms=config.fence.stale_turn_ms,
             require_end_of_turn=config.fence.require_end_of_turn,
+            repair_wait_ms=config.fence.repair_wait_ms,
+            transcript_wait_ms=config.fence.transcript_wait_ms,
         )
         self.ids = IdFactory(session_id)
         self.policies: dict[str, ToolPolicy] = {}
@@ -214,7 +217,17 @@ class Kernel:
             self._on_result(ev)
             return
         if isinstance(ev, (TextChunk, AudioClip)):
-            self.fence.user_activity(self._now, end_of_turn=ev.end_of_turn)
+            announced_repair = (isinstance(ev, TextChunk) and ev.end_of_turn
+                                and editing_only(ev.text, self.cfg.fence.editing_terms))
+            self.fence.user_activity(self._now, end_of_turn=ev.end_of_turn, editing_only=announced_repair)
+            if isinstance(ev, TextChunk) and not ev.end_of_turn:
+                # Rule 5: an empty chunk ends a stretch of speech; a non-empty one brings its words.
+                if ev.text.strip():
+                    self.fence.words_arrived(self._now)
+                else:
+                    self.fence.speech_ended(self._now)
+            if announced_repair and self.fence.repair_pending:
+                self.trace.note("repair_announced", text=ev.text, wait_ms=self.cfg.fence.repair_wait_ms)
             if ev.end_of_turn:
                 self._new_turn()
                 self._set_timer("ack", None, self._now + self.cfg.floor.ack_after_ms)
@@ -657,7 +670,12 @@ class Kernel:
         else:
             self._held_for_speech.discard(e.call_id)
             if ("fence", e.call_id) not in self._timers:
-                self.trace.note("fence_hold", call_id=e.call_id, until=opens)
+                why = {"transcript": "speech not yet transcribed", "repair": "announced repair"}.get(
+                    self.fence.binding or "")
+                if why:
+                    self.trace.note("fence_hold", call_id=e.call_id, until=opens, why=why)
+                else:
+                    self.trace.note("fence_hold", call_id=e.call_id, until=opens)
             self._set_timer("fence", e.call_id, opens)
 
     def _dispatch(self, e: CallEntry) -> None:

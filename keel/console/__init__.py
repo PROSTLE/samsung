@@ -39,14 +39,15 @@ INVARIANTS = (
 
 def _user_inputs(records: Sequence[TraceRecord], live: bool) -> list[dict[str, Any]]:
     """User-side inputs. In a LiveKit session (`live`) an interrupt only marks
-    the user starting to speak and an empty non-final text chunk only marks
-    them stopping: neither is a turn, so neither is shown as one."""
+    the user starting to speak, an empty non-final text chunk only marks them
+    stopping, and a non-empty one only brings a stretch's words (fence rule 5),
+    which the committed turn repeats: none is a turn, so none is shown as one."""
     out = []
     for r in records:
         if r.dir != "in" or r.kind in ("tool_result", "manifest"):
             continue
         d = r.data
-        if live and r.kind == "text" and not d.get("text") and not d.get("end_of_turn"):
+        if live and r.kind == "text" and not d.get("end_of_turn"):
             continue
         if live and r.kind == "interrupt":
             continue
