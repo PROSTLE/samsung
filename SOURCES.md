@@ -247,6 +247,8 @@ development laptop (AMD Ryzen 5 5600H, 12 threads, NVIDIA RTX 3050 Laptop 4 GB, 
   card available). Generation is memory-bound: 2.4 GB of weights per token at 17 GB/s is
   about 7 tokens/s, as measured. The first chat request after loading took 65 s until
   `scripts/open_models.sh` warmed the model with a real chat request (then 5.7 s).
+  Plugged in (Win32_Battery status 2), with `KEEL_OLLAMA_CONTEXT=4096`: GPU in P0,
+  memory clock 6,001 MHz, prompts at 1,168 tokens/s, generation at 21.2 tokens/s.
 - **LiveKit's request deadlines** (installed `livekit/agents/types.py`): `APIConnectOptions`
   defaults to `timeout=10.0`, `max_retry=3`; the OpenAI plugin's HTTP client allows 5 s
   between bytes. A local request timed out at 10.0 s and started again in our first local

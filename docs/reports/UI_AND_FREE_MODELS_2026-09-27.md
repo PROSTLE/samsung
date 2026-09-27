@@ -150,10 +150,54 @@ morning after "Friday morning. Oh, wait. No, make it Saturday morning." (held un
 user finished), and answered "did it go through?" from `list_technician_bookings`. The
 first attempt found bugs 15 and 16, fixed before the second.
 
+## 5b. The full run: 100 recordings on the free Gemini pipeline
+
+`scripts/reproduce_fdb_v3_wsl.sh --pipeline gemini_realtime --judge none`, results in
+`results/fdb_v3/20260927T083931Z_keel_gemini_realtime/` (FDB-v3's three reports, per-scenario
+results, the scored tool-log lines, 99 traces (housing_04's room has none: the agent did not
+join it), logs, versions, seeds). `run_info.txt` names commit 8c6ef4c "with uncommitted
+changes": the run started minutes before this round's commits, and the agent, kernel and
+config code it ran is what those commits contain (later changes touched only the web app,
+Show & Fix and tests).
+
+| Metric (FDB-v3's own scripts, no gpt-4o judge) | Value |
+|---|---|
+| Strict pass rate | 0.43 (43/100) |
+| Tool selection accuracy (turn taken / all) | 0.942 / 0.811 |
+| Argument accuracy, exact match (turn taken / all) | 0.581 / 0.498 |
+| Turn-taking rate | 0.84 (16 no response) |
+| First response latency, median / mean | 4.88 s / 6.67 s (79 samples) |
+| Tool-call latency, median | 3.09 s |
+| By kind of speech | false start 0.583, hesitation 0.400, filler 0.379, pause 0.333, self-correction 0.235 |
+| By domain | e-commerce 0.655, finance 0.640, housing 0.192, travel 0.150 |
+| By number of calls | 1: 0.485, 2: 0.389, 3: 0.250 |
+
+**Failures (57).** 34 wrong arguments, 20 missing tools, 3 unexpected tools.
+- *Arguments.* Under a rule we state (the same date written as "2026-07-15" and "July 15";
+  equal after ignoring case, spaces and punctuation; singular vs plural; equal numbers),
+  20 of the 34 differ from the expected value only in form: e.g. travel_10's date,
+  ecommerce_18's "PO-999" for "PO999", ecommerce_10's "winter jacket" for "winter jackets".
+  FDB-v3's rule-based check counts these wrong; its gpt-4o judge exists to compare by
+  meaning. If they counted, 63 of 100 would pass: that is our estimate by our rule, not a
+  score. The other 14 are real errors (a filter name swapped, "Vegas" for "Las Vegas", 800
+  for 1800, a misheard order ID).
+- *No response (16).* In 12, Gemini Live never produced a user turn: no transcript, no tool
+  call, and Keel held nothing (checked per trace). One had a Gemini API "1006 abnormal
+  closure"; across the run LiveKit's Gemini plugin logged "received server content but no
+  active generation" 95 times (model output it discarded). In the other 4 the calls went
+  out and the answer came late or not at all. Keel held no call without releasing or
+  dropping it in any of the 16.
+- The paper's Pass@1 (Table 2: Gemini Live 3.1 0.540, cascaded 0.450) is judged by gpt-4o
+  and is not comparable with these figures.
+
 ## 6. Open items
 
-- **The local LLM's speed on this laptop.** Plugged in (not on battery) it will be faster;
-  on the evaluation machine's GPU far faster. Not measured here.
+- **Done: the local pipeline plugged in** (`20260927T102255Z_keel_open_travel_10`,
+  `KEEL_OLLAMA_CONTEXT=4096`): prompts at 1,168 tokens/s and generation at 21 tokens/s
+  (6-7 on battery); one call, `search_flights(Miami, 2026-10-07)`, planned 2.4 s after the
+  corrected turn; the agent spoke at 38.9 s, inside the 47.6 s recording: turn-taking 1.0,
+  tool selection 1.0, failing only the exact-match date check. A full 100-scenario run on
+  the open pipeline has not been made.
 - **Show & Fix with a real camera** needs a person in front of a washer (or a photo with
   `KEEL_SHOW_AND_FIX_IMAGE`); the Gemini reader and the tools are verified separately.
 - **Speech on the laptop CPU** adds about 3 s per turn (Whisper's fixed 30 s window);

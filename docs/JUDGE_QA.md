@@ -9,6 +9,15 @@ Short answers first, evidence second. Every external claim is sourced in
 
 ## Free models and the web app (2026-09-27)
 
+**Q: What did your own full run score?**
+0.43 strict pass rate (43/100) on the free Gemini Live pipeline, with FDB-v3's own
+scripts but without its gpt-4o judge (we have no OpenAI credit), so every argument must
+match exactly; tool selection 0.942, turn-taking 0.84. It is not comparable with the
+paper's judged 0.540 for Gemini Live 3.1. 20 of the 34 argument failures differ only in
+form ("2026-07-15" for "July 15"), which the judge exists to compare by meaning; 16
+scenarios got no response, 12 of them because Gemini Live never produced a user turn,
+and Keel held nothing in any of them. Only the organisers' judged re-run is the score.
+
 **Q: Your default pipeline is OpenAI's, which costs money. Can anyone run this for free?**
 Yes, two ways, both with Keel under every tool call. `--pipeline gemini_realtime`
 uses Gemini Live, which Google's pricing page lists as free of charge on the free tier;

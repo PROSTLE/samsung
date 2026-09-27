@@ -130,8 +130,10 @@ answer; the run stops them at the end and records the models and the LLM's diges
 `run_info.txt`. Speech runs on the CPU (about 3 s per turn for Whisper) and the LLM on the
 GPU. On a 4 GB laptop GPU that also drives the desktop, set `KEEL_OLLAMA_CONTEXT=4096` so
 the whole model fits, and run plugged in: on battery our laptop's GPU was throttled to
-7 generated tokens/s, too slow to answer inside FDB-v3's recordings (`SOURCES.md`). The
-evaluation machine's GPU has neither limit.
+7 generated tokens/s, too slow to answer inside FDB-v3's recordings; plugged in it made
+21 tokens/s and answered travel_10 in time, with only the corrected call
+(`results/fdb_v3/20260927T102255Z_keel_open_travel_10/`, `SOURCES.md`). The evaluation
+machine's GPU has neither limit.
 
 The script creates two locked environments (`requirements/agent.lock.txt` and
 `requirements/bench.lock.txt`, resolved for Linux x86-64 / Python 3.10). It then
@@ -163,11 +165,26 @@ scheduled. A later re-run only needs the model name in `config/fdb_v3.toml` chan
 Seeds: the mock latency jitter is seeded per session (`livekit.fdb.seed`), and
 the LLM runs at temperature 0 with a fixed seed (`livekit.cascaded.llm_seed`).
 
-**Results:** no full scored run yet. `results/fdb_v3/` holds smoke runs of the
-travel_10 self-correction scenario (Gemini Live, cascaded and open, scored without the
-gpt-4o judge, so arguments must match exactly), each with its reports, traces and
-logs; the open-pipeline runs carry a `NOTE.md` saying exactly what ran. In the latest
-ones only the corrected call reaches FDB-v3's tool log. A full Gemini run reached scenario 70 of 100 before the machine stopped it; its
+**Results.** Our full run, `results/fdb_v3/20260927T083931Z_keel_gemini_realtime/`
+(all 100 recordings, `--pipeline gemini_realtime`, FDB-v3's own scripts, scored
+**without** the gpt-4o judge because we have no OpenAI credit, so arguments must match
+exactly):
+
+| Strict pass rate | Tool selection | Arguments (exact match) | Turn-taking | First response, median |
+|---|---|---|---|---|
+| **0.43** (43/100) | 0.942 | 0.581 | 0.84 | 4.9 s |
+
+By kind of speech: false start 0.583, hesitation 0.400, filler 0.379, pause 0.333,
+self-correction 0.235. Of the 57 failures, 34 are wrong arguments and 23 wrong or missing
+tools. 20 of the 34 argument failures differ from the expected value only in form
+("2026-07-15" for "July 15", "PO-999" for "PO999", "winter jacket" for "winter jackets"),
+which the rule-based check counts as wrong and FDB-v3's gpt-4o judge exists to compare by
+meaning. 16 scenarios got no response at all; in 12 of them Gemini Live never produced a
+user turn, and Keel held nothing in any of them (analysis in
+`docs/reports/UI_AND_FREE_MODELS_2026-09-27.md`). The paper's Pass@1 figures (Gemini Live
+3.1: 0.540) use the judge and are not comparable with these. The organisers' re-run uses
+the judge. Smoke runs of the travel_10 scenario on every pipeline are in the same folder,
+the open-pipeline ones with a `NOTE.md` saying exactly what ran. A full Gemini run reached scenario 70 of 100 before the machine stopped it; its
 sessions replay in the web app, but it has no reports and claims no score.
 
 ## Web app
@@ -266,8 +283,8 @@ tests against its real tool definitions and mock APIs.
 
 ## Honesty notes
 
-- No full benchmark score has been measured yet; only single-scenario smoke runs
-  exist (see Results above). Nothing here claims a score.
+- Our one full run was scored without FDB-v3's gpt-4o judge (see Results). No judged
+  score is claimed; only the organisers' re-run produces one.
 - The web app shows only what traces and FDB-v3's reports contain. A session without
   a recording replays without sound and says so; the bars then show voice activity
   from the trace, not audio.
