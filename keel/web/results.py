@@ -68,9 +68,20 @@ def summarize_run(run: Path) -> dict[str, Any]:
     # before FDB-v3's evaluation (a crash or an interrupted run; its logs say which).
     newest = max((p.stat().st_mtime for p in run.glob("*.log")), default=0.0)   # the run's own logs only
     status = "complete" if complete else ("running" if time.time() - newest < RUNNING_WINDOW_S else "stopped")
+    # Notes never change a run's status, except one that declares the run invalid (for
+    # example a network outage during it): its reports exist but measure the outage.
+    invalid_note = None
+    try:
+        note = (run / "NOTE.md").read_text(encoding="utf-8")
+        if note.lstrip().lower().startswith("# invalid run"):
+            status = "invalid"
+            invalid_note = next((p.strip() for p in note.split("\n\n")[1:] if p.strip()), None)
+    except OSError:
+        pass
     return {
         "id": run.name,
         "status": status,
+        "invalid_note": invalid_note,
         "provider": info.get("provider_label"),
         "judge": info.get("judge"),
         "command": info.get("command"),

@@ -234,7 +234,7 @@ function bindRows() {
   });
 }
 
-const runLabel = (x) => `${x.id.slice(0, 4)}-${x.id.slice(4, 6)}-${x.id.slice(6, 8)} ${x.id.slice(9, 11)}:${x.id.slice(11, 13)} UTC · ${x.scenarios ? plural(x.scenarios, "scenario") : "no scenarios"}${{ running: " · running", stopped: " · stopped, no reports" }[x.status] || ""}`;
+const runLabel = (x) => `${x.id.slice(0, 4)}-${x.id.slice(4, 6)}-${x.id.slice(6, 8)} ${x.id.slice(9, 11)}:${x.id.slice(11, 13)} UTC · ${x.scenarios ? plural(x.scenarios, "scenario") : "no scenarios"}${{ running: " · running", stopped: " · stopped, no reports", invalid: " · invalid (see its note)" }[x.status] || ""}`;
 
 // ------------------------------------------------------------------ live
 async function renderLive() {
@@ -365,17 +365,21 @@ function liveFrame() {
 
 function renderEnded(ended) {
   const room = ended?.state.room;
+  // The agent writes the session's trace; without it there is nothing to replay.
+  const joined = !!ended?.state.agentJoined;
   const acts = ended ? [...ended.state.actions.values()] : [];
   const n = (st) => acts.filter((a) => a.state === st).length;
   crumbs(["Live demo"]);
   view.innerHTML = `
     <div class="card card-body" style="margin-top:12px;max-width:720px">
       <div class="eyebrow">Conversation ended</div>
-      <h1 style="font-size:24px;margin-top:6px">${acts.length ? `${plural(acts.length, "call")} planned` : "No calls were planned"}</h1>
+      <h1 style="font-size:24px;margin-top:6px">${!joined ? "The agent never joined" : acts.length ? `${plural(acts.length, "call")} planned` : "No calls were planned"}</h1>
       <div class="row-gap" style="margin-top:10px">${n("done") ? `<span class="chip done">${n("done")} executed</span>` : ""}${n("not_sent") ? `<span class="chip not_sent">${n("not_sent")} dropped</span>` : ""}${n("reused") ? `<span class="chip reused">${n("reused")} reused</span>` : ""}</div>
-      <p class="soft" style="margin-top:12px">The agent saved the whole conversation as a session: replay it to see every decision on the timeline.</p>
+      <p class="soft" style="margin-top:12px">${joined
+        ? "The agent saved the whole conversation as a session: replay it to see every decision on the timeline."
+        : "No agent answered in this room, so nothing was recorded. Start the app with an agent (see Setup, “This app plus an agent”) and try again."}</p>
       <div class="row-gap" style="margin-top:16px">
-        ${room ? `<a class="btn btn-primary" href="#/replay/${encodeURIComponent(room)}">${icons.play} Replay this session</a>` : ""}
+        ${room && joined ? `<a class="btn btn-primary" href="#/replay/${encodeURIComponent(room)}">${icons.play} Replay this session</a>` : ""}
         <button class="btn" id="again">Start another</button></div>
     </div>`;
   document.getElementById("again").onclick = () => renderLive();
@@ -505,6 +509,7 @@ async function renderBenchmark(runId) {
       ${judgeNone ? `<div class="notice">${icons.info}<span>Scored without FDB-v3's gpt-4o judge (no OpenAI credit), with its rule-based scoring: arguments must match exactly, so a date given as 2026-10-07 where the benchmark expects "October 7" counts as wrong. The organisers' re-run uses the judge.</span></div>` : ""}
       ${r.status === "running" ? `<div class="notice warn">${icons.alert}<span>This run is still going: its scores appear once FDB-v3's evaluation has run.</span></div>` : ""}
       ${r.status === "stopped" ? `<div class="notice warn">${icons.alert}<span>This run stopped before FDB-v3's evaluation, so it has no scores. Its logs (agent.log, inference.log) in <span class="mono">results/fdb_v3/${esc(r.id)}/</span> say why.</span></div>` : ""}
+      ${r.status === "invalid" ? `<div class="notice warn">${icons.alert}<span>This run is not a measurement of the agent: ${esc(r.invalid_note || "see NOTE.md in its folder")}</span></div>` : ""}
     </div>
     <div class="grid cols-2" style="grid-template-columns:minmax(0,1fr) minmax(0,1fr);margin-top:16px">
       <section class="card"><div class="card-head"><h2>By kind of speech</h2></div><div class="card-body bars">${bars(r.by_disfluency) || `<p class="empty">Not reported for this run.</p>`}</div></section>

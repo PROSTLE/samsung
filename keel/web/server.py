@@ -158,7 +158,7 @@ class App:
         files = self.sessions.files()
         holds = [ms for r in rows for ms in self.sessions.story(files[r["id"]][0]).hold_times_ms()]
         runs = list_runs(self.results)
-        complete = [r for r in runs if r["complete"]]
+        complete = [r for r in runs if r["complete"] and r["status"] != "invalid"]
         latest = max(complete, key=lambda r: ((r["scenarios"] or 0) > 1, r["id"]), default=None)
         by_source: dict[str, int] = {}
         for r in rows:
@@ -196,7 +196,8 @@ class App:
         sid = request.match_info["sid"]
         found = self.sessions.files().get(sid)
         if found is None:
-            raise web.HTTPNotFound()
+            return web.json_response({"error": f"No session {sid} on this machine. A live conversation is saved only "
+                                               "when the agent joined its room."}, status=404)
         path, profile = found
         story = self.sessions.story(path)
         titles = self._titles()

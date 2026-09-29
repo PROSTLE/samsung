@@ -110,6 +110,17 @@ def test_a_run_whose_logs_went_quiet_without_reports_stopped(tmp_path):
     assert summarize_run(_run(tmp_path / "b"))["status"] == "complete"
 
 
+def test_only_a_note_declaring_the_run_invalid_changes_its_status(tmp_path):
+    run = _run(tmp_path / "a")
+    (run / "NOTE.md").write_text("# Smoke run\n\nOnly one scenario.\n", encoding="utf-8")
+    assert summarize_run(run)["status"] == "complete"
+    bad = _run(tmp_path / "b")
+    (bad / "NOTE.md").write_text("# Invalid run: network outage\n\nThe machine lost LiveKit.\n", encoding="utf-8")
+    s = summarize_run(bad)
+    assert s["status"] == "invalid" and s["invalid_note"] == "The machine lost LiveKit."
+    assert s["pass_rate"] is not None   # its reports are still shown, as reports of the outage
+
+
 # ---------------------------------------------------------------- live publisher
 class _Participant:
     def __init__(self, identity):
