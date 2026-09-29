@@ -30,6 +30,7 @@ export class LiveSession {
     this._audioEls = [];
     this._finished = false;
     this._t0 = null;
+    this._seq = 0;      // a stable key (_k) per transcript line and story event, for the chat
   }
 
   async connect() {
@@ -122,7 +123,7 @@ export class LiveSession {
     const mine = info.identity === this.room.localParticipant.identity;
     let turn = this._segments.get(segment);
     if (!turn) {
-      turn = { kind: mine ? "user" : "agent", text: "", interim: true, t: this.now() };
+      turn = { kind: mine ? "user" : "agent", text: "", interim: true, t: this.now(), _k: this._seq++ };
       this._segments.set(segment, turn);
       this.state.turns.push(turn);
     }
@@ -148,7 +149,7 @@ export class LiveSession {
       }
       if (ev.kind === "action") this.state.actions.set(ev.id, ev);
       else if (ev.kind === "config") this.state.pipeline = ev.pipeline;
-      else if (ev.kind === "note" || ev.kind === "keel" || ev.kind === "state") this.state.story.push(ev);
+      else if (ev.kind === "note" || ev.kind === "keel" || ev.kind === "state") this.state.story.push({ ...ev, _k: this._seq++ });
     }
     this.onChange();
   }

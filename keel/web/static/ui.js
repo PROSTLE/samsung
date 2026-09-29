@@ -111,5 +111,7 @@ export const icons = {
   search: svg('<circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/>'),
   clockIc: svg('<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>'),
   wave: svg('<path d="M3 12h2M7 8v8M11 5v14M15 9v6M19 7v10M21 12h0"/>'),
+  panel: svg('<rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/><path d="M14.5 4.5v15"/>'),
+  down: svg('<path d="M12 5v14M6 13l6 6 6-6"/>'),
 };
 export const keelMark = `<svg viewBox="0 0 32 32" width="16" height="16" aria-hidden="true"><path d="M7 20c3 3 15 3 18 0M16 6v13M16 8l6 9h-6" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`;

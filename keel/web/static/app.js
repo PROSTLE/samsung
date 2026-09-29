@@ -96,6 +96,7 @@ async function route() {
   }
   page?.destroy?.();
   page = null;
+  view.classList.remove("full");
   for (const [re, nav, fn] of routes) {
     const m = hash.match(re);
     if (!m) continue;
@@ -237,6 +238,9 @@ function bindRows() {
 const runLabel = (x) => `${x.id.slice(0, 4)}-${x.id.slice(4, 6)}-${x.id.slice(6, 8)} ${x.id.slice(9, 11)}:${x.id.slice(11, 13)} UTC · ${x.scenarios ? plural(x.scenarios, "scenario") : "no scenarios"}${{ running: " · running", stopped: " · stopped, no reports", invalid: " · invalid (see its note)" }[x.status] || ""}`;
 
 // ------------------------------------------------------------------ live
+let liveExamples = [];  // the chosen agent's "things to try", also shown in the empty chat
+const exampleCard = (x) => `<div><span>“${esc(x.say)}”</span><small>${esc(x.expect)}</small></div>`;
+
 async function renderLive() {
   crumbs(["Live demo"]);
   if (live) return mountLive();
@@ -249,37 +253,30 @@ async function renderLive() {
   const profiles = Object.keys(examples).filter((k) => !k.startsWith("_"));
   const demo = await api("/api/overview").then((o) => o.demo_session).catch(() => null);
   view.innerHTML = `
-    <div class="page-head"><div><h1>Live demo</h1>
-      <p class="lede">Talk to the agent from this page and change your mind halfway through a request. You will see each call the model plans, and what Keel does with it, as it happens.</p></div></div>
-    <div class="grid cols-2" style="grid-template-columns:minmax(0,1.1fr) minmax(0,1fr)">
-      <section class="card">
-        <div class="card-head"><h2>Start a conversation</h2></div>
-        <div class="card-body stack">
-          ${cfg.live_available ? "" : `<div class="notice warn">${icons.alert}<span>LiveKit keys are not set. Add <code>LIVEKIT_URL</code>, <code>LIVEKIT_API_KEY</code> and <code>LIVEKIT_API_SECRET</code> to <code>.env</code> (a free LiveKit Cloud project) and restart this app.</span></div>`}
-          <div><div class="eyebrow" style="margin-bottom:8px">1 · Start an agent in another terminal</div>
-            <div class="stack" style="gap:8px">
-              <div class="small soft">Benchmark agent (FDB-v3's tools), free with a Gemini API key:</div>
-              ${copyable("KEEL_PIPELINE=gemini_realtime python -m keel.livekit.agent dev")}
-              <div class="small soft">Show &amp; Fix (camera), free with a Gemini API key:</div>
-              ${copyable("KEEL_PIPELINE=gemini_realtime python -m extension.show_and_fix.agent dev")}
-              <div class="small soft">From Windows, the agent and this app together in WSL: <code>wsl bash scripts/keel_live_wsl.sh --pipeline gemini_realtime</code> (add <code>--show-and-fix</code> for the camera agent, or use <code>--pipeline open</code> for open-weight models with no key).</div>
-            </div></div>
-          <div><div class="eyebrow" style="margin-bottom:8px">2 · Join from this page</div>
-            <div class="row-gap"><button class="btn btn-primary btn-lg" id="start" ${cfg.live_available ? "" : "disabled"}>${icons.mic} Start conversation</button>
-              <span class="small muted">Uses your microphone. The agent joins within a few seconds.</span></div></div>
-        </div>
-      </section>
-      <section class="card">
-        <div class="card-head"><h2>Things to try</h2>
-          ${profiles.length > 1 ? `<div class="right"><div class="seg" id="ex-tabs">${profiles.map((p, i) => `<button data-p="${esc(p)}" class="${i === 0 ? "active" : ""}">${esc(PROFILES[p] || p)}</button>`).join("")}</div></div>` : ""}</div>
-        <div class="card-body stack" id="ex-list" style="gap:10px"></div>
-        ${demo ? `<div class="card-body" style="border-top:1px solid var(--border)"><a class="btn" href="#/replay/${encodeURIComponent(demo)}">${icons.play} No agent running? Replay a recorded session</a></div>` : ""}
-      </section>
+    <div class="live-landing">
+      <span class="ll-mark">${keelMark}</span>
+      <h1>Talk to the agent</h1>
+      <p class="lede">Ask for something, then change your mind halfway through. Each call the model plans shows up in the conversation, with what Keel did with it.</p>
+      ${cfg.live_available ? "" : `<div class="notice warn">${icons.alert}<span>LiveKit keys are not set. Add <code>LIVEKIT_URL</code>, <code>LIVEKIT_API_KEY</code> and <code>LIVEKIT_API_SECRET</code> to <code>.env</code> (a free LiveKit Cloud project) and restart this app.</span></div>`}
+      <button class="btn btn-primary btn-lg ll-start" id="start" ${cfg.live_available ? "" : "disabled"}>${icons.mic} Start conversation</button>
+      <div class="small muted">Uses your microphone. The agent joins within a few seconds.</div>
+      ${profiles.length ? `<div class="ll-try">
+        <div class="ll-try-head"><span class="eyebrow">Things to try</span>
+          ${profiles.length > 1 ? `<div class="seg" id="ex-tabs">${profiles.map((p, i) => `<button data-p="${esc(p)}" class="${i === 0 ? "active" : ""}">${esc(PROFILES[p] || p)}</button>`).join("")}</div>` : ""}</div>
+        <div class="try" id="ex-list"></div></div>` : ""}
+      <details class="ll-help"><summary>No agent running?</summary>
+        <div class="stack" style="gap:8px;margin-top:12px;text-align:left">
+          <div class="small soft">Benchmark agent (FDB-v3's tools), free with a Gemini API key:</div>
+          ${copyable("KEEL_PIPELINE=gemini_realtime python -m keel.livekit.agent dev")}
+          <div class="small soft">Show &amp; Fix (camera), free with a Gemini API key:</div>
+          ${copyable("KEEL_PIPELINE=gemini_realtime python -m extension.show_and_fix.agent dev")}
+          <div class="small soft">From Windows, the agent and this app together in WSL: <code>wsl bash scripts/keel_live_wsl.sh --pipeline gemini_realtime</code> (add <code>--show-and-fix</code> for the camera agent, or use <code>--pipeline open</code> for open-weight models with no key).</div>
+          ${demo ? `<a class="btn" style="align-self:flex-start" href="#/replay/${encodeURIComponent(demo)}">${icons.play} Replay a recorded session instead</a>` : ""}
+        </div></details>
     </div>`;
   const showEx = (p) => {
-    document.getElementById("ex-list").innerHTML = (examples[p] || []).map((x) => `
-      <div style="border:1px solid var(--border);border-radius:12px;padding:12px 14px">
-        <div style="font-weight:600">“${esc(x.say)}”</div><div class="small soft" style="margin-top:4px">${esc(x.expect)}</div></div>`).join("") || `<p class="empty">No examples for this agent.</p>`;
+    liveExamples = examples[p] || [];
+    document.getElementById("ex-list").innerHTML = liveExamples.map(exampleCard).join("") || `<p class="empty">No examples for this agent.</p>`;
     document.querySelectorAll("#ex-tabs button").forEach((b) => b.classList.toggle("active", b.dataset.p === p));
   };
   if (profiles.length) showEx(profiles[0]);
@@ -314,18 +311,22 @@ function mountLive() {
   liveView = new ConsoleView(view, { mode: "live" });
   liveView.mount({
     title: "Live conversation",
-    headRight: `<span class="mono muted small hide-sm">${esc(live.state.room)}</span><button class="btn btn-danger btn-sm" id="l-end-top">End session</button>`,
-    controls: `
-      <div class="ctl" id="l-cam-c"><button id="l-cam" aria-label="Camera">${icons.camera}</button><span id="l-cam-l">Camera</span></div>
-      <div class="ctl primary"><button id="l-mic" aria-label="Mute">${icons.mic}</button><span id="l-mic-l">Mute</span></div>
-      <div class="ctl danger"><button id="l-end" aria-label="End">${icons.end}</button>End</div>`,
+    headRight: `<span class="mono muted small hide-sm">${esc(live.state.room)}</span>`,
+    empty: `
+      <span class="ll-mark">${keelMark}</span>
+      <h3>Say something</h3>
+      <p>Ask for something, then change your mind halfway through. Each call the model plans shows up here, with what Keel did with it.</p>
+      ${liveExamples.length ? `<div class="try">${liveExamples.map(exampleCard).join("")}</div>` : ""}`,
+    dockLeft: `<button class="rb" id="l-cam" aria-label="Turn the camera on" title="Camera">${icons.camera}</button>`,
+    dockRight: `
+      <button class="rb primary" id="l-mic" aria-label="Mute" title="Mute">${icons.mic}</button>
+      <button class="rb danger" id="l-end" aria-label="End the conversation" title="End">${icons.end}</button>`,
   });
-  const wave = view.querySelector(".wave");
-  wave.insertAdjacentHTML("beforeend", `<video id="l-preview" autoplay muted playsinline style="position:absolute;right:6px;bottom:6px;width:140px;border-radius:10px;display:none;box-shadow:var(--shadow-lg)"></video>`);
+  view.querySelector(".chat-main").insertAdjacentHTML("beforeend",
+    `<video id="l-preview" class="cam-preview" autoplay muted playsinline hidden></video>`);
   document.getElementById("l-mic").onclick = () => live.toggleMic();
   document.getElementById("l-cam").onclick = () => live.toggleCamera(document.getElementById("l-preview"));
   document.getElementById("l-end").onclick = () => live.end();
-  document.getElementById("l-end-top").onclick = () => live.end();
   page = { redraw: () => { if (liveView) { liveView.sig = {}; updateLive(); } } };
   scheduleLive();
 }
@@ -340,16 +341,30 @@ function updateLive() {
   if (!live || !liveView) return;
   const s = live.state, now = live.now();
   liveView.update(derive(live.events(), now), [0, Math.max(now, 30000)]);
+  // The clock is filled in each frame (liveFrame), so the status markup stays the
+  // same from one update to the next and is not rebuilt.
   const status = s.connecting ? `<span class="chip">Connecting…</span>`
     : !s.agentJoined ? `<span class="chip holding">${s.waitedLong ? "The agent has not joined. Is it running?" : "Waiting for the agent to join"}</span>`
-    : `<span class="chip done live"><span class="dot"></span>Session active</span><span class="clock" id="l-clock" style="margin-left:6px">${clock(now)}</span>${s.pipeline ? `<span class="muted small" style="margin-left:6px">${esc(PIPELINES[s.pipeline] || s.pipeline)}</span>` : ""}`;
+    : `<span class="chip done live"><span class="dot"></span>Live</span><span class="clock" id="l-clock"></span>${s.pipeline ? `<span class="muted small hide-sm">${esc(PIPELINES[s.pipeline] || s.pipeline)}</span>` : ""}`;
   liveView.setStatus(status);
-  const mic = document.getElementById("l-mic"), micL = document.getElementById("l-mic-l");
-  if (mic) { mic.innerHTML = s.micOn ? icons.mic : icons.micOff; micL.textContent = s.micOn ? "Mute" : "Unmute"; }
-  const cam = document.getElementById("l-cam-c");
-  if (cam) { cam.classList.toggle("on", s.camOn); document.getElementById("l-cam-l").textContent = s.camOn ? "Camera on" : "Camera"; }
+  const c = document.getElementById("l-clock");
+  if (c) c.textContent = clock(now);
+  const mic =document.getElementById("l-mic");
+  const micState = s.micOn ? "on" : "off";
+  if (mic && mic.dataset.s !== micState) {
+    mic.dataset.s = micState;
+    mic.innerHTML = s.micOn ? icons.mic : icons.micOff;
+    mic.classList.toggle("off", !s.micOn);
+    mic.setAttribute("aria-label", s.micOn ? "Mute" : "Unmute");
+    mic.title = s.micOn ? "Mute" : "Unmute";
+  }
+  const cam = document.getElementById("l-cam");
+  if (cam && cam.classList.contains("on") !== s.camOn) {
+    cam.classList.toggle("on", s.camOn);
+    cam.setAttribute("aria-label", s.camOn ? "Turn the camera off" : "Turn the camera on");
+  }
   const prev = document.getElementById("l-preview");
-  if (prev) { prev.style.display = s.camOn ? "block" : "none"; if (s.camOn && !prev.srcObject) live.attachPreview(prev); }
+  if (prev) { prev.hidden = !s.camOn; if (s.camOn && !prev.srcObject) live.attachPreview(prev); }
 }
 
 let lastTimeline = 0;
@@ -467,10 +482,11 @@ async function renderReplay(id, at = null) {
     <div class="notice" style="margin-bottom:16px">${icons.sound}<span>${a?.available
       ? `Plays FDB-v3's own recordings: the benchmark's input audio on your side, and what the agent said in the room on its side, lined up with Keel's trace ${a.anchor === "clock" ? "by the wall clock both recorded" : "by the first executed call, which both recorded (within 10 ms)"}.`
       : a ? `No audio: ${esc(a.why)}.` : `No recording for this session on this machine; the bars show when the trace says someone was speaking. Benchmark sessions play with sound while the FDB-v3 checkout (KEEL_FDB_DIR) still holds their audio.`}
-      Space plays and pauses; the arrow keys skip 5 s; click the timeline or a decision to jump there.</span></div>`;
+      Space plays and pauses; the arrow keys skip 5 s; drag the bar above the controls, or click the timeline or a decision, to jump.</span></div>`;
   const replay = new Replay(view, data);
-  replay.mount(a?.available ? `<span class="chip done">${icons.sound.replace("<svg", '<svg width="12" height="12"')} Recorded audio</span>`
-    : `<span class="chip">${icons.soundOff.replace("<svg", '<svg width="12" height="12"')} No audio</span>`, above);
+  const verdictChip = v ? (v.passed ? `<span class="chip pass">Pass</span>` : `<span class="chip fail">Fail</span>`) : "";
+  replay.mount(`${verdictChip}${a?.available ? `<span class="chip done hide-sm">${icons.sound.replace("<svg", '<svg width="12" height="12"')} Recorded audio</span>`
+    : `<span class="chip hide-sm">${icons.soundOff.replace("<svg", '<svg width="12" height="12"')} No audio</span>`}`, above, title);
   if (at != null) replay.seek(at);
   page = { destroy: () => replay.destroy(), redraw: () => { replay.view.sig = {}; replay.render(); } };
 }

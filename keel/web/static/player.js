@@ -4,7 +4,7 @@
 // step, lined up by the offset the server derived (keel/web/results.py).
 
 import { ConsoleView, derive, drawWave } from "./console.js";
-import { clock, icons } from "./ui.js";
+import { clock, esc, icons } from "./ui.js";
 
 const WINDOW_MS = 6000;   // the visualiser shows the last 6 s
 const BARS = 90;
@@ -64,27 +64,33 @@ export class Replay {
     this.view = new ConsoleView(root, { mode: "replay", onSeek: (t) => this.seek(t) });
   }
 
-  mount(headHtml, aboveHtml) {
+  // title: the session's; headHtml: chips beside it; aboveHtml: the session's
+  // details (verdict, audio note), shown in the drawer's Session tab.
+  mount(headHtml, aboveHtml, title = "Replay") {
     this.view.mount({
-      title: "Replay", headRight: headHtml, above: aboveHtml,
-      controls: `
-        <div class="ctl"><button id="r-back" aria-label="Back 5 seconds">${icons.back}</button>−5 s</div>
-        <div class="ctl primary"><button id="r-play" aria-label="Play">${icons.play}</button><span id="r-play-l">Play</span></div>
-        <div class="ctl"><button id="r-fwd" aria-label="Forward 5 seconds">${icons.fwd}</button>+5 s</div>`,
+      title: esc(title), headRight: headHtml,
+      side: aboveHtml ? { label: "Session", html: aboveHtml } : null,
+      dockTop: `<div class="scrub-row"><input type="range" class="scrub" id="r-scrub" min="0" max="1000" step="1" value="0" aria-label="Position in the conversation"></div>`,
+      dockLeft: `
+        <button class="rb sm" id="r-back" aria-label="Back 5 seconds" title="Back 5 s">${icons.back}</button>
+        <button class="rb primary" id="r-play" aria-label="Play" title="Play (Space)">${icons.play}</button>
+        <button class="rb sm" id="r-fwd" aria-label="Forward 5 seconds" title="Forward 5 s">${icons.fwd}</button>`,
+      dockRight: `
+        <span class="clock hide-sm" id="r-clock"></span>
+        <div class="speed hide-sm" id="r-speed" aria-label="Speed">${[1, 1.5, 2].map((s) => `<button data-s="${s}" class="${s === 1 ? "active" : ""}">${s}×</button>`).join("")}</div>
+        <button class="rb sm" id="r-sound" aria-label="Sound" title="Sound">${icons.sound}</button>`,
     });
-    this.view.$("c-controls").insertAdjacentHTML("beforebegin", `
-      <div class="playbar">
-        <span class="clock" id="r-clock"></span><span class="spacer"></span>
-        <div class="speed" id="r-speed" aria-label="Speed">${[1, 1.5, 2].map((s) => `<button data-s="${s}" class="${s === 1 ? "active" : ""}">${s}×</button>`).join("")}</div>
-        <button class="btn btn-ghost btn-sm" id="r-sound" aria-label="Sound">${icons.sound}<span id="r-sound-l">Sound</span></button>
-      </div>`);
     const $ = (id) => document.getElementById(id);
     $("r-play").onclick = () => (this.playing ? this.pause() : this.play());
     $("r-back").onclick = () => this.seek(this.now - 5000);
     $("r-fwd").onclick = () => this.seek(this.now + 5000);
     $("r-sound").onclick = () => this.toggleSound();
     $("r-speed").onclick = (e) => { const s = Number(e.target.closest("button")?.dataset.s); if (s) this.setSpeed(s); };
-    if (!this.audio) { $("r-sound").disabled = true; $("r-sound-l").textContent = "No audio"; }
+    const scrub = $("r-scrub");
+    scrub.oninput = () => this.seek(this.domain[0] + (Number(scrub.value) / 1000) * (this.domain[1] - this.domain[0]));
+    scrub.onpointerdown = () => { scrub.dataset.drag = "1"; };
+    scrub.onpointerup = scrub.onpointercancel = () => { scrub.dataset.drag = ""; };
+    if (!this.audio) { $("r-sound").disabled = true; $("r-sound").title = "No recorded audio"; }
     this._keys = (e) => {
       if (e.target.closest("input, select, textarea, button")) return;
       if (e.code === "Space") { e.preventDefault(); this.playing ? this.pause() : this.play(); }
@@ -156,13 +162,12 @@ export class Replay {
     this.sound = !this.sound;
     if (!this.sound) Object.values(this.els).forEach((el) => el.pause());
     const b = document.getElementById("r-sound");
-    if (b) b.innerHTML = `${this.sound ? icons.sound : icons.soundOff}<span id="r-sound-l">${this.sound ? "Sound" : "Muted"}</span>`;
+    if (b) { b.innerHTML = this.sound ? icons.sound : icons.soundOff; b.setAttribute("aria-label", this.sound ? "Mute" : "Unmute"); }
   }
 
   _syncButtons() {
-    const b = document.getElementById("r-play"), l = document.getElementById("r-play-l");
+    const b = document.getElementById("r-play");
     if (b) { b.innerHTML = this.playing ? icons.pause : icons.play; b.setAttribute("aria-label", this.playing ? "Pause" : "Play"); }
-    if (l) l.textContent = this.playing ? "Pause" : "Play";
   }
 
   _syncAudio() {
@@ -196,6 +201,8 @@ export class Replay {
     this.view.update(m, this.domain);
     const c = document.getElementById("r-clock");
     if (c) c.textContent = `${clock(this.now - this.domain[0])} / ${clock(this.domain[1] - this.domain[0])}`;
+    const sc = document.getElementById("r-scrub");
+    if (sc && sc.dataset.drag !== "1") sc.value = String(Math.round((1000 * (this.now - this.domain[0])) / Math.max(1, this.domain[1] - this.domain[0])));
     const canvas = document.getElementById("c-wave");
     if (canvas) drawWave(canvas, this._bars(m));
   }
