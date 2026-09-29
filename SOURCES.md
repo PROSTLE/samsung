@@ -72,6 +72,14 @@ by the matching `data/fetch/` script; everything else is maintained by hand.
   Cascaded (Whisper, GPT-4o, OpenAI TTS) 0.450, Grok 0.430, Ultravox 0.410. On
   self-correction scenarios, Pass@1 for the cascaded pipeline is 0.176 and for
   GPT-Realtime 0.588.
+- Table 2, Gemini Live 3.1 row: tool selection 0.817, argument accuracy 0.588, response
+  quality 0.718, Pass@1 0.540, take-turn 78.0%, latency 4.25 s, interrupt 19.2%, filler
+  31.7%. Table 6 (mean seconds, first word / tool call / task completion): Gemini Live 3.1
+  3.95 / 2.21 / 4.25; GPT-Realtime 6.36 / 3.89 / 6.89; Cascaded 8.78 / 3.15 / 10.12.
+  Table 3 (self-correction Pass@1): Gemini Live 3.1 0.353. First response latency is
+  "Time until any speech, including filler sentences". (arXiv HTML, read 2026-09-28.)
+  Take-turn and interrupt rates come from FDB-v3's latency script, which uses no judge, so
+  our run's 84% and 6% (5 of 84) compare directly with the 78.0% and 19.2% above.
 - Quote on premature calls: "Gemini Live 3.1's tool-call latency of −2.27 s means
   the API was invoked before the user finished correcting, locking in
   destination='Rome' (the original, uncorrected value)."

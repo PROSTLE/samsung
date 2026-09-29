@@ -181,7 +181,10 @@ Show & Fix and tests).
   meaning. If they counted, 63 of 100 would pass: that is our estimate by our rule, not a
   score. The other 14 are real errors (a filter name swapped, "Vegas" for "Las Vegas", 800
   for 1800, a misheard order ID).
-- *No response (16).* In 12, Gemini Live never produced a user turn: no transcript, no tool
+- *No response (16).* **Correction (2026-09-28, `docs/reports/RERUN_2026-09-28.md`):** in 9
+  of these the agent joined the room after the caller had finished, or not at all, because
+  the worker lost its connection to LiveKit; they were not Gemini Live's doing. As first
+  written: in 12, Gemini Live never produced a user turn: no transcript, no tool
   call, and Keel held nothing (checked per trace). One had a Gemini API "1006 abnormal
   closure"; across the run LiveKit's Gemini plugin logged "received server content but no
   active generation" 95 times (model output it discarded). In the other 4 the calls went
