@@ -182,6 +182,13 @@ class LivekitConfig(_Section):
     pipeline: str  # "cascaded" | "gpt_realtime" | "gemini_realtime" | "open"
     trace_dir: str
     speak_purposes: list[str]
+    # Upload each session's audio, transcript and traces to LiveKit Cloud
+    # (AgentSession.start(record=...), whose default follows the project's
+    # setting). Replays use FDB-v3's own recordings, so the uploads only compete
+    # with live audio for bandwidth: in the full run of 2026-09-27, failed uploads
+    # were being retried while the worker lost its connection and joined eight
+    # rooms after the user had finished speaking.
+    record: bool = False
     cascaded: CascadedConfig
     realtime: RealtimeConfig
     gemini: Optional[RealtimeConfig] = None

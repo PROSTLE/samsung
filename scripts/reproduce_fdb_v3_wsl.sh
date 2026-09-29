@@ -32,7 +32,7 @@ rsync -a --delete \
   --exclude=/.venv/ --exclude=/.venv-agent/ --exclude=/.venv-bench/ --exclude=/.venv-speech/ --exclude=/third_party/ \
   --exclude=/results/ --exclude=/traces/ --exclude=/reports/ --exclude='*.egg-info/' \
   --exclude=__pycache__/ --exclude=.pytest_cache/ --exclude=.hypothesis/ \
-  --exclude=/txt.txt --exclude='/*.docx' \
+  --exclude=/txt.txt --exclude='/*.docx' --exclude='/*.pptx' \
   "$SRC/" "$DST/"
 mkdir -p "$DST/results/fdb_v3"
 before="$(ls -1 "$DST/results/fdb_v3")"

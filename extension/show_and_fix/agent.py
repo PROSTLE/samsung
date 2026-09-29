@@ -122,7 +122,7 @@ async def entrypoint(ctx: agents.JobContext) -> None:
 
     ctx.add_shutdown_callback(_shutdown)
     await session.start(room=ctx.room, agent=Agent(instructions=instructions, tools=tools),
-                        room_options=room_io.RoomOptions(video_input=True))
+                        room_options=room_io.RoomOptions(video_input=True), record=lk.record)
     log.info("show & fix agent started in room %s", ctx.room.name)
 
 

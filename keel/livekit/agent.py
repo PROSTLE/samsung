@@ -154,7 +154,12 @@ class LatencyTracker:
         self.reset()
 
 
-server = AgentServer()
+# LiveKit stops giving a worker jobs once the machine's CPU load passes
+# load_threshold (0.7 by default in production). FDB-v3 runs its own speech
+# recognition on the same machine between scenarios, and this agent handles one
+# conversation at a time, so machine-wide load says little about its capacity.
+# LiveKit requires a value below 1 in production.
+server = AgentServer(load_threshold=0.95)
 _SETTINGS: Optional[Settings] = None
 
 
@@ -196,7 +201,7 @@ async def entrypoint(ctx: agents.JobContext) -> None:
     wire(session, gate, on_user_final=tracker.user_final, on_agent_speaking=tracker.agent_speaking)
     ctx.add_shutdown_callback(gate.aclose)
     instructions = s.template.instructions + "\n" + lk.fdb.extra_instructions.strip()
-    await session.start(room=ctx.room, agent=Agent(instructions=instructions, tools=tools))
+    await session.start(room=ctx.room, agent=Agent(instructions=instructions, tools=tools), record=lk.record)
     log.info("keel agent started in room %s (pipeline=%s)", room, lk.pipeline)
 
 
