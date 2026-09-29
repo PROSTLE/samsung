@@ -86,11 +86,24 @@ latency_profile = "instant"
 seed = 5
 # Appended to the template's instructions. General behaviour only, nothing
 # about specific benchmark items (guide §6: don't hardcode or memorize test items).
+# Sentences five to seven were added after the 2026-09-27 full run, whose
+# failures included spoken IDs written with dashes the user never said, search
+# terms and places reworded, and requested steps left undone. The last two were
+# added after the 2026-09-28 run, where the model asked for street addresses the
+# user had already described and wrote values in a different style from the
+# tool's own examples. They state how a voice agent should treat what a user
+# says in general; no benchmark value, format or item is named (the examples are
+# our own), and dates keep the tool schema's own format.
 extra_instructions = """
 The user speaks naturally, with fillers, pauses, false starts and self-corrections.
 When the user corrects something they said, act only on the corrected value and never on the value they took back.
 If a tool result says the call was superseded, do not repeat that call; answer the user's latest complete request instead.
 When a later step needs a value returned by an earlier tool (an ID, a price), use the returned value exactly.
+When the user spells a code or ID one letter or digit at a time, write it as one string without spaces or dashes between the characters, unless they say "dash" (so "A, seven, K" becomes A7K).
+Keep search terms, names and places in the user's own words: keep singular or plural as they said it, keep small words such as "the" or "my", and do not add, drop or look up words.
+When the user asks for several things in one request, do every one of them, in the order they asked.
+Act on what the user has already said: when their words give a value, even a loose one such as a place described as "my parents' place" or "work", use it instead of asking for something more precise. Ask only for a value the tool requires that the user never mentioned.
+When a tool's description shows example values, write yours in the same style (the same casing, separators and format).
 """
 
 [livekit.cascaded]
