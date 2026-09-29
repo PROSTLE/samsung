@@ -1,0 +1,412 @@
+{
+  "pid": "61517db6a7589569521b2356",
+  "example_id": "ecommerce_14",
+  "category": "ecommerce_support",
+  "title": "Filler-Heavy Cart Addition",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T16:26:17.629767",
+  "inference_time_s": 59.0,
+  "room_name": "eval-130da69a",
+  "stream_start_time": 1790612780.799167,
+  "input_transcript": "Um well yeah, so um yeah, so I already found what I want. Can you add like two of item uh P52 to my card? I want to get one for myself and one as a gift.",
+  "input_asr_chunks": [
+    {
+      "text": "Um",
+      "timestamp": [
+        0.72,
+        1.2
+      ]
+    },
+    {
+      "text": "well",
+      "timestamp": [
+        2.48,
+        2.72
+      ]
+    },
+    {
+      "text": "yeah,",
+      "timestamp": [
+        3.84,
+        4.08
+      ]
+    },
+    {
+      "text": "so",
+      "timestamp": [
+        4.5600000000000005,
+        4.8
+      ]
+    },
+    {
+      "text": "um",
+      "timestamp": [
+        4.96,
+        5.2
+      ]
+    },
+    {
+      "text": "yeah,",
+      "timestamp": [
+        6.8,
+        7.12
+      ]
+    },
+    {
+      "text": "so",
+      "timestamp": [
+        7.44,
+        7.6000000000000005
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        8.16,
+        8.4
+      ]
+    },
+    {
+      "text": "already",
+      "timestamp": [
+        8.4,
+        8.8
+      ]
+    },
+    {
+      "text": "found",
+      "timestamp": [
+        8.8,
+        9.120000000000001
+      ]
+    },
+    {
+      "text": "what",
+      "timestamp": [
+        9.120000000000001,
+        9.44
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        9.44,
+        9.76
+      ]
+    },
+    {
+      "text": "want.",
+      "timestamp": [
+        9.76,
+        10.08
+      ]
+    },
+    {
+      "text": "Can",
+      "timestamp": [
+        10.4,
+        10.96
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        10.96,
+        11.28
+      ]
+    },
+    {
+      "text": "add",
+      "timestamp": [
+        11.28,
+        11.52
+      ]
+    },
+    {
+      "text": "like",
+      "timestamp": [
+        11.68,
+        12.0
+      ]
+    },
+    {
+      "text": "two",
+      "timestamp": [
+        12.72,
+        13.040000000000001
+      ]
+    },
+    {
+      "text": "of",
+      "timestamp": [
+        13.200000000000001,
+        13.52
+      ]
+    },
+    {
+      "text": "item",
+      "timestamp": [
+        13.52,
+        14.16
+      ]
+    },
+    {
+      "text": "uh",
+      "timestamp": [
+        14.8,
+        14.96
+      ]
+    },
+    {
+      "text": "P52",
+      "timestamp": [
+        15.200000000000001,
+        16.0
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        16.240000000000002,
+        16.4
+      ]
+    },
+    {
+      "text": "my",
+      "timestamp": [
+        16.4,
+        16.56
+      ]
+    },
+    {
+      "text": "card?",
+      "timestamp": [
+        16.56,
+        16.8
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        16.96,
+        17.04
+      ]
+    },
+    {
+      "text": "want",
+      "timestamp": [
+        17.04,
+        17.2
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        17.2,
+        17.36
+      ]
+    },
+    {
+      "text": "get",
+      "timestamp": [
+        17.36,
+        17.68
+      ]
+    },
+    {
+      "text": "one",
+      "timestamp": [
+        17.68,
+        17.92
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        17.92,
+        18.16
+      ]
+    },
+    {
+      "text": "myself",
+      "timestamp": [
+        18.16,
+        18.56
+      ]
+    },
+    {
+      "text": "and",
+      "timestamp": [
+        18.56,
+        18.72
+      ]
+    },
+    {
+      "text": "one",
+      "timestamp": [
+        18.72,
+        18.96
+      ]
+    },
+    {
+      "text": "as",
+      "timestamp": [
+        18.96,
+        19.12
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        19.12,
+        19.36
+      ]
+    },
+    {
+      "text": "gift.",
+      "timestamp": [
+        19.36,
+        19.92
+      ]
+    }
+  ],
+  "user_speech_end_rel": 19.92,
+  "latency": {
+    "input_duration_s": 51.24,
+    "output_duration_s": 51.24,
+    "first_speech_s": 24.55
+  },
+  "user_done_unix": 1790612800.719167,
+  "search_latency_breakdown": {
+    "room": "eval-130da69a",
+    "tool": "add_to_cart",
+    "reasoning": 0.605,
+    "execution": 0.0,
+    "synthesis": 0.665,
+    "total": 1.269,
+    "agent_start_at": 1790612804.6223614
+  },
+  "absolute_total_latency": 3.903,
+  "transcript": "I've added two of those item P52s to your cart. Your total is now $199.98.",
+  "asr_chunks": [
+    {
+      "text": "I've",
+      "timestamp": [
+        24.400000000000002,
+        24.72
+      ]
+    },
+    {
+      "text": "added",
+      "timestamp": [
+        24.72,
+        24.96
+      ]
+    },
+    {
+      "text": "two",
+      "timestamp": [
+        24.96,
+        25.2
+      ]
+    },
+    {
+      "text": "of",
+      "timestamp": [
+        25.2,
+        25.28
+      ]
+    },
+    {
+      "text": "those",
+      "timestamp": [
+        25.28,
+        25.44
+      ]
+    },
+    {
+      "text": "item",
+      "timestamp": [
+        25.44,
+        25.84
+      ]
+    },
+    {
+      "text": "P52s",
+      "timestamp": [
+        25.84,
+        26.64
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        26.64,
+        26.72
+      ]
+    },
+    {
+      "text": "your",
+      "timestamp": [
+        26.72,
+        26.88
+      ]
+    },
+    {
+      "text": "cart.",
+      "timestamp": [
+        26.88,
+        27.2
+      ]
+    },
+    {
+      "text": "Your",
+      "timestamp": [
+        27.36,
+        27.6
+      ]
+    },
+    {
+      "text": "total",
+      "timestamp": [
+        27.6,
+        27.84
+      ]
+    },
+    {
+      "text": "is",
+      "timestamp": [
+        27.84,
+        28.0
+      ]
+    },
+    {
+      "text": "now",
+      "timestamp": [
+        28.0,
+        28.16
+      ]
+    },
+    {
+      "text": "$199.98.",
+      "timestamp": [
+        28.16,
+        29.68
+      ]
+    }
+  ],
+  "perceived_total_latency": 4.48,
+  "audio_agent_speech_start": 24.400000000000002,
+  "actual_tool_calls": [
+    {
+      "function": "add_to_cart",
+      "args": {
+        "quantity": 2,
+        "product_id": "P52"
+      },
+      "timestamp_start": 23.16,
+      "timestamp_end": 23.16
+    }
+  ],
+  "status": "completed"
+}

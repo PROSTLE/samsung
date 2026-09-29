@@ -1,0 +1,10 @@
+{
+  "pid": "5f4a4da1575d605c43bef871",
+  "example_id": "housing_06",
+  "category": "housing_location",
+  "title": "Walking Commute Check",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T20:29:27.044300",
+  "inference_time_s": 45.07,
+  "status": "inference_failed"
+}

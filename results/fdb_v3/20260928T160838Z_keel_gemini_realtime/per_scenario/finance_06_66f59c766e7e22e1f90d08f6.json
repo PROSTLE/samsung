@@ -1,0 +1,327 @@
+{
+  "pid": "66f59c766e7e22e1f90d08f6",
+  "example_id": "finance_06",
+  "category": "finance_billing",
+  "title": "Card Benefits with Hesitation",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T16:44:46.012398",
+  "inference_time_s": 55.12,
+  "room_name": "eval-71184076",
+  "stream_start_time": 1790613890.5382848,
+  "input_transcript": "Um, so uh, I was wondering what the benefits are for the travel card. I think that's the one my co-worker recommended for me.",
+  "input_asr_chunks": [
+    {
+      "text": "Um,",
+      "timestamp": [
+        0.88,
+        1.28
+      ]
+    },
+    {
+      "text": "so",
+      "timestamp": [
+        1.6,
+        1.84
+      ]
+    },
+    {
+      "text": "uh,",
+      "timestamp": [
+        1.92,
+        2.24
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        2.48,
+        2.72
+      ]
+    },
+    {
+      "text": "was",
+      "timestamp": [
+        2.72,
+        2.88
+      ]
+    },
+    {
+      "text": "wondering",
+      "timestamp": [
+        2.88,
+        3.36
+      ]
+    },
+    {
+      "text": "what",
+      "timestamp": [
+        3.36,
+        3.6
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        3.6,
+        3.7600000000000002
+      ]
+    },
+    {
+      "text": "benefits",
+      "timestamp": [
+        3.7600000000000002,
+        4.72
+      ]
+    },
+    {
+      "text": "are",
+      "timestamp": [
+        4.72,
+        5.04
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        5.04,
+        5.36
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        5.36,
+        5.68
+      ]
+    },
+    {
+      "text": "travel",
+      "timestamp": [
+        5.92,
+        6.5600000000000005
+      ]
+    },
+    {
+      "text": "card.",
+      "timestamp": [
+        6.5600000000000005,
+        7.04
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        7.6000000000000005,
+        7.84
+      ]
+    },
+    {
+      "text": "think",
+      "timestamp": [
+        7.84,
+        8.08
+      ]
+    },
+    {
+      "text": "that's",
+      "timestamp": [
+        8.08,
+        8.96
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        8.96,
+        9.28
+      ]
+    },
+    {
+      "text": "one",
+      "timestamp": [
+        9.28,
+        9.6
+      ]
+    },
+    {
+      "text": "my",
+      "timestamp": [
+        9.6,
+        9.92
+      ]
+    },
+    {
+      "text": "co-worker",
+      "timestamp": [
+        9.92,
+        10.64
+      ]
+    },
+    {
+      "text": "recommended",
+      "timestamp": [
+        10.64,
+        11.200000000000001
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        11.200000000000001,
+        11.44
+      ]
+    },
+    {
+      "text": "me.",
+      "timestamp": [
+        11.44,
+        11.76
+      ]
+    }
+  ],
+  "user_speech_end_rel": 11.76,
+  "latency": {
+    "input_duration_s": 43.74,
+    "output_duration_s": 43.74,
+    "first_speech_s": 14.55
+  },
+  "user_done_unix": 1790613902.2982848,
+  "search_latency_breakdown": {
+    "room": "eval-71184076",
+    "tool": "get_card_benefits",
+    "reasoning": 0.61,
+    "execution": 0.0,
+    "synthesis": 0.699,
+    "total": 1.308,
+    "agent_start_at": 1790613905.866777
+  },
+  "absolute_total_latency": 3.568,
+  "transcript": "The benefits for the travel card are two percent cash back and no foreign transaction fees.",
+  "asr_chunks": [
+    {
+      "text": "The",
+      "timestamp": [
+        14.32,
+        14.56
+      ]
+    },
+    {
+      "text": "benefits",
+      "timestamp": [
+        14.56,
+        15.120000000000001
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        15.120000000000001,
+        15.200000000000001
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        15.200000000000001,
+        15.36
+      ]
+    },
+    {
+      "text": "travel",
+      "timestamp": [
+        15.36,
+        15.68
+      ]
+    },
+    {
+      "text": "card",
+      "timestamp": [
+        15.68,
+        16.0
+      ]
+    },
+    {
+      "text": "are",
+      "timestamp": [
+        16.0,
+        16.16
+      ]
+    },
+    {
+      "text": "two",
+      "timestamp": [
+        16.16,
+        16.240000000000002
+      ]
+    },
+    {
+      "text": "percent",
+      "timestamp": [
+        16.4,
+        16.72
+      ]
+    },
+    {
+      "text": "cash",
+      "timestamp": [
+        16.72,
+        17.04
+      ]
+    },
+    {
+      "text": "back",
+      "timestamp": [
+        17.04,
+        17.28
+      ]
+    },
+    {
+      "text": "and",
+      "timestamp": [
+        17.28,
+        17.44
+      ]
+    },
+    {
+      "text": "no",
+      "timestamp": [
+        17.44,
+        17.6
+      ]
+    },
+    {
+      "text": "foreign",
+      "timestamp": [
+        17.6,
+        18.0
+      ]
+    },
+    {
+      "text": "transaction",
+      "timestamp": [
+        18.0,
+        18.64
+      ]
+    },
+    {
+      "text": "fees.",
+      "timestamp": [
+        18.64,
+        19.2
+      ]
+    }
+  ],
+  "perceived_total_latency": 2.56,
+  "audio_agent_speech_start": 14.32,
+  "actual_tool_calls": [
+    {
+      "function": "get_card_benefits",
+      "args": {
+        "card_type": "travel"
+      },
+      "timestamp_start": 14.63,
+      "timestamp_end": 14.63
+    }
+  ],
+  "status": "completed"
+}

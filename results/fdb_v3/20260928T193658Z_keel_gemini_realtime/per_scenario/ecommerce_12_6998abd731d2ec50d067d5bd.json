@@ -1,0 +1,335 @@
+{
+  "pid": "6998abd731d2ec50d067d5bd",
+  "example_id": "ecommerce_12",
+  "category": "ecommerce_support",
+  "title": "Hesitation with Category",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T19:50:22.359642",
+  "inference_time_s": 51.38,
+  "room_name": "eval-8d6fd4be",
+  "stream_start_time": 1790625025.5468931,
+  "input_transcript": "Like, you know, um, I'm thinking something in the let me think electronics section of the grid. He's really into gadgets and text stuff.",
+  "input_asr_chunks": [
+    {
+      "text": "Like,",
+      "timestamp": [
+        0.72,
+        0.96
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        1.04,
+        1.28
+      ]
+    },
+    {
+      "text": "know,",
+      "timestamp": [
+        1.28,
+        1.44
+      ]
+    },
+    {
+      "text": "um,",
+      "timestamp": [
+        1.68,
+        1.84
+      ]
+    },
+    {
+      "text": "I'm",
+      "timestamp": [
+        2.48,
+        3.04
+      ]
+    },
+    {
+      "text": "thinking",
+      "timestamp": [
+        3.04,
+        3.6
+      ]
+    },
+    {
+      "text": "something",
+      "timestamp": [
+        3.6,
+        3.92
+      ]
+    },
+    {
+      "text": "in",
+      "timestamp": [
+        3.92,
+        4.16
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        4.16,
+        4.4
+      ]
+    },
+    {
+      "text": "let",
+      "timestamp": [
+        4.64,
+        4.8
+      ]
+    },
+    {
+      "text": "me",
+      "timestamp": [
+        4.8,
+        5.04
+      ]
+    },
+    {
+      "text": "think",
+      "timestamp": [
+        5.04,
+        5.2
+      ]
+    },
+    {
+      "text": "electronics",
+      "timestamp": [
+        5.5200000000000005,
+        6.32
+      ]
+    },
+    {
+      "text": "section",
+      "timestamp": [
+        6.32,
+        6.72
+      ]
+    },
+    {
+      "text": "of",
+      "timestamp": [
+        6.72,
+        6.88
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        6.88,
+        7.04
+      ]
+    },
+    {
+      "text": "grid.",
+      "timestamp": [
+        7.12,
+        7.44
+      ]
+    },
+    {
+      "text": "He's",
+      "timestamp": [
+        8.0,
+        8.4
+      ]
+    },
+    {
+      "text": "really",
+      "timestamp": [
+        8.4,
+        8.64
+      ]
+    },
+    {
+      "text": "into",
+      "timestamp": [
+        8.64,
+        8.96
+      ]
+    },
+    {
+      "text": "gadgets",
+      "timestamp": [
+        8.96,
+        9.52
+      ]
+    },
+    {
+      "text": "and",
+      "timestamp": [
+        9.6,
+        9.84
+      ]
+    },
+    {
+      "text": "text",
+      "timestamp": [
+        9.84,
+        10.4
+      ]
+    },
+    {
+      "text": "stuff.",
+      "timestamp": [
+        10.4,
+        10.72
+      ]
+    }
+  ],
+  "user_speech_end_rel": 10.72,
+  "latency": {
+    "input_duration_s": 41.264,
+    "output_duration_s": 41.264,
+    "first_speech_s": 14.75
+  },
+  "user_done_unix": 1790625036.2668931,
+  "search_latency_breakdown": {
+    "room": "eval-8d6fd4be",
+    "tool": "search_products",
+    "reasoning": 0.607,
+    "execution": 0.0,
+    "synthesis": 0.589,
+    "total": 1.195,
+    "agent_start_at": 1790625039.4022822
+  },
+  "absolute_total_latency": 3.135,
+  "transcript": "I found one product called Electronics Premium for $99.99. Does that sound like something he would like?",
+  "asr_chunks": [
+    {
+      "text": "I",
+      "timestamp": [
+        14.64,
+        14.88
+      ]
+    },
+    {
+      "text": "found",
+      "timestamp": [
+        14.88,
+        15.280000000000001
+      ]
+    },
+    {
+      "text": "one",
+      "timestamp": [
+        15.280000000000001,
+        15.6
+      ]
+    },
+    {
+      "text": "product",
+      "timestamp": [
+        15.6,
+        16.080000000000002
+      ]
+    },
+    {
+      "text": "called",
+      "timestamp": [
+        16.080000000000002,
+        16.32
+      ]
+    },
+    {
+      "text": "Electronics",
+      "timestamp": [
+        16.32,
+        17.12
+      ]
+    },
+    {
+      "text": "Premium",
+      "timestamp": [
+        17.12,
+        17.68
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        17.68,
+        17.84
+      ]
+    },
+    {
+      "text": "$99.99.",
+      "timestamp": [
+        17.84,
+        18.96
+      ]
+    },
+    {
+      "text": "Does",
+      "timestamp": [
+        19.2,
+        19.44
+      ]
+    },
+    {
+      "text": "that",
+      "timestamp": [
+        19.44,
+        19.6
+      ]
+    },
+    {
+      "text": "sound",
+      "timestamp": [
+        19.6,
+        19.76
+      ]
+    },
+    {
+      "text": "like",
+      "timestamp": [
+        19.76,
+        20.0
+      ]
+    },
+    {
+      "text": "something",
+      "timestamp": [
+        20.0,
+        20.240000000000002
+      ]
+    },
+    {
+      "text": "he",
+      "timestamp": [
+        20.240000000000002,
+        20.48
+      ]
+    },
+    {
+      "text": "would",
+      "timestamp": [
+        20.48,
+        20.72
+      ]
+    },
+    {
+      "text": "like?",
+      "timestamp": [
+        20.72,
+        20.96
+      ]
+    }
+  ],
+  "perceived_total_latency": 3.92,
+  "audio_agent_speech_start": 14.64,
+  "actual_tool_calls": [
+    {
+      "function": "search_products",
+      "args": {
+        "max_price": null,
+        "query": "electronics"
+      },
+      "timestamp_start": 13.27,
+      "timestamp_end": 13.27
+    }
+  ],
+  "status": "completed"
+}

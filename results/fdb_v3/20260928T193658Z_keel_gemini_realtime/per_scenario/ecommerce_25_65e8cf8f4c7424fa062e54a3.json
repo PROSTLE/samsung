@@ -1,0 +1,10 @@
+{
+  "pid": "65e8cf8f4c7424fa062e54a3",
+  "example_id": "ecommerce_25",
+  "category": "ecommerce_support",
+  "title": "False Start into Complex Chain",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T20:04:35.557590",
+  "inference_time_s": 45.94,
+  "status": "inference_failed"
+}

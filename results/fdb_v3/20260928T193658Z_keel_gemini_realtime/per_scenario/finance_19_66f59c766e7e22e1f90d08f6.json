@@ -1,0 +1,10 @@
+{
+  "pid": "66f59c766e7e22e1f90d08f6",
+  "example_id": "finance_19",
+  "category": "finance_billing",
+  "title": "Double Self-Correction in Exchange",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T20:21:10.239529",
+  "inference_time_s": 45.07,
+  "status": "inference_failed"
+}

@@ -1,0 +1,519 @@
+{
+  "pid": "5f4a4da1575d605c43bef871",
+  "example_id": "housing_13",
+  "category": "housing_location",
+  "title": "Dual Filter Update",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T22:22:56.308636",
+  "inference_time_s": 57.4,
+  "room_name": "eval-01bdaca0",
+  "stream_start_time": 1790634179.9497714,
+  "input_transcript": "You know, like, you know, let's raise the max price to three thousand per month and also bump up the minimum bedrooms to three. Yeah, I think I need more space than I originally thought.",
+  "input_asr_chunks": [
+    {
+      "text": "You",
+      "timestamp": [
+        2.56,
+        2.72
+      ]
+    },
+    {
+      "text": "know,",
+      "timestamp": [
+        2.72,
+        2.88
+      ]
+    },
+    {
+      "text": "like,",
+      "timestamp": [
+        3.04,
+        3.2800000000000002
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        3.44,
+        3.7600000000000002
+      ]
+    },
+    {
+      "text": "know,",
+      "timestamp": [
+        3.7600000000000002,
+        4.08
+      ]
+    },
+    {
+      "text": "let's",
+      "timestamp": [
+        4.4,
+        4.8
+      ]
+    },
+    {
+      "text": "raise",
+      "timestamp": [
+        4.8,
+        5.12
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        5.12,
+        5.28
+      ]
+    },
+    {
+      "text": "max",
+      "timestamp": [
+        5.28,
+        5.68
+      ]
+    },
+    {
+      "text": "price",
+      "timestamp": [
+        5.68,
+        6.0
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        6.0,
+        6.24
+      ]
+    },
+    {
+      "text": "three",
+      "timestamp": [
+        6.24,
+        6.4
+      ]
+    },
+    {
+      "text": "thousand",
+      "timestamp": [
+        6.5600000000000005,
+        6.96
+      ]
+    },
+    {
+      "text": "per",
+      "timestamp": [
+        7.12,
+        7.44
+      ]
+    },
+    {
+      "text": "month",
+      "timestamp": [
+        7.44,
+        8.08
+      ]
+    },
+    {
+      "text": "and",
+      "timestamp": [
+        8.96,
+        9.200000000000001
+      ]
+    },
+    {
+      "text": "also",
+      "timestamp": [
+        9.52,
+        9.84
+      ]
+    },
+    {
+      "text": "bump",
+      "timestamp": [
+        9.84,
+        10.24
+      ]
+    },
+    {
+      "text": "up",
+      "timestamp": [
+        10.24,
+        10.4
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        10.4,
+        10.48
+      ]
+    },
+    {
+      "text": "minimum",
+      "timestamp": [
+        10.48,
+        11.040000000000001
+      ]
+    },
+    {
+      "text": "bedrooms",
+      "timestamp": [
+        11.040000000000001,
+        12.0
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        12.0,
+        12.32
+      ]
+    },
+    {
+      "text": "three.",
+      "timestamp": [
+        12.32,
+        12.64
+      ]
+    },
+    {
+      "text": "Yeah,",
+      "timestamp": [
+        13.76,
+        14.0
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        14.24,
+        14.4
+      ]
+    },
+    {
+      "text": "think",
+      "timestamp": [
+        14.4,
+        14.56
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        14.56,
+        14.8
+      ]
+    },
+    {
+      "text": "need",
+      "timestamp": [
+        14.8,
+        14.96
+      ]
+    },
+    {
+      "text": "more",
+      "timestamp": [
+        14.96,
+        15.200000000000001
+      ]
+    },
+    {
+      "text": "space",
+      "timestamp": [
+        15.200000000000001,
+        15.6
+      ]
+    },
+    {
+      "text": "than",
+      "timestamp": [
+        15.6,
+        15.84
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        15.84,
+        15.92
+      ]
+    },
+    {
+      "text": "originally",
+      "timestamp": [
+        15.92,
+        16.96
+      ]
+    },
+    {
+      "text": "thought.",
+      "timestamp": [
+        16.96,
+        17.28
+      ]
+    }
+  ],
+  "user_speech_end_rel": 17.28,
+  "latency": {
+    "input_duration_s": 48.507,
+    "output_duration_s": 48.507,
+    "first_speech_s": 21.7
+  },
+  "user_done_unix": 1790634197.2297714,
+  "search_latency_breakdown": {
+    "room": "eval-01bdaca0",
+    "tool": "update_search_filter",
+    "reasoning": 10.567,
+    "execution": 0.149,
+    "synthesis": 0.725,
+    "total": 11.441,
+    "agent_start_at": 1790634201.0144284
+  },
+  "absolute_total_latency": 3.785,
+  "transcript": "I've updated your search filters. The maximum price is now $3,000 per month, and we're looking for places with at least three bedrooms. Anything else I can help adjust for you?",
+  "asr_chunks": [
+    {
+      "text": "I've",
+      "timestamp": [
+        21.52,
+        21.92
+      ]
+    },
+    {
+      "text": "updated",
+      "timestamp": [
+        21.92,
+        22.400000000000002
+      ]
+    },
+    {
+      "text": "your",
+      "timestamp": [
+        22.400000000000002,
+        22.56
+      ]
+    },
+    {
+      "text": "search",
+      "timestamp": [
+        22.56,
+        22.88
+      ]
+    },
+    {
+      "text": "filters.",
+      "timestamp": [
+        22.88,
+        23.28
+      ]
+    },
+    {
+      "text": "The",
+      "timestamp": [
+        23.52,
+        23.68
+      ]
+    },
+    {
+      "text": "maximum",
+      "timestamp": [
+        23.68,
+        24.16
+      ]
+    },
+    {
+      "text": "price",
+      "timestamp": [
+        24.16,
+        24.48
+      ]
+    },
+    {
+      "text": "is",
+      "timestamp": [
+        24.48,
+        24.560000000000002
+      ]
+    },
+    {
+      "text": "now",
+      "timestamp": [
+        24.560000000000002,
+        24.8
+      ]
+    },
+    {
+      "text": "$3,000",
+      "timestamp": [
+        24.8,
+        25.76
+      ]
+    },
+    {
+      "text": "per",
+      "timestamp": [
+        25.76,
+        25.92
+      ]
+    },
+    {
+      "text": "month,",
+      "timestamp": [
+        25.92,
+        26.16
+      ]
+    },
+    {
+      "text": "and",
+      "timestamp": [
+        26.32,
+        26.48
+      ]
+    },
+    {
+      "text": "we're",
+      "timestamp": [
+        26.48,
+        26.64
+      ]
+    },
+    {
+      "text": "looking",
+      "timestamp": [
+        26.64,
+        26.88
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        26.88,
+        27.04
+      ]
+    },
+    {
+      "text": "places",
+      "timestamp": [
+        27.04,
+        27.44
+      ]
+    },
+    {
+      "text": "with",
+      "timestamp": [
+        27.44,
+        27.68
+      ]
+    },
+    {
+      "text": "at",
+      "timestamp": [
+        27.68,
+        27.76
+      ]
+    },
+    {
+      "text": "least",
+      "timestamp": [
+        27.76,
+        28.080000000000002
+      ]
+    },
+    {
+      "text": "three",
+      "timestamp": [
+        28.080000000000002,
+        28.32
+      ]
+    },
+    {
+      "text": "bedrooms.",
+      "timestamp": [
+        28.32,
+        28.88
+      ]
+    },
+    {
+      "text": "Anything",
+      "timestamp": [
+        29.2,
+        29.52
+      ]
+    },
+    {
+      "text": "else",
+      "timestamp": [
+        29.52,
+        29.76
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        29.76,
+        29.92
+      ]
+    },
+    {
+      "text": "can",
+      "timestamp": [
+        29.92,
+        30.0
+      ]
+    },
+    {
+      "text": "help",
+      "timestamp": [
+        30.0,
+        30.240000000000002
+      ]
+    },
+    {
+      "text": "adjust",
+      "timestamp": [
+        30.240000000000002,
+        30.560000000000002
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        30.560000000000002,
+        30.8
+      ]
+    },
+    {
+      "text": "you?",
+      "timestamp": [
+        30.8,
+        31.12
+      ]
+    }
+  ],
+  "perceived_total_latency": 4.24,
+  "audio_agent_speech_start": 21.52,
+  "actual_tool_calls": [
+    {
+      "function": "update_search_filter",
+      "args": {
+        "filter_name": "max_price",
+        "value": "3000"
+      },
+      "timestamp_start": 20.19,
+      "timestamp_end": 20.29
+    },
+    {
+      "function": "update_search_filter",
+      "args": {
+        "value": "3",
+        "filter_name": "bedrooms"
+      },
+      "timestamp_start": 20.19,
+      "timestamp_end": 20.34
+    }
+  ],
+  "status": "completed"
+}

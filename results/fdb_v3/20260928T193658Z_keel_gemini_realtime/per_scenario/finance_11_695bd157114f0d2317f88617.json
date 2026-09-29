@@ -1,0 +1,10 @@
+{
+  "pid": "695bd157114f0d2317f88617",
+  "example_id": "finance_11",
+  "category": "finance_billing",
+  "title": "Autopay with Filler Words",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T20:15:09.254135",
+  "inference_time_s": 45.04,
+  "status": "inference_failed"
+}

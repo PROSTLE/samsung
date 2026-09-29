@@ -1,0 +1,10 @@
+{
+  "pid": "6998abd731d2ec50d067d5bd",
+  "example_id": "finance_18",
+  "category": "finance_billing",
+  "title": "Exchange + Autopay + Benefits Chain",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T20:20:25.180284",
+  "inference_time_s": 45.06,
+  "status": "inference_failed"
+}

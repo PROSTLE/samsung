@@ -1,0 +1,371 @@
+{
+  "pid": "5f4a4da1575d605c43bef871",
+  "example_id": "housing_06",
+  "category": "housing_location",
+  "title": "Walking Commute Check",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T17:10:44.757341",
+  "inference_time_s": 56.07,
+  "room_name": "eval-c7a2851b",
+  "stream_start_time": 1790615449.5004342,
+  "input_transcript": "So, hmm, I was wondering how long it would take to walk from Oak Street to the gym. I'm trying to figure out if I can walk there in the mornings.",
+  "input_asr_chunks": [
+    {
+      "text": "So,",
+      "timestamp": [
+        2.88,
+        3.2
+      ]
+    },
+    {
+      "text": "hmm,",
+      "timestamp": [
+        3.36,
+        4.0
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        4.32,
+        4.5600000000000005
+      ]
+    },
+    {
+      "text": "was",
+      "timestamp": [
+        4.5600000000000005,
+        4.72
+      ]
+    },
+    {
+      "text": "wondering",
+      "timestamp": [
+        4.72,
+        5.28
+      ]
+    },
+    {
+      "text": "how",
+      "timestamp": [
+        5.28,
+        5.5200000000000005
+      ]
+    },
+    {
+      "text": "long",
+      "timestamp": [
+        5.5200000000000005,
+        5.68
+      ]
+    },
+    {
+      "text": "it",
+      "timestamp": [
+        5.68,
+        5.84
+      ]
+    },
+    {
+      "text": "would",
+      "timestamp": [
+        5.84,
+        6.08
+      ]
+    },
+    {
+      "text": "take",
+      "timestamp": [
+        6.08,
+        6.32
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        6.32,
+        6.48
+      ]
+    },
+    {
+      "text": "walk",
+      "timestamp": [
+        6.48,
+        6.72
+      ]
+    },
+    {
+      "text": "from",
+      "timestamp": [
+        6.72,
+        6.96
+      ]
+    },
+    {
+      "text": "Oak",
+      "timestamp": [
+        6.96,
+        7.36
+      ]
+    },
+    {
+      "text": "Street",
+      "timestamp": [
+        7.36,
+        7.76
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        7.76,
+        7.92
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        7.92,
+        8.16
+      ]
+    },
+    {
+      "text": "gym.",
+      "timestamp": [
+        8.16,
+        8.88
+      ]
+    },
+    {
+      "text": "I'm",
+      "timestamp": [
+        9.200000000000001,
+        9.6
+      ]
+    },
+    {
+      "text": "trying",
+      "timestamp": [
+        9.6,
+        9.76
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        9.76,
+        9.92
+      ]
+    },
+    {
+      "text": "figure",
+      "timestamp": [
+        9.92,
+        10.64
+      ]
+    },
+    {
+      "text": "out",
+      "timestamp": [
+        10.64,
+        10.96
+      ]
+    },
+    {
+      "text": "if",
+      "timestamp": [
+        10.96,
+        11.28
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        12.48,
+        12.8
+      ]
+    },
+    {
+      "text": "can",
+      "timestamp": [
+        12.8,
+        12.96
+      ]
+    },
+    {
+      "text": "walk",
+      "timestamp": [
+        12.96,
+        13.280000000000001
+      ]
+    },
+    {
+      "text": "there",
+      "timestamp": [
+        13.280000000000001,
+        13.52
+      ]
+    },
+    {
+      "text": "in",
+      "timestamp": [
+        13.52,
+        13.68
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        13.68,
+        13.84
+      ]
+    },
+    {
+      "text": "mornings.",
+      "timestamp": [
+        13.84,
+        14.72
+      ]
+    }
+  ],
+  "user_speech_end_rel": 14.72,
+  "latency": {
+    "input_duration_s": 44.84,
+    "output_duration_s": 44.84,
+    "first_speech_s": 19.75
+  },
+  "user_done_unix": 1790615464.2204342,
+  "search_latency_breakdown": {
+    "room": "eval-c7a2851b",
+    "tool": "calculate_commute",
+    "reasoning": 0.616,
+    "execution": 0.757,
+    "synthesis": 0.794,
+    "total": 2.167,
+    "agent_start_at": 1790615469.4753244
+  },
+  "absolute_total_latency": 5.255,
+  "transcript": "It would take you twenty five minutes to walk from Oak Street to the gem.",
+  "asr_chunks": [
+    {
+      "text": "It",
+      "timestamp": [
+        19.76,
+        20.0
+      ]
+    },
+    {
+      "text": "would",
+      "timestamp": [
+        20.0,
+        20.240000000000002
+      ]
+    },
+    {
+      "text": "take",
+      "timestamp": [
+        20.240000000000002,
+        20.48
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        20.48,
+        20.72
+      ]
+    },
+    {
+      "text": "twenty",
+      "timestamp": [
+        20.72,
+        21.04
+      ]
+    },
+    {
+      "text": "five",
+      "timestamp": [
+        21.12,
+        21.28
+      ]
+    },
+    {
+      "text": "minutes",
+      "timestamp": [
+        21.28,
+        21.6
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        21.6,
+        21.76
+      ]
+    },
+    {
+      "text": "walk",
+      "timestamp": [
+        21.76,
+        22.0
+      ]
+    },
+    {
+      "text": "from",
+      "timestamp": [
+        22.0,
+        22.16
+      ]
+    },
+    {
+      "text": "Oak",
+      "timestamp": [
+        22.16,
+        22.48
+      ]
+    },
+    {
+      "text": "Street",
+      "timestamp": [
+        22.48,
+        22.72
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        22.72,
+        22.8
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        22.8,
+        22.96
+      ]
+    },
+    {
+      "text": "gem.",
+      "timestamp": [
+        22.96,
+        23.44
+      ]
+    }
+  ],
+  "perceived_total_latency": 5.04,
+  "audio_agent_speech_start": 19.76,
+  "actual_tool_calls": [
+    {
+      "function": "calculate_commute",
+      "args": {
+        "mode": "walking",
+        "origin_address": "Oak Street",
+        "destination_address": "the gym"
+      },
+      "timestamp_start": 18.42,
+      "timestamp_end": 19.18
+    }
+  ],
+  "status": "completed"
+}

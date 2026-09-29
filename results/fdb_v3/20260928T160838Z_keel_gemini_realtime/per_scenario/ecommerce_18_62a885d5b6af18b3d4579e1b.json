@@ -1,0 +1,583 @@
+{
+  "pid": "62a885d5b6af18b3d4579e1b",
+  "example_id": "ecommerce_18",
+  "category": "ecommerce_support",
+  "title": "Search + Cart + Track Chain",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T16:30:59.917548",
+  "inference_time_s": 52.13,
+  "room_name": "eval-3802989e",
+  "stream_start_time": 1790613063.328716,
+  "input_transcript": "Hmm. So like first search for a gaming mouse. I want to see what you have. Then add the cheapest option in my cart so I can buy it later. And while you're at it, could you also track my order? PO999? I've been waiting on that one.",
+  "input_asr_chunks": [
+    {
+      "text": "Hmm.",
+      "timestamp": [
+        0.16,
+        0.56
+      ]
+    },
+    {
+      "text": "So",
+      "timestamp": [
+        0.8,
+        1.04
+      ]
+    },
+    {
+      "text": "like",
+      "timestamp": [
+        1.2,
+        1.36
+      ]
+    },
+    {
+      "text": "first",
+      "timestamp": [
+        1.68,
+        2.0
+      ]
+    },
+    {
+      "text": "search",
+      "timestamp": [
+        2.08,
+        2.4
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        2.4,
+        2.48
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        2.48,
+        2.56
+      ]
+    },
+    {
+      "text": "gaming",
+      "timestamp": [
+        2.56,
+        2.96
+      ]
+    },
+    {
+      "text": "mouse.",
+      "timestamp": [
+        2.96,
+        3.36
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        3.6,
+        3.7600000000000002
+      ]
+    },
+    {
+      "text": "want",
+      "timestamp": [
+        3.7600000000000002,
+        3.92
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        3.92,
+        4.0
+      ]
+    },
+    {
+      "text": "see",
+      "timestamp": [
+        4.0,
+        4.16
+      ]
+    },
+    {
+      "text": "what",
+      "timestamp": [
+        4.16,
+        4.32
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        4.32,
+        4.48
+      ]
+    },
+    {
+      "text": "have.",
+      "timestamp": [
+        4.48,
+        4.64
+      ]
+    },
+    {
+      "text": "Then",
+      "timestamp": [
+        4.96,
+        5.04
+      ]
+    },
+    {
+      "text": "add",
+      "timestamp": [
+        5.12,
+        5.28
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        5.36,
+        5.44
+      ]
+    },
+    {
+      "text": "cheapest",
+      "timestamp": [
+        5.44,
+        5.84
+      ]
+    },
+    {
+      "text": "option",
+      "timestamp": [
+        5.84,
+        6.08
+      ]
+    },
+    {
+      "text": "in",
+      "timestamp": [
+        6.08,
+        6.24
+      ]
+    },
+    {
+      "text": "my",
+      "timestamp": [
+        6.24,
+        6.32
+      ]
+    },
+    {
+      "text": "cart",
+      "timestamp": [
+        6.32,
+        6.5600000000000005
+      ]
+    },
+    {
+      "text": "so",
+      "timestamp": [
+        6.5600000000000005,
+        6.72
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        6.72,
+        6.8
+      ]
+    },
+    {
+      "text": "can",
+      "timestamp": [
+        6.8,
+        6.88
+      ]
+    },
+    {
+      "text": "buy",
+      "timestamp": [
+        6.88,
+        7.12
+      ]
+    },
+    {
+      "text": "it",
+      "timestamp": [
+        7.12,
+        7.28
+      ]
+    },
+    {
+      "text": "later.",
+      "timestamp": [
+        7.28,
+        7.6000000000000005
+      ]
+    },
+    {
+      "text": "And",
+      "timestamp": [
+        7.92,
+        8.08
+      ]
+    },
+    {
+      "text": "while",
+      "timestamp": [
+        8.08,
+        8.24
+      ]
+    },
+    {
+      "text": "you're",
+      "timestamp": [
+        8.24,
+        8.48
+      ]
+    },
+    {
+      "text": "at",
+      "timestamp": [
+        8.48,
+        8.56
+      ]
+    },
+    {
+      "text": "it,",
+      "timestamp": [
+        8.56,
+        8.72
+      ]
+    },
+    {
+      "text": "could",
+      "timestamp": [
+        8.8,
+        8.96
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        8.96,
+        9.120000000000001
+      ]
+    },
+    {
+      "text": "also",
+      "timestamp": [
+        9.120000000000001,
+        9.36
+      ]
+    },
+    {
+      "text": "track",
+      "timestamp": [
+        9.36,
+        9.68
+      ]
+    },
+    {
+      "text": "my",
+      "timestamp": [
+        9.68,
+        9.84
+      ]
+    },
+    {
+      "text": "order?",
+      "timestamp": [
+        9.84,
+        10.24
+      ]
+    },
+    {
+      "text": "PO999?",
+      "timestamp": [
+        10.48,
+        11.92
+      ]
+    },
+    {
+      "text": "I've",
+      "timestamp": [
+        12.24,
+        12.48
+      ]
+    },
+    {
+      "text": "been",
+      "timestamp": [
+        12.48,
+        12.56
+      ]
+    },
+    {
+      "text": "waiting",
+      "timestamp": [
+        12.56,
+        12.96
+      ]
+    },
+    {
+      "text": "on",
+      "timestamp": [
+        12.96,
+        13.200000000000001
+      ]
+    },
+    {
+      "text": "that",
+      "timestamp": [
+        13.200000000000001,
+        13.52
+      ]
+    },
+    {
+      "text": "one.",
+      "timestamp": [
+        13.52,
+        13.84
+      ]
+    }
+  ],
+  "user_speech_end_rel": 13.84,
+  "latency": {
+    "input_duration_s": 43.8,
+    "output_duration_s": 43.8,
+    "first_speech_s": 20.0
+  },
+  "user_done_unix": 1790613077.168716,
+  "search_latency_breakdown": {
+    "room": "eval-3802989e",
+    "tool": "add_to_cart",
+    "reasoning": 2.709,
+    "execution": 0.0,
+    "synthesis": 0.684,
+    "total": 3.393,
+    "agent_start_at": 1790613082.4409485
+  },
+  "absolute_total_latency": 5.272,
+  "transcript": "Order PO999 is out for delivery. I found a premium gaming mouse for $99.99, and I've added it to your cart, bringing the total to $99.99.",
+  "asr_chunks": [
+    {
+      "text": "Order",
+      "timestamp": [
+        19.84,
+        20.400000000000002
+      ]
+    },
+    {
+      "text": "PO999",
+      "timestamp": [
+        20.400000000000002,
+        21.52
+      ]
+    },
+    {
+      "text": "is",
+      "timestamp": [
+        21.52,
+        21.6
+      ]
+    },
+    {
+      "text": "out",
+      "timestamp": [
+        21.6,
+        21.76
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        21.76,
+        21.92
+      ]
+    },
+    {
+      "text": "delivery.",
+      "timestamp": [
+        21.92,
+        22.32
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        22.64,
+        22.88
+      ]
+    },
+    {
+      "text": "found",
+      "timestamp": [
+        22.88,
+        23.12
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        23.12,
+        23.2
+      ]
+    },
+    {
+      "text": "premium",
+      "timestamp": [
+        23.2,
+        23.68
+      ]
+    },
+    {
+      "text": "gaming",
+      "timestamp": [
+        23.68,
+        24.0
+      ]
+    },
+    {
+      "text": "mouse",
+      "timestamp": [
+        24.0,
+        24.400000000000002
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        24.400000000000002,
+        24.560000000000002
+      ]
+    },
+    {
+      "text": "$99.99,",
+      "timestamp": [
+        24.560000000000002,
+        25.6
+      ]
+    },
+    {
+      "text": "and",
+      "timestamp": [
+        25.68,
+        25.84
+      ]
+    },
+    {
+      "text": "I've",
+      "timestamp": [
+        25.84,
+        26.080000000000002
+      ]
+    },
+    {
+      "text": "added",
+      "timestamp": [
+        26.080000000000002,
+        26.32
+      ]
+    },
+    {
+      "text": "it",
+      "timestamp": [
+        26.32,
+        26.400000000000002
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        26.400000000000002,
+        26.48
+      ]
+    },
+    {
+      "text": "your",
+      "timestamp": [
+        26.48,
+        26.64
+      ]
+    },
+    {
+      "text": "cart,",
+      "timestamp": [
+        26.64,
+        26.96
+      ]
+    },
+    {
+      "text": "bringing",
+      "timestamp": [
+        27.12,
+        27.36
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        27.36,
+        27.52
+      ]
+    },
+    {
+      "text": "total",
+      "timestamp": [
+        27.52,
+        27.76
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        27.76,
+        27.92
+      ]
+    },
+    {
+      "text": "$99.99.",
+      "timestamp": [
+        27.92,
+        29.2
+      ]
+    }
+  ],
+  "perceived_total_latency": 6.0,
+  "audio_agent_speech_start": 19.84,
+  "actual_tool_calls": [
+    {
+      "function": "search_products",
+      "args": {
+        "max_price": null,
+        "query": "gaming mouse"
+      },
+      "timestamp_start": 16.33,
+      "timestamp_end": 16.33
+    },
+    {
+      "function": "track_order",
+      "args": {
+        "order_id": "PO999"
+      },
+      "timestamp_start": 16.33,
+      "timestamp_end": 16.33
+    },
+    {
+      "function": "add_to_cart",
+      "args": {
+        "quantity": 1,
+        "product_id": "PROD1"
+      },
+      "timestamp_start": 18.43,
+      "timestamp_end": 18.43
+    }
+  ],
+  "status": "completed"
+}

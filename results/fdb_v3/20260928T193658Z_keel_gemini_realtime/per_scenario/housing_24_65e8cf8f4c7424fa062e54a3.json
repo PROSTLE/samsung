@@ -1,0 +1,431 @@
+{
+  "pid": "65e8cf8f4c7424fa062e54a3",
+  "example_id": "housing_24",
+  "category": "housing_location",
+  "title": "Hesitant Three-Tool Chain",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T20:45:29.299536",
+  "inference_time_s": 69.09,
+  "room_name": "eval-0014ef34",
+  "stream_start_time": 1790628332.8159869,
+  "input_transcript": "Um, so hmm, like, you know, okay. So, first, um, I want to update my max price to $1,500 because I'm on a tighter budget. Then, uh, search for apartments in Dallas that fit that budget, and then check the walking time from whatever you find to the grocery store because I want to be close to one.",
+  "input_asr_chunks": [
+    {
+      "text": "Um,",
+      "timestamp": [
+        1.04,
+        1.44
+      ]
+    },
+    {
+      "text": "so",
+      "timestamp": [
+        1.76,
+        2.08
+      ]
+    },
+    {
+      "text": "hmm,",
+      "timestamp": [
+        2.4,
+        3.36
+      ]
+    },
+    {
+      "text": "like,",
+      "timestamp": [
+        3.68,
+        4.0
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        4.5600000000000005,
+        4.8
+      ]
+    },
+    {
+      "text": "know,",
+      "timestamp": [
+        4.8,
+        5.12
+      ]
+    },
+    {
+      "text": "okay.",
+      "timestamp": [
+        5.68,
+        6.0
+      ]
+    },
+    {
+      "text": "So,",
+      "timestamp": [
+        6.5600000000000005,
+        6.72
+      ]
+    },
+    {
+      "text": "first,",
+      "timestamp": [
+        6.96,
+        7.28
+      ]
+    },
+    {
+      "text": "um,",
+      "timestamp": [
+        7.6000000000000005,
+        7.84
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        8.4,
+        8.72
+      ]
+    },
+    {
+      "text": "want",
+      "timestamp": [
+        8.72,
+        8.96
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        9.200000000000001,
+        9.52
+      ]
+    },
+    {
+      "text": "update",
+      "timestamp": [
+        9.84,
+        10.48
+      ]
+    },
+    {
+      "text": "my",
+      "timestamp": [
+        10.48,
+        10.64
+      ]
+    },
+    {
+      "text": "max",
+      "timestamp": [
+        10.64,
+        11.040000000000001
+      ]
+    },
+    {
+      "text": "price",
+      "timestamp": [
+        11.040000000000001,
+        11.36
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        11.36,
+        11.52
+      ]
+    },
+    {
+      "text": "$1,500",
+      "timestamp": [
+        11.52,
+        12.48
+      ]
+    },
+    {
+      "text": "because",
+      "timestamp": [
+        12.48,
+        12.72
+      ]
+    },
+    {
+      "text": "I'm",
+      "timestamp": [
+        12.72,
+        12.88
+      ]
+    },
+    {
+      "text": "on",
+      "timestamp": [
+        12.88,
+        13.120000000000001
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        13.120000000000001,
+        13.280000000000001
+      ]
+    },
+    {
+      "text": "tighter",
+      "timestamp": [
+        13.280000000000001,
+        13.68
+      ]
+    },
+    {
+      "text": "budget.",
+      "timestamp": [
+        13.68,
+        14.4
+      ]
+    },
+    {
+      "text": "Then,",
+      "timestamp": [
+        14.72,
+        14.96
+      ]
+    },
+    {
+      "text": "uh,",
+      "timestamp": [
+        15.120000000000001,
+        15.36
+      ]
+    },
+    {
+      "text": "search",
+      "timestamp": [
+        15.52,
+        16.0
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        16.0,
+        16.240000000000002
+      ]
+    },
+    {
+      "text": "apartments",
+      "timestamp": [
+        16.240000000000002,
+        16.72
+      ]
+    },
+    {
+      "text": "in",
+      "timestamp": [
+        16.72,
+        16.88
+      ]
+    },
+    {
+      "text": "Dallas",
+      "timestamp": [
+        16.88,
+        17.36
+      ]
+    },
+    {
+      "text": "that",
+      "timestamp": [
+        17.36,
+        17.52
+      ]
+    },
+    {
+      "text": "fit",
+      "timestamp": [
+        17.52,
+        17.76
+      ]
+    },
+    {
+      "text": "that",
+      "timestamp": [
+        17.76,
+        18.0
+      ]
+    },
+    {
+      "text": "budget,",
+      "timestamp": [
+        18.0,
+        18.72
+      ]
+    },
+    {
+      "text": "and",
+      "timestamp": [
+        19.04,
+        19.36
+      ]
+    },
+    {
+      "text": "then",
+      "timestamp": [
+        19.36,
+        19.68
+      ]
+    },
+    {
+      "text": "check",
+      "timestamp": [
+        20.32,
+        20.8
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        20.8,
+        20.96
+      ]
+    },
+    {
+      "text": "walking",
+      "timestamp": [
+        20.96,
+        21.52
+      ]
+    },
+    {
+      "text": "time",
+      "timestamp": [
+        21.52,
+        21.76
+      ]
+    },
+    {
+      "text": "from",
+      "timestamp": [
+        21.76,
+        22.080000000000002
+      ]
+    },
+    {
+      "text": "whatever",
+      "timestamp": [
+        22.080000000000002,
+        22.48
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        22.48,
+        22.64
+      ]
+    },
+    {
+      "text": "find",
+      "timestamp": [
+        22.64,
+        22.88
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        22.88,
+        23.04
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        23.04,
+        23.12
+      ]
+    },
+    {
+      "text": "grocery",
+      "timestamp": [
+        23.12,
+        23.6
+      ]
+    },
+    {
+      "text": "store",
+      "timestamp": [
+        23.6,
+        24.0
+      ]
+    },
+    {
+      "text": "because",
+      "timestamp": [
+        24.0,
+        24.240000000000002
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        24.240000000000002,
+        24.48
+      ]
+    },
+    {
+      "text": "want",
+      "timestamp": [
+        24.48,
+        24.64
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        24.64,
+        24.72
+      ]
+    },
+    {
+      "text": "be",
+      "timestamp": [
+        24.72,
+        24.88
+      ]
+    },
+    {
+      "text": "close",
+      "timestamp": [
+        24.88,
+        25.12
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        25.12,
+        25.36
+      ]
+    },
+    {
+      "text": "one.",
+      "timestamp": [
+        25.36,
+        25.52
+      ]
+    }
+  ],
+  "user_speech_end_rel": 25.52,
+  "latency": {
+    "input_duration_s": 56.1,
+    "output_duration_s": 56.1,
+    "first_speech_s": 56.1
+  },
+  "user_done_unix": 1790628358.3359869,
+  "transcript": "",
+  "asr_chunks": [],
+  "actual_tool_calls": [],
+  "status": "completed"
+}

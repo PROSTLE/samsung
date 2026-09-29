@@ -1,0 +1,398 @@
+{
+  "pid": "5ff07b5ee7a1d23e719e421e",
+  "example_id": "ecommerce_08",
+  "category": "ecommerce_support",
+  "title": "Search with Pause",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T21:22:06.292591",
+  "inference_time_s": 56.41,
+  "room_name": "eval-8122ca45",
+  "stream_start_time": 1790630530.0119886,
+  "input_transcript": "Ah, hmm. You know, um, I want a mechanical keyboard and I'm trying, um, to keep my budget under two hundred dollars. Do you have anything like that?",
+  "input_asr_chunks": [
+    {
+      "text": "Ah,",
+      "timestamp": [
+        0.32,
+        0.88
+      ]
+    },
+    {
+      "text": "hmm.",
+      "timestamp": [
+        1.2,
+        2.48
+      ]
+    },
+    {
+      "text": "You",
+      "timestamp": [
+        2.8000000000000003,
+        3.04
+      ]
+    },
+    {
+      "text": "know,",
+      "timestamp": [
+        3.04,
+        3.2800000000000002
+      ]
+    },
+    {
+      "text": "um,",
+      "timestamp": [
+        3.6,
+        3.84
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        4.48,
+        4.72
+      ]
+    },
+    {
+      "text": "want",
+      "timestamp": [
+        4.72,
+        4.96
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        4.96,
+        5.12
+      ]
+    },
+    {
+      "text": "mechanical",
+      "timestamp": [
+        5.12,
+        5.76
+      ]
+    },
+    {
+      "text": "keyboard",
+      "timestamp": [
+        5.76,
+        6.4
+      ]
+    },
+    {
+      "text": "and",
+      "timestamp": [
+        6.48,
+        6.640000000000001
+      ]
+    },
+    {
+      "text": "I'm",
+      "timestamp": [
+        6.640000000000001,
+        7.28
+      ]
+    },
+    {
+      "text": "trying,",
+      "timestamp": [
+        7.28,
+        7.6000000000000005
+      ]
+    },
+    {
+      "text": "um,",
+      "timestamp": [
+        8.24,
+        8.4
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        8.56,
+        8.8
+      ]
+    },
+    {
+      "text": "keep",
+      "timestamp": [
+        8.8,
+        9.040000000000001
+      ]
+    },
+    {
+      "text": "my",
+      "timestamp": [
+        9.040000000000001,
+        9.28
+      ]
+    },
+    {
+      "text": "budget",
+      "timestamp": [
+        9.28,
+        10.16
+      ]
+    },
+    {
+      "text": "under",
+      "timestamp": [
+        10.16,
+        10.48
+      ]
+    },
+    {
+      "text": "two",
+      "timestamp": [
+        11.36,
+        11.52
+      ]
+    },
+    {
+      "text": "hundred",
+      "timestamp": [
+        11.76,
+        12.16
+      ]
+    },
+    {
+      "text": "dollars.",
+      "timestamp": [
+        12.16,
+        12.56
+      ]
+    },
+    {
+      "text": "Do",
+      "timestamp": [
+        12.88,
+        13.120000000000001
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        13.120000000000001,
+        13.200000000000001
+      ]
+    },
+    {
+      "text": "have",
+      "timestamp": [
+        13.200000000000001,
+        13.52
+      ]
+    },
+    {
+      "text": "anything",
+      "timestamp": [
+        13.52,
+        14.08
+      ]
+    },
+    {
+      "text": "like",
+      "timestamp": [
+        14.08,
+        14.4
+      ]
+    },
+    {
+      "text": "that?",
+      "timestamp": [
+        14.4,
+        14.72
+      ]
+    }
+  ],
+  "user_speech_end_rel": 14.72,
+  "latency": {
+    "input_duration_s": 45.78,
+    "output_duration_s": 45.78,
+    "first_speech_s": 18.35
+  },
+  "user_done_unix": 1790630544.7319887,
+  "search_latency_breakdown": {
+    "room": "eval-8122ca45",
+    "tool": "search_products",
+    "reasoning": 0.607,
+    "execution": 0.0,
+    "synthesis": 0.646,
+    "total": 1.253,
+    "agent_start_at": 1790630548.217034
+  },
+  "absolute_total_latency": 3.485,
+  "transcript": "I found one mechanical keyboard for $190. Are you interested in that option, or would you like to search for something else?",
+  "asr_chunks": [
+    {
+      "text": "I",
+      "timestamp": [
+        18.16,
+        18.48
+      ]
+    },
+    {
+      "text": "found",
+      "timestamp": [
+        18.48,
+        18.72
+      ]
+    },
+    {
+      "text": "one",
+      "timestamp": [
+        18.72,
+        18.96
+      ]
+    },
+    {
+      "text": "mechanical",
+      "timestamp": [
+        18.96,
+        19.52
+      ]
+    },
+    {
+      "text": "keyboard",
+      "timestamp": [
+        19.52,
+        20.0
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        20.0,
+        20.16
+      ]
+    },
+    {
+      "text": "$190.",
+      "timestamp": [
+        20.16,
+        20.88
+      ]
+    },
+    {
+      "text": "Are",
+      "timestamp": [
+        21.52,
+        21.68
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        21.68,
+        21.84
+      ]
+    },
+    {
+      "text": "interested",
+      "timestamp": [
+        21.84,
+        22.16
+      ]
+    },
+    {
+      "text": "in",
+      "timestamp": [
+        22.16,
+        22.32
+      ]
+    },
+    {
+      "text": "that",
+      "timestamp": [
+        22.32,
+        22.48
+      ]
+    },
+    {
+      "text": "option,",
+      "timestamp": [
+        22.48,
+        22.88
+      ]
+    },
+    {
+      "text": "or",
+      "timestamp": [
+        22.96,
+        23.2
+      ]
+    },
+    {
+      "text": "would",
+      "timestamp": [
+        23.2,
+        23.36
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        23.36,
+        23.52
+      ]
+    },
+    {
+      "text": "like",
+      "timestamp": [
+        23.52,
+        23.6
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        23.6,
+        23.68
+      ]
+    },
+    {
+      "text": "search",
+      "timestamp": [
+        23.68,
+        24.0
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        24.0,
+        24.240000000000002
+      ]
+    },
+    {
+      "text": "something",
+      "timestamp": [
+        24.240000000000002,
+        24.48
+      ]
+    },
+    {
+      "text": "else?",
+      "timestamp": [
+        24.48,
+        25.04
+      ]
+    }
+  ],
+  "perceived_total_latency": 3.44,
+  "audio_agent_speech_start": 18.16,
+  "actual_tool_calls": [
+    {
+      "function": "search_products",
+      "args": {
+        "max_price": 200.0,
+        "query": "mechanical keyboard"
+      },
+      "timestamp_start": 17.56,
+      "timestamp_end": 17.56
+    }
+  ],
+  "status": "completed"
+}

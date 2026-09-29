@@ -1,0 +1,10 @@
+{
+  "pid": "66c4f3cb14cbfc4db836bd4e",
+  "example_id": "finance_10",
+  "category": "finance_billing",
+  "title": "Benefits + Exchange Combo",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T20:14:24.191162",
+  "inference_time_s": 45.06,
+  "status": "inference_failed"
+}

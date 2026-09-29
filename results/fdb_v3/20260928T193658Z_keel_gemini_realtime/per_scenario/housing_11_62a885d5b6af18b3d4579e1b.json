@@ -1,0 +1,10 @@
+{
+  "pid": "62a885d5b6af18b3d4579e1b",
+  "example_id": "housing_11",
+  "category": "housing_location",
+  "title": "Bedroom and Price Correction",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T20:32:27.353185",
+  "inference_time_s": 45.18,
+  "status": "inference_failed"
+}

@@ -1,0 +1,391 @@
+{
+  "pid": "5ff07b5ee7a1d23e719e421e",
+  "example_id": "finance_03",
+  "category": "finance_billing",
+  "title": "Modify Autopay with Fillers",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T21:49:08.134153",
+  "inference_time_s": 55.95,
+  "room_name": "eval-9909a31a",
+  "stream_start_time": 1790632153.9519942,
+  "input_transcript": "Uh um so um I want to change my mortgage auto pay to pull from like my savings account instead of where it's pulling from now.",
+  "input_asr_chunks": [
+    {
+      "text": "Uh",
+      "timestamp": [
+        0.8,
+        1.28
+      ]
+    },
+    {
+      "text": "um",
+      "timestamp": [
+        1.52,
+        1.84
+      ]
+    },
+    {
+      "text": "so",
+      "timestamp": [
+        3.04,
+        3.2800000000000002
+      ]
+    },
+    {
+      "text": "um",
+      "timestamp": [
+        3.7600000000000002,
+        3.92
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        4.08,
+        4.32
+      ]
+    },
+    {
+      "text": "want",
+      "timestamp": [
+        4.32,
+        4.48
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        4.48,
+        4.64
+      ]
+    },
+    {
+      "text": "change",
+      "timestamp": [
+        4.64,
+        4.96
+      ]
+    },
+    {
+      "text": "my",
+      "timestamp": [
+        4.96,
+        5.12
+      ]
+    },
+    {
+      "text": "mortgage",
+      "timestamp": [
+        5.12,
+        5.68
+      ]
+    },
+    {
+      "text": "auto",
+      "timestamp": [
+        5.68,
+        6.0
+      ]
+    },
+    {
+      "text": "pay",
+      "timestamp": [
+        6.08,
+        6.4
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        6.48,
+        6.72
+      ]
+    },
+    {
+      "text": "pull",
+      "timestamp": [
+        6.72,
+        7.36
+      ]
+    },
+    {
+      "text": "from",
+      "timestamp": [
+        7.36,
+        7.68
+      ]
+    },
+    {
+      "text": "like",
+      "timestamp": [
+        8.0,
+        8.16
+      ]
+    },
+    {
+      "text": "my",
+      "timestamp": [
+        8.24,
+        8.48
+      ]
+    },
+    {
+      "text": "savings",
+      "timestamp": [
+        8.48,
+        9.120000000000001
+      ]
+    },
+    {
+      "text": "account",
+      "timestamp": [
+        9.120000000000001,
+        9.52
+      ]
+    },
+    {
+      "text": "instead",
+      "timestamp": [
+        9.68,
+        10.0
+      ]
+    },
+    {
+      "text": "of",
+      "timestamp": [
+        10.0,
+        10.24
+      ]
+    },
+    {
+      "text": "where",
+      "timestamp": [
+        10.24,
+        10.48
+      ]
+    },
+    {
+      "text": "it's",
+      "timestamp": [
+        10.48,
+        10.8
+      ]
+    },
+    {
+      "text": "pulling",
+      "timestamp": [
+        10.8,
+        11.44
+      ]
+    },
+    {
+      "text": "from",
+      "timestamp": [
+        11.44,
+        11.76
+      ]
+    },
+    {
+      "text": "now.",
+      "timestamp": [
+        11.76,
+        12.08
+      ]
+    }
+  ],
+  "user_speech_end_rel": 12.08,
+  "latency": {
+    "input_duration_s": 43.74,
+    "output_duration_s": 43.74,
+    "first_speech_s": 24.2
+  },
+  "user_done_unix": 1790632166.031994,
+  "search_latency_breakdown": {
+    "room": "eval-9909a31a",
+    "tool": "modify_autopay",
+    "reasoning": 6.72,
+    "execution": 0.0,
+    "synthesis": 0.659,
+    "total": 7.38,
+    "agent_start_at": 1790632180.4828813
+  },
+  "absolute_total_latency": 14.451,
+  "transcript": "To update your mortgage auto your mortgage auto pay has been successfully updated and will now be pulled from your new bank account.",
+  "asr_chunks": [
+    {
+      "text": "To",
+      "timestamp": [
+        24.0,
+        24.240000000000002
+      ]
+    },
+    {
+      "text": "update",
+      "timestamp": [
+        24.240000000000002,
+        24.72
+      ]
+    },
+    {
+      "text": "your",
+      "timestamp": [
+        24.72,
+        24.88
+      ]
+    },
+    {
+      "text": "mortgage",
+      "timestamp": [
+        24.88,
+        25.2
+      ]
+    },
+    {
+      "text": "auto",
+      "timestamp": [
+        25.2,
+        25.44
+      ]
+    },
+    {
+      "text": "your",
+      "timestamp": [
+        28.0,
+        28.080000000000002
+      ]
+    },
+    {
+      "text": "mortgage",
+      "timestamp": [
+        28.240000000000002,
+        28.64
+      ]
+    },
+    {
+      "text": "auto",
+      "timestamp": [
+        28.64,
+        28.88
+      ]
+    },
+    {
+      "text": "pay",
+      "timestamp": [
+        28.96,
+        29.2
+      ]
+    },
+    {
+      "text": "has",
+      "timestamp": [
+        29.2,
+        29.28
+      ]
+    },
+    {
+      "text": "been",
+      "timestamp": [
+        29.28,
+        29.44
+      ]
+    },
+    {
+      "text": "successfully",
+      "timestamp": [
+        29.44,
+        29.92
+      ]
+    },
+    {
+      "text": "updated",
+      "timestamp": [
+        29.92,
+        30.240000000000002
+      ]
+    },
+    {
+      "text": "and",
+      "timestamp": [
+        30.240000000000002,
+        30.400000000000002
+      ]
+    },
+    {
+      "text": "will",
+      "timestamp": [
+        30.400000000000002,
+        30.48
+      ]
+    },
+    {
+      "text": "now",
+      "timestamp": [
+        30.48,
+        30.64
+      ]
+    },
+    {
+      "text": "be",
+      "timestamp": [
+        30.64,
+        30.72
+      ]
+    },
+    {
+      "text": "pulled",
+      "timestamp": [
+        30.72,
+        31.04
+      ]
+    },
+    {
+      "text": "from",
+      "timestamp": [
+        31.04,
+        31.12
+      ]
+    },
+    {
+      "text": "your",
+      "timestamp": [
+        31.12,
+        31.2
+      ]
+    },
+    {
+      "text": "new",
+      "timestamp": [
+        31.2,
+        31.44
+      ]
+    },
+    {
+      "text": "bank",
+      "timestamp": [
+        31.44,
+        31.76
+      ]
+    },
+    {
+      "text": "account.",
+      "timestamp": [
+        31.76,
+        32.4
+      ]
+    }
+  ],
+  "perceived_total_latency": 11.92,
+  "audio_agent_speech_start": 24.0,
+  "actual_tool_calls": [
+    {
+      "function": "modify_autopay",
+      "args": {
+        "bill_type": "mortgage",
+        "source_account": "new bank account"
+      },
+      "timestamp_start": 25.87,
+      "timestamp_end": 25.87
+    }
+  ],
+  "status": "completed"
+}

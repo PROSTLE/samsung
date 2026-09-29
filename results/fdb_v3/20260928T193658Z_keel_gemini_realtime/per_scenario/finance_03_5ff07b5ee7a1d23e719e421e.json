@@ -1,0 +1,10 @@
+{
+  "pid": "5ff07b5ee7a1d23e719e421e",
+  "example_id": "finance_03",
+  "category": "finance_billing",
+  "title": "Modify Autopay with Fillers",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T20:08:22.618205",
+  "inference_time_s": 45.05,
+  "status": "inference_failed"
+}

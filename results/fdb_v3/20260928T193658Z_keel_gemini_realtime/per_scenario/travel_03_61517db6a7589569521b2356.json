@@ -1,0 +1,221 @@
+{
+  "pid": "61517db6a7589569521b2356",
+  "example_id": "travel_03",
+  "category": "travel_identity",
+  "title": "Flight Search with Fillers",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T20:52:02.124569",
+  "inference_time_s": 54.25,
+  "room_name": "eval-131b1839",
+  "stream_start_time": 1790628725.7104127,
+  "input_transcript": "Um, yeah, well, I've been looking for flights and I'm I was wondering if you could like maybe check what's available to London around August 20th for me.",
+  "input_asr_chunks": [
+    {
+      "text": "Um,",
+      "timestamp": [
+        0.96,
+        1.36
+      ]
+    },
+    {
+      "text": "yeah,",
+      "timestamp": [
+        2.08,
+        2.24
+      ]
+    },
+    {
+      "text": "well,",
+      "timestamp": [
+        2.4,
+        2.56
+      ]
+    },
+    {
+      "text": "I've",
+      "timestamp": [
+        2.64,
+        2.8000000000000003
+      ]
+    },
+    {
+      "text": "been",
+      "timestamp": [
+        2.8000000000000003,
+        2.96
+      ]
+    },
+    {
+      "text": "looking",
+      "timestamp": [
+        2.96,
+        3.2
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        3.2,
+        3.36
+      ]
+    },
+    {
+      "text": "flights",
+      "timestamp": [
+        3.36,
+        3.92
+      ]
+    },
+    {
+      "text": "and",
+      "timestamp": [
+        4.16,
+        4.4
+      ]
+    },
+    {
+      "text": "I'm",
+      "timestamp": [
+        4.72,
+        5.04
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        5.28,
+        5.5200000000000005
+      ]
+    },
+    {
+      "text": "was",
+      "timestamp": [
+        5.5200000000000005,
+        5.68
+      ]
+    },
+    {
+      "text": "wondering",
+      "timestamp": [
+        5.68,
+        6.08
+      ]
+    },
+    {
+      "text": "if",
+      "timestamp": [
+        6.08,
+        6.24
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        6.24,
+        6.32
+      ]
+    },
+    {
+      "text": "could",
+      "timestamp": [
+        6.32,
+        6.48
+      ]
+    },
+    {
+      "text": "like",
+      "timestamp": [
+        6.5600000000000005,
+        6.72
+      ]
+    },
+    {
+      "text": "maybe",
+      "timestamp": [
+        6.8,
+        7.12
+      ]
+    },
+    {
+      "text": "check",
+      "timestamp": [
+        7.12,
+        7.84
+      ]
+    },
+    {
+      "text": "what's",
+      "timestamp": [
+        7.84,
+        8.24
+      ]
+    },
+    {
+      "text": "available",
+      "timestamp": [
+        8.24,
+        8.88
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        8.88,
+        9.040000000000001
+      ]
+    },
+    {
+      "text": "London",
+      "timestamp": [
+        9.200000000000001,
+        9.92
+      ]
+    },
+    {
+      "text": "around",
+      "timestamp": [
+        9.92,
+        10.24
+      ]
+    },
+    {
+      "text": "August",
+      "timestamp": [
+        10.64,
+        11.200000000000001
+      ]
+    },
+    {
+      "text": "20th",
+      "timestamp": [
+        11.200000000000001,
+        11.84
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        11.84,
+        12.16
+      ]
+    },
+    {
+      "text": "me.",
+      "timestamp": [
+        12.16,
+        12.4
+      ]
+    }
+  ],
+  "user_speech_end_rel": 12.4,
+  "latency": {
+    "input_duration_s": 43.2,
+    "output_duration_s": 43.2,
+    "first_speech_s": 43.2
+  },
+  "user_done_unix": 1790628738.1104128,
+  "transcript": "",
+  "asr_chunks": [],
+  "actual_tool_calls": [],
+  "status": "completed"
+}

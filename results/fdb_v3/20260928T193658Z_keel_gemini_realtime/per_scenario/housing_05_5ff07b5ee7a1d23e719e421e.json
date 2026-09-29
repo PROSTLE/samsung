@@ -1,0 +1,10 @@
+{
+  "pid": "5ff07b5ee7a1d23e719e421e",
+  "example_id": "housing_05",
+  "category": "housing_location",
+  "title": "Pet-Friendly Search with Hesitation",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T20:27:56.963804",
+  "inference_time_s": 45.04,
+  "status": "inference_failed"
+}

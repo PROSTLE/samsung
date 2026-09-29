@@ -1,0 +1,384 @@
+{
+  "pid": "5ff07b5ee7a1d23e719e421e",
+  "example_id": "travel_07",
+  "category": "travel_identity",
+  "title": "Driver License Update",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T17:37:22.924816",
+  "inference_time_s": 56.92,
+  "room_name": "eval-67459853",
+  "stream_start_time": 1790617047.7607727,
+  "input_transcript": "Uh, um, the new driver's license number is Dash L dash five dash five dash five. Could you swap out the old one and put this new one in there?",
+  "input_asr_chunks": [
+    {
+      "text": "Uh,",
+      "timestamp": [
+        0.56,
+        1.04
+      ]
+    },
+    {
+      "text": "um,",
+      "timestamp": [
+        1.52,
+        1.76
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        2.32,
+        2.56
+      ]
+    },
+    {
+      "text": "new",
+      "timestamp": [
+        2.56,
+        2.8000000000000003
+      ]
+    },
+    {
+      "text": "driver's",
+      "timestamp": [
+        2.8000000000000003,
+        3.44
+      ]
+    },
+    {
+      "text": "license",
+      "timestamp": [
+        3.44,
+        4.08
+      ]
+    },
+    {
+      "text": "number",
+      "timestamp": [
+        4.08,
+        4.4
+      ]
+    },
+    {
+      "text": "is",
+      "timestamp": [
+        4.4,
+        4.72
+      ]
+    },
+    {
+      "text": "Dash",
+      "timestamp": [
+        4.72,
+        6.08
+      ]
+    },
+    {
+      "text": "L",
+      "timestamp": [
+        6.08,
+        6.4
+      ]
+    },
+    {
+      "text": "dash",
+      "timestamp": [
+        6.640000000000001,
+        7.12
+      ]
+    },
+    {
+      "text": "five",
+      "timestamp": [
+        7.12,
+        7.68
+      ]
+    },
+    {
+      "text": "dash",
+      "timestamp": [
+        8.0,
+        8.56
+      ]
+    },
+    {
+      "text": "five",
+      "timestamp": [
+        8.56,
+        9.120000000000001
+      ]
+    },
+    {
+      "text": "dash",
+      "timestamp": [
+        9.28,
+        9.76
+      ]
+    },
+    {
+      "text": "five.",
+      "timestamp": [
+        9.76,
+        10.4
+      ]
+    },
+    {
+      "text": "Could",
+      "timestamp": [
+        10.72,
+        11.040000000000001
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        11.040000000000001,
+        11.200000000000001
+      ]
+    },
+    {
+      "text": "swap",
+      "timestamp": [
+        11.200000000000001,
+        11.6
+      ]
+    },
+    {
+      "text": "out",
+      "timestamp": [
+        11.6,
+        11.76
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        11.76,
+        11.92
+      ]
+    },
+    {
+      "text": "old",
+      "timestamp": [
+        11.92,
+        12.16
+      ]
+    },
+    {
+      "text": "one",
+      "timestamp": [
+        12.16,
+        12.4
+      ]
+    },
+    {
+      "text": "and",
+      "timestamp": [
+        12.4,
+        12.56
+      ]
+    },
+    {
+      "text": "put",
+      "timestamp": [
+        12.56,
+        12.88
+      ]
+    },
+    {
+      "text": "this",
+      "timestamp": [
+        12.88,
+        13.200000000000001
+      ]
+    },
+    {
+      "text": "new",
+      "timestamp": [
+        13.200000000000001,
+        13.52
+      ]
+    },
+    {
+      "text": "one",
+      "timestamp": [
+        13.52,
+        13.84
+      ]
+    },
+    {
+      "text": "in",
+      "timestamp": [
+        13.84,
+        14.16
+      ]
+    },
+    {
+      "text": "there?",
+      "timestamp": [
+        14.16,
+        14.48
+      ]
+    }
+  ],
+  "user_speech_end_rel": 14.48,
+  "latency": {
+    "input_duration_s": 45.0,
+    "output_duration_s": 45.0,
+    "first_speech_s": 18.45
+  },
+  "user_done_unix": 1790617062.2407727,
+  "search_latency_breakdown": {
+    "room": "eval-67459853",
+    "tool": "update_identity_doc",
+    "reasoning": 0.612,
+    "execution": 0.0,
+    "synthesis": 0.738,
+    "total": 1.35,
+    "agent_start_at": 1790617066.4634116
+  },
+  "absolute_total_latency": 4.223,
+  "transcript": "I've updated your driver's license number to end in 555. Is there anything else I can help with?",
+  "asr_chunks": [
+    {
+      "text": "I've",
+      "timestamp": [
+        18.400000000000002,
+        18.72
+      ]
+    },
+    {
+      "text": "updated",
+      "timestamp": [
+        18.72,
+        19.2
+      ]
+    },
+    {
+      "text": "your",
+      "timestamp": [
+        19.2,
+        19.36
+      ]
+    },
+    {
+      "text": "driver's",
+      "timestamp": [
+        19.36,
+        19.76
+      ]
+    },
+    {
+      "text": "license",
+      "timestamp": [
+        19.76,
+        20.16
+      ]
+    },
+    {
+      "text": "number",
+      "timestamp": [
+        20.16,
+        20.400000000000002
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        20.400000000000002,
+        20.56
+      ]
+    },
+    {
+      "text": "end",
+      "timestamp": [
+        20.56,
+        20.72
+      ]
+    },
+    {
+      "text": "in",
+      "timestamp": [
+        20.72,
+        20.96
+      ]
+    },
+    {
+      "text": "555.",
+      "timestamp": [
+        20.96,
+        21.76
+      ]
+    },
+    {
+      "text": "Is",
+      "timestamp": [
+        22.0,
+        22.16
+      ]
+    },
+    {
+      "text": "there",
+      "timestamp": [
+        22.16,
+        22.32
+      ]
+    },
+    {
+      "text": "anything",
+      "timestamp": [
+        22.32,
+        22.64
+      ]
+    },
+    {
+      "text": "else",
+      "timestamp": [
+        22.64,
+        22.88
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        22.88,
+        23.04
+      ]
+    },
+    {
+      "text": "can",
+      "timestamp": [
+        23.04,
+        23.28
+      ]
+    },
+    {
+      "text": "help",
+      "timestamp": [
+        23.28,
+        23.52
+      ]
+    },
+    {
+      "text": "with?",
+      "timestamp": [
+        23.52,
+        23.76
+      ]
+    }
+  ],
+  "perceived_total_latency": 3.92,
+  "audio_agent_speech_start": 18.400000000000002,
+  "actual_tool_calls": [
+    {
+      "function": "update_identity_doc",
+      "args": {
+        "doc_type": "driver's license",
+        "doc_number": "DL555"
+      },
+      "timestamp_start": 17.96,
+      "timestamp_end": 17.96
+    }
+  ],
+  "status": "completed"
+}

@@ -1,0 +1,10 @@
+{
+  "pid": "66c4f3cb14cbfc4db836bd4e",
+  "example_id": "finance_20",
+  "category": "finance_billing",
+  "title": "Conditional Autopay Based on Exchange Rate",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T20:21:55.313720",
+  "inference_time_s": 45.08,
+  "status": "inference_failed"
+}

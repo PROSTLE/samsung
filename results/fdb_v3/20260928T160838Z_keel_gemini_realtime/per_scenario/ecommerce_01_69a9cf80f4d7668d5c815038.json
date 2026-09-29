@@ -1,0 +1,425 @@
+{
+  "pid": "69a9cf80f4d7668d5c815038",
+  "example_id": "ecommerce_01",
+  "category": "ecommerce_support",
+  "title": "Simple Order Tracking",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T16:12:20.418864",
+  "inference_time_s": 57.65,
+  "room_name": "eval-e3677200",
+  "stream_start_time": 1790611943.9395528,
+  "input_transcript": "Like, uh, you know, well, I ordered something last week and um, I haven't received it yet. Could you track it for me? The order ID is A B C O Three",
+  "input_asr_chunks": [
+    {
+      "text": "Like,",
+      "timestamp": [
+        1.2,
+        1.52
+      ]
+    },
+    {
+      "text": "uh,",
+      "timestamp": [
+        2.0,
+        2.24
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        2.48,
+        2.8000000000000003
+      ]
+    },
+    {
+      "text": "know,",
+      "timestamp": [
+        2.8000000000000003,
+        3.12
+      ]
+    },
+    {
+      "text": "well,",
+      "timestamp": [
+        4.08,
+        4.32
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        4.48,
+        4.64
+      ]
+    },
+    {
+      "text": "ordered",
+      "timestamp": [
+        4.64,
+        5.2
+      ]
+    },
+    {
+      "text": "something",
+      "timestamp": [
+        5.2,
+        5.44
+      ]
+    },
+    {
+      "text": "last",
+      "timestamp": [
+        5.44,
+        5.68
+      ]
+    },
+    {
+      "text": "week",
+      "timestamp": [
+        5.68,
+        6.08
+      ]
+    },
+    {
+      "text": "and",
+      "timestamp": [
+        6.24,
+        6.5600000000000005
+      ]
+    },
+    {
+      "text": "um,",
+      "timestamp": [
+        7.2,
+        7.44
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        8.08,
+        8.32
+      ]
+    },
+    {
+      "text": "haven't",
+      "timestamp": [
+        8.32,
+        8.72
+      ]
+    },
+    {
+      "text": "received",
+      "timestamp": [
+        8.72,
+        9.200000000000001
+      ]
+    },
+    {
+      "text": "it",
+      "timestamp": [
+        9.200000000000001,
+        9.44
+      ]
+    },
+    {
+      "text": "yet.",
+      "timestamp": [
+        9.44,
+        9.84
+      ]
+    },
+    {
+      "text": "Could",
+      "timestamp": [
+        10.48,
+        10.8
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        10.8,
+        10.96
+      ]
+    },
+    {
+      "text": "track",
+      "timestamp": [
+        10.96,
+        11.28
+      ]
+    },
+    {
+      "text": "it",
+      "timestamp": [
+        11.28,
+        11.52
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        11.52,
+        11.84
+      ]
+    },
+    {
+      "text": "me?",
+      "timestamp": [
+        11.84,
+        12.16
+      ]
+    },
+    {
+      "text": "The",
+      "timestamp": [
+        13.120000000000001,
+        13.36
+      ]
+    },
+    {
+      "text": "order",
+      "timestamp": [
+        13.36,
+        13.84
+      ]
+    },
+    {
+      "text": "ID",
+      "timestamp": [
+        13.84,
+        14.4
+      ]
+    },
+    {
+      "text": "is",
+      "timestamp": [
+        14.4,
+        14.72
+      ]
+    },
+    {
+      "text": "A",
+      "timestamp": [
+        14.72,
+        15.040000000000001
+      ]
+    },
+    {
+      "text": "B",
+      "timestamp": [
+        15.36,
+        15.6
+      ]
+    },
+    {
+      "text": "C",
+      "timestamp": [
+        16.0,
+        16.240000000000002
+      ]
+    },
+    {
+      "text": "O",
+      "timestamp": [
+        16.72,
+        16.88
+      ]
+    },
+    {
+      "text": "Three",
+      "timestamp": [
+        18.080000000000002,
+        18.56
+      ]
+    }
+  ],
+  "user_speech_end_rel": 18.56,
+  "latency": {
+    "input_duration_s": 49.62,
+    "output_duration_s": 49.62,
+    "first_speech_s": 14.7
+  },
+  "user_done_unix": 1790611962.4995527,
+  "search_latency_breakdown": {
+    "room": "eval-e3677200",
+    "tool": "track_order",
+    "reasoning": 5.181,
+    "execution": 0.0,
+    "synthesis": 0.66,
+    "total": 5.841,
+    "agent_start_at": 1790611966.1907606
+  },
+  "absolute_total_latency": 3.691,
+  "transcript": "Sure, I can track that. What's the order ID? Good news, your order EC one two three is currently out for delivery.",
+  "asr_chunks": [
+    {
+      "text": "Sure,",
+      "timestamp": [
+        14.56,
+        14.88
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        15.040000000000001,
+        15.120000000000001
+      ]
+    },
+    {
+      "text": "can",
+      "timestamp": [
+        15.120000000000001,
+        15.280000000000001
+      ]
+    },
+    {
+      "text": "track",
+      "timestamp": [
+        15.280000000000001,
+        15.52
+      ]
+    },
+    {
+      "text": "that.",
+      "timestamp": [
+        15.52,
+        15.68
+      ]
+    },
+    {
+      "text": "What's",
+      "timestamp": [
+        15.92,
+        16.080000000000002
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        16.080000000000002,
+        16.240000000000002
+      ]
+    },
+    {
+      "text": "order",
+      "timestamp": [
+        16.240000000000002,
+        16.56
+      ]
+    },
+    {
+      "text": "ID?",
+      "timestamp": [
+        16.56,
+        17.12
+      ]
+    },
+    {
+      "text": "Good",
+      "timestamp": [
+        22.8,
+        23.12
+      ]
+    },
+    {
+      "text": "news,",
+      "timestamp": [
+        23.12,
+        23.52
+      ]
+    },
+    {
+      "text": "your",
+      "timestamp": [
+        23.68,
+        23.76
+      ]
+    },
+    {
+      "text": "order",
+      "timestamp": [
+        23.92,
+        24.240000000000002
+      ]
+    },
+    {
+      "text": "EC",
+      "timestamp": [
+        24.400000000000002,
+        24.8
+      ]
+    },
+    {
+      "text": "one",
+      "timestamp": [
+        24.96,
+        25.04
+      ]
+    },
+    {
+      "text": "two",
+      "timestamp": [
+        25.28,
+        25.52
+      ]
+    },
+    {
+      "text": "three",
+      "timestamp": [
+        25.52,
+        25.6
+      ]
+    },
+    {
+      "text": "is",
+      "timestamp": [
+        25.92,
+        26.080000000000002
+      ]
+    },
+    {
+      "text": "currently",
+      "timestamp": [
+        26.080000000000002,
+        26.560000000000002
+      ]
+    },
+    {
+      "text": "out",
+      "timestamp": [
+        26.560000000000002,
+        26.72
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        26.72,
+        26.88
+      ]
+    },
+    {
+      "text": "delivery.",
+      "timestamp": [
+        26.88,
+        27.76
+      ]
+    }
+  ],
+  "perceived_total_latency": -4.0,
+  "audio_agent_speech_start": 14.56,
+  "actual_tool_calls": [
+    {
+      "function": "track_order",
+      "args": {
+        "order_id": "EC123"
+      },
+      "timestamp_start": 21.59,
+      "timestamp_end": 21.59
+    }
+  ],
+  "status": "completed"
+}

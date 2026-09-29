@@ -1,0 +1,120 @@
+📁 Found 100 result files for provider 'keel_gemini_realtime'
+  🔍 ecommerce_01... FR=3.52s  TC=4.46s  TK=Nones  filler=✗
+  🔍 ecommerce_01... FR=-3.84s  TC=5.18s  TK=Nones  filler=✗
+  🔍 ecommerce_02... FR=3.92s  TC=4.88s  TK=Nones  filler=✗
+  🔍 ecommerce_04... FR=3.68s  TC=2.52s  TK=Nones  filler=✗
+  🔍 ecommerce_05... FR=4.24s  TC=Nones  TK=Nones  filler=✗
+  🔍 ecommerce_06... FR=4.32s  TC=5.42s  TK=Nones  filler=✗
+  🔍 ecommerce_07... FR=4.64s  TC=5.79s  TK=Nones  filler=✗
+  🔍 ecommerce_08... FR=4.24s  TC=5.26s  TK=Nones  filler=✗
+  🔍 ecommerce_08... FR=4.32s  TC=2.77s  TK=Nones  filler=✗
+  🔍 ecommerce_09... FR=4.16s  TC=5.14s  TK=Nones  filler=✗
+  🔍 ecommerce_10... FR=4.08s  TC=4.91s  TK=Nones  filler=✗
+  🔍 ecommerce_11... FR=3.44s  TC=4.48s  TK=Nones  filler=✗
+  🔍 ecommerce_12... FR=3.92s  TC=2.55s  TK=Nones  filler=✗
+  🔍 ecommerce_13... FR=4.88s  TC=5.66s  TK=Nones  filler=✗
+  🔍 ecommerce_13... FR=5.12s  TC=6.02s  TK=Nones  filler=✗
+  🔍 ecommerce_14... FR=4.24s  TC=5.11s  TK=Nones  filler=✗
+  🔍 ecommerce_14... FR=4.48s  TC=5.23s  TK=Nones  filler=✗
+  🔍 ecommerce_15... FR=4.16s  TC=4.46s  TK=Nones  filler=✗
+  🔍 ecommerce_15... FR=4.4s  TC=5.67s  TK=Nones  filler=✗
+  🔍 ecommerce_16... FR=4.08s  TC=4.81s  TK=Nones  filler=✗
+  🔍 ecommerce_17... FR=3.84s  TC=2.65s  TK=Nones  filler=✗
+  🔍 ecommerce_18... ⚠️ missing fields
+  🔍 ecommerce_19... ⚠️ missing fields
+  🔍 ecommerce_20... ⚠️ missing fields
+  🔍 ecommerce_21... ⚠️ missing fields
+  🔍 ecommerce_21... ⚠️ missing fields
+  🔍 ecommerce_23... ⚠️ missing fields
+  🔍 ecommerce_25... ⚠️ missing fields
+  🔍 ecommerce_25... ⚠️ missing fields
+  🔍 finance_01... ⚠️ missing fields
+  🔍 finance_01... ⚠️ missing fields
+  🔍 finance_02... ⚠️ missing fields
+  🔍 finance_03... ⚠️ missing fields
+  🔍 finance_03... ⚠️ missing fields
+  🔍 finance_04... ⚠️ missing fields
+  🔍 finance_06... ⚠️ missing fields
+  🔍 finance_07... ⚠️ missing fields
+  🔍 finance_07... ⚠️ missing fields
+  🔍 finance_08... ⚠️ missing fields
+  🔍 finance_08... ⚠️ missing fields
+  🔍 finance_10... ⚠️ missing fields
+  🔍 finance_11... ⚠️ missing fields
+  🔍 finance_12... ⚠️ missing fields
+  🔍 finance_12... ⚠️ missing fields
+  🔍 finance_14... ⚠️ missing fields
+  🔍 finance_15... ⚠️ missing fields
+  🔍 finance_16... ⚠️ missing fields
+  🔍 finance_17... ⚠️ missing fields
+  🔍 finance_18... ⚠️ missing fields
+  🔍 finance_19... ⚠️ missing fields
+  🔍 finance_20... ⚠️ missing fields
+  🔍 finance_21... ⚠️ missing fields
+  🔍 finance_22... ⚠️ missing fields
+  🔍 finance_23... ⚠️ missing fields
+  🔍 housing_01... ⚠️ missing fields
+  🔍 housing_02... ⚠️ missing fields
+  🔍 housing_03... ⚠️ missing fields
+  🔍 housing_04... ⚠️ missing fields
+  🔍 housing_05... ⚠️ missing fields
+  🔍 housing_05... ⚠️ missing fields
+  🔍 housing_06... ⚠️ missing fields
+  🔍 housing_08... ⚠️ missing fields
+  🔍 housing_09... ⚠️ missing fields
+  🔍 housing_10... ⚠️ missing fields
+  🔍 housing_11... ⚠️ missing fields
+  🔍 housing_13... ⚠️ missing fields
+  🔍 housing_14... ⚠️ missing fields
+  🔍 housing_14... ⚠️ missing fields
+  🔍 housing_15... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 housing_15... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 housing_17... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 housing_17... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 housing_18... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 housing_19... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 housing_20... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 housing_21... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 housing_22... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 housing_24... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 housing_24... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 housing_25... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 travel_01... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 travel_02... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 travel_03... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 travel_03... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 travel_05... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 travel_07... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 travel_07... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 travel_08... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 travel_10... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 travel_11... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 travel_14... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 travel_16... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 travel_18... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 travel_19... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 travel_20... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 travel_21... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 travel_21... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 travel_23... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 travel_23... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 travel_24... FR=Nones  TC=Nones  TK=Nones  filler=✗
+
+============================================================
+✅ Analyzed: 53, Skipped (existing): 0, Failed: 47
+
+📊 LATENCY REPORT — KEEL_GEMINI_REALTIME
+========================================================
+  Turn-Take Success: 21/53 (39.6%)
+  No Response (silent): 32
+  (Latency metrics below exclude interruptions)
+
+  First Response (N=20):
+    Mean: 4.18s ± 0.41s
+    Min / Median / Max: 3.44s / 4.24s / 5.12s
+  Tool Call (N=19):
+    Mean: 4.62s ± 1.15s
+    Min / Median / Max: 2.52s / 4.91s / 6.02s
+  Task Completion: No data
+
+  📄 Report saved: /home/harshit/keel/results/fdb_v3/20260928T193658Z_keel_gemini_realtime/keel_gemini_realtime_latency_report.json

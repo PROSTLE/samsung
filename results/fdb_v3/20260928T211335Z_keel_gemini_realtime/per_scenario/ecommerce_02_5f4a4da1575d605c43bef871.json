@@ -1,0 +1,370 @@
+{
+  "pid": "5f4a4da1575d605c43bef871",
+  "example_id": "ecommerce_02",
+  "category": "ecommerce_support",
+  "title": "Simple Product Search",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T21:16:57.581238",
+  "inference_time_s": 55.39,
+  "room_name": "eval-b5a30833",
+  "stream_start_time": 1790630221.461417,
+  "input_transcript": "I'm looking for a pair of wireless headphones and I'd like um to track it under a hundred dollars if possible. What do you have?",
+  "input_asr_chunks": [
+    {
+      "text": "I'm",
+      "timestamp": [
+        2.88,
+        3.2
+      ]
+    },
+    {
+      "text": "looking",
+      "timestamp": [
+        3.2,
+        3.44
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        3.44,
+        3.6
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        3.6,
+        3.7600000000000002
+      ]
+    },
+    {
+      "text": "pair",
+      "timestamp": [
+        3.7600000000000002,
+        3.92
+      ]
+    },
+    {
+      "text": "of",
+      "timestamp": [
+        3.92,
+        4.08
+      ]
+    },
+    {
+      "text": "wireless",
+      "timestamp": [
+        4.08,
+        4.72
+      ]
+    },
+    {
+      "text": "headphones",
+      "timestamp": [
+        4.72,
+        5.68
+      ]
+    },
+    {
+      "text": "and",
+      "timestamp": [
+        6.0,
+        6.32
+      ]
+    },
+    {
+      "text": "I'd",
+      "timestamp": [
+        6.32,
+        7.04
+      ]
+    },
+    {
+      "text": "like",
+      "timestamp": [
+        7.04,
+        7.2
+      ]
+    },
+    {
+      "text": "um",
+      "timestamp": [
+        7.36,
+        7.68
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        7.84,
+        8.16
+      ]
+    },
+    {
+      "text": "track",
+      "timestamp": [
+        8.16,
+        8.64
+      ]
+    },
+    {
+      "text": "it",
+      "timestamp": [
+        8.64,
+        8.88
+      ]
+    },
+    {
+      "text": "under",
+      "timestamp": [
+        8.88,
+        9.200000000000001
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        9.200000000000001,
+        9.36
+      ]
+    },
+    {
+      "text": "hundred",
+      "timestamp": [
+        9.36,
+        9.68
+      ]
+    },
+    {
+      "text": "dollars",
+      "timestamp": [
+        9.68,
+        10.08
+      ]
+    },
+    {
+      "text": "if",
+      "timestamp": [
+        10.16,
+        10.4
+      ]
+    },
+    {
+      "text": "possible.",
+      "timestamp": [
+        10.4,
+        11.120000000000001
+      ]
+    },
+    {
+      "text": "What",
+      "timestamp": [
+        11.44,
+        11.76
+      ]
+    },
+    {
+      "text": "do",
+      "timestamp": [
+        11.76,
+        12.08
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        12.08,
+        12.4
+      ]
+    },
+    {
+      "text": "have?",
+      "timestamp": [
+        12.4,
+        12.56
+      ]
+    }
+  ],
+  "user_speech_end_rel": 12.56,
+  "latency": {
+    "input_duration_s": 43.336,
+    "output_duration_s": 43.336,
+    "first_speech_s": 16.2
+  },
+  "user_done_unix": 1790630234.021417,
+  "search_latency_breakdown": {
+    "room": "eval-b5a30833",
+    "tool": "search_products",
+    "reasoning": 0.608,
+    "execution": 0.0,
+    "synthesis": 0.728,
+    "total": 1.337,
+    "agent_start_at": 1790630239.4788687
+  },
+  "absolute_total_latency": 5.457,
+  "transcript": "I found one pair of wireless headphones matching your criteria. The Wireless Headphones Premium for $90. Does that work for you?",
+  "asr_chunks": [
+    {
+      "text": "I",
+      "timestamp": [
+        16.080000000000002,
+        16.32
+      ]
+    },
+    {
+      "text": "found",
+      "timestamp": [
+        16.48,
+        16.8
+      ]
+    },
+    {
+      "text": "one",
+      "timestamp": [
+        16.8,
+        17.04
+      ]
+    },
+    {
+      "text": "pair",
+      "timestamp": [
+        17.04,
+        17.28
+      ]
+    },
+    {
+      "text": "of",
+      "timestamp": [
+        17.28,
+        17.44
+      ]
+    },
+    {
+      "text": "wireless",
+      "timestamp": [
+        17.44,
+        17.92
+      ]
+    },
+    {
+      "text": "headphones",
+      "timestamp": [
+        17.92,
+        18.56
+      ]
+    },
+    {
+      "text": "matching",
+      "timestamp": [
+        18.56,
+        18.88
+      ]
+    },
+    {
+      "text": "your",
+      "timestamp": [
+        18.88,
+        19.04
+      ]
+    },
+    {
+      "text": "criteria.",
+      "timestamp": [
+        19.04,
+        19.68
+      ]
+    },
+    {
+      "text": "The",
+      "timestamp": [
+        20.0,
+        20.16
+      ]
+    },
+    {
+      "text": "Wireless",
+      "timestamp": [
+        20.16,
+        20.8
+      ]
+    },
+    {
+      "text": "Headphones",
+      "timestamp": [
+        20.8,
+        21.36
+      ]
+    },
+    {
+      "text": "Premium",
+      "timestamp": [
+        21.36,
+        21.92
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        21.92,
+        22.080000000000002
+      ]
+    },
+    {
+      "text": "$90.",
+      "timestamp": [
+        22.080000000000002,
+        22.56
+      ]
+    },
+    {
+      "text": "Does",
+      "timestamp": [
+        23.04,
+        23.28
+      ]
+    },
+    {
+      "text": "that",
+      "timestamp": [
+        23.28,
+        23.52
+      ]
+    },
+    {
+      "text": "work",
+      "timestamp": [
+        23.52,
+        23.76
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        23.76,
+        24.0
+      ]
+    },
+    {
+      "text": "you?",
+      "timestamp": [
+        24.0,
+        24.32
+      ]
+    }
+  ],
+  "perceived_total_latency": 3.52,
+  "audio_agent_speech_start": 16.080000000000002,
+  "actual_tool_calls": [
+    {
+      "function": "search_products",
+      "args": {
+        "max_price": 100.0,
+        "query": "wireless headphones"
+      },
+      "timestamp_start": 17.29,
+      "timestamp_end": 17.29
+    }
+  ],
+  "status": "completed"
+}

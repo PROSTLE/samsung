@@ -1,0 +1,10 @@
+{
+  "pid": "62a885d5b6af18b3d4579e1b",
+  "example_id": "finance_04",
+  "category": "finance_billing",
+  "title": "Exchange with Pause Before Currency",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T20:09:52.754866",
+  "inference_time_s": 45.05,
+  "status": "inference_failed"
+}

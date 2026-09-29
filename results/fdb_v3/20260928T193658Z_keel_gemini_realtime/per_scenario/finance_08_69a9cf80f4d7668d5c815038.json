@@ -1,0 +1,10 @@
+{
+  "pid": "69a9cf80f4d7668d5c815038",
+  "example_id": "finance_08",
+  "category": "finance_billing",
+  "title": "Simple Exchange with Hesitation",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T20:13:39.121008",
+  "inference_time_s": 45.07,
+  "status": "inference_failed"
+}

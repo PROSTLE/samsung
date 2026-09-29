@@ -1,0 +1,10 @@
+{
+  "pid": "61517db6a7589569521b2356",
+  "example_id": "finance_07",
+  "category": "finance_billing",
+  "title": "False Start then Autopay",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T20:12:08.984822",
+  "inference_time_s": 45.07,
+  "status": "inference_failed"
+}

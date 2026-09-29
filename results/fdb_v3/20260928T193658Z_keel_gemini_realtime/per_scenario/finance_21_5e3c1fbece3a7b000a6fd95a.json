@@ -1,0 +1,10 @@
+{
+  "pid": "5e3c1fbece3a7b000a6fd95a",
+  "example_id": "finance_21",
+  "category": "finance_billing",
+  "title": "Hesitant Multi-Task",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T20:22:40.391013",
+  "inference_time_s": 45.0,
+  "status": "inference_failed"
+}

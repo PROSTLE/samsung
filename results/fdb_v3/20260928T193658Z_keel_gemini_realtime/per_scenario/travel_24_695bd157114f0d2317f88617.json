@@ -1,0 +1,417 @@
+{
+  "pid": "695bd157114f0d2317f88617",
+  "example_id": "travel_24",
+  "category": "travel_identity",
+  "title": "Unsupported Tool Request (Hotel)",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T21:08:44.744448",
+  "inference_time_s": 69.1,
+  "room_name": "eval-2643d0f3",
+  "stream_start_time": 1790629728.4428382,
+  "input_transcript": "Well, great. So first, um, I need to find a flight to Vancouver on November 5th and book it under the name Schuyler. Then I was also hoping you could find a hotel near the airport for a couple of nights. And then finally, I need to update my Visa number to V as in Victor-4-4.",
+  "input_asr_chunks": [
+    {
+      "text": "Well,",
+      "timestamp": [
+        0.8,
+        1.12
+      ]
+    },
+    {
+      "text": "great.",
+      "timestamp": [
+        1.28,
+        1.44
+      ]
+    },
+    {
+      "text": "So",
+      "timestamp": [
+        1.68,
+        1.84
+      ]
+    },
+    {
+      "text": "first,",
+      "timestamp": [
+        2.08,
+        2.4
+      ]
+    },
+    {
+      "text": "um,",
+      "timestamp": [
+        2.64,
+        2.88
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        3.36,
+        3.52
+      ]
+    },
+    {
+      "text": "need",
+      "timestamp": [
+        3.52,
+        3.68
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        3.68,
+        3.84
+      ]
+    },
+    {
+      "text": "find",
+      "timestamp": [
+        3.84,
+        4.08
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        4.08,
+        4.16
+      ]
+    },
+    {
+      "text": "flight",
+      "timestamp": [
+        4.16,
+        4.48
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        4.48,
+        4.64
+      ]
+    },
+    {
+      "text": "Vancouver",
+      "timestamp": [
+        4.64,
+        5.92
+      ]
+    },
+    {
+      "text": "on",
+      "timestamp": [
+        5.92,
+        6.24
+      ]
+    },
+    {
+      "text": "November",
+      "timestamp": [
+        6.24,
+        6.88
+      ]
+    },
+    {
+      "text": "5th",
+      "timestamp": [
+        6.88,
+        7.84
+      ]
+    },
+    {
+      "text": "and",
+      "timestamp": [
+        7.84,
+        8.16
+      ]
+    },
+    {
+      "text": "book",
+      "timestamp": [
+        8.16,
+        8.48
+      ]
+    },
+    {
+      "text": "it",
+      "timestamp": [
+        8.48,
+        8.64
+      ]
+    },
+    {
+      "text": "under",
+      "timestamp": [
+        8.64,
+        8.8
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        8.8,
+        8.96
+      ]
+    },
+    {
+      "text": "name",
+      "timestamp": [
+        8.96,
+        9.200000000000001
+      ]
+    },
+    {
+      "text": "Schuyler.",
+      "timestamp": [
+        9.200000000000001,
+        10.32
+      ]
+    },
+    {
+      "text": "Then",
+      "timestamp": [
+        11.84,
+        12.08
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        12.16,
+        12.32
+      ]
+    },
+    {
+      "text": "was",
+      "timestamp": [
+        12.32,
+        12.48
+      ]
+    },
+    {
+      "text": "also",
+      "timestamp": [
+        12.48,
+        12.72
+      ]
+    },
+    {
+      "text": "hoping",
+      "timestamp": [
+        12.72,
+        13.120000000000001
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        13.120000000000001,
+        13.44
+      ]
+    },
+    {
+      "text": "could",
+      "timestamp": [
+        13.44,
+        13.76
+      ]
+    },
+    {
+      "text": "find",
+      "timestamp": [
+        13.76,
+        14.08
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        14.08,
+        14.4
+      ]
+    },
+    {
+      "text": "hotel",
+      "timestamp": [
+        14.4,
+        14.88
+      ]
+    },
+    {
+      "text": "near",
+      "timestamp": [
+        14.88,
+        15.120000000000001
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        15.120000000000001,
+        15.280000000000001
+      ]
+    },
+    {
+      "text": "airport",
+      "timestamp": [
+        15.280000000000001,
+        15.76
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        15.76,
+        15.92
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        15.92,
+        16.0
+      ]
+    },
+    {
+      "text": "couple",
+      "timestamp": [
+        16.0,
+        16.240000000000002
+      ]
+    },
+    {
+      "text": "of",
+      "timestamp": [
+        16.240000000000002,
+        16.48
+      ]
+    },
+    {
+      "text": "nights.",
+      "timestamp": [
+        16.48,
+        17.28
+      ]
+    },
+    {
+      "text": "And",
+      "timestamp": [
+        17.92,
+        18.080000000000002
+      ]
+    },
+    {
+      "text": "then",
+      "timestamp": [
+        18.080000000000002,
+        18.240000000000002
+      ]
+    },
+    {
+      "text": "finally,",
+      "timestamp": [
+        18.32,
+        18.72
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        18.96,
+        19.04
+      ]
+    },
+    {
+      "text": "need",
+      "timestamp": [
+        19.04,
+        19.2
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        19.2,
+        19.36
+      ]
+    },
+    {
+      "text": "update",
+      "timestamp": [
+        19.36,
+        19.68
+      ]
+    },
+    {
+      "text": "my",
+      "timestamp": [
+        19.68,
+        19.84
+      ]
+    },
+    {
+      "text": "Visa",
+      "timestamp": [
+        19.84,
+        20.64
+      ]
+    },
+    {
+      "text": "number",
+      "timestamp": [
+        20.64,
+        20.96
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        20.96,
+        21.2
+      ]
+    },
+    {
+      "text": "V",
+      "timestamp": [
+        21.52,
+        21.84
+      ]
+    },
+    {
+      "text": "as",
+      "timestamp": [
+        22.080000000000002,
+        22.16
+      ]
+    },
+    {
+      "text": "in",
+      "timestamp": [
+        22.48,
+        22.64
+      ]
+    },
+    {
+      "text": "Victor-4-4.",
+      "timestamp": [
+        22.64,
+        25.6
+      ]
+    }
+  ],
+  "user_speech_end_rel": 25.6,
+  "latency": {
+    "input_duration_s": 56.76,
+    "output_duration_s": 56.76,
+    "first_speech_s": 56.76
+  },
+  "user_done_unix": 1790629754.042838,
+  "transcript": "",
+  "asr_chunks": [],
+  "actual_tool_calls": [],
+  "status": "completed"
+}

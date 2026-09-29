@@ -1,0 +1,10 @@
+{
+  "pid": "66f59c766e7e22e1f90d08f6",
+  "example_id": "housing_08",
+  "category": "housing_location",
+  "title": "False Start Before Filter Update",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T20:30:12.120139",
+  "inference_time_s": 45.06,
+  "status": "inference_failed"
+}

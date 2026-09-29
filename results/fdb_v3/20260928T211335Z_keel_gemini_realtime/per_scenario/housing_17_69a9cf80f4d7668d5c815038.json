@@ -1,0 +1,364 @@
+{
+  "pid": "69a9cf80f4d7668d5c815038",
+  "example_id": "housing_17",
+  "category": "housing_location",
+  "title": "Commute Mode Self-Correction",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T22:29:02.344758",
+  "inference_time_s": 55.4,
+  "room_name": "eval-3a96378a",
+  "stream_start_time": 1790634545.9027753,
+  "input_transcript": "Like, like, um, so calculate the transit time to the office from there. Wait, no, actually, um, I just remembered I'd be driving, so make a driving time to the office from my house instead.",
+  "input_asr_chunks": [
+    {
+      "text": "Like,",
+      "timestamp": [
+        1.6,
+        1.92
+      ]
+    },
+    {
+      "text": "like,",
+      "timestamp": [
+        2.16,
+        2.48
+      ]
+    },
+    {
+      "text": "um,",
+      "timestamp": [
+        2.96,
+        3.2
+      ]
+    },
+    {
+      "text": "so",
+      "timestamp": [
+        4.08,
+        4.32
+      ]
+    },
+    {
+      "text": "calculate",
+      "timestamp": [
+        4.32,
+        4.96
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        4.96,
+        5.12
+      ]
+    },
+    {
+      "text": "transit",
+      "timestamp": [
+        5.12,
+        5.6000000000000005
+      ]
+    },
+    {
+      "text": "time",
+      "timestamp": [
+        5.6000000000000005,
+        5.84
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        5.84,
+        6.0
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        6.0,
+        6.16
+      ]
+    },
+    {
+      "text": "office",
+      "timestamp": [
+        6.16,
+        6.640000000000001
+      ]
+    },
+    {
+      "text": "from",
+      "timestamp": [
+        6.640000000000001,
+        6.88
+      ]
+    },
+    {
+      "text": "there.",
+      "timestamp": [
+        6.88,
+        7.12
+      ]
+    },
+    {
+      "text": "Wait,",
+      "timestamp": [
+        7.68,
+        7.92
+      ]
+    },
+    {
+      "text": "no,",
+      "timestamp": [
+        8.08,
+        8.32
+      ]
+    },
+    {
+      "text": "actually,",
+      "timestamp": [
+        8.56,
+        8.88
+      ]
+    },
+    {
+      "text": "um,",
+      "timestamp": [
+        9.200000000000001,
+        9.52
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        10.56,
+        10.72
+      ]
+    },
+    {
+      "text": "just",
+      "timestamp": [
+        10.72,
+        10.96
+      ]
+    },
+    {
+      "text": "remembered",
+      "timestamp": [
+        10.96,
+        11.44
+      ]
+    },
+    {
+      "text": "I'd",
+      "timestamp": [
+        11.44,
+        11.76
+      ]
+    },
+    {
+      "text": "be",
+      "timestamp": [
+        11.76,
+        11.92
+      ]
+    },
+    {
+      "text": "driving,",
+      "timestamp": [
+        11.92,
+        12.48
+      ]
+    },
+    {
+      "text": "so",
+      "timestamp": [
+        12.8,
+        13.040000000000001
+      ]
+    },
+    {
+      "text": "make",
+      "timestamp": [
+        13.040000000000001,
+        13.280000000000001
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        13.280000000000001,
+        13.44
+      ]
+    },
+    {
+      "text": "driving",
+      "timestamp": [
+        13.44,
+        13.76
+      ]
+    },
+    {
+      "text": "time",
+      "timestamp": [
+        13.76,
+        14.0
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        14.0,
+        14.08
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        14.08,
+        14.24
+      ]
+    },
+    {
+      "text": "office",
+      "timestamp": [
+        14.24,
+        14.64
+      ]
+    },
+    {
+      "text": "from",
+      "timestamp": [
+        14.64,
+        14.8
+      ]
+    },
+    {
+      "text": "my",
+      "timestamp": [
+        14.8,
+        14.96
+      ]
+    },
+    {
+      "text": "house",
+      "timestamp": [
+        14.96,
+        15.44
+      ]
+    },
+    {
+      "text": "instead.",
+      "timestamp": [
+        15.44,
+        16.240000000000002
+      ]
+    }
+  ],
+  "user_speech_end_rel": 16.240000000000002,
+  "latency": {
+    "input_duration_s": 47.46,
+    "output_duration_s": 47.46,
+    "first_speech_s": 19.5
+  },
+  "user_done_unix": 1790634562.1427753,
+  "transcript": "What is the address of your house and the address of the office?",
+  "asr_chunks": [
+    {
+      "text": "What",
+      "timestamp": [
+        19.68,
+        19.92
+      ]
+    },
+    {
+      "text": "is",
+      "timestamp": [
+        19.92,
+        20.080000000000002
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        20.080000000000002,
+        20.240000000000002
+      ]
+    },
+    {
+      "text": "address",
+      "timestamp": [
+        20.240000000000002,
+        20.64
+      ]
+    },
+    {
+      "text": "of",
+      "timestamp": [
+        20.64,
+        20.72
+      ]
+    },
+    {
+      "text": "your",
+      "timestamp": [
+        20.72,
+        20.88
+      ]
+    },
+    {
+      "text": "house",
+      "timestamp": [
+        20.88,
+        21.2
+      ]
+    },
+    {
+      "text": "and",
+      "timestamp": [
+        21.36,
+        21.6
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        21.6,
+        21.76
+      ]
+    },
+    {
+      "text": "address",
+      "timestamp": [
+        21.76,
+        22.16
+      ]
+    },
+    {
+      "text": "of",
+      "timestamp": [
+        22.16,
+        22.240000000000002
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        22.240000000000002,
+        22.48
+      ]
+    },
+    {
+      "text": "office?",
+      "timestamp": [
+        22.48,
+        23.12
+      ]
+    }
+  ],
+  "perceived_total_latency": 3.44,
+  "audio_agent_speech_start": 19.68,
+  "actual_tool_calls": [],
+  "status": "completed"
+}

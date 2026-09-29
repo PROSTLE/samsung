@@ -1,0 +1,364 @@
+{
+  "pid": "69a9cf80f4d7668d5c815038",
+  "example_id": "finance_08",
+  "category": "finance_billing",
+  "title": "Simple Exchange with Hesitation",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T21:56:07.129728",
+  "inference_time_s": 62.57,
+  "room_name": "eval-d506c29d",
+  "stream_start_time": 1790632579.0407832,
+  "input_transcript": "I'm trying to figure out how much money I'd have if I converted, let me think, about 200 euros into US dollars. What would that come out to?",
+  "input_asr_chunks": [
+    {
+      "text": "I'm",
+      "timestamp": [
+        1.04,
+        1.52
+      ]
+    },
+    {
+      "text": "trying",
+      "timestamp": [
+        1.52,
+        1.68
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        1.68,
+        1.76
+      ]
+    },
+    {
+      "text": "figure",
+      "timestamp": [
+        1.76,
+        2.08
+      ]
+    },
+    {
+      "text": "out",
+      "timestamp": [
+        2.08,
+        2.24
+      ]
+    },
+    {
+      "text": "how",
+      "timestamp": [
+        2.24,
+        2.4
+      ]
+    },
+    {
+      "text": "much",
+      "timestamp": [
+        2.4,
+        2.64
+      ]
+    },
+    {
+      "text": "money",
+      "timestamp": [
+        2.64,
+        2.96
+      ]
+    },
+    {
+      "text": "I'd",
+      "timestamp": [
+        2.96,
+        3.52
+      ]
+    },
+    {
+      "text": "have",
+      "timestamp": [
+        3.52,
+        3.84
+      ]
+    },
+    {
+      "text": "if",
+      "timestamp": [
+        3.84,
+        4.08
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        5.2,
+        5.5200000000000005
+      ]
+    },
+    {
+      "text": "converted,",
+      "timestamp": [
+        5.5200000000000005,
+        6.5600000000000005
+      ]
+    },
+    {
+      "text": "let",
+      "timestamp": [
+        7.2,
+        7.44
+      ]
+    },
+    {
+      "text": "me",
+      "timestamp": [
+        7.44,
+        7.68
+      ]
+    },
+    {
+      "text": "think,",
+      "timestamp": [
+        7.68,
+        7.92
+      ]
+    },
+    {
+      "text": "about",
+      "timestamp": [
+        8.88,
+        9.040000000000001
+      ]
+    },
+    {
+      "text": "200",
+      "timestamp": [
+        9.28,
+        9.84
+      ]
+    },
+    {
+      "text": "euros",
+      "timestamp": [
+        9.84,
+        10.24
+      ]
+    },
+    {
+      "text": "into",
+      "timestamp": [
+        10.24,
+        10.4
+      ]
+    },
+    {
+      "text": "US",
+      "timestamp": [
+        10.4,
+        10.8
+      ]
+    },
+    {
+      "text": "dollars.",
+      "timestamp": [
+        10.8,
+        11.6
+      ]
+    },
+    {
+      "text": "What",
+      "timestamp": [
+        11.92,
+        12.16
+      ]
+    },
+    {
+      "text": "would",
+      "timestamp": [
+        12.16,
+        12.4
+      ]
+    },
+    {
+      "text": "that",
+      "timestamp": [
+        12.4,
+        12.72
+      ]
+    },
+    {
+      "text": "come",
+      "timestamp": [
+        12.72,
+        12.96
+      ]
+    },
+    {
+      "text": "out",
+      "timestamp": [
+        12.96,
+        13.280000000000001
+      ]
+    },
+    {
+      "text": "to?",
+      "timestamp": [
+        13.280000000000001,
+        13.6
+      ]
+    }
+  ],
+  "user_speech_end_rel": 13.6,
+  "latency": {
+    "input_duration_s": 43.98,
+    "output_duration_s": 43.98,
+    "first_speech_s": 26.8
+  },
+  "user_done_unix": 1790632592.640783,
+  "search_latency_breakdown": {
+    "room": "eval-d506c29d",
+    "tool": "get_exchange_rate",
+    "reasoning": 1.621,
+    "execution": 0.0,
+    "synthesis": 2.211,
+    "total": 3.832,
+    "agent_start_at": 1790632602.319056
+  },
+  "absolute_total_latency": 9.678,
+  "transcript": "Two hundred Euros is two hundred and twenty US dollars. Anything else that can help you convert?",
+  "asr_chunks": [
+    {
+      "text": "Two",
+      "timestamp": [
+        26.72,
+        27.04
+      ]
+    },
+    {
+      "text": "hundred",
+      "timestamp": [
+        27.04,
+        27.28
+      ]
+    },
+    {
+      "text": "Euros",
+      "timestamp": [
+        28.32,
+        28.88
+      ]
+    },
+    {
+      "text": "is",
+      "timestamp": [
+        28.88,
+        29.12
+      ]
+    },
+    {
+      "text": "two",
+      "timestamp": [
+        29.12,
+        29.28
+      ]
+    },
+    {
+      "text": "hundred",
+      "timestamp": [
+        29.36,
+        29.6
+      ]
+    },
+    {
+      "text": "and",
+      "timestamp": [
+        29.6,
+        29.68
+      ]
+    },
+    {
+      "text": "twenty",
+      "timestamp": [
+        29.68,
+        30.0
+      ]
+    },
+    {
+      "text": "US",
+      "timestamp": [
+        30.0,
+        30.400000000000002
+      ]
+    },
+    {
+      "text": "dollars.",
+      "timestamp": [
+        30.400000000000002,
+        30.8
+      ]
+    },
+    {
+      "text": "Anything",
+      "timestamp": [
+        31.12,
+        31.44
+      ]
+    },
+    {
+      "text": "else",
+      "timestamp": [
+        31.44,
+        31.68
+      ]
+    },
+    {
+      "text": "that",
+      "timestamp": [
+        31.68,
+        31.84
+      ]
+    },
+    {
+      "text": "can",
+      "timestamp": [
+        31.84,
+        31.92
+      ]
+    },
+    {
+      "text": "help",
+      "timestamp": [
+        31.92,
+        32.08
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        32.08,
+        32.160000000000004
+      ]
+    },
+    {
+      "text": "convert?",
+      "timestamp": [
+        32.160000000000004,
+        32.88
+      ]
+    }
+  ],
+  "perceived_total_latency": 13.12,
+  "audio_agent_speech_start": 26.72,
+  "actual_tool_calls": [
+    {
+      "function": "get_exchange_rate",
+      "args": {
+        "to_currency": "USD",
+        "from_currency": "EUR",
+        "amount": 200.0
+      },
+      "timestamp_start": 21.07,
+      "timestamp_end": 21.07
+    }
+  ],
+  "status": "completed"
+}

@@ -1,0 +1,413 @@
+{
+  "pid": "5ff07b5ee7a1d23e719e421e",
+  "example_id": "housing_05",
+  "category": "housing_location",
+  "title": "Pet-Friendly Search with Hesitation",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T17:08:33.779083",
+  "inference_time_s": 60.14,
+  "room_name": "eval-9c537bc1",
+  "stream_start_time": 1790615318.2891881,
+  "input_transcript": "You know, you know, you know, well, I need um a pet-friendly apartment in Miami, and my budget is about let me check fifteen hundred a month. Is there anything in that range?",
+  "input_asr_chunks": [
+    {
+      "text": "You",
+      "timestamp": [
+        0.8,
+        1.12
+      ]
+    },
+    {
+      "text": "know,",
+      "timestamp": [
+        1.12,
+        1.44
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        2.64,
+        2.96
+      ]
+    },
+    {
+      "text": "know,",
+      "timestamp": [
+        3.2800000000000002,
+        3.52
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        4.08,
+        4.4
+      ]
+    },
+    {
+      "text": "know,",
+      "timestamp": [
+        4.4,
+        4.64
+      ]
+    },
+    {
+      "text": "well,",
+      "timestamp": [
+        4.88,
+        5.04
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        5.36,
+        5.68
+      ]
+    },
+    {
+      "text": "need",
+      "timestamp": [
+        5.68,
+        5.92
+      ]
+    },
+    {
+      "text": "um",
+      "timestamp": [
+        6.08,
+        6.24
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        6.88,
+        7.12
+      ]
+    },
+    {
+      "text": "pet-friendly",
+      "timestamp": [
+        7.12,
+        7.92
+      ]
+    },
+    {
+      "text": "apartment",
+      "timestamp": [
+        7.92,
+        8.48
+      ]
+    },
+    {
+      "text": "in",
+      "timestamp": [
+        8.48,
+        8.64
+      ]
+    },
+    {
+      "text": "Miami,",
+      "timestamp": [
+        8.64,
+        9.36
+      ]
+    },
+    {
+      "text": "and",
+      "timestamp": [
+        9.68,
+        9.84
+      ]
+    },
+    {
+      "text": "my",
+      "timestamp": [
+        9.84,
+        10.0
+      ]
+    },
+    {
+      "text": "budget",
+      "timestamp": [
+        10.0,
+        10.72
+      ]
+    },
+    {
+      "text": "is",
+      "timestamp": [
+        10.72,
+        11.040000000000001
+      ]
+    },
+    {
+      "text": "about",
+      "timestamp": [
+        11.040000000000001,
+        11.36
+      ]
+    },
+    {
+      "text": "let",
+      "timestamp": [
+        12.16,
+        12.4
+      ]
+    },
+    {
+      "text": "me",
+      "timestamp": [
+        12.4,
+        12.64
+      ]
+    },
+    {
+      "text": "check",
+      "timestamp": [
+        12.64,
+        13.120000000000001
+      ]
+    },
+    {
+      "text": "fifteen",
+      "timestamp": [
+        13.68,
+        14.24
+      ]
+    },
+    {
+      "text": "hundred",
+      "timestamp": [
+        14.4,
+        14.96
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        14.96,
+        15.200000000000001
+      ]
+    },
+    {
+      "text": "month.",
+      "timestamp": [
+        15.200000000000001,
+        15.76
+      ]
+    },
+    {
+      "text": "Is",
+      "timestamp": [
+        16.080000000000002,
+        16.32
+      ]
+    },
+    {
+      "text": "there",
+      "timestamp": [
+        16.32,
+        16.56
+      ]
+    },
+    {
+      "text": "anything",
+      "timestamp": [
+        16.56,
+        17.2
+      ]
+    },
+    {
+      "text": "in",
+      "timestamp": [
+        17.2,
+        17.52
+      ]
+    },
+    {
+      "text": "that",
+      "timestamp": [
+        17.52,
+        17.84
+      ]
+    },
+    {
+      "text": "range?",
+      "timestamp": [
+        17.84,
+        18.48
+      ]
+    }
+  ],
+  "user_speech_end_rel": 18.48,
+  "latency": {
+    "input_duration_s": 48.9,
+    "output_duration_s": 48.9,
+    "first_speech_s": 23.5
+  },
+  "user_done_unix": 1790615336.7691882,
+  "search_latency_breakdown": {
+    "room": "eval-9c537bc1",
+    "tool": "search_apartments",
+    "reasoning": 0.615,
+    "execution": 0.456,
+    "synthesis": 0.737,
+    "total": 1.809,
+    "agent_start_at": 1790615342.2617016
+  },
+  "absolute_total_latency": 5.493,
+  "transcript": "I found one apartment in Miami for $1,400 a month that meets your criteria. Would you like more details?",
+  "asr_chunks": [
+    {
+      "text": "I",
+      "timestamp": [
+        23.44,
+        23.68
+      ]
+    },
+    {
+      "text": "found",
+      "timestamp": [
+        23.68,
+        24.0
+      ]
+    },
+    {
+      "text": "one",
+      "timestamp": [
+        24.0,
+        24.240000000000002
+      ]
+    },
+    {
+      "text": "apartment",
+      "timestamp": [
+        24.240000000000002,
+        24.72
+      ]
+    },
+    {
+      "text": "in",
+      "timestamp": [
+        24.72,
+        24.8
+      ]
+    },
+    {
+      "text": "Miami",
+      "timestamp": [
+        24.8,
+        25.28
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        25.28,
+        25.44
+      ]
+    },
+    {
+      "text": "$1,400",
+      "timestamp": [
+        25.44,
+        26.240000000000002
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        26.48,
+        26.560000000000002
+      ]
+    },
+    {
+      "text": "month",
+      "timestamp": [
+        26.560000000000002,
+        26.88
+      ]
+    },
+    {
+      "text": "that",
+      "timestamp": [
+        26.88,
+        27.04
+      ]
+    },
+    {
+      "text": "meets",
+      "timestamp": [
+        27.04,
+        27.36
+      ]
+    },
+    {
+      "text": "your",
+      "timestamp": [
+        27.36,
+        27.52
+      ]
+    },
+    {
+      "text": "criteria.",
+      "timestamp": [
+        27.52,
+        28.080000000000002
+      ]
+    },
+    {
+      "text": "Would",
+      "timestamp": [
+        28.400000000000002,
+        28.560000000000002
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        28.560000000000002,
+        28.72
+      ]
+    },
+    {
+      "text": "like",
+      "timestamp": [
+        28.72,
+        28.88
+      ]
+    },
+    {
+      "text": "more",
+      "timestamp": [
+        28.88,
+        29.04
+      ]
+    },
+    {
+      "text": "details?",
+      "timestamp": [
+        29.04,
+        29.84
+      ]
+    }
+  ],
+  "perceived_total_latency": 4.96,
+  "audio_agent_speech_start": 23.44,
+  "actual_tool_calls": [
+    {
+      "function": "search_apartments",
+      "args": {
+        "city": "Miami",
+        "bedrooms": 1,
+        "max_price": 1500.0
+      },
+      "timestamp_start": 22.78,
+      "timestamp_end": 23.24
+    }
+  ],
+  "status": "completed"
+}

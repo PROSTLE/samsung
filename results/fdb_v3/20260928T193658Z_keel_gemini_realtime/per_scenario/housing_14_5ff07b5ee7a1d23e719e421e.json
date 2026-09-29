@@ -1,0 +1,10 @@
+{
+  "pid": "5ff07b5ee7a1d23e719e421e",
+  "example_id": "housing_14",
+  "category": "housing_location",
+  "title": "Filler-Heavy Apartment Search",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T20:33:57.661855",
+  "inference_time_s": 45.08,
+  "status": "inference_failed"
+}

@@ -1,0 +1,10 @@
+{
+  "pid": "6998abd731d2ec50d067d5bd",
+  "example_id": "finance_17",
+  "category": "finance_billing",
+  "title": "False Start then Benefits Check",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T20:19:40.012767",
+  "inference_time_s": 45.17,
+  "status": "inference_failed"
+}

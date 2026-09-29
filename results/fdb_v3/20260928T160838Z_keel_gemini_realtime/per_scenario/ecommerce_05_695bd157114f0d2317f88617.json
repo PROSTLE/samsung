@@ -1,0 +1,447 @@
+{
+  "pid": "695bd157114f0d2317f88617",
+  "example_id": "ecommerce_05",
+  "category": "ecommerce_support",
+  "title": "Product Search with Hesitation",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T16:15:02.947107",
+  "inference_time_s": 60.01,
+  "room_name": "eval-1555806c",
+  "stream_start_time": 1790612106.216054,
+  "input_transcript": "Um, so like, uh, I'm looking for, um, for a new let me think a desk. Yes, something under three hundred dollars. If you have an option like that, that would be great.",
+  "input_asr_chunks": [
+    {
+      "text": "Um,",
+      "timestamp": [
+        0.8,
+        1.44
+      ]
+    },
+    {
+      "text": "so",
+      "timestamp": [
+        1.76,
+        2.0
+      ]
+    },
+    {
+      "text": "like,",
+      "timestamp": [
+        2.16,
+        2.48
+      ]
+    },
+    {
+      "text": "uh,",
+      "timestamp": [
+        2.8000000000000003,
+        3.12
+      ]
+    },
+    {
+      "text": "I'm",
+      "timestamp": [
+        3.7600000000000002,
+        4.24
+      ]
+    },
+    {
+      "text": "looking",
+      "timestamp": [
+        4.24,
+        4.72
+      ]
+    },
+    {
+      "text": "for,",
+      "timestamp": [
+        4.72,
+        4.96
+      ]
+    },
+    {
+      "text": "um,",
+      "timestamp": [
+        5.04,
+        5.28
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        6.24,
+        6.5600000000000005
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        6.5600000000000005,
+        6.88
+      ]
+    },
+    {
+      "text": "new",
+      "timestamp": [
+        6.88,
+        7.2
+      ]
+    },
+    {
+      "text": "let",
+      "timestamp": [
+        9.76,
+        9.92
+      ]
+    },
+    {
+      "text": "me",
+      "timestamp": [
+        10.16,
+        10.48
+      ]
+    },
+    {
+      "text": "think",
+      "timestamp": [
+        10.48,
+        10.8
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        11.44,
+        11.76
+      ]
+    },
+    {
+      "text": "desk.",
+      "timestamp": [
+        11.76,
+        12.32
+      ]
+    },
+    {
+      "text": "Yes,",
+      "timestamp": [
+        13.280000000000001,
+        13.84
+      ]
+    },
+    {
+      "text": "something",
+      "timestamp": [
+        14.48,
+        14.72
+      ]
+    },
+    {
+      "text": "under",
+      "timestamp": [
+        15.040000000000001,
+        15.36
+      ]
+    },
+    {
+      "text": "three",
+      "timestamp": [
+        15.36,
+        15.52
+      ]
+    },
+    {
+      "text": "hundred",
+      "timestamp": [
+        15.76,
+        16.4
+      ]
+    },
+    {
+      "text": "dollars.",
+      "timestamp": [
+        16.4,
+        17.04
+      ]
+    },
+    {
+      "text": "If",
+      "timestamp": [
+        18.0,
+        18.240000000000002
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        18.240000000000002,
+        18.400000000000002
+      ]
+    },
+    {
+      "text": "have",
+      "timestamp": [
+        18.400000000000002,
+        18.56
+      ]
+    },
+    {
+      "text": "an",
+      "timestamp": [
+        18.56,
+        18.72
+      ]
+    },
+    {
+      "text": "option",
+      "timestamp": [
+        18.72,
+        19.36
+      ]
+    },
+    {
+      "text": "like",
+      "timestamp": [
+        19.36,
+        19.6
+      ]
+    },
+    {
+      "text": "that,",
+      "timestamp": [
+        19.6,
+        19.92
+      ]
+    },
+    {
+      "text": "that",
+      "timestamp": [
+        20.240000000000002,
+        20.48
+      ]
+    },
+    {
+      "text": "would",
+      "timestamp": [
+        20.48,
+        20.8
+      ]
+    },
+    {
+      "text": "be",
+      "timestamp": [
+        20.8,
+        21.12
+      ]
+    },
+    {
+      "text": "great.",
+      "timestamp": [
+        21.12,
+        21.44
+      ]
+    }
+  ],
+  "user_speech_end_rel": 7.2,
+  "latency": {
+    "input_duration_s": 52.08,
+    "output_duration_s": 52.08,
+    "first_speech_s": 11.7
+  },
+  "user_done_unix": 1790612113.416054,
+  "search_latency_breakdown": {
+    "room": "eval-1555806c",
+    "tool": "search_products",
+    "reasoning": 13.621,
+    "execution": 0.0,
+    "synthesis": 0.706,
+    "total": 14.326,
+    "agent_start_at": 1790612131.6192403
+  },
+  "absolute_total_latency": 18.203,
+  "transcript": "I found one desk going for two hundred and ninety dollars. It's the desk premium. Would you like to add this to your cart?",
+  "asr_chunks": [
+    {
+      "text": "I",
+      "timestamp": [
+        26.0,
+        26.240000000000002
+      ]
+    },
+    {
+      "text": "found",
+      "timestamp": [
+        26.240000000000002,
+        26.560000000000002
+      ]
+    },
+    {
+      "text": "one",
+      "timestamp": [
+        26.560000000000002,
+        26.8
+      ]
+    },
+    {
+      "text": "desk",
+      "timestamp": [
+        26.8,
+        27.28
+      ]
+    },
+    {
+      "text": "going",
+      "timestamp": [
+        27.28,
+        27.52
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        27.52,
+        27.68
+      ]
+    },
+    {
+      "text": "two",
+      "timestamp": [
+        27.68,
+        27.84
+      ]
+    },
+    {
+      "text": "hundred",
+      "timestamp": [
+        28.0,
+        28.240000000000002
+      ]
+    },
+    {
+      "text": "and",
+      "timestamp": [
+        28.240000000000002,
+        28.32
+      ]
+    },
+    {
+      "text": "ninety",
+      "timestamp": [
+        28.32,
+        28.64
+      ]
+    },
+    {
+      "text": "dollars.",
+      "timestamp": [
+        28.64,
+        28.96
+      ]
+    },
+    {
+      "text": "It's",
+      "timestamp": [
+        29.28,
+        29.52
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        29.52,
+        29.76
+      ]
+    },
+    {
+      "text": "desk",
+      "timestamp": [
+        29.76,
+        30.16
+      ]
+    },
+    {
+      "text": "premium.",
+      "timestamp": [
+        30.16,
+        30.72
+      ]
+    },
+    {
+      "text": "Would",
+      "timestamp": [
+        31.04,
+        31.2
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        31.2,
+        31.36
+      ]
+    },
+    {
+      "text": "like",
+      "timestamp": [
+        31.36,
+        31.44
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        31.44,
+        31.6
+      ]
+    },
+    {
+      "text": "add",
+      "timestamp": [
+        31.6,
+        31.76
+      ]
+    },
+    {
+      "text": "this",
+      "timestamp": [
+        31.76,
+        31.92
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        31.92,
+        32.0
+      ]
+    },
+    {
+      "text": "your",
+      "timestamp": [
+        32.0,
+        32.24
+      ]
+    },
+    {
+      "text": "cart?",
+      "timestamp": [
+        32.24,
+        32.72
+      ]
+    }
+  ],
+  "perceived_total_latency": 18.8,
+  "audio_agent_speech_start": 26.0,
+  "actual_tool_calls": [
+    {
+      "function": "search_products",
+      "args": {
+        "max_price": 300.0,
+        "query": "desk"
+      },
+      "timestamp_start": 24.7,
+      "timestamp_end": 24.7
+    }
+  ],
+  "status": "completed"
+}

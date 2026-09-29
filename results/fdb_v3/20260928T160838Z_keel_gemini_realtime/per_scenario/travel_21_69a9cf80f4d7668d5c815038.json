@@ -1,0 +1,576 @@
+{
+  "pid": "69a9cf80f4d7668d5c815038",
+  "example_id": "travel_21",
+  "category": "travel_identity",
+  "title": "Hesitant Booking Chain",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T17:48:40.223566",
+  "inference_time_s": 65.53,
+  "room_name": "eval-03fbe023",
+  "stream_start_time": 1790617724.8835025,
+  "input_transcript": "You know, okay, so um I need to find flights to Vegas. I was thinking around August 8th and then um once you find something book it under the name Quinn Davis oh and uh while you're at it could you please update my visa number to V77",
+  "input_asr_chunks": [
+    {
+      "text": "You",
+      "timestamp": [
+        1.36,
+        1.6
+      ]
+    },
+    {
+      "text": "know,",
+      "timestamp": [
+        1.6,
+        1.92
+      ]
+    },
+    {
+      "text": "okay,",
+      "timestamp": [
+        2.8000000000000003,
+        3.12
+      ]
+    },
+    {
+      "text": "so",
+      "timestamp": [
+        3.52,
+        3.68
+      ]
+    },
+    {
+      "text": "um",
+      "timestamp": [
+        3.84,
+        4.08
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        5.04,
+        5.28
+      ]
+    },
+    {
+      "text": "need",
+      "timestamp": [
+        5.28,
+        5.5200000000000005
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        5.5200000000000005,
+        5.76
+      ]
+    },
+    {
+      "text": "find",
+      "timestamp": [
+        5.76,
+        6.0
+      ]
+    },
+    {
+      "text": "flights",
+      "timestamp": [
+        6.0,
+        6.88
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        6.88,
+        7.2
+      ]
+    },
+    {
+      "text": "Vegas.",
+      "timestamp": [
+        7.84,
+        8.96
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        9.28,
+        9.44
+      ]
+    },
+    {
+      "text": "was",
+      "timestamp": [
+        9.44,
+        9.6
+      ]
+    },
+    {
+      "text": "thinking",
+      "timestamp": [
+        9.6,
+        10.0
+      ]
+    },
+    {
+      "text": "around",
+      "timestamp": [
+        10.0,
+        10.24
+      ]
+    },
+    {
+      "text": "August",
+      "timestamp": [
+        10.24,
+        10.72
+      ]
+    },
+    {
+      "text": "8th",
+      "timestamp": [
+        10.72,
+        11.28
+      ]
+    },
+    {
+      "text": "and",
+      "timestamp": [
+        11.92,
+        12.08
+      ]
+    },
+    {
+      "text": "then",
+      "timestamp": [
+        12.08,
+        12.32
+      ]
+    },
+    {
+      "text": "um",
+      "timestamp": [
+        12.48,
+        12.8
+      ]
+    },
+    {
+      "text": "once",
+      "timestamp": [
+        13.120000000000001,
+        13.44
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        13.6,
+        13.92
+      ]
+    },
+    {
+      "text": "find",
+      "timestamp": [
+        13.92,
+        14.24
+      ]
+    },
+    {
+      "text": "something",
+      "timestamp": [
+        14.24,
+        14.48
+      ]
+    },
+    {
+      "text": "book",
+      "timestamp": [
+        14.8,
+        15.200000000000001
+      ]
+    },
+    {
+      "text": "it",
+      "timestamp": [
+        15.200000000000001,
+        15.36
+      ]
+    },
+    {
+      "text": "under",
+      "timestamp": [
+        15.36,
+        15.6
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        15.6,
+        15.68
+      ]
+    },
+    {
+      "text": "name",
+      "timestamp": [
+        15.68,
+        16.0
+      ]
+    },
+    {
+      "text": "Quinn",
+      "timestamp": [
+        16.0,
+        16.4
+      ]
+    },
+    {
+      "text": "Davis",
+      "timestamp": [
+        16.48,
+        17.28
+      ]
+    },
+    {
+      "text": "oh",
+      "timestamp": [
+        17.92,
+        18.16
+      ]
+    },
+    {
+      "text": "and",
+      "timestamp": [
+        18.240000000000002,
+        18.48
+      ]
+    },
+    {
+      "text": "uh",
+      "timestamp": [
+        18.48,
+        18.56
+      ]
+    },
+    {
+      "text": "while",
+      "timestamp": [
+        18.64,
+        18.88
+      ]
+    },
+    {
+      "text": "you're",
+      "timestamp": [
+        18.88,
+        19.12
+      ]
+    },
+    {
+      "text": "at",
+      "timestamp": [
+        19.12,
+        19.28
+      ]
+    },
+    {
+      "text": "it",
+      "timestamp": [
+        19.28,
+        19.44
+      ]
+    },
+    {
+      "text": "could",
+      "timestamp": [
+        19.68,
+        19.84
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        19.84,
+        20.0
+      ]
+    },
+    {
+      "text": "please",
+      "timestamp": [
+        20.0,
+        20.240000000000002
+      ]
+    },
+    {
+      "text": "update",
+      "timestamp": [
+        20.240000000000002,
+        20.64
+      ]
+    },
+    {
+      "text": "my",
+      "timestamp": [
+        20.64,
+        20.72
+      ]
+    },
+    {
+      "text": "visa",
+      "timestamp": [
+        20.72,
+        21.2
+      ]
+    },
+    {
+      "text": "number",
+      "timestamp": [
+        21.2,
+        21.44
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        21.44,
+        21.76
+      ]
+    },
+    {
+      "text": "V77",
+      "timestamp": [
+        21.76,
+        22.64
+      ]
+    }
+  ],
+  "user_speech_end_rel": 22.64,
+  "latency": {
+    "input_duration_s": 53.94,
+    "output_duration_s": 53.94,
+    "first_speech_s": 27.75
+  },
+  "user_done_unix": 1790617747.5235026,
+  "search_latency_breakdown": {
+    "room": "eval-03fbe023",
+    "tool": "search_flights",
+    "reasoning": 0.613,
+    "execution": 0.618,
+    "synthesis": 0.746,
+    "total": 1.977,
+    "agent_start_at": 1790617753.3501916
+  },
+  "absolute_total_latency": 5.827,
+  "transcript": "I have booked that flight for you. I've also updated your Visa number to V seventy seven. Is there anything else I can help with?",
+  "asr_chunks": [
+    {
+      "text": "I",
+      "timestamp": [
+        27.68,
+        27.92
+      ]
+    },
+    {
+      "text": "have",
+      "timestamp": [
+        27.92,
+        28.080000000000002
+      ]
+    },
+    {
+      "text": "booked",
+      "timestamp": [
+        28.080000000000002,
+        28.48
+      ]
+    },
+    {
+      "text": "that",
+      "timestamp": [
+        28.48,
+        28.64
+      ]
+    },
+    {
+      "text": "flight",
+      "timestamp": [
+        28.64,
+        28.88
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        28.88,
+        28.96
+      ]
+    },
+    {
+      "text": "you.",
+      "timestamp": [
+        28.96,
+        29.12
+      ]
+    },
+    {
+      "text": "I've",
+      "timestamp": [
+        29.36,
+        29.6
+      ]
+    },
+    {
+      "text": "also",
+      "timestamp": [
+        29.6,
+        29.84
+      ]
+    },
+    {
+      "text": "updated",
+      "timestamp": [
+        29.84,
+        30.240000000000002
+      ]
+    },
+    {
+      "text": "your",
+      "timestamp": [
+        30.240000000000002,
+        30.400000000000002
+      ]
+    },
+    {
+      "text": "Visa",
+      "timestamp": [
+        30.400000000000002,
+        30.72
+      ]
+    },
+    {
+      "text": "number",
+      "timestamp": [
+        30.72,
+        30.96
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        30.96,
+        31.28
+      ]
+    },
+    {
+      "text": "V",
+      "timestamp": [
+        31.28,
+        31.44
+      ]
+    },
+    {
+      "text": "seventy",
+      "timestamp": [
+        31.52,
+        31.84
+      ]
+    },
+    {
+      "text": "seven.",
+      "timestamp": [
+        31.92,
+        32.160000000000004
+      ]
+    },
+    {
+      "text": "Is",
+      "timestamp": [
+        32.4,
+        32.56
+      ]
+    },
+    {
+      "text": "there",
+      "timestamp": [
+        32.56,
+        32.72
+      ]
+    },
+    {
+      "text": "anything",
+      "timestamp": [
+        32.72,
+        32.96
+      ]
+    },
+    {
+      "text": "else",
+      "timestamp": [
+        32.96,
+        33.12
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        33.12,
+        33.2
+      ]
+    },
+    {
+      "text": "can",
+      "timestamp": [
+        33.2,
+        33.44
+      ]
+    },
+    {
+      "text": "help",
+      "timestamp": [
+        33.44,
+        33.68
+      ]
+    },
+    {
+      "text": "with?",
+      "timestamp": [
+        33.68,
+        33.92
+      ]
+    }
+  ],
+  "perceived_total_latency": 5.04,
+  "audio_agent_speech_start": 27.68,
+  "actual_tool_calls": [
+    {
+      "function": "book_flight",
+      "args": {
+        "passenger_name": "Quinn Davis"
+      },
+      "timestamp_start": 27.1,
+      "timestamp_end": 27.1
+    },
+    {
+      "function": "update_identity_doc",
+      "args": {
+        "doc_number": "V77",
+        "doc_type": "visa"
+      },
+      "timestamp_start": 27.1,
+      "timestamp_end": 27.1
+    },
+    {
+      "function": "search_flights",
+      "args": {
+        "date": "2026-08-08",
+        "destination": "Vegas"
+      },
+      "timestamp_start": 27.1,
+      "timestamp_end": 27.72
+    }
+  ],
+  "status": "completed"
+}

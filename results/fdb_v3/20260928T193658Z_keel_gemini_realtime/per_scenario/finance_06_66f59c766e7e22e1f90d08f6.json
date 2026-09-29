@@ -1,0 +1,10 @@
+{
+  "pid": "66f59c766e7e22e1f90d08f6",
+  "example_id": "finance_06",
+  "category": "finance_billing",
+  "title": "Card Benefits with Hesitation",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T20:10:37.809689",
+  "inference_time_s": 45.96,
+  "status": "inference_failed"
+}

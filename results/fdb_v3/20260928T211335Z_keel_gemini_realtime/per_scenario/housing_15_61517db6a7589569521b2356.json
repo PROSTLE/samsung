@@ -1,0 +1,434 @@
+{
+  "pid": "61517db6a7589569521b2356",
+  "example_id": "housing_15",
+  "category": "housing_location",
+  "title": "False Start then Search",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T22:27:02.051524",
+  "inference_time_s": 58.62,
+  "room_name": "eval-ba4a9223",
+  "stream_start_time": 1790634425.6326404,
+  "input_transcript": "Um, so um uh I wanted to I wanted to check the commute from that one listing. Actually, let me skip that for now. Could you just search for a three-bedroom in Atlanta that's pet-friendly? I um I've got two cats too.",
+  "input_asr_chunks": [
+    {
+      "text": "Um,",
+      "timestamp": [
+        0.56,
+        1.12
+      ]
+    },
+    {
+      "text": "so",
+      "timestamp": [
+        1.44,
+        1.76
+      ]
+    },
+    {
+      "text": "um",
+      "timestamp": [
+        2.16,
+        2.4
+      ]
+    },
+    {
+      "text": "uh",
+      "timestamp": [
+        2.88,
+        3.12
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        3.6,
+        3.84
+      ]
+    },
+    {
+      "text": "wanted",
+      "timestamp": [
+        3.84,
+        4.16
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        4.16,
+        4.24
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        4.8,
+        4.96
+      ]
+    },
+    {
+      "text": "wanted",
+      "timestamp": [
+        4.96,
+        5.28
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        5.28,
+        5.44
+      ]
+    },
+    {
+      "text": "check",
+      "timestamp": [
+        5.44,
+        5.92
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        5.92,
+        6.24
+      ]
+    },
+    {
+      "text": "commute",
+      "timestamp": [
+        6.24,
+        6.88
+      ]
+    },
+    {
+      "text": "from",
+      "timestamp": [
+        6.88,
+        7.2
+      ]
+    },
+    {
+      "text": "that",
+      "timestamp": [
+        7.2,
+        7.5200000000000005
+      ]
+    },
+    {
+      "text": "one",
+      "timestamp": [
+        7.5200000000000005,
+        7.76
+      ]
+    },
+    {
+      "text": "listing.",
+      "timestamp": [
+        7.76,
+        8.56
+      ]
+    },
+    {
+      "text": "Actually,",
+      "timestamp": [
+        9.200000000000001,
+        9.6
+      ]
+    },
+    {
+      "text": "let",
+      "timestamp": [
+        9.92,
+        10.16
+      ]
+    },
+    {
+      "text": "me",
+      "timestamp": [
+        10.16,
+        10.32
+      ]
+    },
+    {
+      "text": "skip",
+      "timestamp": [
+        10.32,
+        10.64
+      ]
+    },
+    {
+      "text": "that",
+      "timestamp": [
+        10.64,
+        10.8
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        10.8,
+        10.88
+      ]
+    },
+    {
+      "text": "now.",
+      "timestamp": [
+        10.88,
+        11.040000000000001
+      ]
+    },
+    {
+      "text": "Could",
+      "timestamp": [
+        11.200000000000001,
+        11.36
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        11.36,
+        11.52
+      ]
+    },
+    {
+      "text": "just",
+      "timestamp": [
+        11.52,
+        11.68
+      ]
+    },
+    {
+      "text": "search",
+      "timestamp": [
+        11.68,
+        11.92
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        11.92,
+        12.08
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        12.08,
+        12.4
+      ]
+    },
+    {
+      "text": "three-bedroom",
+      "timestamp": [
+        12.4,
+        13.36
+      ]
+    },
+    {
+      "text": "in",
+      "timestamp": [
+        13.36,
+        13.68
+      ]
+    },
+    {
+      "text": "Atlanta",
+      "timestamp": [
+        13.68,
+        14.8
+      ]
+    },
+    {
+      "text": "that's",
+      "timestamp": [
+        14.96,
+        15.44
+      ]
+    },
+    {
+      "text": "pet-friendly?",
+      "timestamp": [
+        15.44,
+        16.48
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        16.72,
+        16.88
+      ]
+    },
+    {
+      "text": "um",
+      "timestamp": [
+        17.04,
+        17.28
+      ]
+    },
+    {
+      "text": "I've",
+      "timestamp": [
+        17.44,
+        17.84
+      ]
+    },
+    {
+      "text": "got",
+      "timestamp": [
+        17.84,
+        18.080000000000002
+      ]
+    },
+    {
+      "text": "two",
+      "timestamp": [
+        18.080000000000002,
+        18.32
+      ]
+    },
+    {
+      "text": "cats",
+      "timestamp": [
+        18.32,
+        18.88
+      ]
+    },
+    {
+      "text": "too.",
+      "timestamp": [
+        19.04,
+        19.36
+      ]
+    }
+  ],
+  "user_speech_end_rel": 19.36,
+  "latency": {
+    "input_duration_s": 50.52,
+    "output_duration_s": 50.52,
+    "first_speech_s": 22.45
+  },
+  "user_done_unix": 1790634444.9926403,
+  "transcript": "I can search for apartments, but I need a max price per month. What's your budget?",
+  "asr_chunks": [
+    {
+      "text": "I",
+      "timestamp": [
+        22.32,
+        22.48
+      ]
+    },
+    {
+      "text": "can",
+      "timestamp": [
+        22.48,
+        22.64
+      ]
+    },
+    {
+      "text": "search",
+      "timestamp": [
+        22.64,
+        22.88
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        22.88,
+        23.04
+      ]
+    },
+    {
+      "text": "apartments,",
+      "timestamp": [
+        23.04,
+        23.52
+      ]
+    },
+    {
+      "text": "but",
+      "timestamp": [
+        23.68,
+        23.84
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        23.84,
+        24.0
+      ]
+    },
+    {
+      "text": "need",
+      "timestamp": [
+        24.0,
+        24.240000000000002
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        24.240000000000002,
+        24.32
+      ]
+    },
+    {
+      "text": "max",
+      "timestamp": [
+        24.32,
+        24.72
+      ]
+    },
+    {
+      "text": "price",
+      "timestamp": [
+        24.72,
+        25.04
+      ]
+    },
+    {
+      "text": "per",
+      "timestamp": [
+        25.04,
+        25.2
+      ]
+    },
+    {
+      "text": "month.",
+      "timestamp": [
+        25.2,
+        25.44
+      ]
+    },
+    {
+      "text": "What's",
+      "timestamp": [
+        25.68,
+        25.84
+      ]
+    },
+    {
+      "text": "your",
+      "timestamp": [
+        25.84,
+        26.0
+      ]
+    },
+    {
+      "text": "budget?",
+      "timestamp": [
+        26.0,
+        26.72
+      ]
+    }
+  ],
+  "perceived_total_latency": 2.96,
+  "audio_agent_speech_start": 22.32,
+  "actual_tool_calls": [],
+  "status": "completed"
+}

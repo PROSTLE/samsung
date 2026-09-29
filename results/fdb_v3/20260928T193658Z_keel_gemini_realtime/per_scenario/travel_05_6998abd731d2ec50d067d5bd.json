@@ -1,0 +1,207 @@
+{
+  "pid": "6998abd731d2ec50d067d5bd",
+  "example_id": "travel_05",
+  "category": "travel_identity",
+  "title": "Flight Search with Hesitation",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T20:53:04.184361",
+  "inference_time_s": 50.28,
+  "room_name": "eval-c5e55f2c",
+  "stream_start_time": 1790628787.820901,
+  "input_transcript": "So, I need to go to Chicago sometime around, let me think, I believe it's December twelfth. Yeah. Could you look up flights for the day?",
+  "input_asr_chunks": [
+    {
+      "text": "So,",
+      "timestamp": [
+        1.04,
+        1.2
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        1.28,
+        1.44
+      ]
+    },
+    {
+      "text": "need",
+      "timestamp": [
+        1.44,
+        1.68
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        1.68,
+        1.84
+      ]
+    },
+    {
+      "text": "go",
+      "timestamp": [
+        1.84,
+        2.0
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        2.0,
+        2.16
+      ]
+    },
+    {
+      "text": "Chicago",
+      "timestamp": [
+        2.16,
+        3.04
+      ]
+    },
+    {
+      "text": "sometime",
+      "timestamp": [
+        3.04,
+        3.6
+      ]
+    },
+    {
+      "text": "around,",
+      "timestamp": [
+        3.7600000000000002,
+        4.08
+      ]
+    },
+    {
+      "text": "let",
+      "timestamp": [
+        4.16,
+        4.32
+      ]
+    },
+    {
+      "text": "me",
+      "timestamp": [
+        4.32,
+        4.5600000000000005
+      ]
+    },
+    {
+      "text": "think,",
+      "timestamp": [
+        4.5600000000000005,
+        4.72
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        4.88,
+        5.04
+      ]
+    },
+    {
+      "text": "believe",
+      "timestamp": [
+        5.04,
+        5.28
+      ]
+    },
+    {
+      "text": "it's",
+      "timestamp": [
+        5.28,
+        5.5200000000000005
+      ]
+    },
+    {
+      "text": "December",
+      "timestamp": [
+        5.5200000000000005,
+        6.0
+      ]
+    },
+    {
+      "text": "twelfth.",
+      "timestamp": [
+        6.0,
+        6.5600000000000005
+      ]
+    },
+    {
+      "text": "Yeah.",
+      "timestamp": [
+        6.72,
+        7.04
+      ]
+    },
+    {
+      "text": "Could",
+      "timestamp": [
+        7.68,
+        7.92
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        7.92,
+        8.08
+      ]
+    },
+    {
+      "text": "look",
+      "timestamp": [
+        8.08,
+        8.32
+      ]
+    },
+    {
+      "text": "up",
+      "timestamp": [
+        8.32,
+        8.48
+      ]
+    },
+    {
+      "text": "flights",
+      "timestamp": [
+        8.64,
+        9.120000000000001
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        9.120000000000001,
+        9.44
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        9.44,
+        9.76
+      ]
+    },
+    {
+      "text": "day?",
+      "timestamp": [
+        9.76,
+        10.08
+      ]
+    }
+  ],
+  "user_speech_end_rel": 10.08,
+  "latency": {
+    "input_duration_s": 40.432,
+    "output_duration_s": 40.432,
+    "first_speech_s": 40.432
+  },
+  "user_done_unix": 1790628797.9009008,
+  "transcript": "",
+  "asr_chunks": [],
+  "actual_tool_calls": [],
+  "status": "completed"
+}

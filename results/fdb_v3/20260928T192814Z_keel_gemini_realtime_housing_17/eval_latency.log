@@ -1,0 +1,120 @@
+📁 Found 100 result files for provider 'keel_gemini_realtime'
+  🔍 ecommerce_01... FR=0.96s  TC=4.16s  TK=Nones  filler=✗
+  🔍 ecommerce_01... FR=-4.0s  TC=3.03s  TK=Nones  filler=✗
+  🔍 ecommerce_02... FR=4.16s  TC=2.74s  TK=Nones  filler=✗
+  🔍 ecommerce_04... FR=3.92s  TC=2.56s  TK=Nones  filler=✗
+  🔍 ecommerce_05... FR=18.8s  TC=17.5s  TK=Nones  filler=✗
+  🔍 ecommerce_06... FR=4.48s  TC=3.08s  TK=Nones  filler=✗
+  🔍 ecommerce_07... FR=4.48s  TC=3.49s  TK=Nones  filler=✗
+  🔍 ecommerce_08... FR=4.32s  TC=2.88s  TK=Nones  filler=✗
+  🔍 ecommerce_08... FR=4.48s  TC=3.15s  TK=Nones  filler=✗
+  🔍 ecommerce_09... FR=4.08s  TC=3.01s  TK=Nones  filler=✗
+  🔍 ecommerce_10... FR=4.32s  TC=3.04s  TK=Nones  filler=✗
+  🔍 ecommerce_11... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 ecommerce_12... FR=4.0s  TC=2.72s  TK=Nones  filler=✗
+  🔍 ecommerce_13... FR=4.72s  TC=3.52s  TK=Nones  filler=✗
+  🔍 ecommerce_13... FR=5.28s  TC=4.06s  TK=Nones  filler=✗
+  🔍 ecommerce_14... FR=4.48s  TC=2.93s  TK=Nones  filler=✗
+  🔍 ecommerce_14... FR=4.48s  TC=3.24s  TK=Nones  filler=✗
+  🔍 ecommerce_15... FR=4.56s  TC=2.82s  TK=Nones  filler=✗
+  🔍 ecommerce_15... FR=4.48s  TC=3.04s  TK=Nones  filler=✗
+  🔍 ecommerce_16... FR=4.24s  TC=2.71s  TK=Nones  filler=✗
+  🔍 ecommerce_17... FR=4.4s  TC=2.79s  TK=Nones  filler=✗
+  🔍 ecommerce_18... FR=6.0s  TC=2.49s  TK=Nones  filler=✗
+  🔍 ecommerce_19... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 ecommerce_20... FR=28.64s  TC=25.1s  TK=Nones  filler=✗
+  🔍 ecommerce_21... FR=6.72s  TC=3.44s  TK=Nones  filler=✗
+  🔍 ecommerce_21... FR=-19.36s  TC=3.3s  TK=Nones  filler=✗
+  🔍 ecommerce_23... FR=4.24s  TC=3.19s  TK=Nones  filler=✗
+  🔍 ecommerce_25... FR=6.96s  TC=3.32s  TK=Nones  filler=✗
+  🔍 ecommerce_25... FR=-7.36s  TC=3.06s  TK=Nones  filler=✗
+  🔍 finance_01... FR=4.4s  TC=2.72s  TK=Nones  filler=✗
+  🔍 finance_01... FR=3.12s  TC=2.88s  TK=Nones  filler=✗
+  🔍 finance_02... FR=3.68s  TC=2.8s  TK=Nones  filler=✗
+  🔍 finance_03... FR=3.76s  TC=3.35s  TK=Nones  filler=✗
+  🔍 finance_03... FR=19.6s  TC=18.46s  TK=Nones  filler=✗
+  🔍 finance_04... FR=-1.84s  TC=3.16s  TK=Nones  filler=✗
+  🔍 finance_06... FR=2.56s  TC=2.87s  TK=Nones  filler=✗
+  🔍 finance_07... FR=4.08s  TC=3.7s  TK=Nones  filler=✗
+  🔍 finance_07... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 finance_08... FR=3.76s  TC=3.22s  TK=Nones  filler=✗
+  🔍 finance_08... FR=3.52s  TC=3.26s  TK=Nones  filler=✗
+  🔍 finance_10... FR=3.76s  TC=3.48s  TK=Nones  filler=✗
+  🔍 finance_11... FR=3.36s  TC=3.14s  TK=Nones  filler=✗
+  🔍 finance_12... FR=4.0s  TC=3.45s  TK=Nones  filler=✗
+  🔍 finance_12... FR=4.08s  TC=3.33s  TK=Nones  filler=✗
+  🔍 finance_14... FR=3.68s  TC=3.5s  TK=Nones  filler=✗
+  🔍 finance_15... FR=3.44s  TC=3.37s  TK=Nones  filler=✗
+  🔍 finance_16... FR=11.2s  TC=10.88s  TK=Nones  filler=✗
+  🔍 finance_17... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 finance_18... FR=4.4s  TC=4.16s  TK=Nones  filler=✗
+  🔍 finance_19... FR=3.44s  TC=3.28s  TK=Nones  filler=✗
+  🔍 finance_20... FR=4.56s  TC=4.12s  TK=Nones  filler=✗
+  🔍 finance_21... FR=3.84s  TC=3.62s  TK=Nones  filler=✗
+  🔍 finance_22... FR=3.92s  TC=3.55s  TK=Nones  filler=✗
+  🔍 finance_23... FR=3.76s  TC=3.22s  TK=Nones  filler=✗
+  🔍 housing_01... FR=3.68s  TC=2.36s  TK=Nones  filler=✗
+  🔍 housing_02... FR=3.92s  TC=3.68s  TK=Nones  filler=✗
+  🔍 housing_03... FR=4.64s  TC=4.3s  TK=Nones  filler=✗
+  🔍 housing_04... FR=8.56s  TC=Nones  TK=Nones  filler=✗
+  🔍 housing_05... FR=4.96s  TC=4.3s  TK=Nones  filler=✗
+  🔍 housing_05... FR=5.04s  TC=4.06s  TK=Nones  filler=✗
+  🔍 housing_06... FR=5.04s  TC=3.7s  TK=Nones  filler=✗
+  🔍 housing_08... FR=Nones  TC=Nones  TK=Nones  filler=✗
+  🔍 housing_09... FR=3.76s  TC=3.22s  TK=Nones  filler=✗
+  🔍 housing_10... FR=6.8s  TC=4.94s  TK=Nones  filler=✗
+  🔍 housing_11... FR=2.08s  TC=Nones  TK=Nones  filler=✗
+  🔍 housing_13... FR=4.4s  TC=3.78s  TK=Nones  filler=✗
+  🔍 housing_14... FR=5.2s  TC=4.2s  TK=Nones  filler=✗
+  🔍 housing_14... FR=4.64s  TC=3.86s  TK=Nones  filler=✗
+  🔍 housing_15... FR=3.04s  TC=Nones  TK=Nones  filler=✗
+  🔍 housing_15... FR=3.12s  TC=Nones  TK=Nones  filler=✗
+  🔍 housing_17... FR=4.0s  TC=5.03s  TK=Nones  filler=✗
+  🔍 housing_17... FR=4.16s  TC=4.65s  TK=Nones  filler=✗
+  🔍 housing_18... FR=4.16s  TC=4.11s  TK=Nones  filler=✗
+  🔍 housing_19... FR=2.32s  TC=Nones  TK=Nones  filler=✗
+  🔍 housing_20... FR=6.96s  TC=3.42s  TK=Nones  filler=✗
+  🔍 housing_21... FR=3.2s  TC=Nones  TK=Nones  filler=✗
+  🔍 housing_22... FR=5.52s  TC=3.62s  TK=Nones  filler=✗
+  🔍 housing_24... FR=0.8s  TC=5.17s  TK=Nones  filler=✗
+  🔍 housing_24... FR=7.68s  TC=4.94s  TK=Nones  filler=✗
+  🔍 housing_25... FR=5.84s  TC=4.43s  TK=Nones  filler=✗
+  🔍 travel_01... FR=2.24s  TC=2.52s  TK=Nones  filler=✗
+  🔍 travel_02... FR=3.6s  TC=3.21s  TK=Nones  filler=✗
+  🔍 travel_03... FR=4.4s  TC=3.14s  TK=Nones  filler=✗
+  🔍 travel_03... FR=4.24s  TC=3.18s  TK=Nones  filler=✗
+  🔍 travel_05... FR=4.96s  TC=3.23s  TK=Nones  filler=✗
+  🔍 travel_07... FR=3.92s  TC=3.48s  TK=Nones  filler=✗
+  🔍 travel_07... FR=3.44s  TC=3.18s  TK=Nones  filler=✗
+  🔍 travel_08... FR=4.0s  TC=2.85s  TK=Nones  filler=✗
+  🔍 travel_10... FR=2.96s  TC=0.43s  TK=Nones  filler=✗
+  🔍 travel_11... FR=4.08s  TC=3.01s  TK=Nones  filler=✗
+  🔍 travel_14... FR=5.04s  TC=3.7s  TK=Nones  filler=✗
+  🔍 travel_16... FR=4.24s  TC=3.11s  TK=Nones  filler=✗
+  🔍 travel_18... FR=7.04s  TC=4.33s  TK=Nones  filler=✗
+  🔍 travel_19... FR=-12.64s  TC=3.49s  TK=Nones  filler=✗
+  🔍 travel_20... FR=4.08s  TC=3.29s  TK=Nones  filler=✗
+  🔍 travel_21... FR=4.8s  TC=4.06s  TK=Nones  filler=✗
+  🔍 travel_21... FR=5.04s  TC=4.46s  TK=Nones  filler=✗
+  🔍 travel_23... FR=4.24s  TC=4.0s  TK=Nones  filler=✗
+  🔍 travel_23... FR=4.48s  TC=4.23s  TK=Nones  filler=✗
+  🔍 travel_24... FR=5.2s  TC=-12.5s  TK=Nones  filler=✗
+
+============================================================
+✅ Analyzed: 100, Skipped (existing): 0, Failed: 0
+
+📊 LATENCY REPORT — KEEL_GEMINI_REALTIME
+========================================================
+  Turn-Take Success: 95/100 (95.0%)
+  No Response (silent): 5
+  (Latency metrics below exclude interruptions)
+
+  First Response (N=90):
+    Mean: 4.99s ± 3.63s
+    Min / Median / Max: 0.80s / 4.24s / 28.64s
+  Tool Call (N=84):
+    Mean: 3.95s ± 3.83s
+    Min / Median / Max: -12.50s / 3.37s / 25.10s
+  Task Completion: No data
+
+  📄 Report saved: /home/harshit/keel/results/fdb_v3/20260928T192814Z_keel_gemini_realtime_housing_17/keel_gemini_realtime_latency_report.json

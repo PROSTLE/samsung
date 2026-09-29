@@ -1,0 +1,549 @@
+{
+  "pid": "66c4f3cb14cbfc4db836bd4e",
+  "example_id": "housing_18",
+  "category": "housing_location",
+  "title": "Search + Commute Chain",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T22:30:01.514618",
+  "inference_time_s": 55.57,
+  "room_name": "eval-82042af8",
+  "stream_start_time": 1790634605.014851,
+  "input_transcript": "Well so first, search for a one-bedroom in Portland that's under $800 per month, then once you find the cheapest option, check how long it would take to bike from there to the coffee shop on 5th Street where I work.",
+  "input_asr_chunks": [
+    {
+      "text": "Well",
+      "timestamp": [
+        0.88,
+        1.2
+      ]
+    },
+    {
+      "text": "so",
+      "timestamp": [
+        2.16,
+        2.48
+      ]
+    },
+    {
+      "text": "first,",
+      "timestamp": [
+        2.48,
+        2.8000000000000003
+      ]
+    },
+    {
+      "text": "search",
+      "timestamp": [
+        3.12,
+        3.52
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        3.52,
+        3.7600000000000002
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        3.7600000000000002,
+        4.0
+      ]
+    },
+    {
+      "text": "one-bedroom",
+      "timestamp": [
+        4.0,
+        4.88
+      ]
+    },
+    {
+      "text": "in",
+      "timestamp": [
+        4.88,
+        5.12
+      ]
+    },
+    {
+      "text": "Portland",
+      "timestamp": [
+        5.12,
+        6.0
+      ]
+    },
+    {
+      "text": "that's",
+      "timestamp": [
+        6.0,
+        6.48
+      ]
+    },
+    {
+      "text": "under",
+      "timestamp": [
+        6.48,
+        6.8
+      ]
+    },
+    {
+      "text": "$800",
+      "timestamp": [
+        6.8,
+        7.44
+      ]
+    },
+    {
+      "text": "per",
+      "timestamp": [
+        7.44,
+        7.6000000000000005
+      ]
+    },
+    {
+      "text": "month,",
+      "timestamp": [
+        7.6000000000000005,
+        8.0
+      ]
+    },
+    {
+      "text": "then",
+      "timestamp": [
+        8.24,
+        8.48
+      ]
+    },
+    {
+      "text": "once",
+      "timestamp": [
+        8.64,
+        8.88
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        8.88,
+        9.040000000000001
+      ]
+    },
+    {
+      "text": "find",
+      "timestamp": [
+        9.040000000000001,
+        9.28
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        9.28,
+        9.44
+      ]
+    },
+    {
+      "text": "cheapest",
+      "timestamp": [
+        9.44,
+        10.0
+      ]
+    },
+    {
+      "text": "option,",
+      "timestamp": [
+        10.0,
+        10.64
+      ]
+    },
+    {
+      "text": "check",
+      "timestamp": [
+        10.96,
+        11.36
+      ]
+    },
+    {
+      "text": "how",
+      "timestamp": [
+        11.36,
+        11.6
+      ]
+    },
+    {
+      "text": "long",
+      "timestamp": [
+        11.6,
+        11.84
+      ]
+    },
+    {
+      "text": "it",
+      "timestamp": [
+        11.84,
+        12.0
+      ]
+    },
+    {
+      "text": "would",
+      "timestamp": [
+        12.0,
+        12.24
+      ]
+    },
+    {
+      "text": "take",
+      "timestamp": [
+        12.24,
+        12.48
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        12.48,
+        12.72
+      ]
+    },
+    {
+      "text": "bike",
+      "timestamp": [
+        12.72,
+        13.120000000000001
+      ]
+    },
+    {
+      "text": "from",
+      "timestamp": [
+        13.120000000000001,
+        13.36
+      ]
+    },
+    {
+      "text": "there",
+      "timestamp": [
+        13.36,
+        13.6
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        13.6,
+        13.76
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        13.76,
+        13.84
+      ]
+    },
+    {
+      "text": "coffee",
+      "timestamp": [
+        13.84,
+        14.32
+      ]
+    },
+    {
+      "text": "shop",
+      "timestamp": [
+        14.32,
+        14.56
+      ]
+    },
+    {
+      "text": "on",
+      "timestamp": [
+        14.56,
+        14.8
+      ]
+    },
+    {
+      "text": "5th",
+      "timestamp": [
+        14.8,
+        15.200000000000001
+      ]
+    },
+    {
+      "text": "Street",
+      "timestamp": [
+        15.200000000000001,
+        15.76
+      ]
+    },
+    {
+      "text": "where",
+      "timestamp": [
+        16.080000000000002,
+        16.4
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        16.4,
+        16.72
+      ]
+    },
+    {
+      "text": "work.",
+      "timestamp": [
+        16.72,
+        17.04
+      ]
+    }
+  ],
+  "user_speech_end_rel": 17.04,
+  "latency": {
+    "input_duration_s": 47.685,
+    "output_duration_s": 47.685,
+    "first_speech_s": 24.35
+  },
+  "user_done_unix": 1790634622.054851,
+  "search_latency_breakdown": {
+    "room": "eval-82042af8",
+    "tool": "calculate_commute",
+    "reasoning": 3.037,
+    "execution": 0.599,
+    "synthesis": 0.683,
+    "total": 4.319,
+    "agent_start_at": 1790634628.8562374
+  },
+  "absolute_total_latency": 6.801,
+  "transcript": "I found one matching apartment in Portland for $700 per month. Biking from there to your work at the coffee shop on 5th Street would take about 25 minutes.",
+  "asr_chunks": [
+    {
+      "text": "I",
+      "timestamp": [
+        24.16,
+        24.48
+      ]
+    },
+    {
+      "text": "found",
+      "timestamp": [
+        24.48,
+        24.72
+      ]
+    },
+    {
+      "text": "one",
+      "timestamp": [
+        24.72,
+        24.96
+      ]
+    },
+    {
+      "text": "matching",
+      "timestamp": [
+        24.96,
+        25.44
+      ]
+    },
+    {
+      "text": "apartment",
+      "timestamp": [
+        25.44,
+        25.84
+      ]
+    },
+    {
+      "text": "in",
+      "timestamp": [
+        25.84,
+        25.92
+      ]
+    },
+    {
+      "text": "Portland",
+      "timestamp": [
+        25.92,
+        26.32
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        26.32,
+        26.48
+      ]
+    },
+    {
+      "text": "$700",
+      "timestamp": [
+        26.48,
+        27.12
+      ]
+    },
+    {
+      "text": "per",
+      "timestamp": [
+        27.28,
+        27.52
+      ]
+    },
+    {
+      "text": "month.",
+      "timestamp": [
+        27.52,
+        27.76
+      ]
+    },
+    {
+      "text": "Biking",
+      "timestamp": [
+        28.0,
+        28.400000000000002
+      ]
+    },
+    {
+      "text": "from",
+      "timestamp": [
+        28.400000000000002,
+        28.560000000000002
+      ]
+    },
+    {
+      "text": "there",
+      "timestamp": [
+        28.560000000000002,
+        28.72
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        28.72,
+        28.8
+      ]
+    },
+    {
+      "text": "your",
+      "timestamp": [
+        28.8,
+        28.96
+      ]
+    },
+    {
+      "text": "work",
+      "timestamp": [
+        28.96,
+        29.12
+      ]
+    },
+    {
+      "text": "at",
+      "timestamp": [
+        29.12,
+        29.28
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        29.28,
+        29.36
+      ]
+    },
+    {
+      "text": "coffee",
+      "timestamp": [
+        29.36,
+        29.68
+      ]
+    },
+    {
+      "text": "shop",
+      "timestamp": [
+        29.68,
+        29.92
+      ]
+    },
+    {
+      "text": "on",
+      "timestamp": [
+        29.92,
+        30.0
+      ]
+    },
+    {
+      "text": "5th",
+      "timestamp": [
+        30.0,
+        30.32
+      ]
+    },
+    {
+      "text": "Street",
+      "timestamp": [
+        30.32,
+        30.560000000000002
+      ]
+    },
+    {
+      "text": "would",
+      "timestamp": [
+        30.560000000000002,
+        30.72
+      ]
+    },
+    {
+      "text": "take",
+      "timestamp": [
+        30.72,
+        30.88
+      ]
+    },
+    {
+      "text": "about",
+      "timestamp": [
+        30.88,
+        31.04
+      ]
+    },
+    {
+      "text": "25",
+      "timestamp": [
+        31.04,
+        31.68
+      ]
+    },
+    {
+      "text": "minutes.",
+      "timestamp": [
+        31.68,
+        32.24
+      ]
+    }
+  ],
+  "perceived_total_latency": 7.12,
+  "audio_agent_speech_start": 24.16,
+  "actual_tool_calls": [
+    {
+      "function": "search_apartments",
+      "args": {
+        "city": "Portland",
+        "bedrooms": 1,
+        "max_price": 800.0
+      },
+      "timestamp_start": 20.13,
+      "timestamp_end": 20.43
+    },
+    {
+      "function": "calculate_commute",
+      "args": {
+        "mode": "biking",
+        "destination_address": "coffee shop on Fifth Street",
+        "origin_address": "APT1"
+      },
+      "timestamp_start": 22.56,
+      "timestamp_end": 23.16
+    }
+  ],
+  "status": "completed"
+}

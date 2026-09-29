@@ -1,0 +1,10 @@
+{
+  "pid": "62a885d5b6af18b3d4579e1b",
+  "example_id": "ecommerce_18",
+  "category": "ecommerce_support",
+  "title": "Search + Cart + Track Chain",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T20:00:04.645325",
+  "inference_time_s": 45.04,
+  "status": "inference_failed"
+}

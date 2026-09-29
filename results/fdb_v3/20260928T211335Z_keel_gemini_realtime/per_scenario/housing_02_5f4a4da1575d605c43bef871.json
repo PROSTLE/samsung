@@ -1,0 +1,364 @@
+{
+  "pid": "5f4a4da1575d605c43bef871",
+  "example_id": "housing_02",
+  "category": "housing_location",
+  "title": "Simple Commute Check",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T22:12:45.265005",
+  "inference_time_s": 55.22,
+  "room_name": "eval-292f69dd",
+  "stream_start_time": 1790633568.7097821,
+  "input_transcript": "Tell me how long it would take to drive from one oh one Main Street to downtown office during a normal day. Um, I want to make sure it's reasonable.",
+  "input_asr_chunks": [
+    {
+      "text": "Tell",
+      "timestamp": [
+        2.8000000000000003,
+        3.04
+      ]
+    },
+    {
+      "text": "me",
+      "timestamp": [
+        3.04,
+        3.2800000000000002
+      ]
+    },
+    {
+      "text": "how",
+      "timestamp": [
+        3.2800000000000002,
+        3.52
+      ]
+    },
+    {
+      "text": "long",
+      "timestamp": [
+        3.52,
+        3.68
+      ]
+    },
+    {
+      "text": "it",
+      "timestamp": [
+        3.68,
+        3.84
+      ]
+    },
+    {
+      "text": "would",
+      "timestamp": [
+        3.84,
+        4.0
+      ]
+    },
+    {
+      "text": "take",
+      "timestamp": [
+        4.0,
+        4.24
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        4.24,
+        4.5600000000000005
+      ]
+    },
+    {
+      "text": "drive",
+      "timestamp": [
+        4.5600000000000005,
+        5.28
+      ]
+    },
+    {
+      "text": "from",
+      "timestamp": [
+        5.28,
+        5.6000000000000005
+      ]
+    },
+    {
+      "text": "one",
+      "timestamp": [
+        5.6000000000000005,
+        5.76
+      ]
+    },
+    {
+      "text": "oh",
+      "timestamp": [
+        5.92,
+        6.08
+      ]
+    },
+    {
+      "text": "one",
+      "timestamp": [
+        6.16,
+        6.4
+      ]
+    },
+    {
+      "text": "Main",
+      "timestamp": [
+        6.4,
+        6.8
+      ]
+    },
+    {
+      "text": "Street",
+      "timestamp": [
+        6.8,
+        7.2
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        7.2,
+        7.36
+      ]
+    },
+    {
+      "text": "downtown",
+      "timestamp": [
+        7.44,
+        8.24
+      ]
+    },
+    {
+      "text": "office",
+      "timestamp": [
+        8.24,
+        8.88
+      ]
+    },
+    {
+      "text": "during",
+      "timestamp": [
+        9.120000000000001,
+        9.6
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        9.6,
+        9.76
+      ]
+    },
+    {
+      "text": "normal",
+      "timestamp": [
+        9.76,
+        10.48
+      ]
+    },
+    {
+      "text": "day.",
+      "timestamp": [
+        10.48,
+        10.8
+      ]
+    },
+    {
+      "text": "Um,",
+      "timestamp": [
+        11.120000000000001,
+        11.76
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        12.08,
+        12.32
+      ]
+    },
+    {
+      "text": "want",
+      "timestamp": [
+        12.32,
+        12.56
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        12.56,
+        12.64
+      ]
+    },
+    {
+      "text": "make",
+      "timestamp": [
+        12.64,
+        12.8
+      ]
+    },
+    {
+      "text": "sure",
+      "timestamp": [
+        12.8,
+        13.040000000000001
+      ]
+    },
+    {
+      "text": "it's",
+      "timestamp": [
+        13.040000000000001,
+        13.44
+      ]
+    },
+    {
+      "text": "reasonable.",
+      "timestamp": [
+        13.44,
+        14.32
+      ]
+    }
+  ],
+  "user_speech_end_rel": 14.32,
+  "latency": {
+    "input_duration_s": 45.136,
+    "output_duration_s": 45.136,
+    "first_speech_s": 18.95
+  },
+  "user_done_unix": 1790633583.029782,
+  "search_latency_breakdown": {
+    "room": "eval-292f69dd",
+    "tool": "calculate_commute",
+    "reasoning": 0.606,
+    "execution": 0.757,
+    "synthesis": 0.617,
+    "total": 1.979,
+    "agent_start_at": 1790633587.0527046
+  },
+  "absolute_total_latency": 4.023,
+  "transcript": "It would take about 25 minutes to drive from 101 Main Street to Downtown Office.",
+  "asr_chunks": [
+    {
+      "text": "It",
+      "timestamp": [
+        18.88,
+        19.04
+      ]
+    },
+    {
+      "text": "would",
+      "timestamp": [
+        19.04,
+        19.28
+      ]
+    },
+    {
+      "text": "take",
+      "timestamp": [
+        19.28,
+        19.44
+      ]
+    },
+    {
+      "text": "about",
+      "timestamp": [
+        19.44,
+        19.68
+      ]
+    },
+    {
+      "text": "25",
+      "timestamp": [
+        19.68,
+        20.080000000000002
+      ]
+    },
+    {
+      "text": "minutes",
+      "timestamp": [
+        20.240000000000002,
+        20.56
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        20.56,
+        20.64
+      ]
+    },
+    {
+      "text": "drive",
+      "timestamp": [
+        20.64,
+        20.88
+      ]
+    },
+    {
+      "text": "from",
+      "timestamp": [
+        20.88,
+        21.04
+      ]
+    },
+    {
+      "text": "101",
+      "timestamp": [
+        21.04,
+        21.68
+      ]
+    },
+    {
+      "text": "Main",
+      "timestamp": [
+        21.68,
+        21.92
+      ]
+    },
+    {
+      "text": "Street",
+      "timestamp": [
+        21.92,
+        22.16
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        22.16,
+        22.240000000000002
+      ]
+    },
+    {
+      "text": "Downtown",
+      "timestamp": [
+        22.32,
+        22.88
+      ]
+    },
+    {
+      "text": "Office.",
+      "timestamp": [
+        22.88,
+        23.44
+      ]
+    }
+  ],
+  "perceived_total_latency": 4.56,
+  "audio_agent_speech_start": 18.88,
+  "actual_tool_calls": [
+    {
+      "function": "calculate_commute",
+      "args": {
+        "mode": "driving",
+        "destination_address": "downtown office",
+        "origin_address": "101 Main Street"
+      },
+      "timestamp_start": 16.97,
+      "timestamp_end": 17.73
+    }
+  ],
+  "status": "completed"
+}

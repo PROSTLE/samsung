@@ -1,0 +1,43 @@
+📖 Loading benchmark data from benchmark_data_v2.json...
+📁 Scanning fdb_v3_data_released for provider 'keel_gemini_realtime'...
+🔍 Found 100 valid result files matching benchmark scenarios.
+
+📊 PASS RATE REPORT — KEEL_GEMINI_REALTIME
+========================================================
+  Total Scenarios : 100
+  ✅ Passed       : 44
+  ❌ Failed       : 56
+  📈 Pass Rate    : 44.0%
+
+  Failure Breakdown:
+    Wrong Tools     : 23
+    Wrong Arguments : 33
+
+  By Domain:
+    ecommerce_support: 69.0%
+    finance_billing: 64.0%
+    travel_identity: 15.0%
+    housing_location: 19.2%
+
+  By Difficulty:
+    hard: 26.7%
+    easy: 58.3%
+    medium: 44.1%
+
+  By Num Tool Calls:
+    1 tools: 50.0%
+    2 tools: 38.9%
+    3 tools: 25.0%
+
+  By Disfluency Feature:
+    FILLER: 41.4%
+    FALSE_START: 58.3%
+    PAUSE: 33.3%
+    HESITATION: 40.0%
+    SELF_CORRECTION: 23.5%
+
+  State Rollback:
+    With rollback:    23.5%
+    Without rollback: 48.2%
+
+  📄 Report saved: /home/harshit/keel/results/fdb_v3/20260928T155723Z_keel_gemini_realtime_ecommerce_14/keel_gemini_realtime_pass_rate_report.json

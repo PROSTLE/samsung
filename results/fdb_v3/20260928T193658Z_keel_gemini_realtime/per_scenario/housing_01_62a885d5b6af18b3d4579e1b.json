@@ -1,0 +1,10 @@
+{
+  "pid": "62a885d5b6af18b3d4579e1b",
+  "example_id": "housing_01",
+  "category": "housing_location",
+  "title": "Simple Apartment Search",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T20:24:56.717808",
+  "inference_time_s": 45.02,
+  "status": "inference_failed"
+}

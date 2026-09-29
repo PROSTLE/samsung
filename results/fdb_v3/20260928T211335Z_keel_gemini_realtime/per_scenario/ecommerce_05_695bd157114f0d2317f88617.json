@@ -1,0 +1,623 @@
+{
+  "pid": "695bd157114f0d2317f88617",
+  "example_id": "ecommerce_05",
+  "category": "ecommerce_support",
+  "title": "Product Search with Hesitation",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T21:18:49.779977",
+  "inference_time_s": 64.79,
+  "room_name": "eval-915bf404",
+  "stream_start_time": 1790630333.3594778,
+  "input_transcript": "Um, so like, uh, I'm looking for, um, for a new let me think a desk. Yes, something under three hundred dollars. If you have an option like that, that would be great.",
+  "input_asr_chunks": [
+    {
+      "text": "Um,",
+      "timestamp": [
+        0.8,
+        1.44
+      ]
+    },
+    {
+      "text": "so",
+      "timestamp": [
+        1.76,
+        2.0
+      ]
+    },
+    {
+      "text": "like,",
+      "timestamp": [
+        2.16,
+        2.48
+      ]
+    },
+    {
+      "text": "uh,",
+      "timestamp": [
+        2.8000000000000003,
+        3.12
+      ]
+    },
+    {
+      "text": "I'm",
+      "timestamp": [
+        3.7600000000000002,
+        4.24
+      ]
+    },
+    {
+      "text": "looking",
+      "timestamp": [
+        4.24,
+        4.72
+      ]
+    },
+    {
+      "text": "for,",
+      "timestamp": [
+        4.72,
+        4.96
+      ]
+    },
+    {
+      "text": "um,",
+      "timestamp": [
+        5.04,
+        5.28
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        6.24,
+        6.5600000000000005
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        6.5600000000000005,
+        6.88
+      ]
+    },
+    {
+      "text": "new",
+      "timestamp": [
+        6.88,
+        7.2
+      ]
+    },
+    {
+      "text": "let",
+      "timestamp": [
+        9.76,
+        9.92
+      ]
+    },
+    {
+      "text": "me",
+      "timestamp": [
+        10.16,
+        10.48
+      ]
+    },
+    {
+      "text": "think",
+      "timestamp": [
+        10.48,
+        10.8
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        11.44,
+        11.76
+      ]
+    },
+    {
+      "text": "desk.",
+      "timestamp": [
+        11.76,
+        12.32
+      ]
+    },
+    {
+      "text": "Yes,",
+      "timestamp": [
+        13.280000000000001,
+        13.84
+      ]
+    },
+    {
+      "text": "something",
+      "timestamp": [
+        14.48,
+        14.72
+      ]
+    },
+    {
+      "text": "under",
+      "timestamp": [
+        15.040000000000001,
+        15.36
+      ]
+    },
+    {
+      "text": "three",
+      "timestamp": [
+        15.36,
+        15.52
+      ]
+    },
+    {
+      "text": "hundred",
+      "timestamp": [
+        15.76,
+        16.4
+      ]
+    },
+    {
+      "text": "dollars.",
+      "timestamp": [
+        16.4,
+        17.04
+      ]
+    },
+    {
+      "text": "If",
+      "timestamp": [
+        18.0,
+        18.240000000000002
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        18.240000000000002,
+        18.400000000000002
+      ]
+    },
+    {
+      "text": "have",
+      "timestamp": [
+        18.400000000000002,
+        18.56
+      ]
+    },
+    {
+      "text": "an",
+      "timestamp": [
+        18.56,
+        18.72
+      ]
+    },
+    {
+      "text": "option",
+      "timestamp": [
+        18.72,
+        19.36
+      ]
+    },
+    {
+      "text": "like",
+      "timestamp": [
+        19.36,
+        19.6
+      ]
+    },
+    {
+      "text": "that,",
+      "timestamp": [
+        19.6,
+        19.92
+      ]
+    },
+    {
+      "text": "that",
+      "timestamp": [
+        20.240000000000002,
+        20.48
+      ]
+    },
+    {
+      "text": "would",
+      "timestamp": [
+        20.48,
+        20.8
+      ]
+    },
+    {
+      "text": "be",
+      "timestamp": [
+        20.8,
+        21.12
+      ]
+    },
+    {
+      "text": "great.",
+      "timestamp": [
+        21.12,
+        21.44
+      ]
+    }
+  ],
+  "user_speech_end_rel": 7.2,
+  "latency": {
+    "input_duration_s": 52.08,
+    "output_duration_s": 52.08,
+    "first_speech_s": 11.1
+  },
+  "user_done_unix": 1790630340.5594778,
+  "transcript": "I can help with that. What were you looking for? Are you searching for a flight? Understood. To narrow things down, what specifically are you looking for? For instance, are you searching for a flight, an apartment, or maybe a pair of headphones? And what destination or city are you interested in?",
+  "asr_chunks": [
+    {
+      "text": "I",
+      "timestamp": [
+        10.88,
+        11.200000000000001
+      ]
+    },
+    {
+      "text": "can",
+      "timestamp": [
+        11.200000000000001,
+        11.44
+      ]
+    },
+    {
+      "text": "help",
+      "timestamp": [
+        11.44,
+        11.6
+      ]
+    },
+    {
+      "text": "with",
+      "timestamp": [
+        11.6,
+        11.76
+      ]
+    },
+    {
+      "text": "that.",
+      "timestamp": [
+        11.76,
+        11.92
+      ]
+    },
+    {
+      "text": "What",
+      "timestamp": [
+        12.16,
+        12.4
+      ]
+    },
+    {
+      "text": "were",
+      "timestamp": [
+        12.4,
+        12.56
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        12.56,
+        12.64
+      ]
+    },
+    {
+      "text": "looking",
+      "timestamp": [
+        12.64,
+        12.96
+      ]
+    },
+    {
+      "text": "for?",
+      "timestamp": [
+        12.96,
+        13.120000000000001
+      ]
+    },
+    {
+      "text": "Are",
+      "timestamp": [
+        13.36,
+        13.6
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        13.6,
+        13.76
+      ]
+    },
+    {
+      "text": "searching",
+      "timestamp": [
+        13.76,
+        14.08
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        14.08,
+        14.32
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        14.32,
+        14.64
+      ]
+    },
+    {
+      "text": "flight?",
+      "timestamp": [
+        14.64,
+        15.280000000000001
+      ]
+    },
+    {
+      "text": "Understood.",
+      "timestamp": [
+        24.48,
+        25.28
+      ]
+    },
+    {
+      "text": "To",
+      "timestamp": [
+        25.6,
+        25.76
+      ]
+    },
+    {
+      "text": "narrow",
+      "timestamp": [
+        25.76,
+        26.240000000000002
+      ]
+    },
+    {
+      "text": "things",
+      "timestamp": [
+        26.240000000000002,
+        26.48
+      ]
+    },
+    {
+      "text": "down,",
+      "timestamp": [
+        26.48,
+        26.64
+      ]
+    },
+    {
+      "text": "what",
+      "timestamp": [
+        26.96,
+        27.2
+      ]
+    },
+    {
+      "text": "specifically",
+      "timestamp": [
+        27.2,
+        27.76
+      ]
+    },
+    {
+      "text": "are",
+      "timestamp": [
+        27.76,
+        27.92
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        27.92,
+        28.080000000000002
+      ]
+    },
+    {
+      "text": "looking",
+      "timestamp": [
+        28.080000000000002,
+        28.400000000000002
+      ]
+    },
+    {
+      "text": "for?",
+      "timestamp": [
+        28.400000000000002,
+        28.560000000000002
+      ]
+    },
+    {
+      "text": "For",
+      "timestamp": [
+        28.88,
+        29.04
+      ]
+    },
+    {
+      "text": "instance,",
+      "timestamp": [
+        29.04,
+        29.44
+      ]
+    },
+    {
+      "text": "are",
+      "timestamp": [
+        29.6,
+        29.76
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        29.76,
+        29.92
+      ]
+    },
+    {
+      "text": "searching",
+      "timestamp": [
+        29.92,
+        30.32
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        30.32,
+        30.400000000000002
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        30.400000000000002,
+        30.64
+      ]
+    },
+    {
+      "text": "flight,",
+      "timestamp": [
+        30.64,
+        30.96
+      ]
+    },
+    {
+      "text": "an",
+      "timestamp": [
+        31.2,
+        31.36
+      ]
+    },
+    {
+      "text": "apartment,",
+      "timestamp": [
+        31.36,
+        31.84
+      ]
+    },
+    {
+      "text": "or",
+      "timestamp": [
+        32.08,
+        32.24
+      ]
+    },
+    {
+      "text": "maybe",
+      "timestamp": [
+        32.24,
+        32.56
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        32.56,
+        32.64
+      ]
+    },
+    {
+      "text": "pair",
+      "timestamp": [
+        32.64,
+        32.88
+      ]
+    },
+    {
+      "text": "of",
+      "timestamp": [
+        32.88,
+        32.96
+      ]
+    },
+    {
+      "text": "headphones?",
+      "timestamp": [
+        32.96,
+        33.68
+      ]
+    },
+    {
+      "text": "And",
+      "timestamp": [
+        34.0,
+        34.24
+      ]
+    },
+    {
+      "text": "what",
+      "timestamp": [
+        34.24,
+        34.4
+      ]
+    },
+    {
+      "text": "destination",
+      "timestamp": [
+        34.4,
+        35.04
+      ]
+    },
+    {
+      "text": "or",
+      "timestamp": [
+        35.04,
+        35.2
+      ]
+    },
+    {
+      "text": "city",
+      "timestamp": [
+        35.2,
+        35.52
+      ]
+    },
+    {
+      "text": "are",
+      "timestamp": [
+        35.52,
+        35.76
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        35.76,
+        36.0
+      ]
+    },
+    {
+      "text": "interested",
+      "timestamp": [
+        36.0,
+        36.56
+      ]
+    },
+    {
+      "text": "in?",
+      "timestamp": [
+        36.56,
+        36.88
+      ]
+    }
+  ],
+  "perceived_total_latency": 3.68,
+  "audio_agent_speech_start": 10.88,
+  "actual_tool_calls": [],
+  "status": "completed"
+}

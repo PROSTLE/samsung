@@ -1,0 +1,32 @@
+📖 Loading benchmark data from benchmark_data_v2.json...
+📁 Scanning fdb_v3_data_released for provider 'keel_gemini_realtime'...
+🔍 Found 100 valid result files matching benchmark scenarios.
+
+📊 EVALUATION REPORT
+========================================================
+  Scenarios evaluated : 100
+  Turn-Take Success   : 21/100 (21.0%)
+  No Response (silent): 79
+
+  By Metric (turn-taken only, N=21):
+    Tool Selection Acc : 95.2%
+    Argument Acc       : 69.0%
+    Response Qual      : (LLM judge disabled, use --use-llm)
+
+  Latency (N=21, turn-taken only):
+    Avg latency        : 4.18s ± 0.41s  (excl. interruptions)
+    Min / Max          : 3.44s / 5.12s
+    Interruptions      : 1 / 21  (4.8%)
+
+  By Domain (all samples):
+    ecommerce_support: tool_selection_acc=69.0%, argument_acc=50.0%
+    finance_billing: tool_selection_acc=0.0%, argument_acc=0.0%
+    travel_identity: tool_selection_acc=0.0%, argument_acc=0.0%
+    housing_location: tool_selection_acc=0.0%, argument_acc=0.0%
+
+  By Difficulty (all samples):
+    hard: tool_selection_acc=0.0%, argument_acc=0.0%
+    easy: tool_selection_acc=22.2%, argument_acc=13.9%
+    medium: tool_selection_acc=35.3%, argument_acc=27.9%
+
+  📄 Full report saved: /home/harshit/keel/results/fdb_v3/20260928T193658Z_keel_gemini_realtime/keel_gemini_realtime_evaluation_report.json

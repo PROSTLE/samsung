@@ -1,0 +1,385 @@
+{
+  "pid": "695bd157114f0d2317f88617",
+  "example_id": "housing_04",
+  "category": "housing_location",
+  "title": "Apartment Search with Pause",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T22:14:49.539002",
+  "inference_time_s": 62.82,
+  "room_name": "eval-8190a55c",
+  "stream_start_time": 1790633693.1284006,
+  "input_transcript": "Well, um uh, you know, I'm looking for an apartment in Denver that has one bedroom. I'm living alone, um, so I don't need anything too big.",
+  "input_asr_chunks": [
+    {
+      "text": "Well,",
+      "timestamp": [
+        0.56,
+        0.8
+      ]
+    },
+    {
+      "text": "um",
+      "timestamp": [
+        1.6,
+        1.84
+      ]
+    },
+    {
+      "text": "uh,",
+      "timestamp": [
+        3.92,
+        4.16
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        4.32,
+        4.64
+      ]
+    },
+    {
+      "text": "know,",
+      "timestamp": [
+        4.64,
+        4.96
+      ]
+    },
+    {
+      "text": "I'm",
+      "timestamp": [
+        6.16,
+        6.48
+      ]
+    },
+    {
+      "text": "looking",
+      "timestamp": [
+        6.48,
+        6.8
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        6.8,
+        6.96
+      ]
+    },
+    {
+      "text": "an",
+      "timestamp": [
+        6.96,
+        7.12
+      ]
+    },
+    {
+      "text": "apartment",
+      "timestamp": [
+        7.12,
+        7.5200000000000005
+      ]
+    },
+    {
+      "text": "in",
+      "timestamp": [
+        7.5200000000000005,
+        7.68
+      ]
+    },
+    {
+      "text": "Denver",
+      "timestamp": [
+        7.68,
+        8.56
+      ]
+    },
+    {
+      "text": "that",
+      "timestamp": [
+        9.44,
+        9.76
+      ]
+    },
+    {
+      "text": "has",
+      "timestamp": [
+        9.76,
+        10.08
+      ]
+    },
+    {
+      "text": "one",
+      "timestamp": [
+        10.08,
+        10.32
+      ]
+    },
+    {
+      "text": "bedroom.",
+      "timestamp": [
+        10.32,
+        11.28
+      ]
+    },
+    {
+      "text": "I'm",
+      "timestamp": [
+        12.48,
+        12.8
+      ]
+    },
+    {
+      "text": "living",
+      "timestamp": [
+        12.8,
+        13.44
+      ]
+    },
+    {
+      "text": "alone,",
+      "timestamp": [
+        13.44,
+        14.08
+      ]
+    },
+    {
+      "text": "um,",
+      "timestamp": [
+        15.44,
+        15.68
+      ]
+    },
+    {
+      "text": "so",
+      "timestamp": [
+        16.32,
+        16.56
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        16.56,
+        16.64
+      ]
+    },
+    {
+      "text": "don't",
+      "timestamp": [
+        16.64,
+        16.88
+      ]
+    },
+    {
+      "text": "need",
+      "timestamp": [
+        16.88,
+        17.12
+      ]
+    },
+    {
+      "text": "anything",
+      "timestamp": [
+        17.12,
+        17.76
+      ]
+    },
+    {
+      "text": "too",
+      "timestamp": [
+        17.76,
+        18.080000000000002
+      ]
+    },
+    {
+      "text": "big.",
+      "timestamp": [
+        18.080000000000002,
+        18.400000000000002
+      ]
+    }
+  ],
+  "user_speech_end_rel": 1.84,
+  "latency": {
+    "input_duration_s": 49.32,
+    "output_duration_s": 49.32,
+    "first_speech_s": 4.95
+  },
+  "user_done_unix": 1790633694.9684005,
+  "transcript": "Hello, how can I help you today? I can help with and what's your butt. Sorry about that. Understood. What about your maximum price?",
+  "asr_chunks": [
+    {
+      "text": "Hello,",
+      "timestamp": [
+        4.88,
+        5.36
+      ]
+    },
+    {
+      "text": "how",
+      "timestamp": [
+        5.5200000000000005,
+        5.68
+      ]
+    },
+    {
+      "text": "can",
+      "timestamp": [
+        5.68,
+        5.76
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        5.76,
+        5.92
+      ]
+    },
+    {
+      "text": "help",
+      "timestamp": [
+        5.92,
+        6.08
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        6.08,
+        6.4
+      ]
+    },
+    {
+      "text": "today?",
+      "timestamp": [
+        6.4,
+        6.72
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        10.88,
+        11.040000000000001
+      ]
+    },
+    {
+      "text": "can",
+      "timestamp": [
+        11.040000000000001,
+        11.200000000000001
+      ]
+    },
+    {
+      "text": "help",
+      "timestamp": [
+        11.200000000000001,
+        11.36
+      ]
+    },
+    {
+      "text": "with",
+      "timestamp": [
+        11.36,
+        11.6
+      ]
+    },
+    {
+      "text": "and",
+      "timestamp": [
+        13.84,
+        14.08
+      ]
+    },
+    {
+      "text": "what's",
+      "timestamp": [
+        14.08,
+        14.32
+      ]
+    },
+    {
+      "text": "your",
+      "timestamp": [
+        14.32,
+        14.56
+      ]
+    },
+    {
+      "text": "butt.",
+      "timestamp": [
+        14.56,
+        14.88
+      ]
+    },
+    {
+      "text": "Sorry",
+      "timestamp": [
+        17.76,
+        18.16
+      ]
+    },
+    {
+      "text": "about",
+      "timestamp": [
+        18.16,
+        18.48
+      ]
+    },
+    {
+      "text": "that.",
+      "timestamp": [
+        18.48,
+        18.8
+      ]
+    },
+    {
+      "text": "Understood.",
+      "timestamp": [
+        19.12,
+        19.84
+      ]
+    },
+    {
+      "text": "What",
+      "timestamp": [
+        22.72,
+        22.96
+      ]
+    },
+    {
+      "text": "about",
+      "timestamp": [
+        22.96,
+        23.28
+      ]
+    },
+    {
+      "text": "your",
+      "timestamp": [
+        23.28,
+        23.44
+      ]
+    },
+    {
+      "text": "maximum",
+      "timestamp": [
+        23.44,
+        24.16
+      ]
+    },
+    {
+      "text": "price?",
+      "timestamp": [
+        24.16,
+        24.8
+      ]
+    }
+  ],
+  "perceived_total_latency": 3.04,
+  "audio_agent_speech_start": 4.88,
+  "actual_tool_calls": [],
+  "status": "completed"
+}

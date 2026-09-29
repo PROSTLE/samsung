@@ -1,0 +1,377 @@
+{
+  "pid": "695bd157114f0d2317f88617",
+  "example_id": "finance_11",
+  "category": "finance_billing",
+  "title": "Autopay with Filler Words",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T21:58:15.492034",
+  "inference_time_s": 50.98,
+  "room_name": "eval-ac2b1e59",
+  "stream_start_time": 1790632698.9608932,
+  "input_transcript": "Um, so I want to set my credit card payment to pull from like my savings account instead of where it is from now. Can you switch that over for me?",
+  "input_asr_chunks": [
+    {
+      "text": "Um,",
+      "timestamp": [
+        0.48,
+        0.72
+      ]
+    },
+    {
+      "text": "so",
+      "timestamp": [
+        0.96,
+        1.28
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        1.84,
+        2.08
+      ]
+    },
+    {
+      "text": "want",
+      "timestamp": [
+        2.08,
+        2.24
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        2.24,
+        2.48
+      ]
+    },
+    {
+      "text": "set",
+      "timestamp": [
+        2.8000000000000003,
+        3.12
+      ]
+    },
+    {
+      "text": "my",
+      "timestamp": [
+        3.12,
+        3.2800000000000002
+      ]
+    },
+    {
+      "text": "credit",
+      "timestamp": [
+        3.2800000000000002,
+        3.68
+      ]
+    },
+    {
+      "text": "card",
+      "timestamp": [
+        3.68,
+        3.92
+      ]
+    },
+    {
+      "text": "payment",
+      "timestamp": [
+        3.92,
+        4.24
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        4.24,
+        4.4
+      ]
+    },
+    {
+      "text": "pull",
+      "timestamp": [
+        4.4,
+        4.72
+      ]
+    },
+    {
+      "text": "from",
+      "timestamp": [
+        4.72,
+        4.88
+      ]
+    },
+    {
+      "text": "like",
+      "timestamp": [
+        4.96,
+        5.12
+      ]
+    },
+    {
+      "text": "my",
+      "timestamp": [
+        5.12,
+        5.36
+      ]
+    },
+    {
+      "text": "savings",
+      "timestamp": [
+        5.36,
+        5.84
+      ]
+    },
+    {
+      "text": "account",
+      "timestamp": [
+        5.84,
+        6.24
+      ]
+    },
+    {
+      "text": "instead",
+      "timestamp": [
+        6.4,
+        6.8
+      ]
+    },
+    {
+      "text": "of",
+      "timestamp": [
+        6.8,
+        6.96
+      ]
+    },
+    {
+      "text": "where",
+      "timestamp": [
+        6.96,
+        7.12
+      ]
+    },
+    {
+      "text": "it",
+      "timestamp": [
+        7.12,
+        7.28
+      ]
+    },
+    {
+      "text": "is",
+      "timestamp": [
+        7.28,
+        7.44
+      ]
+    },
+    {
+      "text": "from",
+      "timestamp": [
+        7.44,
+        7.68
+      ]
+    },
+    {
+      "text": "now.",
+      "timestamp": [
+        7.68,
+        7.92
+      ]
+    },
+    {
+      "text": "Can",
+      "timestamp": [
+        8.24,
+        8.4
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        8.4,
+        8.56
+      ]
+    },
+    {
+      "text": "switch",
+      "timestamp": [
+        8.56,
+        8.96
+      ]
+    },
+    {
+      "text": "that",
+      "timestamp": [
+        8.96,
+        9.28
+      ]
+    },
+    {
+      "text": "over",
+      "timestamp": [
+        9.28,
+        9.52
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        9.52,
+        9.84
+      ]
+    },
+    {
+      "text": "me?",
+      "timestamp": [
+        9.84,
+        10.16
+      ]
+    }
+  ],
+  "user_speech_end_rel": 10.16,
+  "latency": {
+    "input_duration_s": 41.04,
+    "output_duration_s": 41.04,
+    "first_speech_s": 13.8
+  },
+  "user_done_unix": 1790632709.1208932,
+  "search_latency_breakdown": {
+    "room": "eval-ac2b1e59",
+    "tool": "modify_autopay",
+    "reasoning": 0.607,
+    "execution": 0.0,
+    "synthesis": 0.644,
+    "total": 1.251,
+    "agent_start_at": 1790632712.3179498
+  },
+  "absolute_total_latency": 3.197,
+  "transcript": "No problem. I've updated your credit card auto paid to draw from your savings account now.",
+  "asr_chunks": [
+    {
+      "text": "No",
+      "timestamp": [
+        13.76,
+        14.08
+      ]
+    },
+    {
+      "text": "problem.",
+      "timestamp": [
+        14.08,
+        14.4
+      ]
+    },
+    {
+      "text": "I've",
+      "timestamp": [
+        14.64,
+        14.88
+      ]
+    },
+    {
+      "text": "updated",
+      "timestamp": [
+        14.88,
+        15.280000000000001
+      ]
+    },
+    {
+      "text": "your",
+      "timestamp": [
+        15.280000000000001,
+        15.44
+      ]
+    },
+    {
+      "text": "credit",
+      "timestamp": [
+        15.44,
+        15.76
+      ]
+    },
+    {
+      "text": "card",
+      "timestamp": [
+        15.76,
+        16.0
+      ]
+    },
+    {
+      "text": "auto",
+      "timestamp": [
+        16.0,
+        16.240000000000002
+      ]
+    },
+    {
+      "text": "paid",
+      "timestamp": [
+        16.32,
+        16.56
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        16.64,
+        16.72
+      ]
+    },
+    {
+      "text": "draw",
+      "timestamp": [
+        16.72,
+        16.96
+      ]
+    },
+    {
+      "text": "from",
+      "timestamp": [
+        16.96,
+        17.12
+      ]
+    },
+    {
+      "text": "your",
+      "timestamp": [
+        17.12,
+        17.2
+      ]
+    },
+    {
+      "text": "savings",
+      "timestamp": [
+        17.2,
+        17.6
+      ]
+    },
+    {
+      "text": "account",
+      "timestamp": [
+        17.6,
+        18.0
+      ]
+    },
+    {
+      "text": "now.",
+      "timestamp": [
+        18.0,
+        18.32
+      ]
+    }
+  ],
+  "perceived_total_latency": 3.6,
+  "audio_agent_speech_start": 13.76,
+  "actual_tool_calls": [
+    {
+      "function": "modify_autopay",
+      "args": {
+        "source_account": "savings",
+        "bill_type": "credit_card"
+      },
+      "timestamp_start": 12.71,
+      "timestamp_end": 12.71
+    }
+  ],
+  "status": "completed"
+}

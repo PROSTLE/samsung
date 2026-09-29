@@ -1,0 +1,10 @@
+{
+  "pid": "66c4f3cb14cbfc4db836bd4e",
+  "example_id": "ecommerce_20",
+  "category": "ecommerce_support",
+  "title": "Conditional Logic: Price Check then Cart",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T20:01:34.784072",
+  "inference_time_s": 45.07,
+  "status": "inference_failed"
+}

@@ -1,0 +1,616 @@
+{
+  "pid": "61517db6a7589569521b2356",
+  "example_id": "housing_14",
+  "category": "housing_location",
+  "title": "Filler-Heavy Apartment Search",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T22:24:57.873615",
+  "inference_time_s": 59.47,
+  "room_name": "eval-a2d0c71d",
+  "stream_start_time": 1790634301.4728482,
+  "input_transcript": "Like, you know, so um, I'm looking for like a one-bedroom apartment in Portland and I'd want to keep the rent under $1,800. Oh, well, and oh, and it needs to be uh pet-friendly because uh I have a dog.",
+  "input_asr_chunks": [
+    {
+      "text": "Like,",
+      "timestamp": [
+        1.6,
+        1.92
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        2.32,
+        2.48
+      ]
+    },
+    {
+      "text": "know,",
+      "timestamp": [
+        2.48,
+        2.64
+      ]
+    },
+    {
+      "text": "so",
+      "timestamp": [
+        3.44,
+        3.6
+      ]
+    },
+    {
+      "text": "um,",
+      "timestamp": [
+        3.7600000000000002,
+        4.0
+      ]
+    },
+    {
+      "text": "I'm",
+      "timestamp": [
+        4.32,
+        4.64
+      ]
+    },
+    {
+      "text": "looking",
+      "timestamp": [
+        4.64,
+        4.88
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        4.88,
+        5.12
+      ]
+    },
+    {
+      "text": "like",
+      "timestamp": [
+        5.12,
+        5.28
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        5.28,
+        5.5200000000000005
+      ]
+    },
+    {
+      "text": "one-bedroom",
+      "timestamp": [
+        5.5200000000000005,
+        6.32
+      ]
+    },
+    {
+      "text": "apartment",
+      "timestamp": [
+        6.32,
+        6.88
+      ]
+    },
+    {
+      "text": "in",
+      "timestamp": [
+        6.88,
+        7.04
+      ]
+    },
+    {
+      "text": "Portland",
+      "timestamp": [
+        7.04,
+        7.92
+      ]
+    },
+    {
+      "text": "and",
+      "timestamp": [
+        8.24,
+        8.48
+      ]
+    },
+    {
+      "text": "I'd",
+      "timestamp": [
+        8.48,
+        8.72
+      ]
+    },
+    {
+      "text": "want",
+      "timestamp": [
+        8.72,
+        8.96
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        8.96,
+        9.120000000000001
+      ]
+    },
+    {
+      "text": "keep",
+      "timestamp": [
+        9.120000000000001,
+        9.28
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        9.28,
+        9.44
+      ]
+    },
+    {
+      "text": "rent",
+      "timestamp": [
+        9.44,
+        9.84
+      ]
+    },
+    {
+      "text": "under",
+      "timestamp": [
+        9.84,
+        10.08
+      ]
+    },
+    {
+      "text": "$1,800.",
+      "timestamp": [
+        10.08,
+        11.040000000000001
+      ]
+    },
+    {
+      "text": "Oh,",
+      "timestamp": [
+        11.68,
+        12.0
+      ]
+    },
+    {
+      "text": "well,",
+      "timestamp": [
+        13.44,
+        13.76
+      ]
+    },
+    {
+      "text": "and",
+      "timestamp": [
+        14.0,
+        14.24
+      ]
+    },
+    {
+      "text": "oh,",
+      "timestamp": [
+        14.64,
+        14.88
+      ]
+    },
+    {
+      "text": "and",
+      "timestamp": [
+        15.040000000000001,
+        15.36
+      ]
+    },
+    {
+      "text": "it",
+      "timestamp": [
+        15.36,
+        15.52
+      ]
+    },
+    {
+      "text": "needs",
+      "timestamp": [
+        15.52,
+        15.84
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        15.84,
+        16.0
+      ]
+    },
+    {
+      "text": "be",
+      "timestamp": [
+        16.0,
+        16.16
+      ]
+    },
+    {
+      "text": "uh",
+      "timestamp": [
+        16.16,
+        16.32
+      ]
+    },
+    {
+      "text": "pet-friendly",
+      "timestamp": [
+        16.4,
+        17.44
+      ]
+    },
+    {
+      "text": "because",
+      "timestamp": [
+        17.68,
+        17.92
+      ]
+    },
+    {
+      "text": "uh",
+      "timestamp": [
+        18.080000000000002,
+        18.32
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        19.28,
+        19.52
+      ]
+    },
+    {
+      "text": "have",
+      "timestamp": [
+        19.52,
+        19.76
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        19.76,
+        20.0
+      ]
+    },
+    {
+      "text": "dog.",
+      "timestamp": [
+        20.0,
+        20.56
+      ]
+    }
+  ],
+  "user_speech_end_rel": 20.56,
+  "latency": {
+    "input_duration_s": 51.3,
+    "output_duration_s": 51.3,
+    "first_speech_s": 25.35
+  },
+  "user_done_unix": 1790634322.0328481,
+  "search_latency_breakdown": {
+    "room": "eval-a2d0c71d",
+    "tool": "search_apartments",
+    "reasoning": 0.606,
+    "execution": 0.59,
+    "synthesis": 0.68,
+    "total": 1.876,
+    "agent_start_at": 1790634326.1905153
+  },
+  "absolute_total_latency": 4.158,
+  "transcript": "I found one apartment matching your search in Partland for $1,700, but unfortunately I can't check if it's pet-friendly right now. I can search again for places that explicitly list pet friendliness, or do you want more details about this one?",
+  "asr_chunks": [
+    {
+      "text": "I",
+      "timestamp": [
+        25.2,
+        25.52
+      ]
+    },
+    {
+      "text": "found",
+      "timestamp": [
+        25.52,
+        25.84
+      ]
+    },
+    {
+      "text": "one",
+      "timestamp": [
+        25.84,
+        26.080000000000002
+      ]
+    },
+    {
+      "text": "apartment",
+      "timestamp": [
+        26.080000000000002,
+        26.560000000000002
+      ]
+    },
+    {
+      "text": "matching",
+      "timestamp": [
+        26.560000000000002,
+        26.88
+      ]
+    },
+    {
+      "text": "your",
+      "timestamp": [
+        26.88,
+        27.04
+      ]
+    },
+    {
+      "text": "search",
+      "timestamp": [
+        27.04,
+        27.28
+      ]
+    },
+    {
+      "text": "in",
+      "timestamp": [
+        27.28,
+        27.36
+      ]
+    },
+    {
+      "text": "Partland",
+      "timestamp": [
+        27.36,
+        28.080000000000002
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        28.080000000000002,
+        28.32
+      ]
+    },
+    {
+      "text": "$1,700,",
+      "timestamp": [
+        28.32,
+        29.68
+      ]
+    },
+    {
+      "text": "but",
+      "timestamp": [
+        30.32,
+        30.560000000000002
+      ]
+    },
+    {
+      "text": "unfortunately",
+      "timestamp": [
+        30.560000000000002,
+        31.36
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        31.52,
+        31.68
+      ]
+    },
+    {
+      "text": "can't",
+      "timestamp": [
+        31.68,
+        32.0
+      ]
+    },
+    {
+      "text": "check",
+      "timestamp": [
+        32.0,
+        32.24
+      ]
+    },
+    {
+      "text": "if",
+      "timestamp": [
+        32.24,
+        32.4
+      ]
+    },
+    {
+      "text": "it's",
+      "timestamp": [
+        32.4,
+        32.56
+      ]
+    },
+    {
+      "text": "pet-friendly",
+      "timestamp": [
+        32.56,
+        33.36
+      ]
+    },
+    {
+      "text": "right",
+      "timestamp": [
+        33.36,
+        33.6
+      ]
+    },
+    {
+      "text": "now.",
+      "timestamp": [
+        33.6,
+        33.84
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        34.160000000000004,
+        34.32
+      ]
+    },
+    {
+      "text": "can",
+      "timestamp": [
+        34.32,
+        34.56
+      ]
+    },
+    {
+      "text": "search",
+      "timestamp": [
+        34.56,
+        34.96
+      ]
+    },
+    {
+      "text": "again",
+      "timestamp": [
+        34.96,
+        35.2
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        35.2,
+        35.36
+      ]
+    },
+    {
+      "text": "places",
+      "timestamp": [
+        35.36,
+        35.68
+      ]
+    },
+    {
+      "text": "that",
+      "timestamp": [
+        35.68,
+        35.84
+      ]
+    },
+    {
+      "text": "explicitly",
+      "timestamp": [
+        35.84,
+        36.4
+      ]
+    },
+    {
+      "text": "list",
+      "timestamp": [
+        36.4,
+        36.72
+      ]
+    },
+    {
+      "text": "pet",
+      "timestamp": [
+        36.72,
+        36.88
+      ]
+    },
+    {
+      "text": "friendliness,",
+      "timestamp": [
+        36.96,
+        37.6
+      ]
+    },
+    {
+      "text": "or",
+      "timestamp": [
+        37.76,
+        38.0
+      ]
+    },
+    {
+      "text": "do",
+      "timestamp": [
+        38.32,
+        38.56
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        38.56,
+        38.72
+      ]
+    },
+    {
+      "text": "want",
+      "timestamp": [
+        38.72,
+        38.88
+      ]
+    },
+    {
+      "text": "more",
+      "timestamp": [
+        38.88,
+        39.04
+      ]
+    },
+    {
+      "text": "details",
+      "timestamp": [
+        39.04,
+        39.6
+      ]
+    },
+    {
+      "text": "about",
+      "timestamp": [
+        39.6,
+        39.92
+      ]
+    },
+    {
+      "text": "this",
+      "timestamp": [
+        39.92,
+        40.24
+      ]
+    },
+    {
+      "text": "one?",
+      "timestamp": [
+        40.24,
+        40.56
+      ]
+    }
+  ],
+  "perceived_total_latency": 4.64,
+  "audio_agent_speech_start": 25.2,
+  "actual_tool_calls": [
+    {
+      "function": "search_apartments",
+      "args": {
+        "bedrooms": 1,
+        "city": "Portland",
+        "max_price": 1800.0
+      },
+      "timestamp_start": 23.45,
+      "timestamp_end": 24.04
+    }
+  ],
+  "status": "completed"
+}

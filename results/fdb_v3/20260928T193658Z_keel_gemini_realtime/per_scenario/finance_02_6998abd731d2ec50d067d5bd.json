@@ -1,0 +1,10 @@
+{
+  "pid": "6998abd731d2ec50d067d5bd",
+  "example_id": "finance_02",
+  "category": "finance_billing",
+  "title": "Check Card Benefits",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T20:07:36.712461",
+  "inference_time_s": 45.9,
+  "status": "inference_failed"
+}

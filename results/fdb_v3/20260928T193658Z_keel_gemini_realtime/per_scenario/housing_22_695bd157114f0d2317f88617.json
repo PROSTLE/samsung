@@ -1,0 +1,396 @@
+{
+  "pid": "695bd157114f0d2317f88617",
+  "example_id": "housing_22",
+  "category": "housing_location",
+  "title": "Filler-Heavy Multi-Tool Chain",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T20:44:20.612650",
+  "inference_time_s": 64.98,
+  "room_name": "eval-dc2317e1",
+  "stream_start_time": 1790628267.3411236,
+  "input_transcript": "You know, um, can you first update my filter so pets are allowed? Um, I keep forgetting to set that. Then, like, search in Seattle for one bedroom. And then once you find something, uh, check the transit time from there to the stadium because, you know, I go to games pretty often.",
+  "input_asr_chunks": [
+    {
+      "text": "You",
+      "timestamp": [
+        0.64,
+        0.96
+      ]
+    },
+    {
+      "text": "know,",
+      "timestamp": [
+        0.96,
+        1.2
+      ]
+    },
+    {
+      "text": "um,",
+      "timestamp": [
+        1.44,
+        1.68
+      ]
+    },
+    {
+      "text": "can",
+      "timestamp": [
+        2.32,
+        2.56
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        2.56,
+        2.8000000000000003
+      ]
+    },
+    {
+      "text": "first",
+      "timestamp": [
+        2.8000000000000003,
+        3.04
+      ]
+    },
+    {
+      "text": "update",
+      "timestamp": [
+        3.04,
+        3.44
+      ]
+    },
+    {
+      "text": "my",
+      "timestamp": [
+        3.44,
+        3.6
+      ]
+    },
+    {
+      "text": "filter",
+      "timestamp": [
+        3.6,
+        4.08
+      ]
+    },
+    {
+      "text": "so",
+      "timestamp": [
+        4.08,
+        4.24
+      ]
+    },
+    {
+      "text": "pets",
+      "timestamp": [
+        4.24,
+        4.5600000000000005
+      ]
+    },
+    {
+      "text": "are",
+      "timestamp": [
+        4.5600000000000005,
+        4.72
+      ]
+    },
+    {
+      "text": "allowed?",
+      "timestamp": [
+        4.72,
+        5.44
+      ]
+    },
+    {
+      "text": "Um,",
+      "timestamp": [
+        5.76,
+        5.92
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        6.16,
+        6.32
+      ]
+    },
+    {
+      "text": "keep",
+      "timestamp": [
+        6.32,
+        6.5600000000000005
+      ]
+    },
+    {
+      "text": "forgetting",
+      "timestamp": [
+        6.5600000000000005,
+        7.2
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        7.2,
+        7.5200000000000005
+      ]
+    },
+    {
+      "text": "set",
+      "timestamp": [
+        7.5200000000000005,
+        7.84
+      ]
+    },
+    {
+      "text": "that.",
+      "timestamp": [
+        7.84,
+        8.16
+      ]
+    },
+    {
+      "text": "Then,",
+      "timestamp": [
+        8.48,
+        8.72
+      ]
+    },
+    {
+      "text": "like,",
+      "timestamp": [
+        8.8,
+        8.96
+      ]
+    },
+    {
+      "text": "search",
+      "timestamp": [
+        9.120000000000001,
+        9.36
+      ]
+    },
+    {
+      "text": "in",
+      "timestamp": [
+        9.36,
+        9.52
+      ]
+    },
+    {
+      "text": "Seattle",
+      "timestamp": [
+        9.52,
+        10.0
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        10.0,
+        10.16
+      ]
+    },
+    {
+      "text": "one",
+      "timestamp": [
+        10.24,
+        10.48
+      ]
+    },
+    {
+      "text": "bedroom.",
+      "timestamp": [
+        10.48,
+        11.52
+      ]
+    },
+    {
+      "text": "And",
+      "timestamp": [
+        11.84,
+        11.92
+      ]
+    },
+    {
+      "text": "then",
+      "timestamp": [
+        11.92,
+        12.16
+      ]
+    },
+    {
+      "text": "once",
+      "timestamp": [
+        12.16,
+        12.48
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        12.48,
+        12.72
+      ]
+    },
+    {
+      "text": "find",
+      "timestamp": [
+        12.72,
+        12.96
+      ]
+    },
+    {
+      "text": "something,",
+      "timestamp": [
+        12.96,
+        13.120000000000001
+      ]
+    },
+    {
+      "text": "uh,",
+      "timestamp": [
+        13.280000000000001,
+        13.36
+      ]
+    },
+    {
+      "text": "check",
+      "timestamp": [
+        13.52,
+        13.84
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        13.84,
+        14.16
+      ]
+    },
+    {
+      "text": "transit",
+      "timestamp": [
+        14.16,
+        14.8
+      ]
+    },
+    {
+      "text": "time",
+      "timestamp": [
+        14.8,
+        15.120000000000001
+      ]
+    },
+    {
+      "text": "from",
+      "timestamp": [
+        15.44,
+        15.76
+      ]
+    },
+    {
+      "text": "there",
+      "timestamp": [
+        15.76,
+        16.0
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        16.0,
+        16.080000000000002
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        16.080000000000002,
+        16.240000000000002
+      ]
+    },
+    {
+      "text": "stadium",
+      "timestamp": [
+        16.240000000000002,
+        16.64
+      ]
+    },
+    {
+      "text": "because,",
+      "timestamp": [
+        16.72,
+        16.88
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        16.96,
+        17.04
+      ]
+    },
+    {
+      "text": "know,",
+      "timestamp": [
+        17.04,
+        17.12
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        17.2,
+        17.36
+      ]
+    },
+    {
+      "text": "go",
+      "timestamp": [
+        17.36,
+        17.44
+      ]
+    },
+    {
+      "text": "to",
+      "timestamp": [
+        17.44,
+        17.6
+      ]
+    },
+    {
+      "text": "games",
+      "timestamp": [
+        17.6,
+        18.0
+      ]
+    },
+    {
+      "text": "pretty",
+      "timestamp": [
+        18.0,
+        18.56
+      ]
+    },
+    {
+      "text": "often.",
+      "timestamp": [
+        18.56,
+        19.52
+      ]
+    }
+  ],
+  "user_speech_end_rel": 19.52,
+  "latency": {
+    "input_duration_s": 50.1,
+    "output_duration_s": 50.1,
+    "first_speech_s": 50.1
+  },
+  "user_done_unix": 1790628286.8611236,
+  "transcript": "",
+  "asr_chunks": [],
+  "actual_tool_calls": [],
+  "status": "completed"
+}

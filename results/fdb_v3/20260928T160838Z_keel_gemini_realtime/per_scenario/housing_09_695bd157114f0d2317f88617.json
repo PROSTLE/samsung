@@ -1,0 +1,371 @@
+{
+  "pid": "695bd157114f0d2317f88617",
+  "example_id": "housing_09",
+  "category": "housing_location",
+  "title": "City Self-Correction",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T17:12:45.302408",
+  "inference_time_s": 57.78,
+  "room_name": "eval-1d506c93",
+  "stream_start_time": 1790615569.9401383,
+  "input_transcript": "Well well, uh, I'm interested in two-bedroom in Boston. Wait, actually, um, I changed my mind. Let's look in Chicago instead and keep the max price around two thousand dollars a month.",
+  "input_asr_chunks": [
+    {
+      "text": "Well",
+      "timestamp": [
+        0.56,
+        0.72
+      ]
+    },
+    {
+      "text": "well,",
+      "timestamp": [
+        1.68,
+        1.92
+      ]
+    },
+    {
+      "text": "uh,",
+      "timestamp": [
+        2.08,
+        2.24
+      ]
+    },
+    {
+      "text": "I'm",
+      "timestamp": [
+        2.4,
+        2.64
+      ]
+    },
+    {
+      "text": "interested",
+      "timestamp": [
+        2.64,
+        2.96
+      ]
+    },
+    {
+      "text": "in",
+      "timestamp": [
+        2.96,
+        3.04
+      ]
+    },
+    {
+      "text": "two-bedroom",
+      "timestamp": [
+        3.2,
+        3.84
+      ]
+    },
+    {
+      "text": "in",
+      "timestamp": [
+        4.0,
+        4.16
+      ]
+    },
+    {
+      "text": "Boston.",
+      "timestamp": [
+        4.16,
+        4.88
+      ]
+    },
+    {
+      "text": "Wait,",
+      "timestamp": [
+        5.2,
+        6.0
+      ]
+    },
+    {
+      "text": "actually,",
+      "timestamp": [
+        6.32,
+        6.5600000000000005
+      ]
+    },
+    {
+      "text": "um,",
+      "timestamp": [
+        7.12,
+        7.36
+      ]
+    },
+    {
+      "text": "I",
+      "timestamp": [
+        8.0,
+        8.24
+      ]
+    },
+    {
+      "text": "changed",
+      "timestamp": [
+        8.24,
+        8.64
+      ]
+    },
+    {
+      "text": "my",
+      "timestamp": [
+        8.64,
+        8.8
+      ]
+    },
+    {
+      "text": "mind.",
+      "timestamp": [
+        8.8,
+        9.120000000000001
+      ]
+    },
+    {
+      "text": "Let's",
+      "timestamp": [
+        9.44,
+        9.76
+      ]
+    },
+    {
+      "text": "look",
+      "timestamp": [
+        9.76,
+        9.92
+      ]
+    },
+    {
+      "text": "in",
+      "timestamp": [
+        9.92,
+        10.08
+      ]
+    },
+    {
+      "text": "Chicago",
+      "timestamp": [
+        10.08,
+        10.88
+      ]
+    },
+    {
+      "text": "instead",
+      "timestamp": [
+        10.88,
+        11.44
+      ]
+    },
+    {
+      "text": "and",
+      "timestamp": [
+        11.76,
+        11.92
+      ]
+    },
+    {
+      "text": "keep",
+      "timestamp": [
+        11.92,
+        12.16
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        12.16,
+        12.32
+      ]
+    },
+    {
+      "text": "max",
+      "timestamp": [
+        12.32,
+        12.64
+      ]
+    },
+    {
+      "text": "price",
+      "timestamp": [
+        12.64,
+        13.040000000000001
+      ]
+    },
+    {
+      "text": "around",
+      "timestamp": [
+        13.040000000000001,
+        13.36
+      ]
+    },
+    {
+      "text": "two",
+      "timestamp": [
+        13.36,
+        13.44
+      ]
+    },
+    {
+      "text": "thousand",
+      "timestamp": [
+        13.6,
+        14.08
+      ]
+    },
+    {
+      "text": "dollars",
+      "timestamp": [
+        14.08,
+        14.4
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        14.4,
+        14.72
+      ]
+    },
+    {
+      "text": "month.",
+      "timestamp": [
+        14.72,
+        15.280000000000001
+      ]
+    }
+  ],
+  "user_speech_end_rel": 15.280000000000001,
+  "latency": {
+    "input_duration_s": 46.38,
+    "output_duration_s": 46.38,
+    "first_speech_s": 19.1
+  },
+  "user_done_unix": 1790615585.2201383,
+  "search_latency_breakdown": {
+    "room": "eval-1d506c93",
+    "tool": "search_apartments",
+    "reasoning": 0.617,
+    "execution": 0.305,
+    "synthesis": 0.725,
+    "total": 1.647,
+    "agent_start_at": 1790615589.4693336
+  },
+  "absolute_total_latency": 4.249,
+  "transcript": "I found one apartment in Chicago with two bedrooms listed for $1,900 a month.",
+  "asr_chunks": [
+    {
+      "text": "I",
+      "timestamp": [
+        19.04,
+        19.2
+      ]
+    },
+    {
+      "text": "found",
+      "timestamp": [
+        19.36,
+        19.6
+      ]
+    },
+    {
+      "text": "one",
+      "timestamp": [
+        19.6,
+        19.84
+      ]
+    },
+    {
+      "text": "apartment",
+      "timestamp": [
+        19.84,
+        20.240000000000002
+      ]
+    },
+    {
+      "text": "in",
+      "timestamp": [
+        20.240000000000002,
+        20.32
+      ]
+    },
+    {
+      "text": "Chicago",
+      "timestamp": [
+        20.32,
+        20.8
+      ]
+    },
+    {
+      "text": "with",
+      "timestamp": [
+        20.8,
+        20.96
+      ]
+    },
+    {
+      "text": "two",
+      "timestamp": [
+        20.96,
+        21.12
+      ]
+    },
+    {
+      "text": "bedrooms",
+      "timestamp": [
+        21.12,
+        21.6
+      ]
+    },
+    {
+      "text": "listed",
+      "timestamp": [
+        21.6,
+        21.92
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        21.92,
+        22.080000000000002
+      ]
+    },
+    {
+      "text": "$1,900",
+      "timestamp": [
+        22.080000000000002,
+        22.96
+      ]
+    },
+    {
+      "text": "a",
+      "timestamp": [
+        23.28,
+        23.52
+      ]
+    },
+    {
+      "text": "month.",
+      "timestamp": [
+        23.52,
+        24.0
+      ]
+    }
+  ],
+  "perceived_total_latency": 3.76,
+  "audio_agent_speech_start": 19.04,
+  "actual_tool_calls": [
+    {
+      "function": "search_apartments",
+      "args": {
+        "city": "Chicago",
+        "max_price": 2000.0,
+        "bedrooms": 2
+      },
+      "timestamp_start": 18.5,
+      "timestamp_end": 18.8
+    }
+  ],
+  "status": "completed"
+}

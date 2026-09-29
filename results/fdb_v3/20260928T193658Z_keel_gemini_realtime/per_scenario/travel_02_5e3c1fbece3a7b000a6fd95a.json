@@ -1,0 +1,214 @@
+{
+  "pid": "5e3c1fbece3a7b000a6fd95a",
+  "example_id": "travel_02",
+  "category": "travel_identity",
+  "title": "Update Passport Number",
+  "provider": "keel_gemini_realtime",
+  "evaluated_at": "2026-09-28T20:50:07.854326",
+  "inference_time_s": 55.32,
+  "room_name": "eval-548f7c50",
+  "stream_start_time": 1790628611.4822962,
+  "input_transcript": "Uh, yeah, so my new passport number is P eight eight nine nine zero zero one one. Could you update that in the system for me, please?",
+  "input_asr_chunks": [
+    {
+      "text": "Uh,",
+      "timestamp": [
+        1.44,
+        1.76
+      ]
+    },
+    {
+      "text": "yeah,",
+      "timestamp": [
+        1.84,
+        2.08
+      ]
+    },
+    {
+      "text": "so",
+      "timestamp": [
+        2.24,
+        2.4
+      ]
+    },
+    {
+      "text": "my",
+      "timestamp": [
+        2.48,
+        2.64
+      ]
+    },
+    {
+      "text": "new",
+      "timestamp": [
+        2.64,
+        2.8000000000000003
+      ]
+    },
+    {
+      "text": "passport",
+      "timestamp": [
+        2.8000000000000003,
+        3.52
+      ]
+    },
+    {
+      "text": "number",
+      "timestamp": [
+        3.52,
+        3.84
+      ]
+    },
+    {
+      "text": "is",
+      "timestamp": [
+        3.84,
+        4.16
+      ]
+    },
+    {
+      "text": "P",
+      "timestamp": [
+        4.16,
+        4.48
+      ]
+    },
+    {
+      "text": "eight",
+      "timestamp": [
+        4.64,
+        4.96
+      ]
+    },
+    {
+      "text": "eight",
+      "timestamp": [
+        5.12,
+        5.36
+      ]
+    },
+    {
+      "text": "nine",
+      "timestamp": [
+        5.5200000000000005,
+        5.92
+      ]
+    },
+    {
+      "text": "nine",
+      "timestamp": [
+        6.24,
+        6.640000000000001
+      ]
+    },
+    {
+      "text": "zero",
+      "timestamp": [
+        6.8,
+        7.2
+      ]
+    },
+    {
+      "text": "zero",
+      "timestamp": [
+        7.28,
+        7.68
+      ]
+    },
+    {
+      "text": "one",
+      "timestamp": [
+        7.84,
+        8.08
+      ]
+    },
+    {
+      "text": "one.",
+      "timestamp": [
+        8.24,
+        8.48
+      ]
+    },
+    {
+      "text": "Could",
+      "timestamp": [
+        9.44,
+        9.68
+      ]
+    },
+    {
+      "text": "you",
+      "timestamp": [
+        9.68,
+        9.84
+      ]
+    },
+    {
+      "text": "update",
+      "timestamp": [
+        9.84,
+        10.4
+      ]
+    },
+    {
+      "text": "that",
+      "timestamp": [
+        10.4,
+        10.72
+      ]
+    },
+    {
+      "text": "in",
+      "timestamp": [
+        10.72,
+        11.040000000000001
+      ]
+    },
+    {
+      "text": "the",
+      "timestamp": [
+        11.040000000000001,
+        11.36
+      ]
+    },
+    {
+      "text": "system",
+      "timestamp": [
+        11.36,
+        11.6
+      ]
+    },
+    {
+      "text": "for",
+      "timestamp": [
+        12.08,
+        12.4
+      ]
+    },
+    {
+      "text": "me,",
+      "timestamp": [
+        12.4,
+        12.56
+      ]
+    },
+    {
+      "text": "please?",
+      "timestamp": [
+        12.72,
+        13.200000000000001
+      ]
+    }
+  ],
+  "user_speech_end_rel": 13.200000000000001,
+  "latency": {
+    "input_duration_s": 44.52,
+    "output_duration_s": 44.52,
+    "first_speech_s": 44.52
+  },
+  "user_done_unix": 1790628624.6822963,
+  "transcript": "",
+  "asr_chunks": [],
+  "actual_tool_calls": [],
+  "status": "completed"
+}
