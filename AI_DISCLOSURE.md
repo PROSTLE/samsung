@@ -20,6 +20,7 @@ Keel was built by the team with an AI coding assistant.
 - Help writing and refactoring parts of the code and tests.
 - Help drafting and editing documentation, and condensing and formatting the final
   8-slide version of the presentation.
+- Help scripting, recording and editing the demo video.
 
 All AI-assisted work was reviewed, tested and integrated by the team. Every number
 in this repository comes from our own runs or from the cited sources (`SOURCES.md`).
@@ -45,6 +46,14 @@ deterministic rules, not model outputs.
 The illustrations in the presentation are AI-generated and are labelled
 "Illustration, AI-generated" on the slides. The washer display used to test Show & Fix
 without a physical washer is a synthetic image and is labelled so.
+
+In the demo video (`Keel_Demo.mp4`):
+- The narration is synthesised speech (Kokoro-82M, run locally).
+- The Show & Fix customer's voice is synthesised (Gemini text-to-speech); the video says so.
+  The benchmark calls use Full-Duplex-Bench v3's own recorded human audio.
+- The subtitles were transcribed with faster-whisper and corrected by hand.
+- Every conversation shown is a real, unscripted run of the agent; only the caller's lines
+  were prepared in advance.
 
 ## Evaluation integrity
 

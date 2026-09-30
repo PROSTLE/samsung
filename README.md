@@ -12,7 +12,7 @@ Built on **LiveKit Agents** and evaluated on **Full-Duplex-Bench v3** (FDB-v3).
 | | |
 |---|---|
 | Presentation | [`Keel_Theme05_PRISM.pptx`](Keel_Theme05_PRISM.pptx) · [PDF](Keel_Theme05_PRISM.pdf) |
-| Demo video | *Link to be added (YouTube / Google Drive)* |
+| Demo video | [Watch on Google Drive](https://drive.google.com/file/d/1iw0AbQnh6XjdW6kOBBN92SjrbucEm6BR/view?usp=sharing) (5:28) · also in the repo as [`Keel_Demo.mp4`](Keel_Demo.mp4) |
 | AI disclosure | [`AI_DISCLOSURE.md`](AI_DISCLOSURE.md) |
 | Dependencies | [`requirements.txt`](requirements.txt), locked environments in [`requirements/`](requirements/) |
 | Extension use case | [Show & Fix](#extension-use-case-show--fix), a Samsung washer assistant that can see |
