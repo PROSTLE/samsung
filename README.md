@@ -11,7 +11,7 @@ Built on **LiveKit Agents** and evaluated on **Full-Duplex-Bench v3** (FDB-v3).
 
 | | |
 |---|---|
-| Presentation | [`Keel_Theme05_PRISM.pptx`](Keel_Theme05_PRISM.pptx) |
+| Presentation | [`Keel_Theme05_PRISM.pptx`](Keel_Theme05_PRISM.pptx) · [PDF](Keel_Theme05_PRISM.pdf) |
 | Demo video | *Link to be added (YouTube / Google Drive)* |
 | AI disclosure | [`AI_DISCLOSURE.md`](AI_DISCLOSURE.md) |
 | Dependencies | [`requirements.txt`](requirements.txt), locked environments in [`requirements/`](requirements/) |
