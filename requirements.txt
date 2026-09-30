@@ -1,0 +1,30 @@
+# Keel: Python dependencies (Python 3.10 to 3.12).
+#
+#   python -m pip install -r requirements.txt
+#
+# Installs Keel with the LiveKit agent, the Show & Fix extension, the web app and
+# the test suite. The benchmark runs use fully locked environments instead
+# (Linux x86-64, Python 3.10), which scripts/reproduce_fdb_v3.sh installs:
+#   requirements/agent.lock.txt   the LiveKit agent
+#   requirements/bench.lock.txt   Full-Duplex-Bench v3's runner and evaluations
+#   requirements/speech.lock.txt  the local speech server of the open pipeline
+
+# Core: kernel, manifest compiler, trace console
+pydantic>=2.6,<3
+jsonschema>=4.18
+tomli>=2.0; python_version < "3.11"
+
+# LiveKit agent and Show & Fix
+livekit-agents[openai,google,silero,turn-detector]==1.8.3
+python-dotenv==1.2.3
+
+# Web app
+aiohttp>=3.9
+livekit-api>=1.0
+
+# Tests
+pytest>=8
+hypothesis>=6.100
+
+# Keel itself
+-e .
